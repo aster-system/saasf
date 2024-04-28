@@ -31,11 +31,11 @@
                     Elle se mesure en ampère, nom donné en hommage au physicien français <a href="https://fr.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re">André-Marie Ampère</a>.
                     Elle se calcul avec la formule :</br>
                     <math>
-                        <mtext>I en ampères</mtext>
+                        <mtext>I</mtext>
                         <mo>=</mo>
                         <mfrac>
-                            <mtext>dq en Coulomb</mtext>
-                            <mtext>dt en secondes</mtext>
+                            <mtext>dq</mtext>
+                            <mtext>dt</mtext>
                         </mfrac>
                     </math></br>
                     Où I est l'intensité en ampères, dq le nombre de Coulomb mesuré pendant la période de temps et dt la période de temps.</br>
@@ -47,7 +47,7 @@
                 <h3>
                     Pourquoi les lois de l'intensité électriques ?
                 </h3>
-                <div>
+                <div >
                     Il y a deux lois pour l'intensité électriques vues en cour :</br>
                     <ul>
                         <li>
@@ -73,11 +73,11 @@
                     Elle se mesure en volt, nom donné en hommage au physicien italien <a href="https://fr.wikipedia.org/wiki/Alessandro_Volta">Alessandro Volta</a>.
                     Elle se calcul avec la formule :</br>
                     <math>
-                        <mtext>U en volts</mtext>
+                        <mtext>U</mtext>
                         <mo>=</mo>
                         <mfrac>
-                            <mtext>W en Joules</mtext>
-                            <mtext>dq en Coulomb</mtext>
+                            <mtext>W</mtext>
+                            <mtext>dq</mtext>
                         </mfrac>
                     </math></br>
                     Où U est la tension en volts, W l'énergie déployée en Joules et dq le nombre de Coulomb déplacé.</br>
@@ -110,16 +110,60 @@
                     Les lois sont donc justifiées.
                 </p>
                 <h3>
+                    Que ce que la résistance électrique ?
+                </h3>
+                <p>
+                    La résistance électrique est la capacité d'un circuit à rendre la tension moins efficace dans un courant électrique.
+                    En effet, plus elle est élevée, plus l'énergie transportée par un électron est affaibli dans le circuit.
+                    En utilisant les formules vues plus haut, on peut dire que si la résistance est élevée, alors la tension, qui correspond à l'énergie transportée par un électron, est plus faible.
+                    Donc, pour obtenir la même énergie, il faut plus d'électrons pour compenser la perte.</br>
+                    Elle se mesure en ohm, nom donné en hommage au physicien allemand <a href="https://fr.wikipedia.org/wiki/Georg_Ohm">Georg Ohm</a>.
+                    Un circuit a une résistance de 1 ohm si une tension de 1 volt dans le circuit produit un courant de 1 ampère.</br>
+                    Une loi célèbre permet de facilement calculer la résistance d'un circuit : la <b>loi d'Ohm</b>.
+                    Selon cette loi, l'intensité d'un courant multiplié par la résistance du circuit donne la tension du courant.
+                    La formule de la loi est :</br>
+                    <math>
+                        <mtext>U</mtext>
+                        <mo>=</mo>
+                        <mtext>R</mtext>
+                        <mo>*</mo>
+                        <mtext>I</mtext>
+                    </math></br>
+                    Où R est la résistance du circuit en Ohm, I est l'intensité en ampères et U est la tension en volts.</br>
+                    Par modification, on peut obtenir la formule suivant :</br>
+                    <math>
+                        <mtext>R</mtext>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mn>U</mn>
+                            <mn>I</mn>
+                        </mfrac>
+                    </math></br>
+                    Cette formule s'explique en disant que plus la résistance est élevée, plus la tension doit être élevée pour vérifier l'égalité, comme expliquer en haut.
+                    Réciproquement, plus l'intensité I est élevé, plus la tension U est efficace, et donc plus la résistance R est faible.
+                </p>
+                <h3>
                     L'effet Joule
                 </h3>
                 <p>
-                    Les éléctrons circulant dans un circuit électrique peuvent rentrer en collision avec des atomes.
+                    Les éléctrons circulant dans un circuit électrique peuvent interagir (comme entrer en collision) avec des atomes.
                     Les atomes touchés rentrent en mouvement, et donc chauffent.
-                    Cela produit de l'énergie thermique, réduisant donc l'énergie électrique.
-                    L'énergie électrique est convertie en énergie thermique.
+                    Cela produit de l'énergie thermique, réduisant donc l'énergie électrique. En d'autres termes, l'énergie électrique est convertie en énergie thermique.
                     Cette effet est appelé <b>effet Joule</b>.
                     Cette effet est utilisé dans les résistances électriques pour générer de la chaleur.
-                    L'énergie perdue se calcul avec la formule :</br>
+                    La moyenne de l'énergie perdue se calcul avec la formule :</br>
+                    <math>
+                        <mtext>Ej en joules</mtext>
+                        <mo>=</mo>
+                        <mtext>R</mtext>
+                        <msubsup>
+                            <mo>&#x222B;<!--Integral --></mo>
+                            <mn>t0</mn>
+                            <mn>t1</mn>
+                        </msubsup>
+                        <mtext>I^2 dt</mtext>
+                    </math></br>
+                    Ou, plus simplement, si l'intensité du courant est constante :</br>
                     <math>
                         <mtext>Ej en joules</mtext>
                         <mo>=</mo>
@@ -127,16 +171,40 @@
                         <mo>*</mo>
                         <mtext>I^2</mtext>
                         <mo>*</mo>
-                        <mtext>dt en secondes</mtext>
+                        <mtext>dt</mtext>
+                        <mo>=</mo>
+                        <mtext>U</mtext>
+                        <mo>*</mo>
+                        <mtext>I</mtext>
+                        <mo>*</mo>
+                        <mtext>dt</mtext>
                     </math></br>
-                    On peut la modifier de manière simple en :</br>
+                    Où R est la résistance du circuit en Ohm, I est l'intensité en ampères, U la tension en volt, t1 le début de l'analyse , t2 la fin de l'analyse et dt est t2 - t1.</br>
+                    Le calcul de cette énergie demande donc de connaître c'est valeurs.
+                    On peut cependant pousser un peu plus loin le calcul pour mieux comprendre la formule :</br>
                     <math>
                         <mtext>Ej en joules</mtext>
                         <mo>=</mo>
-                        <mtext>Wj en watt</mtext>
+                        <mtext>U</mtext>
                         <mo>*</mo>
-                        <mtext>dt en secondes</mtext>
+                        <mtext>I</mtext>
+                        <mo>*</mo>
+                        <mtext>dt</mtext>
+                        <mo>=</mo>
+                        <mtext>W</mtext>
+                        <mo>*</mo>
+                        <mfrac>
+                            <mtext>dt</mtext>
+                            <mtext>
+                                <msub>
+                                    <mi>dt</mi>
+                                    <mn>I</mn>
+                                </msub>
+                            </mtext>
+                        </mfrac>
                     </math></br>
+                    Où W est la puissance du courant électrique en Watt utilisé par le dipôle.</br>
+                    À noter que la puissance utilsé par le dipôle n'est pas la même que la puissance totale du circuit (voir <a href="">lois de la tension électrique</a>).
                 </p>
             </div>
         </div>
