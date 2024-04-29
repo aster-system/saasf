@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SAASF - ASL
+        </title>
+    </head>
+    <body>
+        <h1>
+            SAASF - Aster Système Learn
+        </h1>
+        <h2>
+            Format PNG
+        </h2>
+        <div>
+            <h3>
+                Le problème du stockage d'image
+            </h3>
+            <div>
+                <p>
+                    Imaginez que vous ayez une image numérique quelconque à stocker.
+                    En général, l'image brute se présentera sous la forme de chaque pixel les un à côté des autres, quelque soit leut format (RGB, RGBA, nuance de gris...).
+                    Pour la stocker, il vous faut un format dans lequel stocker votre image.
+                    Le format le plus simple est le même que la façon dont votre image est présentée : chaque pixel les un à côté des autres.
+                    Cependant si votre image fait 5000 pixels sur 5000 pixels, cela représente en tout 25 millions de pixels.
+                    En partant du principe que chaque pixel soit en format RGBA et occupe 4 octets, soit 32 bits, votre image pésera 100 mégaoctets.
+                    C'est littéralement le poids d'une petite vidéo .mp4, ou d'une grande vidéo assez légère et bien traitée.
+                    Il peut être compliqué d'allouer toute cette place à une seule image, surtout à l'époque, où le stockage était beaucoup plus limité qu'aujourd'hui.
+                </p>
+                <p>
+                    C'est le problème qu'avaient tous les développeurs de l'époque.
+                    Pour cela, l'organisation du <a href="https://www.w3c.fr/">World Wide Web Consortium</a>, fondée par <a href="https://fr.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners Lee</a> (un des inventeurs du Web) le 1er octobre 1994, a décidé d'essayer de trouver un moyen de stocker plus efficacement les images.
+                    Le format, publié le 1er octobre 1996, est nommé <b>"Portable Network Graphic"</b>, ou <b>PNG</b>.
+                </p>
+            </div>
+            <h3>
+                Qu'est ce que le format PNG ?
+            </h3>
+            <div>
+                <p>
+                    Le format PNG est un format de stockage d'image, entièrement Open Source et sans pertes, contrairement au format <a rhef="https://fr.wikipedia.org/wiki/JPEG">JPEG</a>.
+                    Comme son nom l'indique, il a été fait au départ pour l'échange d'images sur le Web.
+                    Il a été crée pour être extrêmement modulabe et portable.
+                    Il doit aussi offrir un système de compression fiable et efficace.
+                </p>
+                <p>
+                    Comme tous les fichiers numérique, ce fichier est fait de binaire, donc de 0 et de 1.
+                    Plus précisement, il est composé d'octets précisement définis.
+                    Les <b>8 premiers octets</b> représente la signature du fichier. Elle est exactement de : <b>137;80;78;71;13;10;26;10</b>.
+                    Cette signature permet de différencier un fichier PNG d'un autre type de fichier.
+                    Tout le reste du fichier est découpé en <b>chunks</b>.
+                </p>
+            </div>
+            <h3>
+                Qu'est ce qu'un chunk ?
+            </h3>
+            <div>
+                <p>
+                    Un chunk représente un bloc de données.
+                    Dans le format PNG, tous les chunks ont la même structure (heuresement) :
+                    <ul>
+                        <li>
+                            Les <b>4 premiers octets</b> du chunk représente la taille totale du chunk en octets, sans compter le nom du chunk.
+                            La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                        </li>
+                        <li>
+                            Les <b>4 octets suivants</b> du chunk représente le nom du chunk.
+                            Ils forment une chaîne de caractère, équivalente au nom du chunk.
+                        </li>
+                        <li>
+                            Les <b>"taille du chunk" octets suivants</b> du chunk représente les données du chunk.
+                            Elles peuvent représenter beaucoup de chose, que nous verrons plus tard.
+                        </li>
+                        <li>
+                            Les <b>4 derniers octets</b> du chunk représente le code CRC du chunk.
+                            Le code CRC est un code obtenu en passant toutes les données du chunks (sauf la taille et le code CRC du chunk) via un algorithme CRC.
+                            Nous réaliserons dans une autre page plus tard une explication de cette algorithme.
+                            En tout cas, sachez que cette algorithme utilise le pôlynome 32 bits 0x04C11DB7 (ici représenté en hexadécimal), avec les données d'entrée et de sortie inversée, une entrée 0xffffffff et un XOR final 0xffffffff.
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    Il existe officiellement 18 chunks.
+                    Cependant, 3 sont absoluments indispensables.
+                    Leur nom sont : IHDR, IDAT et IEND.
+                </p>
+            </div>
+            <h3>
+                Le chunk IHDR
+            </h3>
+            <div>
+                <p>
+                    Le tout premier chunk d'un fichier PNG, situé juste après la signature, est le chunk IHDR, ou "Image Header".
+                    Il contient des informations de base sur le fichier.
+                    Sa taille est toujours de 13 octets.
+                </p>
+                <p>
+                    Ce chunk est très précisément défini :</br>
+                    <ul>
+                        <li>
+                            Les <b>4 premiers octets</b> du chunk représente la largeur de l'image en pixels.
+                            La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                        </li>
+                        <li>
+                            Les <b>4 octets suivants</b> du chunk représente la hauteur de l'image en pixels.
+                            La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                        </li>
+                        <li>
+                            L'<b>octet suivant</b> du chunk représente la pronfondeur de bit de l'image.
+                            La représentation précise du nombre est un nombre entier de 1 bit non signé.
+                            La profondeur de l'image est le nombre de bits qui composent une valeur d'un pixel dans le chunk.
+                            Avec le format RGB ou RGBA, la profondeur est le nombre de bits correspondant au R, G, B ou A individuellement.
+                            En tout, un pixel RGB fait 3 fois la profondeur de ce nombre, et un pixel RGBA fait 4 fois la pronfondeur de ce nombre.
+                            Le nombre maximum d'une profondeur est donnée par la formule 2 exposant profondeur.
+                            En général, ce nombre est de 8 bits.
+                        </li>
+                        <li>
+                            L'<b>octet suivant</b> du chunk représente le type de couleur du chunk.
+                            La représentation précise du nombre est un nombre entier de 1 bit non signé.
+                            Dans chaque représentation, 0 représente le noir et le nombre maximum représente la valeur maximale de la couleur du nombre (blanc, rouge, vert...).
+                            <ul>
+                                <li>Si le nombre est de 0, chaque pixel est composé de 1 nombre correspondant au niveau de gris du pixel.</li>
+                                <li>Si le nombre est de 2, chaque pixel est composé de 3 nombres RGB.</li>
+                                <li>Si le nombre est de 3, chaque pixel est nombre défini dans une palette RGB.</li>
+                                <li>Si le nombre est de 4, chaque pixel est nombre de 2 nombres, correspondant au niveau de gris du pixel et au canal alpha du pixel.</li>
+                                <li>Si le nombre est de 6, chaque pixel est composé de 4 nombres, 3 RGB et un représentant le canal alpha du pixel.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            L'<b>octet suivant</b> du chunk représente la méthode de compression de l'image.
+                            La représentation précise du nombre est un nombre entier de 1 bit non signé.
+                            Seul la valeur 0 est officiellement utile, qui représente la méthode de compression "deflate/inflate".
+                        </li>
+                        <li>
+                            L'<b>octet suivant</b> du chunk représente la méthode de filtrage de l'image.
+                            La représentation précise du nombre est un nombre entier de 1 bit non signé.
+                            Seul la valeur 0 est officiellement utile, qui représente un filtrage adaptatif de l'image.
+                        </li>
+                        <li>
+                            L'<b>octet suivant</b> du chunk représente la méthode d'entrelacement de l'image.
+                            La représentation précise du nombre est un nombre entier de 1 bit non signé.
+                            Il existe 2 valeurs d'entrelacement :
+                            <ul>
+                                <li>La valeur 0 représente un entrelacement avec les pixels les uns après les autres, de gauche à droite et de haut en bas.</li>
+                                <li>La valeur 1 représente un entrelacement Adam7.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    Tout cela représente la partie donnée de la structure de base du chunk.
+                </p>
+                <p>
+                    Toutes ces données peuvent faire peur, mais pour rappel, le format est sencé être très modulable.
+                    En général, seule la taille de l'image change vraiment (et peut être le type de couleur dans certains cas).
+                </p>
+            </div>
+            <h3>
+                Le chunk IDAT
+            </h3>
+            <div>
+                <p>
+                    Un autre chunk obligatoire est le chunk nommé IDAT.
+                    Ce chunk contient tout simplement le contenu de l'image.
+                    Toutes les données nécessaires pour traiter ces données, comme celles du chunk IHDR, doivent être définies avant ce chunk.
+                </p>
+                <p>
+                    La partie données du chunk contient l'image compressée.
+                    La méthode de compression est définie par la valeur de l'octet dédié dans le chunk IHDR (donc pour l'instant, que la méthode "inflate/deflate").
+                    Pour décompresser/compresser ces données, vous pouvez soit coder votre propre bibliothèque de compression, soit utiliser une bibliothèque déjà faite.
+                    La plus connue, et la plus utilisées, est la bibliothèque <a href="https://www.zlib.net/">ZLib</a>.
+                    Elle est présente en C++, Python, Java...
+                </p>
+                <p>
+                    Les données décompressées représentent tout simplement l'image avec les pixels les uns après les autres, selon la méthode d'entrelacement.
+                    Le contenu d'un pixel dépend de la profondeur de l'image et du type de couleur.
+                    Le contenu est découpé en "scanlines", chaque scanlines commençant par la valeur de la méthode de filtrage a appliquer à la ligne.
+                    Si il n'y a pas d'entrelacement (la valeur de l'octet dans IHDR est de 0), une scanline représente une ligne de l'image.
+                    Sinon, une scanlines représente une passe de l'entrelacement.</br>
+                    Par exemple, pour une image en 2*2 en RGB sans entrelacement, un contenu décompréssé peut être :</br>
+                    0;255;0;0;0;255;0;0;0;0;255;0;0;0</br>
+                    Ou, représenté de manière plus estéthique :</br>
+                    0 - 255;0;0 - 0;255;0</br>
+                    0 - 0;0;255 - 0;0;0</br>
+                    Le premier nombre de chaque ligne représente la méthode de filtrage de la ligne.
+                    Les 6 nombres suivants correspondent à 2 fois les valeurs RGB du pixel.
+                </p>
+                <p>
+                    Il existe 5 méthodes de filtrages différentes pour une scanline.</br>
+                    Voici les méthodes pour des données qui doivent être compressées.
+                    <li>
+                        <ul>
+                            Si la valeur est de 0, aucun filtrage n'est appliqué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 1, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la partie correspondante du pixel d'avant.
+                            Si le pixel actuellement traité est le premier de la scanline, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 2, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la partie correspondante du pixel au dessus de celui là.
+                            Si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 3, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur moyenne de la partie correspondante du pixel d'avant et de la partie correspondante du pixel d'au dessus.
+                            Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 4, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la fonction de Paeth entre la partie correspondante du pixel d'avant, la partie correspondante du pixel d'au dessus et la partie correspondante du pixel d'au dessus d'avant.
+                            Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                    </li>
+                    Voici les méthodes pour des données qui viennent d'être décompressées.
+                    <li>
+                        <ul>
+                            Si la valeur est de 0, aucun filtrage n'est appliqué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 1, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la partie correspondante du pixel d'avant.
+                            Si le pixel actuellement traité est le premier de la scanline, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 2, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la partie correspondante du pixel au dessus de celui là.
+                            Si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 3, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur moyenne de la partie correspondante du pixel d'avant et de la partie correspondante du pixel d'au dessus.
+                            Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                        <ul>
+                            Si la valeur est de 4, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la fonction de Paeth entre la partie correspondante du pixel d'avant, la partie correspondante du pixel d'au dessus et la partie correspondante du pixel d'au dessus d'avant.
+                            Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
+                        </ul>
+                    </li>
+                    Une fois que le filtrage est appliqué, alors vous avez votre image décodée, pixel par pixel, pour un usage à court terme.
+                </p>
+                <p>
+                    Certains fichiers peuvent contenir plusieurs chunks IDAT.
+                    Dans ce cas là, les données finales compresser / à décompresser représente la concaténation de toutes les données des chunks IDAT.
+                </p>
+            </div>
+            <h3>
+                Le chunk IEND
+            </h3>
+            <div>
+                <p>
+                    Pour une fois, le chunk IEND est extrêment simple, puis ce qu'il ne contient pas de données (appart la structure obligatoire d'un chunk).
+                    Il marque la fin de l'analyse du fichier PNG.
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
