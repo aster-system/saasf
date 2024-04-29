@@ -186,49 +186,49 @@
                 <p>
                     Il existe 5 méthodes de filtrages différentes pour une scanline.</br>
                     Voici les méthodes pour des données qui doivent être compressées.
-                    <li>
-                        <ul>
+                    <ul>
+                        <li>
                             Si la valeur est de 0, aucun filtrage n'est appliqué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 1, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la partie correspondante du pixel d'avant.
                             Si le pixel actuellement traité est le premier de la scanline, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 2, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la partie correspondante du pixel au dessus de celui là.
                             Si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 3, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur moyenne de la partie correspondante du pixel d'avant et de la partie correspondante du pixel d'au dessus.
                             Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 4, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité soustraite à la valeur de la fonction de Paeth entre la partie correspondante du pixel d'avant, la partie correspondante du pixel d'au dessus et la partie correspondante du pixel d'au dessus d'avant.
                             Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                    </li>
+                        </li>
+                    </ul>
                     Voici les méthodes pour des données qui viennent d'être décompressées.
-                    <li>
-                        <ul>
+                    <ul>
+                        <li>
                             Si la valeur est de 0, aucun filtrage n'est appliqué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 1, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la partie correspondante du pixel d'avant.
                             Si le pixel actuellement traité est le premier de la scanline, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 2, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la partie correspondante du pixel au dessus de celui là.
                             Si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 3, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur moyenne de la partie correspondante du pixel d'avant et de la partie correspondante du pixel d'au dessus.
                             Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                        <ul>
+                        </li>
+                        <li>
                             Si la valeur est de 4, la valeur finale de chaque partie du pixel est la valeur de la partie correspondante du pixel actuellement traité additionée à la valeur de la fonction de Paeth entre la partie correspondante du pixel d'avant, la partie correspondante du pixel d'au dessus et la partie correspondante du pixel d'au dessus d'avant.
                             Si le pixel actuellement traité est le premier de la scanline ou si la scaline actuellement traitée est la première ou si l'image est entrelacée, alors le même filtrage que pour la valeur "0" est effectué.
-                        </ul>
-                    </li>
+                        </li>
+                    </ul>
                     Une fois que le filtrage est appliqué, alors vous avez votre image décodée, pixel par pixel, pour un usage à court terme.
                 </p>
                 <p>
