@@ -20,14 +20,17 @@
                 <p>
                     La définition globale de l'<b>éléctricité</b> correspond en toutes les actions de la matières faisant intervenir des charges éléctriques.</br>
                     Hors, la définition souvent étudié en cour correspond à celle du <b>courant éléctrique</b>, où l'action en question correspond au mouvement de ces charges dans un circuit.
-                    Pour être plus précis, ces charges représentent généralement des électrons, de charge négatives, naviguant atomes par atomes.</br>
+                    Pour être plus précis, ces charges représentent généralement des électrons, de charge négatives, naviguant de leur atome vers un atome voisin.
+                    Ils effectuent des sortes de sauts entre atomes.
+                    Par effet de récurrence, cela crée un courant électrique.</br>
                     Les éléctrons qui se déplacent sont généralement peu liés à leur atome. Ils sont dans ce qu'on appelle la <b>bande de conduction</b>.</br>
                 </p>
                 <h3>
                     Que ce que l'intensité ?
                 </h3>
                 <p>
-                    L'intensité désigne le flux d'éléctrons passant par un certain endroit du trajet du courant éléctrique.
+                    L'intensité désigne le flux de charges passant par un certain endroit du trajet du courant éléctrique.
+                    En gros, il s'agit du nombre de sauts d'électrons dans un circuit par seconde.
                     Elle se mesure en ampère, nom donné en hommage au physicien français <a href="https://fr.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re">André-Marie Ampère</a>.
                     Elle se calcul avec la formule :</br>
                     <math>
@@ -39,10 +42,11 @@
                         </mfrac>
                     </math></br>
                     Où I est l'intensité en ampères, dq le nombre de Coulomb mesuré pendant la période de temps et dt la période de temps.</br>
-                    Le Coulomb représente la quantité de charges qui se sont déplacés, en sachant que 1 Coulomb vaut environ 6,24 milliards de milliards d'éléctrons dans le cas d'un déplacement d'éléctrons.
-                    En vérité, le Coulomb est une valeur correspondant en la somme des charges de particules. Dans le cas d'un éléctron, sa charge est de 1,602 X 10^(-19) Coulomb.
-                    Pour obtenir un Coulomb, il faut donc 6,24 milliards de milliards d'éléctrons, car (1,602 X 10^(-19)) X 6,24 milliards de milliards = 1, justifiant le résultat.</br>
+                    Le Coulomb représente la quantité de charges qui se sont déplacés, en sachant que 1 Coulomb vaut environ 6,24 milliards de milliards de fois celle de l'éléctron.
+                    En effet, sa charge est de 1,602 X 10^(-19) Coulomb.
+                    Pour obtenir un Coulomb, il faut donc 6,24 milliards de milliards de sauts d'éléctrons, car (1,602 X 10^(-19)) X 6,24 milliards de milliards = 1, justifiant le résultat.</br>
                     Donc; l'intensité d'un courant est de 1 ampère si 1 Coulomb le traverse en 1 seconde.
+                    Le nombre de sauts par seconde d'un seul électron étant relativement constant à notre échelle, cette valeur permet plutôt d'avoir une idée du nombre d'électrons qui ont effectués des sauts.
                 </p>
                 <h3>
                     Pourquoi les lois de l'intensité électriques ?
@@ -59,10 +63,10 @@
                     </ul>
                     Pour justifier ces deux lois, prenons l'exemple d'une route.</br>
                     Si une route est à sens unique, quoi qu'il arrive, si tout se passe normalement, alors autant de voiture vont rentrer de la route que en sortir.
-                    C'est la même chose dans un circuit en série. Il n'y a qu'un seul chemin, et les électrons sont obligés de passer par là, quoi qu'il arrive.</br>
+                    C'est la même chose dans un circuit en série. Il n'y a qu'un seul chemin, et les charges sont obligées de passer par là, quoi qu'il arrive.</br>
                     Si une route à deux sens unique, quoi qu'il arrive, si tout se passe normalement, alors les voitures iront soit à droite, soit à gauche.
                     Où qu'aille les voitures, elles sont toutes issues de la première route. Donc, la somme de ces voitures représente le nombre de voiture sur la première route.
-                    C'est la même chose dans un circuit en déviration. Il peut y avoir plusieurs chemins à la sortir / entrée d'un chemin, et les électrons sont obligés de passer par un de eux, quoi qu'il arrive.</br>
+                    C'est la même chose dans un circuit en déviration. Il peut y avoir plusieurs chemins à la sortir / entrée d'un chemin, et les charges sont obligées de passer par un de eux, quoi qu'il arrive.</br>
                     Les lois sont donc justifiées.
                 </div>
                 <h3>
@@ -76,15 +80,15 @@
                         <mtext>U</mtext>
                         <mo>=</mo>
                         <mfrac>
-                            <mtext>W</mtext>
-                            <mtext>dq</mtext>
+                            <mtext>E</mtext>
+                            <mtext>q</mtext>
                         </mfrac>
                     </math></br>
-                    Où U est la tension en volts, W l'énergie déployée en Joules et dq le nombre de Coulomb déplacé.</br>
-                    Une manière de dire en utilisant la formule est de dire que la tension U est la capacité à faire à ce qu'une certaine quantité d'éléctrons q fournissent du travail, et donc de l'énergie W.
-                    Plus la tension est élevé, plus le courant sera capable de générer de l'énergie.</br>
-                    Pour modifier (augmenter ou abaisser) la tension d'un courant sans modifier la puissance, il faut <b>utiliser</b> un transformateur.
-                    Par exemples, les lignes hautes tensions transforment un courant de plusieurs centaines de milliers de volts en 220 volts. 
+                    Où U est la tension en volts, E l'énergie déployée en Joules et q le nombre de Coulomb déplacé.</br>
+                    Une manière de dire en utilisant la formule est de dire que la tension U est la capacité à faire à ce qu'une certaine quantité de charges q fournissent du travail, et donc de l'énergie W.
+                    Plus la tension est élevée, plus le courant sera capable de générer de l'énergie.</br>
+                    Pour modifier (augmenter ou baisser) la tension d'un courant sans modifier la puissance, il faut <b>utiliser</b> un transformateur.
+                    Par exemples, les lignes hautes tensions utilisent un courant de plusieurs centaines de milliers de volts, qui est converti en 220 volts. 
                 </p>
                 <h3>
                     Pourquoi les lois de tensions électriques ?
@@ -101,22 +105,20 @@
                     </ul>
                     Pour justifier ces deux lois, prenons l'exemple d'un quartier.</br>
                     Admettons une route reliant un quartier résidentiel à des quartier de commerce directement entre eux, où le retour au quartier résidentiel oblige à passer devant chaque quartier commercial une fois.
+                    Le budget alloué aux courses représente le pouvoir d'achat des habitants, donc une sorte de puissance à acheter des choses. Il représente la tension et l'achat de chose représente le travail fourni.
                     Si les habitants du quartier résidentiel partent faire leurs courses et allouent un certain budget aux courses, qui sera usé totalement, alors le budget devra être redistribué de tel manière que la somme total du budget mis dans chaque quartier commercial soit le même que le budget de départ.
                     C'est la même chose dans un circuit en série, avec les habitants représentants les charges, le quartier résidentiel le générateur, les quartiers commerciaux les récépteurs et le budget la tension aux bornes des récépteurs.
                     Admettons maintenant que plusieurs routes relient un quartier résidentiel à différents quartiers de commerce.
                     Si les habitants du quartier résidentiel partent faire leurs courses et allouent un certain budget aux courses, qui sera usé totalement, alors la même logique s'applique.
-                    Hors, même si le nombre de gens diffère entre ceux qui sortent du quartier résidentiel et ceux qui vont dans un quartier commercial, le budget restera le même, et la logique aussi.
-                    C'est la même chose dans un circuit en dérivation, le budget à l'entrée et à la sortie de chaque branche de quartier est le même.</br>
+                    Hors, même si le nombre de gens qui iront dans les différents quartiers commerciaux diffère selon le quartier, le budget à l'entrée et à la sortie restera le même, et la logique aussi.
+                    C'est la même chose dans un circuit en dérivation, la tension ne change pas pour les charges selon la branche du circuit.</br>
                     Les lois sont donc justifiées.
                 </p>
                 <h3>
                     Que ce que la résistance électrique ?
                 </h3>
                 <p>
-                    La résistance électrique est la capacité d'un circuit à rendre la tension moins efficace dans un courant électrique.
-                    En effet, plus elle est élevée, plus l'énergie transportée par un électron est affaibli dans le circuit.
-                    Donc, pour obtenir la même énergie, il faut plus d'électrons pour compenser la perte.
-                    En terme plus scientifique, plus la résistance est élevée, plus la tension nécessaire pour que un Coulomb puisse transporter une certaine quantité d'énergie dans le circuit est élevée.
+                    La résistance électrique est la capacité d'un circuit à rendre la propagation d'énergie moins efficace dans un courant électrique.
                     Cette effet est inévitable, sauf dans certains cas de supraconducteurs.</br>
                     Elle se mesure en ohm, nom donné en hommage au physicien allemand <a href="https://fr.wikipedia.org/wiki/Georg_Ohm">Georg Ohm</a>.
                     Un circuit a une résistance de 1 ohm si une tension de 1 volt dans le circuit produit un courant de 1 ampère.</br>
@@ -140,50 +142,20 @@
                             <mn>I</mn>
                         </mfrac>
                     </math></br>
-                    Cette formule s'explique en disant que plus la résistance est élevée, plus la tension doit être élevée pour vérifier l'égalité, et donc moins elle est efficace, comme expliquer en haut.
-                    Réciproquement, plus l'intensité I est élevé, plus la tension U est efficace, et donc plus la résistance R est faible.</br>
-                    Prenons un exemple de circuit électrique.
-                    Imagineons un circuit avec un dipôle d'une résistance de 5 ohms et un générateur.
-                    Si la tension aux bornes du générateur est de 50 volts, alors la tension aux bornes du dipôle sera de 50 volts.
-                    On peut calculer l'intensité aux bornes du dipôle :</br>
-                    <math>
-                        <mtext>R</mtext>
-                        <mo>=</mo>
-                        <mfrac>
-                            <mn>U</mn>
-                            <mn>I</mn>
-                        </mfrac>
-                        <mo>&lt;=&gt;</mo>
-                        <mtext>I</mtext>
-                        <mo>=</mo>
-                        <mfrac>
-                            <mn>U</mn>
-                            <mn>R</mn>
-                        </mfrac>
-                        <mo>=</mo>
-                        <mfrac>
-                            <mn>50 volts</mn>
-                            <mn>5 ohms</mn>
-                        </mfrac>
-                        <mo>=</mo>
-                        <mtext>
-                            10 ampères
-                        </mtext>
-                    </math></br>
-                    L'intensité aux bornes du dipôle sera donc de 10 ampères.
-                    La tension sera donc en capacité de générer 10 ampère, soit un mouvement de 10 Coulomb, ou 62,4 milliards de milliards d'électrons par seconde.
-                    De plus, la puissance consommée par le dipôle sera de 500 Watts.
-                    Si le dipôle a besoin de 1000 Watts, alors il faudra augmenter la tension aux bornes du générateur pour obtenir une puissance suffisante.</br>
-                    La résistance est responsable de l'<a href="#ej">effet Joule</a>.
+                    Plus la résistance est élevée, plus l'énergie transportée par une charge est affaibli dans le circuit.
+                    Plus précisement, les électrons perdent un peu d'énergie électrique lors des sauts, et donc le courant perd de l'énergie.
+                    Donc, pour obtenir la même énergie, il faut plus de charges pour compenser la perte.
+                    Inversement, si on veut le même nombre de charges, alors il faut augmenter l'énergie du courant.</br>
+                    Une partie de l'énergie est perdue, conformément à l'<a href="#ej">effet Joule</a>.
                 </p>
                 <h3>
                     L'effet Joule
                 </h3>
                 <p id="ej">
-                    Les éléctrons circulant dans un circuit électrique peuvent interagir (comme entrer en collision) avec des atomes.
-                    Les atomes touchés rentrent en mouvement, et donc chauffent.
-                    Cela produit de l'énergie thermique, réduisant donc l'énergie électrique.
-                    Cet effet crée des pertes d'énergie électrique.
+                    Les éléctrons faisant des sauts entre atomes dans un circuit électrique peuvent interagir avec d'autres atomes voisins.
+                    Les atomes touchés gagnent de l'énergie, et donc chauffent.
+                    Inversement, l'électron en perd.
+                    Cet effet crée donc des pertes d'énergie électrique.
                     En d'autres termes, l'énergie électrique est convertie en énergie thermique.
                     Cette effet est appelé <b>effet Joule</b>.
                     Plus la résistance d'un circuit est élevée, plus cette effet sera visible.
