@@ -89,7 +89,7 @@
                 <h3>
                     Pourquoi les lois de tensions électriques ?
                 </h3>
-                <p>
+                <p id="plldte">
                     Il y a deux lois pour la tension électrique vues en cour :</br>
                     <ul>
                         <li>
@@ -115,8 +115,9 @@
                 <p>
                     La résistance électrique est la capacité d'un circuit à rendre la tension moins efficace dans un courant électrique.
                     En effet, plus elle est élevée, plus l'énergie transportée par un électron est affaibli dans le circuit.
-                    En utilisant les formules vues plus haut, on peut dire que si la résistance est élevée, alors la tension, qui correspond à l'énergie transportée par un électron, est plus faible.
-                    Donc, pour obtenir la même énergie, il faut plus d'électrons pour compenser la perte.</br>
+                    Donc, pour obtenir la même énergie, il faut plus d'électrons pour compenser la perte.
+                    En terme plus scientifique, plus la résistance est élevée, plus la tension nécessaire pour que un Coulomb puisse transporter une certaine quantité d'énergie dans le circuit est élevée.
+                    Cette effet est inévitable, sauf dans certains cas de supraconducteurs.</br>
                     Elle se mesure en ohm, nom donné en hommage au physicien allemand <a href="https://fr.wikipedia.org/wiki/Georg_Ohm">Georg Ohm</a>.
                     Un circuit a une résistance de 1 ohm si une tension de 1 volt dans le circuit produit un courant de 1 ampère.</br>
                     Une loi célèbre permet de facilement calculer la résistance d'un circuit : la <b>loi d'Ohm</b>.
@@ -139,19 +140,55 @@
                             <mn>I</mn>
                         </mfrac>
                     </math></br>
-                    Cette formule s'explique en disant que plus la résistance est élevée, plus la tension doit être élevée pour vérifier l'égalité, comme expliquer en haut.
-                    Réciproquement, plus l'intensité I est élevé, plus la tension U est efficace, et donc plus la résistance R est faible.
+                    Cette formule s'explique en disant que plus la résistance est élevée, plus la tension doit être élevée pour vérifier l'égalité, et donc moins elle est efficace, comme expliquer en haut.
+                    Réciproquement, plus l'intensité I est élevé, plus la tension U est efficace, et donc plus la résistance R est faible.</br>
+                    Prenons un exemple de circuit électrique.
+                    Imagineons un circuit avec un dipôle d'une résistance de 5 ohms et un générateur.
+                    Si la tension aux bornes du générateur est de 50 volts, alors la tension aux bornes du dipôle sera de 50 volts.
+                    On peut calculer l'intensité aux bornes du dipôle :</br>
+                    <math>
+                        <mtext>R</mtext>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mn>U</mn>
+                            <mn>I</mn>
+                        </mfrac>
+                        <mo>&lt;=&gt;</mo>
+                        <mtext>I</mtext>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mn>U</mn>
+                            <mn>R</mn>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mn>50 volts</mn>
+                            <mn>5 ohms</mn>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mtext>
+                            10 ampères
+                        </mtext>
+                    </math></br>
+                    L'intensité aux bornes du dipôle sera donc de 10 ampères.
+                    La tension sera donc en capacité de générer 10 ampère, soit un mouvement de 10 Coulomb, ou 62,4 milliards de milliards d'électrons par seconde.
+                    De plus, la puissance consommée par le dipôle sera de 500 Watts.
+                    Si le dipôle a besoin de 1000 Watts, alors il faudra augmenter la tension aux bornes du générateur pour obtenir une puissance suffisante.</br>
+                    La résistance est responsable de l'<a href="#ej">effet Joule</a>.
                 </p>
                 <h3>
                     L'effet Joule
                 </h3>
-                <p>
+                <p id="ej">
                     Les éléctrons circulant dans un circuit électrique peuvent interagir (comme entrer en collision) avec des atomes.
                     Les atomes touchés rentrent en mouvement, et donc chauffent.
-                    Cela produit de l'énergie thermique, réduisant donc l'énergie électrique. En d'autres termes, l'énergie électrique est convertie en énergie thermique.
+                    Cela produit de l'énergie thermique, réduisant donc l'énergie électrique.
+                    Cet effet crée des pertes d'énergie électrique.
+                    En d'autres termes, l'énergie électrique est convertie en énergie thermique.
                     Cette effet est appelé <b>effet Joule</b>.
+                    Plus la résistance d'un circuit est élevée, plus cette effet sera visible.
                     Cette effet est utilisé dans les résistances électriques pour générer de la chaleur.
-                    La moyenne de l'énergie perdue se calcul avec la formule :</br>
+                    La moyenne de l'énergie perdue se calcule avec la formule :</br>
                     <math>
                         <mtext>Ej en joules</mtext>
                         <mo>=</mo>
@@ -193,18 +230,11 @@
                         <mo>=</mo>
                         <mtext>W</mtext>
                         <mo>*</mo>
-                        <mfrac>
-                            <mtext>dt</mtext>
-                            <mtext>
-                                <msub>
-                                    <mi>dt</mi>
-                                    <mn>I</mn>
-                                </msub>
-                            </mtext>
-                        </mfrac>
+                        <mtext>dt</mtext>
                     </math></br>
                     Où W est la puissance du courant électrique en Watt utilisé par le dipôle.</br>
-                    À noter que la puissance utilsé par le dipôle n'est pas la même que la puissance totale du circuit (voir <a href="">lois de la tension électrique</a>).
+                    À noter que la puissance utilsé par le dipôle n'est pas la même que la puissance totale du circuit (voir <a href="#plldte">lois de la tension électrique</a>).</br>
+                    Cet effet est inévitable dans un circuit, sauf dans certains cas de supraconducteur.
                 </p>
             </div>
         </div>
