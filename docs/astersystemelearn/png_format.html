@@ -65,7 +65,7 @@
                         <ul>
                             <li>
                                 Les <b>4 premiers octets</b> du chunk représentent la taille totale du chunk en octets, sans compter le nom du chunk.
-                                La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                                La représentation précise du nombre est un nombre entier de 4 octets non signé, en big endian.
                             </li>
                             <li>
                                 Les <b>4 octets suivants</b> du chunk représentent le nom du chunk.
@@ -103,11 +103,11 @@
                         <ul>
                             <li>
                                 Les <b>4 premiers octets</b> du chunk représentent la largeur de l'image en pixels.
-                                La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                                La représentation précise du nombre est un nombre entier de 4 octets non signé, en big endian.
                             </li>
                             <li>
                                 Les <b>4 octets suivants</b> du chunk représentent la hauteur de l'image en pixels.
-                                La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                                La représentation précise du nombre est un nombre entier de 4 octets non signé, en big endian.
                             </li>
                             <li>
                                 L'<b>octet suivant</b> du chunk représente la pronfondeur de bit de l'image.
@@ -272,12 +272,12 @@
                         <ul>
                             <li>
                                 Les <b>4 premiers octets</b> du chunk représentent le nombre de pixels en largeur pour obtenir une certaine taille dans la vraie vie.
-                                La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                                La représentation précise du nombre est un nombre entier de 4 octets non signé, en big endian.
                                 Par exemple, si ces 4 octets contiennent le nombre "1500", alors une unité de valeur dans la vraie vie équivaut à 1500 pixels de l'image.
                             </li>
                             <li>
                                 Les <b>4 octets suivant</b> du chunk représentent le nombre de pixels en hauteur pour obtenir une certaine taille dans la vraie vie.
-                                La représentation précise du nombre est un nombre entier de 4 bits non signé, en big endian.
+                                La représentation précise du nombre est un nombre entier de 4 octets non signé, en big endian.
                                 Par exemple, si ces 4 octets contiennent le nombre "1500", alors une unité de valeur dans la vraie vie équivaut à 1500 pixels de l'image.
                             </li>
                             <li>
