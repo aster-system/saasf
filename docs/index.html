@@ -1,86 +1,127 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-            SAASF - Hub
-        </title>
+        <link href="./styles/base.css" rel="stylesheet" />
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <h1>
-            SAASF Par Aster Système
-        </h1>
-        <div>
+    <body class="open-sans">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="./images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="./images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="./images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
             <p>Warning : As the lessons come from France, the entire website is in french.</p>
-            <h2>
-                Présentation
-            </h2>
+            <h1>
+                SAASF
+            </h1>
             <div>
                 SAASF (anciennement Aster School) pour Service d'Apprentissage d'Aster Système en Français est une branche de l'organisation <a href="https://aster-system.github.io/aster-system/">Aster Système</a>.</br>
                 Il s'agit d'un site web, regroupant pleins de cours de terminal pris par le créateur d'Aster Système, Mattéo pour ceux qui me connaissent dans la vraie vie, et d'autres membres.</br>
                 Cependant, les cours seront re-travaillés pour être facilement compréhensible par n'importe qui.</br>
                 De plus, certains cours du programme peuvent paraître assez peu poussé et peuvent être approfondis.
                 C'est pour ça que les cours seront de temps en temps améliorés avec des éléments hors programmes.
-                <h3>
-                    Pourquoi SAASF ?
-                </h3>
-                <div>
-                    Tous les cours présents sur SAASF sont rédigés par des personnes qui suivent également ces cours.
-                    Ils sont donc les plus adéquat du monde pour proposer ce service.
-                </div>
-                <h3>
-                    Réalisation
-                </h3>
-                <div>
-                    <p>
-                        Ce site web est réalise avec les très cèlèbres langages HTML et CSS, vu en SNT (même si le niveau nécessaire pour créer un site de ce genre est bien supérieur à ce que vous avez vu).</br>
-                        Pour la structuration, il utilise l'outil de l'organisation mère, <a href="https://aster-system.github.io/aster-system/">Aster Système</a>,
-                        nommé <a href="https://aster-system.github.io/aster-system/scls/documentalist.html">SCLS Documentalist Agatha</a>.
-                    </p>
-                    <p>
-                        La version actuelle du site web, modifiée le 20/04/2024, n'ai pas encore équipée de style, ni de structure propre. Cependant, ça ne tardera pas.
-                    </p>
-                </div>
-                <h3>
-                    Plus d'informations sur SAASF
-                </h3>
-                <div>
-                    SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
-                    Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.
-                </div>
             </div>
-            <h2>
-                Aster Système Learn
-            </h2>
-            <div>
-                Voici la liste de tous les savoirs accessibles sur les médias d'Aster Système Learn pour l'instant :
-                <ul>
-                    <li>
-                        <a href="astersystemelearn/png_format.html">Le format PNG</a>
-                    </li>
-                </ul>
-            </div>
-            <h2>
-                Matières
-            </h2>
-            <div>
-                Voici la liste de toutes les matières accessibles pour l'instant :
-                <ul>
-                    <li>
-                        <a href="subjects/en.html">Anglais</a>
-                    </li>
-                    <li>
-                        <a href="subjects/es_svt.html">Enseignement scientifique SVT</a>
-                    </li>
-                    <li>
-                        <a href="subjects/es_pc.html">Enseignement scientifique physique chimie</a>
-                    </li>
-                    <li>
-                        <a href="subjects/sp.html">Espagnol</a>
-                    </li>
-                    <li>
-                        <a href="subjects/ph.html">Philosophie</a>
-                    </li>
-                </ul>
+            <div class="left_arrow_right_text">
+                <div>
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="./images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Pourquoi SAASF ?
+                    </h2>
+                    <div>
+                        Tous les cours présents sur SAASF sont rédigés par des personnes qui suivent également ces cours.
+                        Ils sont donc les plus adéquat du monde pour proposer ce service.
+                    </div>
+                </div>
+                <div>
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="./images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Réalisation
+                    </h2>
+                    <div>
+                        <p>
+                            Ce site web est réalise avec les très cèlèbres langages HTML et CSS, vu en SNT (même si le niveau nécessaire pour créer un site de ce genre est bien supérieur à ce que vous avez vu).</br>
+                            Pour la structuration, il utilise l'outil de l'organisation mère, <a href="https://aster-system.github.io/aster-system/">Aster Système</a>,
+                            nommé <a href="https://aster-system.github.io/aster-system/scls/documentalist.html">SCLS Documentalist Agatha</a>.
+                        </p>
+                        <p>
+                            La version actuelle du site web, modifiée le 20/04/2024, n'ai pas encore équipée de style, ni de structure propre. Cependant, ça ne tardera pas.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="./images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Plus d'informations sur SAASF
+                    </h2>
+                    <div>
+                        SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                        Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="./images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Aster Système Learn
+                    </h2>
+                    <div>
+                        Voici la liste de tous les savoirs accessibles sur les médias d'Aster Système Learn pour l'instant :
+                        <ul>
+                            <li>
+                                <a href="astersystemelearn/png_format.html">Le format PNG</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="./images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Matières
+                    </h2>
+                    <div>
+                        Voici la liste de toutes les matières accessibles pour l'instant :
+                        <ul>
+                            <li>
+                                <a href="subjects/en.html">Anglais</a>
+                            </li>
+                            <li>
+                                <a href="subjects/es_svt.html">Enseignement scientifique SVT</a>
+                            </li>
+                            <li>
+                                <a href="subjects/es_pc.html">Enseignement scientifique physique chimie</a>
+                            </li>
+                            <li>
+                                <a href="subjects/sp.html">Espagnol</a>
+                            </li>
+                            <li>
+                                <a href="subjects/ph.html">Philosophie</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
