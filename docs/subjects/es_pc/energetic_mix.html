@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SAASF - ES PC
+        </title>
+    </head>
+    <body>
+        <h1>
+            SAASF - Enseignement Scientifique Physique Chimie
+        </h1>
+        <h2>
+            Un mix énergétique
+        </h2>
+        <div>
+            <h3>
+                Contexte
+            </h3>
+            <div>
+                <p>
+                    Pour cette exercice, on suppose que nous devons faire une étude des moyens énergétiques à utiliser pour un village fictif, nommé "Eklaugy".
+                    Ce village est une petite commune de 2000 habitants qui semble se situer dans les montagnes alpines française, au pied du grande colline.
+                    Le maire est cherche à générer sa propre électricité, et l'objectif de l'exercice est de trouver un mix énergétique le plus intéressant possible pour le village.
+                </p>
+                <p>
+                    Nous pouvant déjà commencer à étudier statistiquement ce village.
+                    Nous estimons la population à 2000 habitants.
+                    De plus, en France, une personne consomme en moyenne 2.223 MWh d'électricité.
+                    Par un très simple calcul, on peut estimer la consommation total annuel du village pour les habitants à 4.446 GWh.
+                </p>
+                <p>
+                    De plus, comme je sais magner ce genre d'outils, je m'aiderai d'un script Python pour faire les calculs plus facilement et rapidement.
+                </p>
+            </div>
+            <h3>
+                Utiliser le vent
+            </h3>
+            <div>
+                <p>
+                    La première idée représente l'utilisation d'éoliennes.
+                    En effet, il s'agit d'un moyen renouvelable de générer de l'énergie grâce à la force du vent.
+                    Il s'agit d'un des moyens les plus utilisés pour générer de l'énergie localement sans difficulté et en petite quantité.
+                    La première étape consiste à trouver un type d'éolienne à installer.
+                    Cependant, la recherche est très compliquée, car il est difficile de trouver des sources fiables de recensement d'éoliennes.
+                    En effet, il y a les éoliennes domestiques, industrielles, verticales, horizontales, les tailles des pâles, du mât...
+                    Par exemple, nous avons trouvé un catalogue de la marque Enercon, à <a href="https://pdf.directindustry.fr/pdf/enercon/eoliennes-enercon-gamme/20877-363791.html" target="_blank">cette adresse</a>, donnant des informations assez satisfaisantes sur différents éoliennes.
+                    Cependant, ce genre de catalogues n'est pas vraiment accessible à un élève qui fait un exercice de physique.
+                    Mais, il faut bien des données pour commencer quelque part.
+                    Même si leur source ne sont pas très satisfaisantes, nous avons décidé de prendre les données du site <a href="https://www.les-energies-renouvelables.eu/conseils/eolienne/prix-rentabilite-eolien/" target="_blank">EcoInfos</a>.
+                    Selon ce site, une éolienne de 20KW coûte approximativement 70 000 €.
+                </p>
+                <p>
+                    Nous pouvons première faire le calcul pour l'utilisation d'éoliennes produisant 20kW.
+                    Le premier point à voir pour l'utilisation de cette énergie est la production électrique de cette dernière.
+                    Nous savons que cette éolienne produit 20kW.
+                    Elle produit donc 20kW/h, soit 480kW/jours, donc 175320kW/ans, ou 175MW/h par ans.
+                    Le village nécessite 4446MW/h par ans.
+                    Donc, par une simple division, on constate qu'il faudrai 26 éoliennes pour pleinement remplir cette objectif.
+                    Avec une simple multiplication, on constate que ce nombre d'éolienne couterai approximativement 1,82 millions d'euros à installer.
+                    Il faut de plus compter que leur durée de vie ne dépasse pas 15 ans, et que le coût de fonctionnement est aussi à prendre en compte, bien qu'il n'est pas présent sur la source.
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
