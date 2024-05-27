@@ -70,6 +70,11 @@ header nav div a {
     color: black;
 }
 
+/*An important thing in a lesson*/
+.important {
+    color: red;
+}
+
 /*Div containing arrows at the left and text at the right*/
 .left_arrow_right_text {
     display: flex;

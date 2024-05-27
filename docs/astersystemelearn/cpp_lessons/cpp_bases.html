@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                1. Les bases du C++
+            </h1>
+            <div>
+                Cette première partie est particulièrement importante pour comprendre le reste du cours.
+                Dans cette partie, je vais vous raconter les bases du C++, et même, plus généralement, de la programmation.
+                Cette étape sera très utilise pour ceux qui ne connaissent pas bien le domaine.
+                D'ailleurs, nous ne parlerons pas que d'informatique.
+                Mais pour savoir pourquoi et comment, il faut que je vous explique quelques petits trucs avant.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Les bases de la programmation
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Avant de s'attaquer au langage de programmation, nous allons faire un petit détour vers les bases de ce qu'est la programmation.
+                        <h3 id="part_A_a">
+                            a. Pourquoi programmer ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Cette question peut paraître particulièrement débile.
+                                Cependant, <u>vous l'aviez vous déjà posé</u> ?
+                                La première réponse qui peut vous venir en tête est <u>"Je veux faire quelque chose à l'aide d'un ordinateur"</u>.
+                                Cette réponse est tout à fait juste et satisfaisante.
+                                Cependant, on va un peu plus creuser le concept pour <u>comprendre ce que l'on va faire</u>.
+                            </p>
+                            <p id="part_A_a_2">
+                                Par définition, selon la définition 1 du <a href="https://www.larousse.fr/dictionnaires/francais/programmation/64205" target="_blank">Larousse</a>, la programmation est <u>"Action de programmer quelque chose"</u>.
+                                Cependant, programmer signifie, selon la définition 2 du <a href="https://www.larousse.fr/dictionnaires/francais/programmer/64209" target="_blank">Larousse</a>, <u>"Établir à l'avance une suite d'opérations"</u>.
+                                Ces définitions collent parfaitement à ce qu'on veut faire.
+                                En effet, <span class="important">on veut créer une suite d'action, exécutée par ordinateur, permettant de faire quelque chose</span>.
+                            </p>
+                            <p id="part_A_a_3">
+                                Cette logique s'inscrit dans la logique <u>d'automatisation</u>.
+                                Selon <a href="https://www.ibm.com/fr-fr/topics/automation">IBM</a>, l'automation d'un processus est le fait de faire à ce que <u>cette tâche se réalise toute seule, grâce à une machine</u>.
+                                Par soucis de facilité, il est aussi recommandé de faire à ce que <u>l'utilisateur est le moins possible besoin d'intervenir</u> dans ce processur.
+                                Par exemple, on peut automatiser un calcul, comme 547856+554478/44775, grâce à une calculatrice.
+                                Cependant, une machine, même automatique, n'est pas forcément programmable.
+                                En effet, elle peut ne seulement exécuter qu'un programme défini par son architecture, et donc, non modifiable.
+                                Heuresement, <span class="important">certaines machines peuvent modifier leur comportement selon un programme donné par l'utilisateur.
+                                Ces machines sont appelées machine programmable</span>.
+                                Donc, <span class="important">la programmation est un moyen d'automatisation d'une tâche en utilisant une machine programmable</span>.
+                            </p>
+                            <p id="part_A_a_4">
+                                Une chose, peu importante, est que <u>la programmation n'est pas que informatique</u>.
+                                En effet, n'importe <span class="important">quel objet programmable peut utiliser un programme</span>.
+                                Cependant, certains de ces objets ne sont pas nécessairement informatique.
+                                Par exemple, selon <a href="https://fr.wikipedia.org/wiki/M%C3%A9tier_Jacquard">Wikipédia</a>, la machine à tisser "Métier Jacquard" est une machine programmeable, mais sans informatique.
+                                Elle utilise un ingénieux système de carte programmable, qui exécute des actions sans électronique, mais par la seule ingéniosité de la mécanique qui la constitue.
+                                Bien évidemment, dans ce cours, je ne parlerai pas de ce genre de programmation, mais plutôt de programmation électronique.
+                            </p>
+                            <p id="part_A_a_5">
+                                Une chose qu'il est assez important de rappeler est une explication de "Mais comment c'est possible ?".
+                                En effet, vous, moi, peut être vos parents ou animaux de compagnies nous sommes posés cette question.
+                                Comment est-il possible de créer une machine programmable ?
+                                <span class="important">L'idée en général d'une machine programmable est d'incorporer dans son architecture tout ce qu'elle peut faire physiquement</span>.
+                                En suite, <span class="important">le programme doit être physiquement fait de telle façon qu'il puisse faire à ce que la machine effectue la tâche adéquat</span>.
+                                Par exemple, <u>en utilisant habilement des rouages, il est possible de créer une calculatrice mécanique</u>, comme la machine à calculer de Blaise Pascal, <a href="https://fr.wikipedia.org/wiki/Pascaline">la pascaline</a>, faite il y a presque 400 ans.
+                                Le mouvement des rouages permet de provoquer le calcul demandé.
+                                Ce concept est le même pour <span class="important">toutes machine programmable, avec seulement les mécaniques qui effectuent les tâches de différentes</span>.
+                            </p>
+                            <p id="part_A_a_6">
+                                La mécanique derrière ces machines programmables peuvent être différents, mais ne s'éloignent jamais vraiment entre elles.
+                                En général, c'est <u>une représentation dans la vraie vie de concepts mathématiques</u>.
+                                Par exemple, dans <a href="https://fr.wikipedia.org/wiki/Pascaline">la pascaline</a> vue plus haut, la mécanique de l'addition est une très simple mécanique, ou une unité représente un dizième de tour de rouage.
+                                Donc, un tour complet de rouage représente 10, provoquant par ailleurs l'annulation de cette dizaine et l'augmentation de la dizaine de haut dessus, comme dans l'addition que l'on apprend en primaire.
+                                Ces <span class="important">concepts mathématiques sont utilisés dans toutes les machines programmables, plus ou moins différement</span>.
+                            </p>
+                            <p id="part_A_a_7">
+                                Pour conclure cette partie, nous allons dire que nous allons programmer sur ordinateur, donc créer une suite de tâches automatiques sur un appareil programmable.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Comment programmer sur ordinateur ?
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Pour cette partie, nous allons devoir revoir quelques bases des ordinateurs, et même plus globalement, de l'électronique.
+                                En effet, comme nos programmes s'éxecuterons grâce à ça, elles auront un rôle racine, qu'il est important de connaître.
+                            </p>
+                            <p id="part_A_b_2">
+                                Le premier concept à comprendre est comment et pourquoi l'ordinateur est une machine programamble.
+                                Comme vu <a href="#part_A_a_5">plus haut</a>, l'ordinateur, en tant que machine programmable, contient dans son architecture de quoi effectuer physiquement des tâches.
+                                Pour cela, <span class="important">il utilise la mécanique de l'électricité, ou électronique</span>.
+                                L'idée est <span class="important">d'utiliser l'électricité pour assurer ces tâches</span>.
+                                L'utilisation de ce type de mécanique est qu'il est facile de créer des systèmes physiques extrêmement petits et rapide.
+                                Ces <u>systèmes physiques peuvent aussi être appelés une puce électronique / circuit intégré</u>.
+                                Ces puces électroniques utilisent différents types de composants, mais je ne rentrerai pas dans les détails.
+                                Le <u>processus de retrécissement de ces composants est appelée la miniaturisation</u>.
+                                Plus il y a de composant, plus la puce est puissante.
+                            </p>
+                            <p id="part_A_b_3">
+                                Comme vu <a href="#part_A_a_6">plus haut</a>, cette mécanique doit être la représentation d'un concept mathématique.
+                                Le concept mathématique utilisé nécessite une <a href="https://fr.wikipedia.org/wiki/Base_(arithm%C3%A9tique)">base numérique</a> 2 constituée de 2 chiffres : 0 et 1.
+                                <span class="important">Cette base 2 est la célèbre base binaire</span>.
+                                En général, en électronique, <span class="important">les chiffres, appelés "bits", sont regroupés en paquets de 8 bits, nommés "octets", ou "bytes" en anglais</span>.
+                                Cette base permet d'utiliser <u>un concept mathématique très important : <a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre_de_Boole_(logique)">l'algèbre de Boole</a></u>.
+                                De plus, cette algèbre permet de réaliser tous les calculs mathématiques immagineables, dans une certaine mesure.
+                                Pour représenter tout cela physiquement, les puces électroniques utilisent 2 types de courants : <u>courants forts et courants faibles (mais non nul)</u>.
+                                Pour pouvoir appliquer l'algèbre de Boole, elles utilisent des composants spéciaux, comme <a href="https://fr.wikipedia.org/wiki/Transistor">transistors</a>, combinées aux courants donnés.
+                                L'avantage de cette algèbre est qu'elle peut être entièrement représentée grâce à des composants de ce genre, et donc permettre de mener des tâches.
+                                Une ingénieuse disposition de ces composants permet de rendre la puce programmable.
+                                Pour finir, <span class="important">la combinaison électronique / algèbre de Boole permet de rendre un ordinateur pleinement programmable</span>.
+                            </p>
+                            <p id="part_A_b_4">
+                                Ces tâches sont réalisées, en général, <u>par un composant nommé le processeur</u>.
+                                Il est possible, grâce à un protocole dépendant du matériel, de l'OS... de donner une suite d'octets au processeur, pour qu'il réalise les tâches qu'on veuille qu'il réalise.
+                                Ces octets que nous allons donner au processeur correspondent au code source en langage machine du programme à exécuter.
+                                Cependant, "donner un code source en langage machine à exécuter au processeur" dépend lui aussi de beaucoup de choses très complexes.
+                                Il existe cependant un moyen plus simple de faire, <u>c'est de lancer un programme dans un fichier exécutable</u>, au titre le plus littéral du terme.
+                                Votre système d'exploitation s'occupera du reste, et les tâches s'exécuteront.
+                                <span class="important">La programmation sur ordinateur consiste donc à créer ce code source en langage machine de 0 et de 1 / octets pour pouvoir l'exécuter en suite sur l'ordinateur</span>.
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Les langages de programmation
+                        </h3>
+                        <div>
+                            <p id="part_A_c_1">
+                                Cependant, créer un jeu vidéo en 0 et en 1 est une tâche complexe, voir impossible.
+                                En effet, si je vous dis "01010011 01100001 01101100 01110101 01110100", bonne chance pour lire ce message.
+                                C'est pour ça que les développeurs <u>ont crées quelqque chose d'extraordinaire : les langages de programmation</u>.
+                                L'idée est de définir <u>chaque octets nécessaires dans le programme par un mot bien humain</u>, qu'il faudra ensuite convertir en 0 et 1, selon ce que le mot représente.
+                                Le langage qui correspond exactement à cette définition est <a href="https://fr.wikipedia.org/wiki/Assembleur">l'assembleur</a>.
+                                Par exemple (le même que celui de Wikipédia), l'instruction "10110000 01100001" représente en assembleur " movb $0x61,%al".
+                                Ce langage est dit <span class="important">"bas niveau", ce qui veut dire qu'il est très proche du langage machine</span>.
+                                À l'inverse, <span class="important">un langage "haut niveau" comme Python est assez loin du langage machine</span>.
+                                <span class="important">Les langages de programmation représentent donc une manière humainement lisible de représenter les instructions d'un matériel informatique</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.
+            </div>
+        </footer>
+    </body>
+</html>
