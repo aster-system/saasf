@@ -164,7 +164,55 @@
                                 À l'inverse, <span class="important">un langage "haut niveau" comme Python est assez loin du langage machine</span>.
                                 <span class="important">Les langages de programmation représentent donc une manière humainement lisible de représenter les instructions d'un matériel informatique</span>.
                             </p>
+                            <p id="part_A_c_2">
+                                Cependant, l'assembleur n'est pas parfait.
+                                En effet, le premier problème est que <u>chaque processeur a son propre assembleur</u>.
+                                L'ensemble des instructions que possèdent un processeur s'appele un <a href="https://fr.wikipedia.org/wiki/Jeu_d%27instructions">jeu d'instructions</a>.
+                                Il existe cependant des normes permettant d'avoir des jeux d'instructions similaires, comme <a href="https://fr.wikipedia.org/wiki/AMD64">AMD64</a> ou <a href="https://fr.wikipedia.org/wiki/Architecture_ARM">ARM</a>.
+                                De plus, il existe des versions étendues (CISC), réduites (RISC)...
+                                Pour donner le coup de grâce, le système d'exploitation peut complexifier le tout.
+                                Donc, l'assembleur à beau être un langage compréhensible pour l'humain, <u>il est très peu portable et compréhensible</u> (sauf si vous aimez vous faire du mal).
+                                Heuresement, <u>des langages plus haut niveau existent, comme le C++</u>.
+                                L'idée de ces langages est de pouvoir faire des instructions plus simple et compréhensible, tout en permettant <u>l'adaptation et la portabilité en assembleur</u>.
+                                Pour être plus précis, <span class="important">ces langages demandent la conversion du code en code assembleur adéquat, puis en langage machine, tout en état plus simple à utiliser. C'est le cas par exemple du C ou du C++.</span>
+                            </p>
+                            <p id="part_A_c_3">
+                                Les langages utilisant ce procédé doivent donc être convertis en assembleur avant de finir en langage machine exécutable.
+                                Pour cela, les développeurs ont crée deux outils formidables : <span class="important">le compilater (ou compiler en anglais) et le l'éditeur de lien (linker en anglais)</span>.
+                                Ces langages sont appelés <span class="important">langages compilés</span>.
+                                Comme tout les développeurs ont l'habitude de faire, j'appellerai ces programmes par leur nom anglais.
+                                Le compiler doit transformer <u>le code C++ en langage machine</u>, et le lieur doit s'occuper de proprement lié tous les codes générés <u>pour faire un bel exécutable tout propre</u>.
+                                En effet, le compiler va en général créer plusieurs fichiers de code source, <u>dans un langage nommé "le code objet"</u>.
+                                Nous verrons plus tard comment se fait plus précisemment cette génération en C++.
+                                Le linker va prendre tous les fichiers en code objet générés, supprimer les doublons si il y en a, et s'assurer que tout s'exécute comme voulu.
+                                Il va ensuite <u>générer le fichier en exécutable</u>.
+                                Cette manière de faire peuvent provoquer des erreurs assez peu détaillées de temps en temps, mais nous analyserons tout ça plus tard.
+                                En définitif, <span class="important">pour utiliser un langage compilé, il faut absolument un compiler et un linker (à noter que le linker est souvent fourni avec le compiler)</span>.
+                            </p>
+                            <p id="part_A_c_4">
+                                Il est important de noter que certains langages ne fonctionnent pas comme ça.
+                                En effet, certains langages, comme Python, ne convertissent pas leur tâches en code source, mais les font exécuter par un outil nommé <span class="important">un interpréteur</span>.
+                                Ces langages sont appelés <span class="important">langages interprétés</span>.
+                            </p>
+                            <p id="part_A_c_5">
+                                Un autre outil nécessaire pour développer est un endroit où écrire le code, comme LibreOffice mais pour le code.
+                                Il est aussi pratique d'y ajouter <u>des outils pour coder plus facilement</u>, comme la mise en évidence de certains mots importants ou l'option de compilation intégré.
+                                Pour cela, il faut <span class="important">IDE (integrated development environment)</span>.
+                                Il existe beaucoup d'IDE, certains open source et d'autres non.
+                            </p>
+                            <p>
+                                Avec tout ça, on peut commencer à voir pour le C++.
+                            </p>
                         </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        B. Les bases du C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        
                     </div>
                 </div>
             </div>
