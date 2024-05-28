@@ -183,7 +183,7 @@
                                 Comme tout les développeurs ont l'habitude de faire, j'appellerai ces programmes par leur nom anglais.
                                 Le compiler doit transformer <u>le code C++ en langage machine</u>, et le lieur doit s'occuper de proprement lié tous les codes générés <u>pour faire un bel exécutable tout propre</u>.
                                 En effet, le compiler va en général créer plusieurs fichiers de code source, <u>dans un langage nommé "le code objet"</u>.
-                                Nous verrons plus tard comment se fait plus précisemment cette génération en C++.
+                                Nous verrons plus tard comment se fait plus précisément cette génération en C++.
                                 Le linker va prendre tous les fichiers en code objet générés, supprimer les doublons si il y en a, et s'assurer que tout s'exécute comme voulu.
                                 Il va ensuite <u>générer le fichier en exécutable</u>.
                                 Cette manière de faire peuvent provoquer des erreurs assez peu détaillées de temps en temps, mais nous analyserons tout ça plus tard.
@@ -200,6 +200,11 @@
                                 Pour cela, il faut <span class="important">IDE (integrated development environment)</span>.
                                 Il existe beaucoup d'IDE, certains open source et d'autres non.
                             </p>
+                            <p id="part_A_c_4">
+                                Les langages de programmation peuvent utiliser des mécaniques propres à eux pour fonctionner.
+                                Par exemple, certains concepts de certains langages diffèrent de concepts d'un autre langage.
+                                Ces concepts sont appelés des <span class="important">paradigmes de programmation</span>.
+                            </p>
                             <p>
                                 Avec tout ça, on peut commencer à voir pour le C++.
                             </p>
@@ -212,7 +217,99 @@
                         B. Les bases du C++
                     </h2>
                     <div class="left_arrow_right_text left_arrow_right_text_text">
-                        
+                        Après toutes ces définitions, la définition du C++ devient extrêmement simple, et ne nécessite seulement que de piocher dans les définitions déjà énoncées plus haut.
+                        <h3 id="part_B_a">
+                            a. Qu'est ce qu'est le C++ ?
+                        </h3>
+                        <div>
+                            <p>
+                                Le C++ est un langage de programmation compilé.
+                                C'est un langage qui est considéré comme étant assez bas niveau, bien que bien plus haut niveau que l'assembleur.
+                                En tant que langage bas niveau, <u>il est un langage très rapide, permettant de développer des jeux vidéos, logiciels...</u>
+                                Il est dérivé du langage C, et s'inspire en grande partie de ce dernier.
+                                Il est <u>la base de presque tout ce que représente la programamtion</u> de nos jours.
+                                En effet, sa syntaxe et son utilisation ont su ravir une grande quantité de développeurs.
+                                Il est tellement populaire que, selon <a href="https://www.tiobe.com/tiobe-index/">l'index TIOBE</a>, <span class="important">le C++ est le 3ème langage le plus utilisé au monde en 2024</span>.
+                            </p>
+                            <p>
+                                Le C++ est constitué de 3 paradigmes principaux : <span class="important">la programmation générique, la programmation orientée objet et la programmation procédurale</span>.
+                                Nous verrons précisément plus tard ce que ces mots veulent dire.
+                                Ils constituent <u>la base du langage</u>, et ce pourquoi le langage est si populaire.
+                            </p>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Comment utiliser du C++ ?
+                        </h3>
+                        <div>
+                            <p>
+                                Comme nous l'avons vu, les langages de programmations nécessitent un IDE pour fonctionner.
+                                Il vous faudra donc un IDE pour faire marcher votre code C++.
+                                De plus, comme le C++ est un langage compilé, utiliser un IDE permettant d'utiliser facilement le compiler est recommandé?
+                                Il existe <u>des milliers de listes d'IDEs C++ sur Internet, qui vous les présentent et vous conseillent sur lequel choisir</u>, de manière plus ou moins réussies.
+                                Je ne vous parlerai ici que des IDEs que je connais personnellement et que j'ai eu l'occasion d'utiliser.
+                                Le plus simple est l'IDE de Microsoft <span class="important"><a href="https://visualstudio.microsoft.com/fr/">Visual Studio</a></span>, qui est fourni avec un installeur de grande qualité, pour moduler tout ce dont vous aurez besoin.
+                                Cependant, il n'est pas Open Source, et seule la version "Communauté" est gratuite.
+                                L'autre IDE que j'ai beaucoup utilisé est <span class="important"><a href="https://www.qt.io/product/development-tools">QT Creator</a></span>, qui est aussi fourni avec un très bon installeur, et le framework C++ proposé par QT.
+                                De plus, il est Open Source sous la licence LGPL, bien que seule la version "Communauté" est gratuite.
+                                Finalement, le dernier IDE que j'ai utilisé, et que j'utilise toujours, et <span class="important">l'IDE Open Source <a href="https://www.codeblocks.org/">Code::Block</a></span>.
+                                Il est entièrement gratuit, même si il est malheuresement assez prise de tête pour les nouveaux venues.
+                                De plus, il n'a pas de Dark Mode facilement implémentable.
+                                La dernière chose à dire sur ces IDEs est qu'ils, en général, utilisent un système de projets pour pouvoir utiliser le C++.
+                                Nous verrons pourquoi <u>ces systèmes de projets sont nécessaires pour pleinement utiliser le C++</u>.
+                                Au final, <span class="important">le choix de votre IDE ne dépend que de vous, et de ce que vous préférez</span>.
+                            </p>
+                            <p>
+                                Si vous choisissez Visual Studio ou QT, en général, le compiler et le linker sont fournis dans le téléchargement.
+                                Cependant, si ce n'est pas le cas, comme sur Code::Block, <u>il vous faudra l'installer vous même</u>.
+                                C'est une opération plus simple qu'il n'y paraît.
+                                Le compiler le plus utilisé est <span class="important">le compiler proposé par GNU (la même entreprise que Linux), <a href="https://gcc.gnu.org/">GCC</a></span>.
+                                Il est entièrement libre et Open Source.
+                                Cependant, ce qui nous intéresse en particulier est <u>l'environnement complet de GCC, nommé "MinGW"</u>.
+                                Si vous êtes sur Linux, il devrait être automatiquement installé de base.
+                                Sur Windows, pour l'installer, il vous faut vous rendre sur le <a href="https://github.com/skeeto/w64devkit/releases" target="_blank">Github de MinGW</a>, et sélectionner la version qui vous convient (en général, " w64devkit-1.23.0.zip").
+                                Il vous faut ensuite indiquer à votre IDE les liens nécessaires.
+                                Sur Code::Block, il vous faut aller <u>dans "Paramètres" (en haut), puis "Compilateur", puis "Toolchain executable"</u>.
+                                Dans "Compiler's installation directory", vous devez <u>renseigner le chemin d'accès vers le dossier principale de votre compilateur</u>.
+                                Vous renseignez en suite "gcc.exe" dans "Compilateur C", et "g++.exe" dans "Compilateur C++" et "Linker for dynamics libs".
+                                Le linker est utilisé automatiquement avec ces programmes.
+                                Une fois que tout cela est fait, <span class="important">vous pouvez commencer à faire du C++</span>.
+                            </p>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. Votre premier programme C++
+                        </h3>
+                        <div>
+                            <p>
+                                La toute première étape pour créer un programme en C++ est de <u>créer un projet avec votre IDE</u>.
+                                Vous devriez choisir entre pleins de choses différentes, selon l'IDE choisi.
+                                Dans Code::Block, <u>il faut choisir un projet C++ avec console</u>.
+                                Pour le reste, rentrez le nom de votre projet, son chemin d'accès, et laissez le reste par défaut.
+                                Après ça, <span class="important">vous aurez un fichier dans votre projet, nommé "main.cpp"</span>.
+                                Ce fichier est <u>un fichier source en C++, ou fichier "cpp"</u>.
+                                Lors de la compilation du programme, <u>tous les fichiers "cpp" contenus dans le projet (d'où l'importance du projet) vont être compilés, et chaque fichier va générer un fichier en code objet</u>, comme nous l'avons vu plus haut.
+                                Le linker va avoir pour rôle d'unifier tous les fichiers sources dans un fichier exécutable.
+                                Après tout cela, vous aurez un fichier exécutable contenant votre programme, que vous pourrez en suite lancer pour exécuter le programme.
+                                Cependant, nous verrons comment faire tout ça dans quelques lignes.
+                                Le plus important est de savoir que <span class="important">votre fichier "main.cpp" contient pour l'instant le code source de votre programme</span>.
+                            </p>
+                            <p>
+                                En général, les IDEs offrent une interface rendant tout cela très simple.
+                                Il y a souvent 3 boutons différents : <u>compiler le projet, lancer la dernière version compilée du projet ou compiler puis lancer le projet</u>.
+                                Le bouton lancer est en général un triangle vert, là où le bouton compiler est soit un petit marteau soit un engrenage.
+                                Il peut aussi existe <u>un bouton permettant de recréer tous les fichiers objets si nécessaire</u>, à utiliser si vous modifier un fichier qui n'est pas présent dans le projet (ce qui est néanmoins déconseillé).
+                                Vous pouvez aussi choisir <u>dans quelle version compiler le projet</u>, grâce à une petit boite de texte, contenant en général <span class="important">"Debug" et "Realase"</span>.
+                                Il s'agit de 2 façons différentes de compiler le code.
+                                "Debug" permet d'utiliser un outil inclu dans MinGW, <u>nommé le "déboggueur", pour tracer d'éventuelles erreurs</u> provoquant un crash dans votre code.
+                                L'exécutable final est cependant beaucoup plus lourd à stocker.
+                                "Release" ne permet pas d'utiliser cette outil, mais offre <u>une version de l'exécutable adapté à la distribution</u>.
+                                L'exécutable final est par conséquent beaucoup moins lourd et beaucoup plus rapide.
+                                Il est conseillé d'utiliser le "Debug" tant que votre code est en production.
+                                <span class="important">Pour lancer le code, utilisez "Compiler puis lancer le projet", et votre code se lancera</span> tout seul grâce à l'IDE.
+                            </p>
+                        </div>
+                        <p>
+                            Dés que tout cela est fait, nous pouvons commencer les choses sérieuses.
+                        </p>
                     </div>
                 </div>
             </div>
