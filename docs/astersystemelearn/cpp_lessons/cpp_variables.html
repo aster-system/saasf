@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                2. Les variables en C++
+            </h1>
+            <div>
+                Le C++, s'exécutant sur ordinateur, est donc une partie de la très célèbre science nommée "informatique".
+                Par définition pure, l'informatique est la science de traitement de l'information, selon <a href="https://www.larousse.fr/dictionnaires/francais/informatique/42996">le Larousse</a>.
+                Cependant, pour traiter ces informations, il faut <u>les données correspondantes à l'information, et savoir comment les traiter</u>.
+                Une appellation de ces données en informatique est <span class="important">la célèbre notion de "variable"</span>.
+                Pour cela, nous allons voir dans ce cours une des choses les plus importantes en programmation : <span class="important">les variables / données et leur utilisation</span>.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Les variables et les données
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Avant de s'attaquer au données en C++, voyant plutôt avant la définition globale des données en informatique.
+                        <h3 id="part_A_a">
+                            a. Que ce qu"est une donnée ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Comme pour la première question du premier cours, cette question peut paraître particulièrement débile.
+                                Cependant, <u>vous l'aviez vous déjà posé</u> ?
+                                Difficile de définir très précisément une donnée.
+                                Par définition, <u>une donnée est une information connue qui sert de point de départ à un raisonnement</u>, selon <a href="https://dictionnaire.lerobert.com/definition/donnee">le Robert</a>.
+                                Il peut s'agir d'un nombre de voitures sur une route, d'un nom de famille, d'une date...
+                                On peut donc conclure <span class="important">qu'une donnée est une valeur utilisable pour faire ce que l'on veut avec</span>.
+                            </p>
+                            <p id="part_A_a_2">
+                                Dans le domaine électronique, comme vous le savez certainement, <u>seul le binaire est utilisable, d'un point de vue physique</u>.
+                                Donc, quelque soit votre donnée, elle sera représentée en binaire dans la mémoire de votre ordinateur.
+                                Je ne décrirai pas ici quel est la sorcellerie qui permet cela.
+                                Ce qui faut retenir, est que <span class="important">quel que soit la donnée électronique, elle a forcément une base en binaire</span>.
+                                Nous verrons plus tard que ce qui permet d'utiliser correctement ces données pour pouvoir en faire ce que l'on veut.
+                            </p>
+                            <p id="part_A_a_3">
+                                Pour être stockées correctement, <u>elles peuvent demander un certain nombre de 0 et de 1 différent</u>, pour ne pas perdre de précision dans la valeur.
+                                Le nombre de 0 et de 1 nécessaire <u>s'expriment généralement en octet (paquet de huits 0 ou 1)</u>.
+                                <span class="important">La quantité d'octet nécessaire pour une valeur est appelée le poids de la donnée</span>.
+                                Par exemple, une données nécessitant 4 octets a un poids de 4 octets (logique).
+
+                            </p>
+                            <p id="part_A_a_4">
+                                Ces donneés ne sont cependant pas stockées dans la mémoire au hasard.
+                                On peut <u>les retrouver dans la mémoire, grâce à quelque chose qui s'appelle leur adresse mémoire</u>.
+                                Il s'agit, comme toutes les données numériques, d'un nombre binaire, qui permet de dérouler le chemin dans la mémoire de l'ordinateur jusqu'à la donnée souhaitée.
+                                Pour cela, l'ordinateur utilisent de complexes algorithmes, que nous ne détaillerons pas ici.
+                                Le plus important est de s'avoir <span class="important">que chaque donnée stockée sur mémoire à une adresse, permettant de la retrouver</span>.
+                            </p>
+                            <p id="part_A_a_5">
+                                Une particularité de ces données est la façon dont on peut les modifier.
+                                En général, on peut modifier la valeur qu'elle contient, pour pouvoir opérer sur elle plus facilement avec un programme informatique.
+                                Si <span class="important">une donnée numérique peut changer de valeur, c'est une variable</span>.
+                                Dans <span class="important">le cas contraire, c'est une constante</span>.
+                                Bien que la majorité des données sont variables, il peut être intéressant de bien apprendre la différence entre les deux.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Qu'est ce qu'est une variable ?
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Maintenant qu'on sait ce qu'est une variable, une donnée qui peut changer, on peut s'intéresser plus en détail à leur fonctionnement, qui les différe des données.
+                                En effet, cette petite particularité <u>change beaucoup de choses</u>, faisant la force de la programmation sur ordinateur.
+                            </p>
+                            <p id="part_A_b_2">
+                                La première chose à faire est de savoir bien distinguer plusieurs variables.
+                                En effet, comme nous l'avons vue, en tant que données, <u>les variables possèdent elles aussi une adresse mémoire</u>.
+                                <span class="important">Cette adresse mémoire n'est pas modifiable, mais seulement la valeur de la donnée</span> stockée dans cette adresse mémoire.
+                                Il y a cependant quelques exceptions très spéciales que nous verrons après.
+                                De plus, utiliser chaque variable par leur adresse mémoire, comme "00111010100" ou "11000111000111", est aussi intuitif qu'appeler les gens par leur phénotype.
+                                Pour cela, dans <span class="important">la majorité des langages de programmation, elles sont utilisables via un nom</span>, qui les relient à leur valeur en mémoire.
+                            </p>
+                            <p id="part_A_b_3">
+                                Il existe deux termes très impotant avec cette mécanique : la déclaration et la définition.
+                                <a href="https://www.ibm.com/docs/fr/i/7.5?topic=functions-function-declarations-definitions">IBM</a> offre une approche intéressante de ces deux termes.
+                                <span class="important">La déclaration d'une variable</span> est un concept fourbe, qui représente <span class="important"> la création de l'ensemble de tout ce qui caractérise une variable, mais sans lui attribuer de valeur</span>.
+                                En d'autre terme, <u>c'est dire à l'ordinateur qu'une certaine variable existe quelque part, sans lui dire où</u>.
+                                Ce concept n'est applicable qu'au moment de la programmation, est pas pendant l'exécution du programme.
+                                En général, <u>c'est le linker qui s'occupe de dire où se trouve la variable</u>, si elle existe.
+                                <span class="important">La définition représente le même concept, sauf qu'une partie de la mémoire est bel est bien utilisée pour stocker la valeur</span>.
+                            </p>
+                            <p id="part_A_b_4">
+                                Pour économiser des la mémoire, ces variables doivent n'être définies que le temps où elles sont utiles.
+                                En général, <u>leur adresse mémoire est en suite effacée des adresses à retenir</u>, et donc la donnée est perdue, et <u>est considérée "libérée"</u>.
+                                Cette zone de la mémoire peut être utilisée pour autre chose.
+                                Elle est cependant toujours accessible via des méthodes assez complexes, pouvant représenter une faille de sécurité.
+                                <span class="important">Le moment où la donnée est donc utilisable représente le temps de vie de son adresse mémoire, appelé sa portée</span>.
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Les langages de programmation
+                        </h3>
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.
+            </div>
+        </footer>
+    </body>
+</html>
