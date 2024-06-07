@@ -125,11 +125,57 @@
                             </p>
                         </div>
                         <h3 id="part_A_c">
-                            c. Les langages de programmation
+                            c. Comment utiliser des variables ?
                         </h3>
                         <div>
-                            
+                            <p id="part_A_c_0">
+                                Une donnée inutilisée est, par définition, complétement inutile.
+                                Il faut donc utiliser les données disponibles, si on veut quelque chose qui sert à quelque chose.
+                                Cependant, l'utilisation des données est quelque chose de très vaste.
+                            </p>
+                            <p id="part_A_c_1">
+                                <span class="important">La première utilisation, évidente d'une donnée, est de la lire</span> pour la modifier ou modifier une autre donnée selon cette donnée.
+                                Pour une constante, on ne peut cependant que modifier une autre donnée selon la valeur de la constante.
+                                En général, <u>l'adresse mémoire de la variable est passée au processeur</u>, pour en faire ce que vous voulez faire avec.
+                                Le processeur peut lire la valeur pour réaliser plusieurs types d'opérations.
+                                Par exemple, pour les processeurs sous format <a href="https://fr.wikipedia.org/wiki/Jeu_d%27instructions_x86">X86</a>, une lecture possible est "AND", qui compare deux valeurs et remplace la valeur de la première par le résultat.
+                                Cependant, <u>si la variable est seulement déclarée mais pas définie (voir les définitions en haut), le linker renvoie une erreur</u>.
+                                <span class="important">La lecture est l'utilisation principale est la plus générale d'une variable</span>.
+                            </p>
+                            <p id="part_A_c_2">
+                                Si la variable n'est pas constante, <span class="important">vous pouvez modifier sa valeur</span>.
+                                C'est la deuxième utilisation la plus commune d'une variable.
+                                <u>N'importe quelle valeur peut lui être attribué</u>, que ce soit celle d'une autre variable ou une valeur inscrite dans le code source.
+                                D'un point de vue entièrement binaire et extrêmement bas niveau, <u>les modifications applicables à la variables sont les instructions du processeur pouvant modifier sa valeur</u>.
+                                Par exemple, pour les processeurs sous format <a href="https://fr.wikipedia.org/wiki/Jeu_d%27instructions_x86">X86</a>, une modification possible est "ADD", qui additionne deux valeurs remplace la valeur de la première par le résultat.
+                                <span class="important">La modification de valeur est donc très importante pour pouvoir réaliser un programme cool</span>.
+                            </p>
+                            <p id="part_A_c_3">
+                                Les plus attentifs d'entre vous ont dû remarquer quelque chose d'assez frustrant.
+                                En effet, <u>les seules choses présentées ici vont dans le cas d'une utilisation de variables entièrement binaire</u>.
+                                Cependant, si vous voulez faire un jeu 3D avec "AND" et "ADD", bonne chance.
+                                Bien évidemment, il est cependant possible de manipuler toutes les données imagineables avec seulement ces opérations, mais c'est très complexe.
+                                Heuresement, pour cela, <u>il existe un paradigme de programmation permettant d'utiliser des normes d'utilisations très précises pour les données : la généricité</u>.
+                                Ce système est plus connu comme <span class="important">le système définissant les normes d'utilisations par des types de variables</span>.
+                            </p>
+                            <p id="part_A_c_4">
+                                Ces types représentant de simples normes, <u>chaque langage a son propre système de typage</u>.
+                                Par exemple, <span class="important">en Python, le système de typage est dynamique</span>.
+                                <u>Le type d'une variable peut changer pendant sa durée de vie</u>.
+                                Cependant, certains langages, comme <span class="important">le C++, utilisent un système de typage statique</span>.
+                                <u>Le type d'une variable ne peut pas être modifié pendant sa durée de vie</u>.
+                                Il y a cependant pleins de types possibles, présentés dans la prochaine partie.
+                            </p>
                         </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Les types de variable en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        En tant que langage générique, le typage en C++ est extrêmement important pour n'importe quel programme C++.
                     </div>
                 </div>
             </div>
