@@ -176,6 +176,270 @@
                     </h2>
                     <div class="left_arrow_right_text left_arrow_right_text_text">
                         En tant que langage générique, le typage en C++ est extrêmement important pour n'importe quel programme C++.
+                        <h3 id="part_B_a">
+                            a. Comment créer et utiliser une variable ?
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                En C++, <u>il y a une quantité aberrante de façon de déclarer des variables</u>.
+                                Cependant, pour ne pas perdre tout le monde, <span class="important">on va juste s'arrêter sur les méthodes de déclarations compatibles avec le premier programme C++</span>, que nous avons fait au cours précédent.
+                                Pour l'instant, nous avons ce code la :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Hello world!" &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Même si je ne vous ai pas présenté ce que veut dire tout ça, <u>il va falloir que je pose quelques bases, qui seront grandement creusées dans les prochains cours</u>.
+                                Pour l'instant, seul ce qui se passe entre les accolades nous intéresse.
+                                <span class="important">Il s'agit des instructions principales qui seront exécutées dans notre programme</span>.
+                                Pour que notre variable soit crée et utilisée, <span class="important">on la mettra la dedans</span>.
+                                Dans les prochains codes, je ne mettrai pas tout le code, avec les accolades...
+                                Mais, les codes devront être inclus entre ces accolades pour fonctionner.
+                                De plus, <span class="important">toutes les instructions doivent se terminer par un ";"</span>.
+                                Si un morceau de code ne <u>se termine pas par ";", ce n'est donc pas une instruction</u>, mais autre chose (nous creuserons ça plus tard).
+                            </p>
+                            <p id="part_B_a_2">
+                                L'instruction pour déclarer une variable est assez simple.
+                                <span class="important">Voici la manière générale de déclarer une variable :</span>
+                                <div class="code_sample">
+                                    type nom_de_la_variable;
+                                </div>
+                                Par exemple, si vous avez un type "nombre_entier" (qui n'existe pas en C++ élementaire, mais est utilisé pour l'exemple) et que vous voulez créer une variable "age", vous devez écrire l'instruction :
+                                <div class="code_sample">
+                                    nombre_entier age;
+                                </div>
+                                Cependant, si vous faites cela, votre variable est déclarée, mais pas définie.
+                                Pour définir une variable, <span class="important">vous devez utiliser le symbole "=" et une valeur à donner à la variable</span>, que le compiler reconnaît comme étant du même type que la variable.
+                                Par exemple, pour notre exemple de en haut :
+                                <div class="code_sample">
+                                    nombre_entier age = 36;
+                                </div>
+                                Si votre variable n'est pas définie, <span class="important">vous pouvez assister en des comportements inattendus</span> (unexpected behavior en anglais).
+                                Le symbole "=" peut aussi être utilisé autrement.
+                                En effet, si vous l'utilisez après avoir déclarée votre variable, vous pouvez modifier sa valeur (ou la définir si la variable n'a pas déjà été définie).
+                                Par exemple, pour notre exemple de en haut, pour changer l'âge, nous devons écrire après la déclaration de la variable :
+                                <div class="code_sample">
+                                    age = 29;
+                                </div>
+                                Dans ces deux cas (et d'autres que nous verrons après), <span class="important">la partie à droite du symbole peut être soit une autre variable, soit une valeur écrite dans le programme</span>.
+                                Cette partie est appelée <u>"une rvalue" (pour right value)</u>.
+                                Avec tout cela, vous pouvez déjà commencer à utiliser des variables.
+                            </p>
+                            <p id="part_B_a_3">
+                                Les variables ont bien d'autres utilisations que juste être rédéfinies sans modifications (heuresement).
+                                <span class="important">Ces utilisations sont toutes très précisément définies selon leur type</span>.
+                                Pour savoir ce que l'ont peut faire avec les variables sans prise de tête, il est grandement conseillé de connaître ces types.
+                                Cependant, il existe 2 catégories de types.
+                                <span class="important">Les premiers sont les types fondamentaux</span>, qui sont les types fondamentaux du C++, pas modifiables et présents dans tous les compilers C++.
+                                <span class="important">Les deuxièmes sont les types composés</span>, qui sont fondamentaux pour certains, mais pas pour d'autres.
+                                <u>Nous verrons dans la prochaine partie que les types fondamentaux</u>, car les types composés pourraient occuper à eux tout seul plusieurs cours.
+                            </p>
+                        </div>
+                        <h3 id="part_B_a">
+                            b. Les types fondamentaux numériques
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                Comme nous l'avons vus, pour déclarer une variable, <u>il faut un nom de type connu</u>.
+                                En C++, les types les plus primaires sont les types qui représentent des nombres entiers relatifs.
+                                <span class="important">Le type par excellence pour un entier décimal est "int"</span>.
+                                Pour notre exemple d'en haut, la définition juste serait :
+                                <div class="code_sample">
+                                    int age = 36;
+                                </div>
+                                Ce code s'exécuterait sans problème.
+                                <span class="important">Il s'agit d'un nombre entier codé en général sur 4 octets</span>.
+                                Cependant, on peut créer un nombre entier avec d'autres tailles.
+                                <span class="important">Le type "char" occupe 1 octet, "short" occupe 2 octets et "long" 8 octets.</span>
+                                Hormis leur taille, ils sont tout à fait similaires, et le compiler peut automatiquement les convertir de l'un à l'autre si vous utilisez plusieurs variables utilisant différents de ces types.
+                                Cependant, si l'on passe d'un type à un autre plus léger, on risque de perdre des informations si le nombre est trop grand.
+                                On peut encore plus détailler la définition, <u>en disant au compiler si le nombre est signé ou pas (toujours positif dans ce cas là)</u>.
+                                Pour cela, <span class="important">il faut rajouter "unsigned" avant le type</span>.
+                                Les plus attentifs auront remarqués que dans le programme, le type "int" est déjà mentionné.
+                                Nous verrons dans le cours sur les fonctions pourquoi.
+                            </p>
+                            <p id="part_B_a_2">
+                                Comme nous l'avons vus plus haut, chaque donnée en mémoire est stockée en binaire.
+                                <span class="important">Ces types sont eux aussi stockés en binaire.</span>
+                                Cependant, le nombre en base binaire stocké en mémoire est exactement le nombre qu'on a donnée à la variable, en base 10.
+                                <u>Le compiler se charge de la conversion de la base 10 au binaire par défaut</u>, pour tous les nombres.
+                                Pour être plus précis, les nombres binaires sont stockées avec une technique nommé <a href="https://fr.wikipedia.org/wiki/Compl%C3%A9ment_%C3%A0_deux" target="_blank">"le complément à 2"</a>.
+                                Cependant, les types "unsigned" utilisent la représentation direct du nombre qu'ils encodent en binaire, sans complément à 2.
+                                <u>Si vous leur donnez un nombre négatif, il est fortement probable que la valeur devienne absolument aberrante</u>, et il ne faut pas se faire avoir.
+                            </p>
+                            <p id="part_B_a_3">
+                                Comme avec n'importe quel nombre, il est possible de réaliser des calculs avec ces variables numériques très simplement.
+                                <span class="important">La façon la plus simple est d'utiliser les opérateurs</span>.
+                                <span class="important">Pour faire une addition, il faut utiliser l'opérateur "+"</span>.
+                                Pour notre exemple de en haut, on peut faire :
+                                <div class="code_sample">
+                                    age = age + 1;
+                                </div>
+                                On assigne à "age" la valeur de "age" auquelle on additionne 1.
+                                <span class="important">Il est à noter que les opérateurs s'exécutent dans un ordre très précis</span>.
+                                Dans cette exemple, l'opérateur "+" est exécuté avant "=".
+                                <span class="important">Il est à noter que "=" est lui aussi un opérateur, mais un opérateur d'assignement</span>.
+                                <u>Les autres opérateurs présentés ici sont des opérateurs arithmétiques</u>.
+                                L'ordre est présenté <a href="https://en.cppreference.com/w/cpp/language/operator_precedence">sur ce site</a>.
+                                Si vous voulez faire des calculs plus complexes, il existe heuresement d'autres opérateurs.
+                                <span class="important">L'opérateur "-" effectue des soustractions, "*" effectue des multiplications, "/" effectue des divisions et "%" donne le reste d'une division euclidienne</span>.
+                                <span class="important">Vous pouvez aussi utiliser des parenthèses pour bien séparer le tout</span>.
+                                Par une bonne utilisation d'opérateurs, vous pouvez faire le calcul que vous voulez, comme :
+                                <div class="code_sample">
+                                    age = (age * 2 + (age - 3) / 2) % 5;
+                                </div>
+                                <u>Il faut garder en tête que ces opérateurs ne donneront avec ces types que des nombres entiers relatifs,</u> donc pas de nombre décimaux.
+                                <span class="important">Grâce à ces opérateurs arithmétiques, vous pouvez commencer à réaliser des calculs avec votre programme</span>.
+                            </p>
+                            <p id="part_B_a_4">
+                                Pour ceux qui n'ont pas de temps à perdre, <span class="important">il existe aussi d'autres opérateurs combinant opérateurs arithmétiques et opérateurs d'assignements</span>.
+                                <u>Ces opérateurs représentent les symboles de leur opérateur arithmétique suivi de "="</u>.
+                                Par exemple, "+=" effectue directement une addition, "*=" une multiplication...
+                                Dans le cas de notre variable age, on peut faire :
+                                <div class="code_sample">
+                                    age += 1;
+                                </div>
+                                Cependant, si vous voulez gagner encore plus de temps, <span class="important">vous pouvez utiliser les opérateurs "++" et "--"</span>, qui correspondent respectivement à "+= 1" et "-= 1".
+                                On peut encore simplifier le code :
+                                <div class="code_sample">
+                                    age++;
+                                </div>
+                                Un autre avantage des ces 2 opérateurs est que, après leur exécution, la nouvelle valeur peut être directement réutilisée.
+                                Si "++" et "--" est avant la valeur à modifier, la valeur est utilisée avant d'être modifiée.
+                                Si ils sont après, la valeur est modifié puis utilisée.
+                                En pratique, si on regarde le tableau de l'ordre des opérateurs, ce n'est pas si différent que ça.
+                            </p>
+                            <p id="part_B_a_5">
+                                <span class="important">Avec ces types en particulier, vous pouvez aussi manipuler la variable directement grâce au binaire</span>.
+                                Pour cela, il faut utiliser des opérateurs binaires.
+                                <u>Les opérateurs binaires les plus utiles sont l'inversion de bits "~", le AND binaire "&", le OR binaire "|", le XOR binaire "^", le décalage de bits vers la gauche "&lt;&lt;" et la droite "&gt;&gt;".</u>
+                                Ils sont utilisables de la même façon que les opérateurs arithmétiques.
+                            </p>
+                            <p id="part_B_a_6">
+                                Cependant, si vous voulez utiliser des nombres décimaux plus complexes, ces types ne suffisent pas.
+                                <span class="important">Pour les nombres décimaux, il faut utiliser deux types : float (32 bits) ou double (64 bits)</span>.
+                                Les opérations binaires ne sont cependant pas accessibles avec eux.
+                                Appart cela, ils fonctionnent de la même façon que les types entiers, avec la possibilité de gérer des nombres décimaux.
+                                En C++, <u>les nombres décimaux s'écrivent avec un ".", et pas un ","</u>.
+                                Voici un exemple :
+                                <div class="code_sample">
+                                    double taille = 1.82;
+                                </div>
+                                Bien que ces types sont tout à fait compatibles à la conversion en types entiers, il faut faire attention à ne pas perdre d'informations lors de la conversion automatique du compiler.
+                                <u>En général, la conversion fait à ce que la valeur entière sera l'arrondissement à l'entier d'en dessous du nombre décimal stocké</u>.
+                                Ces nombres sont encodés avec le format binaire <a href="https://fr.wikipedia.org/wiki/IEEE_754">IEEE 754</a>.
+                            </p>
+                            <p id="part_B_a_7">
+                                Après tout cela, ça serai bien de connaître la valeur d'une de ces variables.
+                                Pour cela, <u>il faut utiliser une instruction, qui est déjà en partie présente dans le code</u> :
+                                <div class="code_sample">
+                                    cout &lt;&lt; "Hello world!" &lt;&lt; endl;</br>
+                                </div>
+                                Cette instruction est assez complexe, mais nous allons la décortiquer.
+                                <span class="important">En C++, pour communiquer avec l'extérieur, il faut utiliser un morceau de code qui n'est pas primaire au C++</span>.
+                                Pouvoir utiliser ce morceau de code est la raison des 2 expressions :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    using namespace std;
+                                </div>
+                                "#include &lt;iostream&gt;" permet d'utiliser le fichier nécessaire, et "using namespace std;" facilite l'utilisation du morceau de code nécessaire.
+                                <span class="important">La porte d'accès vers l'extérieur, pour faire sortir des informations, représente le mot "cout"</span>.
+                                <span class="important">Vous pouvez aussi en faire rentrer avec "cin"</span>.
+                                Pour faire entrer ou sortir ces informations, il faut utiliser des opérateurs spéciaux, les opérateurs "&lt;&lt;" pour faire sortir des infos et "&gt;&gt;" pour en faire entrer.
+                                <u>Il est possible de cumuler l'opérateur "&lt;&lt;" pour pouvoir sortir plusieurs informations à la fois, mais pas pour en faire rentrer</u>.
+                                Donc, si on reprend l'instruction :
+                                <div class="code_sample">
+                                    cout &lt;&lt; "Hello world!" &lt;&lt; endl;</br>
+                                </div>
+                                On fait sortir les informations "Hello world!" (un type textuel que nous verrons après) et endl (un saut de ligne).
+                                <span class="important">La console se débrouille ensuite pour afficher ces informations à l'écran.</span>
+                                Donc, pour afficher l'âge, il faut faire passer la variable en sortie, et donc utiliser l'instruction :
+                                <div class="code_sample">
+                                    cout &lt;&lt; "Âge : " &lt;&lt; age &lt;&lt; endl;</br>
+                                </div>
+                                Cependant, vous pouvez aussi demander à l'utilisateur de saisir un âge, avec l'instruction :
+                                <div class="code_sample">
+                                    cout &lt;&lt; "Rentrez votre âge : ";</br>
+                                    cin &gt;&gt; age;</br>
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_B_a">
+                            c. Les autres types fondamentaux
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                Bien évidemment, <u>il existe d'autres types fondamentaux en C++, bien que les types fondamentaux non décimaux sont assez peu utilisés</u>.
+                                Un type assez étrange est le type "void".
+                                <span class="important">En effet, "void" veut dire pas de type, et peut sembler déroutant</span>.
+                                D'ailleurs, <u>il n'est pas possible de créer une variable de type "void"</u>.
+                                Cependant, ce type est utilisé par le compiler pour deux raisons.
+                                La première est <u>qu'il permet de spécifier qu'une fonction en retourne pas de valeur</u> (nous verrons ce que cela représente dans un prochain cours).
+                                La deuxième est <u>qu'il permet de spécifier qu'un pointeur pointe vers un objet de n'importe quel type</u> (nous verrons ce que cela représente dans un prochain cours).
+                                Au final, pour l'instant, il ne vous sera pas utile.
+                            </p>
+                            <p id="part_B_c_2">
+                                Un autre type qui sera très important dans les cours à venir est le type "bool".
+                                <span class="important">"bool" représente une condition, qui peut avoir pour réponse true (vrai) ou "false" (faux).</span>
+                                Il est utile dans beaucoup de choses, que nous verrons après.
+                                En tous cas, si vous affichez son contenu avec "cout", vous obtiendrez 0 pour "false" et 1 pour "true".
+                            </p>
+                            <p id="part_B_c_3">
+                                Pour finir avec les types fondamentaux, il faut que je vous reparle d'un type qu'on a déjà vu : le type "char".
+                                En effet, je l'ai défini comme un type qui représente un nombre de 1 octet.
+                                Cependant, si vous exécutez cette instruction :
+                                <div class="code_sample">
+                                    char nombre = 65;</br>
+                                    cout &lt;&lt; nombre &lt;&lt; endl;</br>
+                                </div>
+                                La console affichera "A".
+                                En effet, <span class="important">"char" représente un nombre sur 1 octet, mais aussi un caractère de la table ASCII, et donc un caractère de texte</span>.
+                                Il est donc possible (et heuresement) d'utiliser du texte de cette manière en C++.
+                                Cependant, vous n'avez qu'un caractère.
+                                <span class="important">Pour écrire tout un texte, vous devez utiliser le type "char*", et mettre votre texte entre guillemets</span>.
+                                De plus, les "char" simples doivent être utilisés avec leur caractère entre apostrophes comme 'A'.
+                                Par exemple, cela est possible :
+                                <div class="code_sample">
+                                    char* ville = "Paris";</br>
+                                    cout &lt;&lt; ville &lt;&lt; endl;</br>
+                                </div>
+                                Nous rentrerons plus en détail dans un prochain cours sur comment tout cela fonctionne précisément.
+                                Cependant, <u>cette manière reste très restrictive, et rend le texte non modifiable et complexe à utiliser</u>.
+                                Il n'y a pas de types fondamentaux permettant de rendre un texte pleinement utilisable.
+                            </p>
+                            <p id="part_B_c_4">
+                                Cependant, de la même manière que nous avons utilisés "cout", nous pouvons utiliser un autre type nommé "string".
+                                <span class="important">"string" représente une chaîne de caractère très modulable et assez simple d'utilisation</span>.
+                                Cependant, pour l'utiliser, il faut rajouter quelques instructions au début de notre code :
+                                <div class="code_sample">
+                                    #include &lt;string&gt;</br>
+                                    using namespace std;
+                                </div>
+                                Si vous avez déjà "using namespace std;" pour le "cout", il n'y a pas besoin de le répéter.
+                                <u>Il s'utilise de manière très similaire à "char*".</u>
+                                Cependant, il offre des options en plus.
+                                Par exemple, <span class="important">on peut utiliser les opérateurs "+" et "+=" avec un string,</span> pour y ajouter du texte.
+                                Voici un exemple d'utilisation :
+                                <div class="code_sample">
+                                    string pays = "France";</br>
+                                    string ville = "Paris";</br>
+                                    cout &lt;&lt; "Vous vivez à " &lt;&lt; ville &lt;&lt; " en " &lt;&lt; pays &lt;&lt; "." &lt;&lt; endl;</br>
+                                </div>
+                                <span class="important">Vous pouvez aussi utiliser "cin" pour permettre à l'utilisateur de rentrer du texte</span>, comme ça :
+                                <div class="code_sample">
+                                    string ville = "";</br>
+                                    cout &lt;&lt; "Où vivez vous : ";</br>
+                                    cin >> ville;</br>
+                                    cout &lt;&lt; "Vous vivez à " &lt;&lt; ville &lt;&lt; "." &lt;&lt; endl;</br>
+                                </div>
+                                Il y a une aberrante quantité de choses possibles avec "string", donc voici <a href="https://cplusplus.com/reference/string/string/">la documentation de ce type</a>.
+                                Nous verrons plus tard comment bien lire une documentation C++.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

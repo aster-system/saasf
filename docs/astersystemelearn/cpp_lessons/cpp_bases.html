@@ -286,6 +286,16 @@
                                 Pour le reste, rentrez le nom de votre projet, son chemin d'accès, et laissez le reste par défaut.
                                 Après ça, <span class="important">vous aurez un fichier dans votre projet, nommé "main.cpp"</span>.
                                 Ce fichier est <u>un fichier source en C++, ou fichier "cpp"</u>.
+                                Ce fichier devrait ressembler à ça :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Hello world!" &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
                                 Lors de la compilation du programme, <u>tous les fichiers "cpp" contenus dans le projet (d'où l'importance du projet) vont être compilés, et chaque fichier va générer un fichier en code objet</u>, comme nous l'avons vu plus haut.
                                 Le linker va avoir pour rôle d'unifier tous les fichiers sources dans un fichier exécutable.
                                 Après tout cela, vous aurez un fichier exécutable contenant votre programme, que vous pourrez en suite lancer pour exécuter le programme.
