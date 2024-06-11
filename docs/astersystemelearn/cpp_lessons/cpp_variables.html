@@ -239,11 +239,11 @@
                                 <u>Nous verrons dans la prochaine partie que les types fondamentaux</u>, car les types composés pourraient occuper à eux tout seul plusieurs cours.
                             </p>
                         </div>
-                        <h3 id="part_B_a">
+                        <h3 id="part_B_b">
                             b. Les types fondamentaux numériques
                         </h3>
                         <div>
-                            <p id="part_B_a_1">
+                            <p id="part_B_b_1">
                                 Comme nous l'avons vus, pour déclarer une variable, <u>il faut un nom de type connu</u>.
                                 En C++, les types les plus primaires sont les types qui représentent des nombres entiers relatifs.
                                 <span class="important">Le type par excellence pour un entier décimal est "int"</span>.
@@ -262,7 +262,7 @@
                                 Les plus attentifs auront remarqués que dans le programme, le type "int" est déjà mentionné.
                                 Nous verrons dans le cours sur les fonctions pourquoi.
                             </p>
-                            <p id="part_B_a_2">
+                            <p id="part_B_b_2">
                                 Comme nous l'avons vus plus haut, chaque donnée en mémoire est stockée en binaire.
                                 <span class="important">Ces types sont eux aussi stockés en binaire.</span>
                                 Cependant, le nombre en base binaire stocké en mémoire est exactement le nombre qu'on a donnée à la variable, en base 10.
@@ -271,7 +271,7 @@
                                 Cependant, les types "unsigned" utilisent la représentation direct du nombre qu'ils encodent en binaire, sans complément à 2.
                                 <u>Si vous leur donnez un nombre négatif, il est fortement probable que la valeur devienne absolument aberrante</u>, et il ne faut pas se faire avoir.
                             </p>
-                            <p id="part_B_a_3">
+                            <p id="part_B_b_3">
                                 Comme avec n'importe quel nombre, il est possible de réaliser des calculs avec ces variables numériques très simplement.
                                 <span class="important">La façon la plus simple est d'utiliser les opérateurs</span>.
                                 <span class="important">Pour faire une addition, il faut utiliser l'opérateur "+"</span>.
@@ -295,7 +295,7 @@
                                 <u>Il faut garder en tête que ces opérateurs ne donneront avec ces types que des nombres entiers relatifs,</u> donc pas de nombre décimaux.
                                 <span class="important">Grâce à ces opérateurs arithmétiques, vous pouvez commencer à réaliser des calculs avec votre programme</span>.
                             </p>
-                            <p id="part_B_a_4">
+                            <p id="part_B_b_4">
                                 Pour ceux qui n'ont pas de temps à perdre, <span class="important">il existe aussi d'autres opérateurs combinant opérateurs arithmétiques et opérateurs d'assignements</span>.
                                 <u>Ces opérateurs représentent les symboles de leur opérateur arithmétique suivi de "="</u>.
                                 Par exemple, "+=" effectue directement une addition, "*=" une multiplication...
@@ -313,13 +313,13 @@
                                 Si ils sont après, la valeur est modifié puis utilisée.
                                 En pratique, si on regarde le tableau de l'ordre des opérateurs, ce n'est pas si différent que ça.
                             </p>
-                            <p id="part_B_a_5">
+                            <p id="part_B_b_5">
                                 <span class="important">Avec ces types en particulier, vous pouvez aussi manipuler la variable directement grâce au binaire</span>.
                                 Pour cela, il faut utiliser des opérateurs binaires.
                                 <u>Les opérateurs binaires les plus utiles sont l'inversion de bits "~", le AND binaire "&", le OR binaire "|", le XOR binaire "^", le décalage de bits vers la gauche "&lt;&lt;" et la droite "&gt;&gt;".</u>
                                 Ils sont utilisables de la même façon que les opérateurs arithmétiques.
                             </p>
-                            <p id="part_B_a_6">
+                            <p id="part_B_b_6">
                                 Cependant, si vous voulez utiliser des nombres décimaux plus complexes, ces types ne suffisent pas.
                                 <span class="important">Pour les nombres décimaux, il faut utiliser deux types : float (32 bits) ou double (64 bits)</span>.
                                 Les opérations binaires ne sont cependant pas accessibles avec eux.
@@ -333,7 +333,7 @@
                                 <u>En général, la conversion fait à ce que la valeur entière sera l'arrondissement à l'entier d'en dessous du nombre décimal stocké</u>.
                                 Ces nombres sont encodés avec le format binaire <a href="https://fr.wikipedia.org/wiki/IEEE_754">IEEE 754</a>.
                             </p>
-                            <p id="part_B_a_7">
+                            <p id="part_B_b_7">
                                 Après tout cela, ça serai bien de connaître la valeur d'une de ces variables.
                                 Pour cela, <u>il faut utiliser une instruction, qui est déjà en partie présente dans le code</u> :
                                 <div class="code_sample">
@@ -368,7 +368,7 @@
                                 </div>
                             </p>
                         </div>
-                        <h3 id="part_B_a">
+                        <h3 id="part_B_c">
                             c. Les autres types fondamentaux
                         </h3>
                         <div>
@@ -438,6 +438,48 @@
                                 </div>
                                 Il y a une aberrante quantité de choses possibles avec "string", donc voici <a href="https://cplusplus.com/reference/string/string/">la documentation de ce type</a>.
                                 Nous verrons plus tard comment bien lire une documentation C++.
+                            </p>
+                        </div>
+                        <h3 id="part_B_d">
+                            d. Les types composés
+                        </h3>
+                        <div>
+                            <p id="part_B_d_1">
+                                Par définition, <span class="important">les types composés sont des types composés d'autres types</span>.
+                                D'un point de vue binaire, <u>ils sont composés de valeurs binaires d'autres types, comme des "int", "string"...</u>
+                                Dans ces types là, il y a 2  catégories différentes.
+                                <u>La première est la catégorie des types composés fondamentaux</u>.
+                                Ils sont crées directement par le compiler.
+                                <u>L'autre catégorie est la catégorie des types définis par l'utilsiateur</u>.
+                                En effet, <span class="important">il est possible de créer ses propres types</span>, et nous verrons comment dans les prochains cours, car c'est la force même du C++.
+                            </p>
+                            <p id="part_B_d_2">
+                                Les 2 types les plus intéressants des types composés fondamentaux sont <span class="important">les pointeurs et les références</span>.
+                                Il s'agit cependant d'un sujet très complexe, que je développerai en profondeur dans un prochain cours.
+                                En gros, <span class="important">ces 2 types représentent une adresse mémoire d'une autre variable</span>, qui permet de l'utiliser "à distance".
+                                <u>Le pointeur est beaucoup plus compliquée que la référence, donc je ne parlerai que de la référence pour l'instant</u>.
+                                Une autre manière de définir la référence est de dire que c'est un moyen d'utiliser une variable, sans la redéfinir.
+                                Il faut ensuite définir à la référence la variable à référencer.
+                                <span class="important">Pour définir une référence, il faut utiliser le symbole "&" à côté du type de la variable à référencer, comme cela</span> :
+                                <div class="code_sample">
+                                    int age = 42;</br>
+                                    int& age_2 = age;</br>
+                                    int &age_3 = age;</br>
+                                </div>
+                                Les deux façon sont possibles.
+                                Si vous modifier "age_2" ou "age_3", <u>la variable qu'elles référencent, "age", est modifiée</u>.
+                                Si vous "cout" ou "cin" une de ces variables, <u>c'est la variable qu'elles référencent, "age", qui est utilisée</u>.
+                            </p>
+                            <p id="part_B_d_3">
+                                Les 2 derniers types composés fondamentaux sont <span class="important">les fonctions et les listes</span>.
+                                Comme pour les pointeurs, il s'agit de sujets très complets et complexes, que nous traiteront dans un prochain cours.
+                            </p>
+                            <p id="part_B_d_4">
+                                Pour finir avec les types, <u>il faut aussi savoir qu'il est possible de créer ses propres types</u>.
+                                Pour cela, il existe 2 systèmes principaux : <span class="important">les classes et les unions</span>.
+                                <u>Le système de classe est la raison de pourquoi le C++ est appelé un "langage orienté objet"</u>.
+                                Cependant, tout comme les pointeurs, fonctions et listes, nous reviendront dessus dans un prochaine cours.
+                                En effet, <u>ce système permet de rendre le C++ infiniment modulable</u>.
                             </p>
                         </div>
                     </div>
