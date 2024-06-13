@@ -219,7 +219,13 @@
                                     nombre_entier age = 36;
                                 </div>
                                 Si votre variable n'est pas définie, <span class="important">vous pouvez assister en des comportements inattendus</span> (unexpected behavior en anglais).
-                                Le symbole "=" peut aussi être utilisé autrement.
+                                <span class="important">En rajoutant "const" avant le type une définition de variable, vous la faite devenir constante</span>.
+                                Vous devez obligatoirement la définir au même moment.
+                                Par exemple, cette variable ne pourra pas être modifiée :
+                                <div class="code_sample">
+                                    const type_de_groupe_sanguin groupe_sanguin = B;
+                                </div>
+                                Si votre variable n'est pas constante, le symbole "=" peut aussi être utilisé autrement.
                                 En effet, si vous l'utilisez après avoir déclarée votre variable, vous pouvez modifier sa valeur (ou la définir si la variable n'a pas déjà été définie).
                                 Par exemple, pour notre exemple de en haut, pour changer l'âge, nous devons écrire après la déclaration de la variable :
                                 <div class="code_sample">
@@ -227,9 +233,24 @@
                                 </div>
                                 Dans ces deux cas (et d'autres que nous verrons après), <span class="important">la partie à droite du symbole peut être soit une autre variable, soit une valeur écrite dans le programme</span>.
                                 Cette partie est appelée <u>"une rvalue" (pour right value)</u>.
+                                <span class="important">La variable sera utilisable jusqu'à la fin des accolades, mais pas après</span>.
                                 Avec tout cela, vous pouvez déjà commencer à utiliser des variables.
                             </p>
                             <p id="part_B_a_3">
+                                Il existe toute une convention de nommage pour les variables en C++.
+                                Cependant, <u>il y a deux types de règles à respecter pour nommer des variables</u>.
+                                <span class="important">Les premières sont les règles imposées par le compileur</span>.
+                                Ces conventions sont <a href="https://cplusplus.com/doc/tutorial/variables/">écrites sur ce site web</a>.
+                                Les principales choses à retenir sont <u>qu'un nom de variable ne peut contenir que les 26 lettres de l'alphabet, des chiffres et des underscores "_"</u>.
+                                De plus, <u>une variable ne peut que commencer par une lettre ou un underscore</u> et ne doit pas avoir le même nom qu'un mot réservé (voir le site plus bas).
+                                Si une de ces conditions n'est pas respéctée, le programme plante.
+                                <span class="important">Les autres règles sont des conventions entre développeurs pour rentre le code plus lisible</span>.
+                                Soyons honnête, <u>il y a autant de façon de faire que de développeurs</u>.
+                                <span class="important">L'objectif est que le nom soit simple, mais efficace et ordonné</span>.
+                                N'hésitez pas à aller regarder des codes d'autres personnes, pour vous faire votre propre style.
+
+                            </p>
+                            <p id="part_B_a_4">
                                 Les variables ont bien d'autres utilisations que juste être rédéfinies sans modifications (heuresement).
                                 <span class="important">Ces utilisations sont toutes très précisément définies selon leur type</span>.
                                 Pour savoir ce que l'ont peut faire avec les variables sans prise de tête, il est grandement conseillé de connaître ces types.
@@ -493,7 +514,10 @@
             <h1>Plus d'informations</h1>
             <div class="open-sans-regular">
                 SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
-                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
             </div>
         </footer>
     </body>
