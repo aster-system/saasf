@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                3. Utiliser des conditions
+            </h1>
+            <div>
+                L'utilisation de variable permet de faire pleins de choses, mais reste néanmoins limité.
+                En effet, vous ne pouvez pas adapter l'utilisation du programme selon des variables / données prédéfinies.
+                Sans cela, votre programme n'est pas très utile.
+                Heuresement, cela est possible en C++, et nous allons voir comment dés maintenant.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Conditionner son programme
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Pour commencer, nous allons définir ce qu'est le conditionnement d'un programme, et son utilité.
+                        <h3 id="part_A_a">
+                            a. Que ce qu'est une condition ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Par définition, <u>une condition est "État, situation, fait dont l'existence est indispensable pour qu'un autre état, un autre fait existe"</u>, selon <a href="https://dictionnaire.lerobert.com/definition/condition">le Robert</a>.
+                                En programmation, dans notre contexte nécessaire, <span class="important">une condition est une question que l'on pose au processeur, qui peut avoir pour réponse "vrai" ou "faux", et qui permet de faire quelque chose selon la réponse du processeur</span>.
+                                Comme nous allons poser la condition au processeur, il est important de noter que <u>l'obstention d'un résultat se fait via des instructions</u>, que nous verrons juste après.
+                                <u>La condition en elle même est, souvent, présente dans le code source d'un programme</u>.
+                            </p>
+                            <p id="part_A_a_2">
+                                Cette définition peut, dans un certain sens, nous rappeller la définition des données, voir des variables, pour de bonnes raisons.
+                                En effet, <span class="important">le résultat d'une condition est une données, qui peut avoir pour valeur soit "vrai" ou "faux"</span>.
+                                <u>Elle peut donc être utilisée de manière similaire à une données : lue, modifiée...</u>
+                            </p>
+                            <p id="part_A_a_3">
+                                nous avons vu plus tôt que <u>l'obstention d'un résultat se fait via des instructions</u>.
+                                En théorie, tout question peut être considérée comme une condition.
+                                Cependant, d'un point de vue bas niveau informatique, <span class="important">les conditions sont souvent des comparaisons, via des comparateurs</span>.
+                                <span class="important">Des exemples de comparaison sont "plus petit que", "plus grand que", "égal à" ou "différent de"</span>.
+                                En <a href="https://fr.wikipedia.org/wiki/Jeu_d%27instructions_x86">assembleur X86</a>, cela se fait avec l'instruction "CMP".
+                                <u>Cela marche avec des nombres, et donc, comme nous l'avons vus dans les derniers cours</u>, <span class="important">avec tout ce qui utilisent des nombres (caractères ASCII...)</span>.
+                            </p>
+                            <p id="part_A_a_4">
+                                De plus, ayant seulement deux valeurs possibles, les résultats de conditions peuvent aussi être utilisées avec l'algèbre de Boole.
+                                <u>Cette algèbre permet l'utilisation de plusieurs comparateurs très utiles, entre deux résultats de conditions</u>.
+                                <span class="important">Les trois comparateurs de ce genre les plus importants sont ET, OU et NON</span>.
+                                <span class="important">ET permet de savoir si deux résultats de conditions sont vraies, OU si au moins un des résultats de conditions est vraie, et NON si un résultats de condition n'est pas vraie</span>.
+                                Ces comparateurs extrêmement basiques permettent de faire <u>des comparateurs un peu plus complexes, comme XOR (ou exclusif, un seul résultat de condition vraie), ou "plus grand ou égal" (plus grand ou égal ¯\_(ツ)_/¯)</u>.
+                            </p>
+                            <p id="part_A_a_5">
+                                Pour utiliser correctement les conditions, <span class="important">il ne faut pas avoir peur d'en mettre plusieurs à côté</span>.
+                                Pour cela, <span class="important">il est conseillé d'utiliser des parenthèses entre chaque condition</span>, pour ne pas créer de contextes ambigüs.
+                                Par exemple, voici une condition en pseudo-code bien formulée, sous forme de variable :
+                                <div class="code_sample">
+                                    a_le_bac = moyenne > 10 ou (a_ete_au_rattrapage et moyenne_rattrapage > 10)
+                                </div>
+                                Par contre, une mauvaise pratique serait d'écrire :
+                                <div class="code_sample">
+                                    a_le_bac = moyenne > 10 ou a_ete_au_rattrapage et moyenne_rattrapage > 10
+                                </div>
+                                Parce que, comme ça, on peut lire soit :
+                                <div class="code_sample">
+                                    a_le_bac = moyenne > 10 ou (a_ete_au_rattrapage et moyenne_rattrapage > 10)
+                                </div>
+                                Soit :
+                                <div class="code_sample">
+                                    a_le_bac = (moyenne > 10 ou a_ete_au_rattrapage) et moyenne_rattrapage > 10
+                                </div>
+                                Les deux ayant des sens bien différents.
+                                <u>Il faut donc faire attention à bien structurer sa condition</u>.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Comment changer son programme selon une condition ?
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Pour l'instant, nous avons vu une version des conditions très proche des variables.
+                                Cependant, <u>cette utilisation ne permet pas grand chose, appart de savoir si une condition est vraie ou fausse</u>, sans que cela n'influe quoi que ce soit dans le programme.
+                                <span class="important">Pour pouvoir modifier le comportement du programme selon une condition, il faut utiliser quelque chose d'essentiel en programmation : les structures de conditions</span>.
+                                <u>Elles permettent de faire certaines choses, ou non, selon la valeur d'une condition</u>.
+                            </p>
+                            <p id="part_A_b_2">
+                                <span class="important">La structure de condition la plus connues est "SI"</span>.
+                                D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "SI une condition est vraie, faire quelque chose"</span>.
+                                Si la condition n'est pas vraie, alors cette chose ne sera pas faite.
+                                Voici un petit exemple de pseudo-code, utilisant "SI" :
+                                <div class="code_sample">
+                                    demander l'age à l'utilisateur</br>
+                                    si age est plus grand ou égal à 18, afficher "Vous êtes majeur."
+                                </div>
+                                Elle permet de commencer à <u>modifier le programme directement dans le code source, selon ce qu'il se passe pendant l'exécution</u>.
+                            </p>
+                            <p id="part_A_b_3">
+                                Avec cette condition seule, nous pouvons faire quelque chose si une condition est vraie.
+                                Cependant, si elle est fausse, on ne peut pas faire autre chose, directement via cette condition.
+                                <u>En théorie, on pourrait rajouter juste après "SI la condition est fausse", et cela fonctionnerait</u>.
+                                Cependant, c'est assez moche. 
+                                <span class="important">Heuresement, il y a une autre structure, "SINON", qui, rajoutée après un "SI", permet de dire au programme que faire si la condition est fausse</span>.
+                                D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "SI une condition est vraie, faire quelque chose, SINON, faire autre chose"</span>.
+                                Voici un petit exemple de pseudo-code, utilisant "SINON" :
+                                <div class="code_sample">
+                                    demander l'age à l'utilisateur</br>
+                                    si age est plus grand ou égal à 18, afficher "Vous êtes majeur."
+                                    sinon, afficher "Vous êtes mineur."
+                                </div>
+                            </p>
+                            <p id="part_A_b_4">
+                                Si plusieurs conditions doivent être testées, il est possible de combiner les deux structures pour en faire une dernière.
+                                <span class="important">En fait, la struct "SINON SI" représente une structure "SINON", mais qui a besoin d'une autre condition pour passer</span>.
+                                D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "SI une condition est vraie, faire quelque chose, SINON SI une autre condition est vraie, faire autre chose"</span>.
+                                <u>Vous pouvez aussi rajouter un "SINON" après un (ou plusieurs) "SINON SI"</u>.
+                                Voici un petit exemple de pseudo-code, utilisant "SINON SI" :
+                                <div class="code_sample">
+                                    demander l'age à l'utilisateur</br>
+                                    si age est plus grand ou égal à 60, afficher "Vous êtes un boomer."</br>
+                                    sinon, si age est plus grand ou égal à 44, afficher "Vous êtes un gen X."</br>
+                                    sinon, si age est plus grand ou égal à 24, afficher "Vous êtes un gen Y."</br>
+                                    sinon, si age est plus grand ou égal à 10, afficher "Vous êtes un gen Z."</br>
+                                    sinon, afficher "Vous êtes un gen Alpha."
+                                </div>
+                            </p>
+                            <p id="part_A_b_5">
+                                De manière très similaire à la structure "SINON SI", il est possible d'utiliser une autre structure pour tester plusieurs conditions.
+                                <span class="important">Il s'agit de la structure "SELON", qui prend une donnée, et y applique plusieurs conditions</span>.
+                                D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "SELON une donnée, SI une condition avec cette donnée est vraie, faire quelque chose chose, SINON SI une autre condition avec cette donnée est vraie, faire autre chose, SINON, faire autre chose"</span>.
+                                C'est une forme simplifiée pour remplacer plein de "SINON SI".
+                                Pour notre exemple plus haut, cela donnerait :
+                                <div class="code_sample">
+                                    demander l'age à l'utilisateur</br>
+                                    selon age</br>
+                                    --- si age est plus grand ou égal à 60, afficher "Vous êtes un boomer."</br>
+                                    --- sinon, si age est plus grand ou égal à 44, afficher "Vous êtes un gen X."</br>
+                                    --- sinon, si age est plus grand ou égal à 24, afficher "Vous êtes un gen Y."</br>
+                                    --- sinon, si age est plus grand ou égal à 10, afficher "Vous êtes un gen Z."</br>
+                                    --- sinon, afficher "Vous êtes un gen Alpha."
+                                </div>
+                            </p>
+                            <p id="part_A_b_6">
+                                Une dernière chose à noter, est que, en pseudo-code, il y a souvent un petit mot présent, que je n'ai pas mis ici.
+                                <span class="important">Il s'agit de "FIN SI"</span>.
+                                Il permet de <span class="important">connaître la fin de la structure de conditions qu'il succède</span>.
+                                Je ne l'ai pas mis car <u>je considère que toute la partie, soit sur la même ligne que SI, soit indenté après SI, est dans la structure</u>.
+                                <span class="important">Indenté veut dire toute la partie après le SI, qui est espacée de la gauche de l'écran d'un certain nombre de caractères</span>.
+                                Dans mon exemple de en haut, toute la partie indentée est la partie avec des "--- " devant.
+                                Le nombre de "-" représente l'indentation, en général (dans ce cas), <u>un multiple de 4 moins 1 "-"</u>.
+                                <span class="important">J'ai donc pris la décision de ne pas le mettre, bien que je pourrai le mettre, et qu'il est parfois recommandé de le mettre</span>.
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Répéter des instructions via des conditions
+                        </h3>
+                        <div>
+                            <p id="part_A_c_0">
+                                Toutes les structures que nous avons vu jusqu'ici permettent de <u>tester une condition une fois</u>, lorsqu'elle (la structure) est atteinte.
+                                Cependant, il est aussi possible d'utiliser une structure, <u>de telle manière que ses instructions seront répétées, tant qu'une condition est vraie</u>.
+                                <span class="important">Ces structures portent un nom très célèbre en programmation : les boucles</span>.
+                                <span class="important">Leur contenu est exécuté jusqu'à ce que la condition de la structure est vraie</span>.
+                            </p>
+                            <p id="part_A_c_1">
+                                <span class="important">La boucle la plus célèbre est la boucle "TANT QUE"</span>.
+                                D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "TANT QUE une condition est vraie, faire quelque chose"</span>.
+                                En gérant efficacement la condition qui anime la boucle, on peut dériver cette boucle en pleins d'autres types de boucles.
+                                <span class="important">Cette condition est nommée "condition de sortie"</span>.
+                                Voici un petit exemple de pseudo-code, utilisant "TANT QUE", pour une multiplication :
+                                <div class="code_sample">
+                                    demander nombre_a_multiplier à l'utilisateur</br>
+                                    demander multiplicateur à l'utilisateur</br></br>
+                                    mettre nombre_de_multiplication à 0</br>
+                                    mettre resultat à 0</br></br>
+                                    tant que nombre_de_multiplication plus petit que multiplicateur</br>
+                                    --- ajouter nombre_a_multiplier à resultat</br>
+                                    --- ajouter 1 à nombre_de_multiplication
+                                </div>
+                                Dans cette exemple, tant que nombre_de_multiplication est plus petit que multiplicateur, on ajoute nombre_a_multiplier à resultat.
+                                Comme <u>on ajoute 1 à chaque passage à nombre_de_multiplication, nombre_de_multiplication est égal au nombre de fois que la boucle se répète</u>.
+                                Au final, <span class="important">resultat sera égal à nombre_a_multiplier + nombre_a_multiplier + ... + nombre_a_multiplier, multiplicateur fois, soit nombre_a_multiplier * multiplicateur</span>.
+                                D'ailleurs, <span class="important">une répétition de boucle est appelée une itération de boucle</span>.
+                            </p>
+                            <p id="part_A_c_2">
+                                <span class="important">Une boucle qui peut vous venir à l'esprit est la boucle "RÉPÉTER X FOIS"</span>.
+                                Cependant, cette boucle n'est en général pas primaire en programmation, bien que cette appelation est possible en pseudo-code.
+                                <u>Il est cependant possible de reproduire cette boucle avec "TANT QUE"</u>.
+                                Pour cela, <span class="important">il faut 2 variables, une qui contient le nombre d'itérations nécessaires, et une contenant le nombre d'itérations à un moment T</span>.
+                                À chaque itérations de la boucle, la variable contenant le nombre d'itérations augmente de 1.
+                                Lors ce qu'elle sera égal au nombre d'itérations nécessaires, il y aura eu ce nombre là d'itérations, donc la condition de sortie doit devenir fausse.
+                                <u>Il faut donc utiliser comme condition de sortie "nombre_itérations plus petit que nombre_itérations_nécessaires"</u>.
+                                En pseudo-code, cela donne :
+                                <div class="code_sample">
+                                    mettre iterations_necessaires à 5</br>
+                                    mettre nombre_iterations à 0</br></br>
+                                    tant que nombre_iterations plus petit que iterations_necessaires</br>
+                                    --- afficher "Ce message sera affiché 5 fois."</br>
+                                    --- ajouter 1 à nombre_iterations
+                                </div>
+                                Très similaire à ce que l'on a vu dans l'exemple d'en haut.
+                            </p>
+                            <p id="part_A_c_3">
+                                Le problème de ce système est que, <u>si la condition de sortie n'est jamais fausse, la boucle ne s'arrête jamais</u>.
+                                <span class="important">Dans ce cas là, la boucle est appelée une boucle infinie</span>.
+                                Cependant, si cela n'est pas prévu, le programme se gèle, jusqu'à ce que vous l'arrêtiez.
+                                <u>Il faut donc faire attention à la condition de sortie</u>.
+                                Un exemple de boucle infini, inspiré des exemples d'en haut, serait en pseudo-code :
+                                <div class="code_sample">
+                                    mettre iterations_necessaires à 5</br>
+                                    mettre nombre_iterations à 0</br></br>
+                                    tant que nombre_iterations plus petit que iterations_necessaires</br>
+                                    --- afficher "Ce message sera affiché 5 fois."</br>
+                                    --- enlever 1 à nombre_iterations
+                                </div>
+                                Dans ce cas là, <u>nombre_iterations ne dépassera jamais iterations_necessaires, et la boucle se répétera indéfiniment</u>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
