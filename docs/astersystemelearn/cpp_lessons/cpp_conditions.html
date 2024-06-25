@@ -245,6 +245,187 @@
                         </div>
                     </div>
                 </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Les conditions en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Tout ce que nous avons vu est, bien évidemment, présent en C++.
+                        Nous allons voir dés maintenant sous quelle forme.
+                        <h3 id="part_B_a">
+                            a. Les variables "conditions"
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                Comme nous l'avons vu, <u>le résultat d'une condition représente une donnée, qui est soit vraie soit fausse</u>.
+                                <span class="important">Ces données sont présentes en C++, sous forme de variables, de type "bool"</span>.
+                                <span class="important">Ce type peut avoir deux valeurs : "true" (vrai) ou "false" (faux).</span>
+                                En général, <u>"false" équivaut au 0 numérique et "true" à n'importe quel autre valeur numérique</u>.
+                                Pour créer une variable "bool", vous pouvez procéder ainsi :
+                                <div class="code_sample">
+                                    // Avec "true" et "false"</br>
+                                    bool vrai = true;</br>
+                                    bool faux = false;</br></br>
+                                    // Avec des nombres</br>
+                                    vrai = 1;</br>
+                                    faux = 0;
+                                </div>
+                            </p>
+                            <p id="part_B_a_2">
+                                Pour faire des comparaisons, <u>il faut utiliser le système d'opérateurs que nous avons vu au dernier cours</u>.
+                                <span class="important">Ils sont appelés les opérateurs de comparaisons</span>.
+                                <span class="important">L'opérateur de comparaison permettant de vérifier que deux valeurs sont égales est "=="</span>.
+                                <u>À ne pas confondre avec "=", qui est un opérateur d'assignement (voir dernier cours)</u>.
+                                La valeur d'une comparaison de ce genre est une rvalue (voir dernier cours).
+                                Ils sont assez facilement utilisables :
+                                <div class="code_sample">
+                                    // Attention à l'ordre des opérateurs</br>
+                                    int age = 10;</br>
+                                    bool vrai = (age == 10);</br>
+                                    bool faux = (age == 25);
+                                </div>
+                                Les autres opérateurs sont aussi assez simples.
+                                <span class="important">L'opérateur permettant de vérifier que deux valeurs sont différentes est "!=".
+                                Pour "plus grand que", c'est "&gt;", et pour "plus petit que", c'est "&lt;".
+                                Pour "plus grand ou égal à", c'est "&gt;=", et pour "plus petit ou égal à", c'est "&lt;=".</span>
+                                Leur utilisation précise dépend du type des valeurs comparées.
+                                Par exemple, <u>avec des valeurs numériques, les comparaisons sont entièrement numériques</u>.
+                                Avec du texte (std::string), "==" et "!=" vérifient si le texte est le même ou pas.
+                                <u>Ces valeurs peuvent être tous types de valeurs : variables, valeurs en dur...</u>
+                            </p>
+                            <p id="part_B_a_3">
+                                <u>Les opérateurs de l'algèbre de Boole vus plus haut sont aussi disponibles en C++</u>.
+                                Ils permettent de <u>donner un résultat via deux autres valeurs de conditions</u>.
+                                <span class="important">L'opérateur "ET" s'écrit "&&", "OU" s'écrit "||" et "NON" s'écrit avec un "!" avant la condition</span>.
+                                C'est opérateurs sont <u>des opérateurs logiques</u>.
+                                Ils sont exécutés après les opérateurs de comparaisons dans le compiler.
+                                Un exemple peut être :
+                                <div class="code_sample">
+                                    int age = 10;</br>
+                                    std::string nationalite = "francaise";</br>
+                                    bool citoyen_francais = (age >= 18 && nationalite == "francaise");
+                                </div>
+                            </p>
+                            <p id="part_B_a_4">
+                                Comme en algorithmique, <u>une bonne structure des conditions est nécessaire pour ne pas se perdre</u>.
+                                Pour ça, <span class="important">l'utilisation de parenthèses est possible en C++</span>.
+                                Voici un petit exemple :
+                                <div class="code_sample">
+                                    int age = 10;</br>
+                                    bool inscrit_sur_liste_electorale = false;</br>
+                                    std::string nationalite = "francaise";</br>
+                                    bool peut_voter = (age >= 18 && nationalite == "francaise") && inscrit_sur_liste_electorale;</br></br>
+                                    bool veut_voter = true;</br>
+                                    bool vote_obligatoire = false;</br>
+                                    bool va_voter = peut_voter && (veut_voter || vote_obligatoire);
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_B_a">
+                            b. Les structures de conditions
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                L'utilisation de <u>structures de conditions est très liés à l'utilisation de données "bool"</u>, vue plus tôt.
+                                <span class="important">La structure de condition "SI quelque chose, faire_quelque_chose" est représenté en C++ avec la syntaxe "if(quelque_chose) {faire_quelque_chose;}"</span>.
+                                "if" est un des mots réservés par le compiler en C++.
+                                <u>Entre parenthèses, vous devez mettre une condition, ou un résultat de condition</u>.
+                                <u>Entre crochets, vous devez mettre ce qui va être fait si le résultat de condition est "true"</u>.
+                                Voici un petit exemple :
+                                <div class="code_sample">
+                                    int age = 10;</br>
+                                    if(age >= 18) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;// Écrire "Majeur" dans la console</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Majeur" &lt;&lt; std::endl;</br>
+                                    }</br></br>
+                                    // Cas aussi possible</br>
+                                    bool est_majeur = (age >= 18);</br>
+                                    if(est_majeur) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;// Écrire "Majeur" dans la console</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Majeur" &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                À noter que, ici, l'indentation n'est pas nécessaire, au contraite du pseudo-code.
+                                <u>Ce qui sera exécuté n'est que ce qui est entre crochets</u>.
+                                On peut donc le présenter comme on veut, avec indentation, sauts de lignes... Pour rendre cela plus jolie.
+                            </p>
+                            <p id="part_B_b_2">
+                                La structure "SELON" a une syntaxe très similaire à la structure "if".
+                                <span class="important">Pour l'utiliser, il faut rajouter "else {chose_a_faire;}" après les crochets du "if"</span>.
+                                <u>Si la condition de "if" est "false", les choses à faire dans les crochets de "else" sont faites</u>.
+                                Elle reste très simple à utiliser :
+                                <div class="code_sample">
+                                    int age = 10;</br>
+                                    if(age >= 18) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;// Écrire "Majeur" dans la console</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Majeur" &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;// Écrire "Mineur" dans la console</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Mineur" &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                Elle complète très bien "if".
+                            </p>
+                            <p id="part_B_b_3">
+                                Finalement, la dernière structure pour compléter "if" et "SINON SI".
+                                <span class="important">C'est un mélange de "if" et "else", et ça s'écrit "else if(condition){faire_quelque_chose;}"</span>.
+                                Il fonctionne exactement comme "if", <u>à l'exception près qu'il faut rajouter "else" devant, et qu'elle n'arrive que si les précédents "if" sont faux</u>.
+                                Ce sera plus clair avec un exemple :
+                                <div class="code_sample">
+                                    int age = 0;</br>
+                                    std::cin &gt;&gt; age;</br>
+                                    if(age &gt;= 60) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes un boomer." &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else if(age &gt;= 44) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes un gen X." &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else if(age &gt;= 24) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes un gen Y." &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else if(age &gt;= 10) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes un gen Z." &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes un gen Alpha." &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_b_4">
+                                Pour en finir avec tout cela, il reste une structure avoir : la structure "SELON".
+                                Bien qu'elle ne soit pas si utilisée que ça en C++, il est important de la connaître.
+                                <span class="important">En C++, elle commence avec la syntaxe "switch(variable){comparaison}"</span>.
+                                "variable" entre parenthèse est <u>la variable à laquelle on va tester des valeurs</u>.
+                                Cependant, la comparaison n'est qu'un "==", et ne fonctionne que avec des nombres entiers.
+                                Entre crochets, on doit utiliser une syntaxe précise pour tester une valeur.
+                                <span class="important">Il faut utiliser la syntaxe "case valeur: faire_quelque_chose; break;"</span>.
+                                Si la variable à la valeur mise après "case", alors tout ce qui suit après le ":" jusqu'au "break;" sera fait.
+                                Nous verrons un peu plus tard qu'est ce qu'est "break".
+                                <span class="important">On peut y attribuer un comportement par défaut si aucun "case" n'est juste, avec "default: faire_quelque_chose;"</span>.
+                                Pas besoin de "break;" ici.
+                                On va prendre un exemple assez nouveau :
+                                <div class="code_sample">
+                                    int exercice = 2;</br>
+                                    switch(exercice) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;case 1 :</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes à l'exercice 1." &lt;&lt; std::endl;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;case 2 :</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes à l'exercice 2." &lt;&lt; std::endl;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;case 3 :</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous êtes à l'exercice 3." &lt;&lt; std::endl;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;default :</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vous avez fini." &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>
