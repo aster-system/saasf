@@ -60,13 +60,13 @@
                                 <u>La condition en elle même est, souvent, présente dans le code source d'un programme</u>.
                             </p>
                             <p id="part_A_a_2">
-                                Cette définition peut, dans un certain sens, nous rappeller la définition des données, voir des variables, pour de bonnes raisons.
-                                En effet, <span class="important">le résultat d'une condition est une données, qui peut avoir pour valeur soit "vrai" ou "faux"</span>.
-                                <u>Elle peut donc être utilisée de manière similaire à une données : lue, modifiée...</u>
+                                Cette définition peut, dans un certain sens, nous rappeler la définition des données, voir des variables, pour de bonnes raisons.
+                                En effet, <span class="important">le résultat d'une condition est une donnée, qui peut avoir pour valeur soit "vrai" soit "faux"</span>.
+                                <u>Elle peut donc être utilisée de manière similaire à une donnée : lecture, modification...</u>
                             </p>
                             <p id="part_A_a_3">
-                                nous avons vu plus tôt que <u>l'obstention d'un résultat se fait via des instructions</u>.
-                                En théorie, tout question peut être considérée comme une condition.
+                                Nous avons vu plus tôt que <u>l'obstention d'un résultat se fait via des instructions</u>.
+                                En théorie, toute question peut être considérée comme une condition.
                                 Cependant, d'un point de vue bas niveau informatique, <span class="important">les conditions sont souvent des comparaisons, via des comparateurs</span>.
                                 <span class="important">Des exemples de comparaison sont "plus petit que", "plus grand que", "égal à" ou "différent de"</span>.
                                 En <a href="https://fr.wikipedia.org/wiki/Jeu_d%27instructions_x86">assembleur X86</a>, cela se fait avec l'instruction "CMP".
@@ -193,7 +193,7 @@
                                 <span class="important">La boucle la plus célèbre est la boucle "TANT QUE"</span>.
                                 D'un point de vue assez haut niveau, <span class="important">elle peut se traduire par "TANT QUE une condition est vraie, faire quelque chose"</span>.
                                 En gérant efficacement la condition qui anime la boucle, on peut dériver cette boucle en pleins d'autres types de boucles.
-                                <span class="important">Cette condition est nommée "condition de sortie"</span>.
+                                <span class="important">Cette condition est nommée "condition d'exécution"</span>.
                                 Voici un petit exemple de pseudo-code, utilisant "TANT QUE", pour une multiplication :
                                 <div class="code_sample">
                                     demander nombre_a_multiplier à l'utilisateur</br>
@@ -215,8 +215,8 @@
                                 <u>Il est cependant possible de reproduire cette boucle avec "TANT QUE"</u>.
                                 Pour cela, <span class="important">il faut 2 variables, une qui contient le nombre d'itérations nécessaires, et une contenant le nombre d'itérations à un moment T</span>.
                                 À chaque itérations de la boucle, la variable contenant le nombre d'itérations augmente de 1.
-                                Lors ce qu'elle sera égal au nombre d'itérations nécessaires, il y aura eu ce nombre là d'itérations, donc la condition de sortie doit devenir fausse.
-                                <u>Il faut donc utiliser comme condition de sortie "nombre_itérations plus petit que nombre_itérations_nécessaires"</u>.
+                                Lors ce qu'elle sera égal au nombre d'itérations nécessaires, il y aura eu ce nombre là d'itérations, donc la condition d'exécution doit devenir fausse.
+                                <u>Il faut donc utiliser comme condition d'exécution "nombre_itérations plus petit que nombre_itérations_nécessaires"</u>.
                                 En pseudo-code, cela donne :
                                 <div class="code_sample">
                                     mettre iterations_necessaires à 5</br>
@@ -228,10 +228,10 @@
                                 Très similaire à ce que l'on a vu dans l'exemple d'en haut.
                             </p>
                             <p id="part_A_c_3">
-                                Le problème de ce système est que, <u>si la condition de sortie n'est jamais fausse, la boucle ne s'arrête jamais</u>.
+                                Le problème de ce système est que, <u>si la condition d'exécution n'est jamais fausse, la boucle ne s'arrête jamais</u>.
                                 <span class="important">Dans ce cas là, la boucle est appelée une boucle infinie</span>.
                                 Cependant, si cela n'est pas prévu, le programme se gèle, jusqu'à ce que vous l'arrêtiez.
-                                <u>Il faut donc faire attention à la condition de sortie</u>.
+                                <u>Il faut donc faire attention à la condition d'exécution</u>.
                                 Un exemple de boucle infini, inspiré des exemples d'en haut, serait en pseudo-code :
                                 <div class="code_sample">
                                     mettre iterations_necessaires à 5</br>
@@ -424,8 +424,81 @@
                                 </div>
                             </p>
                         </div>
+                        <h3 id="part_B_c">
+                            c. Les boucles
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                En C++, l'utilisation des boucles est très similaire à l'utilisations des autres structures de données.
+                                <span class="important">La boucle "TANT QUE" à exactement la même syntaxe que "if", à l'exception qu'on doit mettre "while" à la place de "if"</span>.
+                                Voici un très simple cas d'utilisation :
+                                <div class="code_sample">
+                                    int iterations_necessaires = 5;</br>
+                                    int nombre_iterations = 0;</br>
+                                    while(nombre_iterations &lt; iterations_necessaires) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;nombre_iterations++;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Ce message sera affiché 5 fois." &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_c_2">
+                                Une autre boucle extrêmement similaire existe en C++.
+                                Cependant, <u>elle n'a pas vraiment d'équivalent en pseudo-code</u>.
+                                En effet, <u>le problème avec la boucle "while" est que, si la condition est fausse à l'entrée de la boucle, alors elle ne s'exécutera pas une seule fois</u>.
+                                Pour obliger la boucle à se répéter au moins une fois, il faut un peu changer sa syntaxe.
+                                Pour cela, <span class="important">il faut placer le "while(condition)" après les crochets, et rajouter "do" avant les crochets</span>.
+                                Voici un cas d'utilisation similaire à celui d'en haut :
+                                <div class="code_sample">
+                                    int iterations_necessaires = 0;</br>
+                                    int nombre_iterations = 0;</br>
+                                    do {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;nombre_iterations++;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Ce message sera affiché 1 fois." &lt;&lt; std::endl;</br>
+                                    } while(nombre_iterations &lt; iterations_necessaires)
+                                </div>
+                            </p>
+                            <p id="part_B_c_3">
+                                Ces boucles là restent assez simples, mais il existe une boucle un peu plus complexe.
+                                De plus, comme en pseudo-code, elle n'a pas vraiment d'équivalent en pseudo-code.
+                                <span class="important">Il s'agit de la boucle "for", qui a pour syntaxe "for(assignement;condition;iteration)"</span>.
+                                Entre parenthèse, <u>"l'assignement" correspond à la création / modification d'une variable avant d'entrer dans la boucle</u>.
+                                Si aucune variable n'a besoin d'être crée ou modifiée pour pouvoir utiliser la boucle, cette endroit peut être laissé vide.
+                                <span class="important">La "condition" représente la condition d'exécution de la boucle, comme dans une boucle "TANT QUE"</span>.
+                                <u>L'itération est ce qu'il va arriver à chaque itération de la boucle</u>.
+                                Ces 3 choses sont des instructions, <u>donc doivent finir par un ";"</u> (même si l'instruction est vide).
+                                En général, <u>cette boucle est très similaire à la boucle pseudo-code "RÉPÉTER X FOIS"</u>, bien qu'elle soit beaucoup plus modulable.
+                                Voici un cas d'utilisation similaire à ceux d'en haut :
+                                <div class="code_sample">
+                                    // On crée une variable int "i", on défini comme condition d'exécution "i plus petit que 5", et à chaque itération de boucle, on ajoute 1 à "i"</br>
+                                    for(int i = 0;i&lt;5;i++) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Ce message sera affiché 5 fois." &lt;&lt; std::endl;</br>
+                                    }</br></br>
+                                    // Pareil que en haut, bien qu'on n'ait pas d'assignement nécessaire</br>
+                                    int i = 0;</br>
+                                    for(;i&lt;5;i++) {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Ce message sera affiché 5 fois." &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                Nous pouvons faire plein d'autres choses avec cette boucle, comme l'utiliser avec des itérateurs.
+                                Cependant, pour utiliser pleinement cette boucle, il faut bien la comprendre, ce qui peut être assez complexe pour certains.
+                            </p>
+                            <p id="part_B_c_4">
+                                Pour en finir avec les boucles, <u>il faut savoir qu'il est possible d'agir sur leur déroulé, pendant leur exécution</u>.
+                                En effet, <span class="important">l'instruction "break;" permet de sortir de la boucle, pour de bon, qu'elle que soit la condition d'exécution</span>.
+                                Elle peut être utilisé dans une boucle, <u>pour simplifier la condition d'exécution de la boucle</u>.
+                                De manière un peu moins brutale, <span class="important">l'instruction "continue;" permet d'ignorer tout ce qui vient après elle dans la boucle, et de directement passer à la prochaine itération</span>.
+                                Bien que certains développeurs les détestent, il est quand même important de les connaître.
+                            </p>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                Voici la base des conditions et des boucles en C++.
+                Cependant, il y a une dernière chose très importante à savoir.
+                En effet, ce que je vous aie expliqué n'est, en vrai, pas vraiment la base, puis ce qu'il s'agit de l'entièreté de cette partie du C++.
+                Le problème principal n'est, en effet, pas de connaître la syntaxe de ces boucles, mais réussir à comprendre leur puissance et comment précisement les utiliser.
+                Pour cela, il faut de la pratique.
             </div>
         </div>
         <footer>
