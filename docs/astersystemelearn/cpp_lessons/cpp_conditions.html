@@ -446,7 +446,7 @@
                                 Cependant, <u>elle n'a pas vraiment d'équivalent en pseudo-code</u>.
                                 En effet, <u>le problème avec la boucle "while" est que, si la condition est fausse à l'entrée de la boucle, alors elle ne s'exécutera pas une seule fois</u>.
                                 Pour obliger la boucle à se répéter au moins une fois, il faut un peu changer sa syntaxe.
-                                Pour cela, <span class="important">il faut placer le "while(condition)" après les crochets, et rajouter "do" avant les crochets</span>.
+                                Pour cela, <span class="important">il faut placer le "while(condition)" après les crochets, lui rajouter un ";" après, et rajouter "do" avant les crochets</span>.
                                 Voici un cas d'utilisation similaire à celui d'en haut :
                                 <div class="code_sample">
                                     int iterations_necessaires = 0;</br>
@@ -454,7 +454,7 @@
                                     do {</br>
                                         &nbsp;&nbsp;&nbsp;&nbsp;nombre_iterations++;</br>
                                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Ce message sera affiché 1 fois." &lt;&lt; std::endl;</br>
-                                    } while(nombre_iterations &lt; iterations_necessaires)
+                                    } while(nombre_iterations &lt; iterations_necessaires);
                                 </div>
                             </p>
                             <p id="part_B_c_3">
