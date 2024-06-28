@@ -60,6 +60,60 @@
                         </p>
                     </div>
                 </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Partie 1 : la zone de jeu
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        Pour commencer, nous allons développer la zone de jeu où évoluera notre serpent.
+                        <h3>
+                            La fenêtre principale
+                        </h3>
+                        <div>
+                            On commence par créer une fenêtre principale, en format téléphone 9:16 pour faciliter la réalisation des shorts.
+                            Notre fenêtre fera 540 X 960 pixels de taille.
+                            Le titre de la fenêtre sera "Snake par Aster Système".
+                            Le fond de la fenêtre sera noir par défaut.
+                            Pour pouvoir utiliser de la 2D dans la fenêtre, on crée une page 2D avec SCLS Graphic "Benoit", appelé "a_gui".
+                            Elle occupera la totalité de la fenêtre.
+                        </div>
+                        <h3>
+                            La zone de jeu
+                        </h3>
+                        <div>
+                            Dans "GUI", on ajoute un objet nommé "a_playground", qui représentera la zone de jeu.
+                            Elle occupera une place de 540 X 540 pixels, soit un carré.
+                            On la place de telle manière qu'elle occupera la totalité de la largeur de la fenêtre.
+                            Pour la hauteur, on place le milieu de la zone de jeu à 3/5 de la hauteur totale, soit ici, 576 pixels.
+                            La texture appliquée sera une texture fabriqué directement dans le code source, sans avoir besoin d'image extérieure.
+                            Il s'agira d'une texture avec un fond de gris RGB (160, 160, 160).
+                            On y appliquera aussi une légère bordure, composé de 3 parties en tout.
+                            Une partie sera la partie extérieure de la bordure gauche-bas, de couleur RGB (60, 60, 60).
+                            La deuxième partie sera la partie intérieure de la bordure gauche-bas, après la bordure extérieure, de couleur RGB (102, 102, 102).
+                            Finalement, la dernière partie sera la partie extérieure de la bordure droite-haut, de couleur RGB (200, 200, 200).
+                            La largeur de ces trois bordures est appelée "a_outer_line_width", et est par défaut à 4.
+                        </div>
+                        <h3>
+                            Cadriller la zone de jeu
+                        </h3>
+                        <div>
+                            <p>
+                                Le tracé du cadrillage de la zone de jeu se fera à même la texture.
+                                Pour commencer, on calcul chaque positions X et Y et tailles largeurs et hauteurs de chaque case, verticale et horizontale.
+                                Pour cela, on doit repartir la zone de jeu en un certain nombre de cases, ici 15 X 15 cases.
+                                Nous devons en plus prendre en compte la bordure.
+                                Grâce à cela, par proportionnalité, on peut connaître toutes les positions et tailles nécessaires.
+                                Avec ces positions et tailles, on peut tracer à la fin de chaque case la ligne de cadrillage interne, de largeur "a_inner_line_width" et de couleur RGB (102, 102, 102).
+                                Cependant, on ne doit pas tracer la dernière ligne, car la fin de la dernière ligne est juste à côté du bord droite / haut de la zone de jeu, et n'est donc pas nécessaire.
+                                Or, nous devons compter cet absence de tracé de la dernière ligne, en ajoutant "a_inner_line_width" (la valeur manquante) pour le calcul de la largeur nécessaire au cadrillage.
+                            </p>
+                            <p>
+                                Grâce aux données de positions de chaque case, on peut savoir précisément où placer une certaine texture, et quelle taille elle doit occuper.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>
