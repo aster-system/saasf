@@ -114,6 +114,51 @@
                         </div>
                     </div>
                 </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Partie 2 : le serpent
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        Dans un jeu Snake, le plus important est très certainement le serpent.
+                        Sinon, il n'y aurait pas de jeu.
+                        <h3>
+                            Afficher le serpent
+                        </h3>
+                        <div>
+                            <p>
+                                Chaque case de la grille peut prendre une certaine texture.
+                                Le serpent sera constitué d'un certain nombre de parties, nommées "Snake_Piece".
+                                Chaque partie occupera une case particulière de la grille.
+                                Elles sont stockées dans une file.
+                                La dernière partie ajoutée représente la tête du serpent, qui aura une texture légèrement différente.
+                            </p>
+                            <p>
+                                La texture de la tête du serpent est composée de deux yeux rectangulaires.
+                                Ces yeux représentent un triangle blanc, qui représentent 1/4 de la texture, constitué d'un triangle noir de 3/5 de la taille du triangle blanc.
+                                Le triangle noir commence à 3/100 derrière le bord du triangle blanc, dans la direction du serpent, et au milieu de l'autre direction.
+                                Le triangle blanc commence à 1/10 pixels du bord de la texture, dans la direction du serpent, et à 3/25 de l'autre direction, du bord de leur côté respectif.
+                                Il y a une texture pour chacune des quatres directions possible (haut, bas, gauche, droite).
+                            </p>
+                        </div>
+                        <h3>
+                            Bouger le serpent
+                        </h3>
+                        <div>
+                            Le mouvement du serpent se fait via les flèches du clavier.
+                            Au commencement du jeu, la direction du serpent, qui ici, est un nombre entier, est de "-1", il ne bouge pas.
+                            Lorsque le joueur commence, la direction change selon la touche pressée (haut = 0, bas = 2, gauche = 1, droite = 3).
+                            Le serpent se déplace à un certain nombre de cases par secondes (par défaut, 3 cases par secondes).
+                            Quand il se déplace, les morceaux de serpent étant stockés dans une file, la tête du serpent avance (on ajoute un élement à la pile).
+                            Si le serpent grandit, le dernier morceau reste.
+                            Sinon, il est supprimé.
+                            Le jeu regarde l'objet situé à la nouvelle position du serpent.
+                            Si il s'agit de nourriture (case rouge), le serpent grandit.
+                            Sinon, sa taille ne change pas.
+                            Il y a toujours 3 objets "nourritures" sur la grille.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>
