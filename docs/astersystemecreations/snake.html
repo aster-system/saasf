@@ -159,6 +159,52 @@
                         </div>
                     </div>
                 </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Partie 3 : Game Over et GUI
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        Si le joueur perd, il faut qu'il le sache, et qu'il puisse recommencer la partie.
+                        Pour cela, on doit implémenter le Game Over, et une GUI qui s'affiche dés la mort du joueur.
+                        <h3>
+                            Game Over
+                        </h3>
+                        <div>
+                            <p>
+                                Quand le serpent se déplace, on peut savoir ce qui se situe devant lui.
+                                Si il se situe un bout du serpent, ou le bord de la zone de jeu, le joueur a perdu.
+                                Le serpent s'arrête de bouger.
+                                La texture de la tête du serpent change, les carrés sont remplacés par des croix.
+                                Ces croix ont exactement la même taille que le rectangle blanc, vu plus haut.
+                                Leur ligne mesure 7 pixels d'épaisseur, pour être visible malgré le retrécissement de l'image.
+                            </p>
+                            <p>
+                                Au même moment, un texte affichant "Vous avez perdu" s'affiche, juste en dessous de la zone de jeu.
+                                Il prend toute la largeur de la fenêtre, et 50 pixels de haut.
+                                Il n'est affiché que quand le joueur a perdu.
+                                Au dessous de lui, un bouton "Recommencer" est placé.
+                                Il prend toute la largeur de la fenêtre, et 50 pixels de haut.
+                                Il n'est affiché que quand le joueur a perdu.
+                                Si le joueur clique dessus, le serpent repart à la case départ, avec une taille de 1.
+                                Le texte et le bouton disparaissent, jusqu'au prochain Game Over.
+                            </p>
+                        </div>
+                        <h3>
+                            Le reste de la GUI
+                        </h3>
+                        <div>
+                            <p>
+                                Pour permettre au joueur de connaître sa progression, on a rajouter un texte "Score" en haut de la fenêtre.
+                                Il se situe à 1 pixel du haut de la fenêtre, prend toute la largeur de la fenêtre et 50 pixels de haut.
+                                Il affiche le texte "Score : x / y" où x est la taille du serpent moins 1 et y la taille de la zone de jeu en cases moins 1.
+                                Pour finir, on ajoute notre logo en bas de la fenêtre.
+                                Il se situe au milieu de la fenêtre, à 30 pixels du bas de la fenêtre.
+                                Il prend toute la largeur de la fenêtre, et 1 / 8 de la hauteur de la fenêtre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>
