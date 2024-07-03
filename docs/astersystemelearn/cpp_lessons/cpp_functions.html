@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                4. Les fonctions
+            </h1>
+            <div>
+                Pour l'instant, sur les trois paradigmes que nous avons présenté au premier cours de C++, seulement un a été étudié : la généricité.
+                Bien que nous ne l'avons pas entièrement étudié, il reste le seul que nous avons commencé à voir.
+                Aujourd'hui, nous allons commencer à voir un autre paradigme : la procéduralité.
+                Ce concept repose sur un autre, très important en informatique : le concept de fonctions.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Découper son programme
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Pour commencer, nous allons voir comment pouvons nous découper notre programme, et dans quel sens du terme nous allons le faire.
+                        <h3 id="part_A_a">
+                            a. Où sont situées les instructions ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Pour la première fois depuis le début de ce cours, <u>nous allons regarder un code assembleur complet</u>.
+                                Cependant, nous n'allons pas voir un code utilisant des boucles, conditions...
+                                Nous allons regarder un code très simple : le premier code que nous avons vu, simplifié :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int i = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Si nous mettons ce code dans un convertisseur assembleur (avec <a href="https://godbolt.org/">Compiler Explorer</a>), nous obtenons :
+                                <div class="code_sample">
+                                    main:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push    rbp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     rbp, rsp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     DWORD PTR [rbp-4], 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     eax, 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pop     rbp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ret</br>
+                                </div>
+                                Nous n'allons pas essayer de tout comprendre, mais seulement une petit chose.
+                                En effet, <u>toutes ces instructions sont écrites avec un système d'indentation</u>.
+                                Pourquoi ?
+                                Ici, <u>le mot non-indenté est "main", qui regroupe toutes les instructions suivantes</u>.
+                                <span class="important">Ce "main" est une fonction.
+                                Une fonction représente un ensemble d'instructions, qui ici (pour "main"), sont toutes celles qui sont indentées</span>.
+                                Comme vous pouvez l'avoir remarqué, <u>il s'agit du "main" écrit dans le programme C++</u>.
+                                <span class="important">Une instruction (C++ ou assembleur) ne peut pas se retrouver en dehors d'une fonction</span>.
+                            </p>
+                            <p id="part_A_a_2">
+                                Pour des raisons de santé mentale, je ne vais pas vous arroser d'assembleur pour continuer à vous expliquer les fonctions.
+                                <span class="important">Je vais donc vous montrer comment utiliser une fonction en pseudo-code</span>.
+                                Voici une façon de faire :
+                                <div class="code_sample">
+                                    fonction main:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher "Hello world !"</br>
+                                </div>
+                                On peut, si l'on veut, rajouter un "FIN FONCTION", de la même façon que l'on pouvait rajouter un "FIN SI" dans le dernier cours.
+                                Cependant, comme expliqué au dernier cours, je ne ferai pas comme ça.
+                                <u>De plus, nous perfectionnerons cette façon d'écrire dans la suite du cours</u>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
