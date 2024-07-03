@@ -205,6 +205,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Partie 4 : Gagner
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        Pour tester la mécanique quand le joueur gagne, on va implémenter une petite méthode de triche, pour gagner rapidement.
+                        <h3>
+                            Triche
+                        </h3>
+                        <div>
+                            <p>
+                                Si le joueur appuie sur "p", la triche se met en route.
+                                L'algorithme consiste en emprunter un chemin, de telle manière que le serpent ne croise aucun de ses bouts.
+                                Pour cela, il faut emprunter un chemin, qui soit topologiquement un cercle (une boucle).
+                                Des milliars de chemins de ce genre sont possibles, nous allons choisir un des plus simples.
+                                Nous allons cadriller le plan colonne par colonne, en utilisant la ligne d'en bas pour aller de la colonne droite à la colonne gauche.
+                                Si nous sommes dans une colonne pair, on monte.
+                                Sinon, on descend.
+                                Quand on arrive à l'avant dernière ligne, dans une colonne pair, on tourne à droite, pour passer sur colonne impair et commencer à monter.
+                                Cependant, si on est à la dernière colonne, on atteint la dernière ligne, et on tourne à gauche jusqu'à la première colonne.
+                                La première colonne étant 0 (pair), on se met donc à monter, et on recommence le tout, jusqu'à que le joueur gagne.
+                            </p>
+                        </div>
+                        <h3>
+                            Victoire
+                        </h3>
+                        <div>
+                            <p>
+                                Quand le joueur gagne, donc que le serpent fait la taille totale de la zone de jeu, il s'arrête de bouger.
+                                Un texte "Vous avez gagné" apparaît, exactement de la même manière que le texte "Vous avez perdu".
+                                Le bouton "Recommencer" apparaît aussi, pour recommencer la partie.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>
