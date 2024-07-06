@@ -68,11 +68,11 @@
                                 Si nous mettons ce code dans un convertisseur assembleur (avec <a href="https://godbolt.org/">Compiler Explorer</a>), nous obtenons :
                                 <div class="code_sample">
                                     main:</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push    rbp</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     rbp, rsp</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     DWORD PTR [rbp-4], 0</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov     eax, 0</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pop     rbp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push&nbsp;&nbsp;&nbsp;&nbsp;rbp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rbp, rsp</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD PTR [rbp-4], 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eax, 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rbp</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ret</br>
                                 </div>
                                 Nous n'allons pas essayer de tout comprendre, mais seulement une petit chose.
@@ -89,12 +89,90 @@
                                 <span class="important">Je vais donc vous montrer comment utiliser une fonction en pseudo-code</span>.
                                 Voici une façon de faire :
                                 <div class="code_sample">
-                                    fonction main:</br>
+                                    fonction main():</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher "Hello world !"</br>
                                 </div>
                                 On peut, si l'on veut, rajouter un "FIN FONCTION", de la même façon que l'on pouvait rajouter un "FIN SI" dans le dernier cours.
                                 Cependant, comme expliqué au dernier cours, je ne ferai pas comme ça.
                                 <u>De plus, nous perfectionnerons cette façon d'écrire dans la suite du cours</u>.
+                                Nous verrons à quoi servent les parenthèses plus tard.
+                            </p>
+                            <p id="part_A_a_3">
+                                Une chose, très importante, qu'il faut comprendre avec les fonctions, est comment les utiliser.
+                                En effet, <u>les fonctions ne peuvent pas s'exécuter toutes seules</u>.
+                                En effet, <span class="important">ce que nous avons vu plus tôt (en assembleur et en pseudo-code) ne sont que les définitions des fonctions "main", mais pas leur utilisation</span>.
+                                <span class="important">Pour les utiliser, et donc exécuter les instructions dans la définition, il faut utiliser une instruction nommée "un appel de fonction"</span>.
+                                On dit qu'on appelle une fonction.
+                                En assembleur, un appel de fonction se fait comme ça :
+                                <div class="code_sample">
+                                    call&nbsp;&nbsp;&nbsp;&nbsp;foo()
+                                </div>
+                                À noter que "foo" est un nom souvent utilisé pour désigner une fonction.
+                                En pseudo-code, c'est assez similaire :
+                                <div class="code_sample">
+                                    foo()
+                                </div>
+                                Il y a une exception : <u>la fonction "main" est appelée automatiquement par le système d'exploitation à l'exécution du programme</u>.
+                                Maintenant, nous pouvons définir est appeler des fonctions en pseudo-code.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Les paramètres de fonctions
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Quand on dit le mot fonction, on peut penser aux <a href="https://fr.wikipedia.org/wiki/Fonction_(math%C3%A9matiques)">fonctions mathématiques</a>.
+                                Cependant, <u>une fonction mathématique nécessite une donnée, souvent "x", pour générer un résultat</u>.
+                                En informatique, on peut le faire aussi, <u>et passer des données à une fonction pour que son comportement dépende des données</u>.
+                                <span class="important">Ces données passées à la fonction sont appelées des "paramètres de fonction"</span>.
+                                <span class="important">Il s'agit de variables (ou de constantes)</span>, exactement comme on les a vu dans le cours des variables.
+                                <u>Elles doivent être ajoutées entre les parenthèses, après le nom de la fonction</u>.
+                                Voici un exemple d'utilisation d'une fonction avec des paramètres :
+                                <div class="code_sample">
+                                    fonction afficher_addition(nombre nombre_1, nombre nombre_2):</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher nombre_1 + nombre_2</br></br>
+                                    fonction main():</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher_addition(254, 65)</br>
+                                </div>
+                                C'est à ça que servent les parenthèses.
+                            </p>
+                            <p id="part_A_b_2">
+                                La façon dont on passe les variables a des conséquences sur la façon dont elles seront utilisées dans la fonction.
+                                En effet, <span class="important">si on passe une variable comme dans l'exemple au-dessus, le contenu de la variable passée est copié dans le paramètre</span>.
+                                Donc, <u>la modification du paramètre n'influe pas la variable passée</u>.
+                                Par contre, <span class="important">si le paramètre est une référence à la variable passée, alors la valeur de la variable passée change en même que temps celle du paramètre</span>, puisque c'est une référence.
+                                Voici un exemple :
+                                <div class="code_sample">
+                                    fonction effectuer_addition(reference nombre nombre_1, nombre nombre_2):</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mettre nombre_1 à nombre_1 + nombre_2</br></br>
+                                    fonction main():</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mettre nombre_passe à 15</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;effectuer_addition(nombre_passe, 65)</br>
+                                </div>
+                                Ici, la valeur de nombre_passe dans "main" augmentera de 65.
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Obtenir une valeur d'une fonction
+                        </h3>
+                        <div>
+                            <p id="part_A_c_1">
+                                Si une fonction peut recevoir des données, <u>elle peut aussi en produire, et permettre de l'utiliser dans une autre fonction</u>.
+                                <span class="important">Pour les fonctions, les données produites sont appelées les retours de fonction, et l'obstention de ces données est appelé un retour</span>.
+                                <span class="important">Cette valeur peut être utilisé via un simple appel à la fonction (elle est, bien évidement, utilisée là où la fonction est appelée), comme n'importe quelle variable classique</span>.
+                                Bien que la fonction puisse retourner de plein de façons possibles, <u>on va garder une démarche proche du C++ pour procéder</u>.
+                                Comme le C++ utilise un typage statique, <span class="important">nous allons dire qu'un seul type peut être renvoyé par la fonction</span>.
+                                Dans notre pseudo-code, nous allons remplacer le mot "fonction" par le nom de ce type, par exemple :
+                                <div class="code_sample">
+                                    nombre effectuer_addition(nombre nombre_1, nombre nombre_2):</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retourner nombre_1 + nombre_2</br></br>
+                                    nombre main():</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mettre nombre_passe à effectuer_addition(147, 65)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher nombre_passe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retourner 0
+                                </div>
+                                <span class="important">La valeur après l'instruction "retourner" est la valeur retournée par la fonction</span>.
+                                D'ailleurs, la fonction "main" est de type "nombre" et retourne 0, et nous verrons pourquoi après.
                             </p>
                         </div>
                     </div>
