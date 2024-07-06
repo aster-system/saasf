@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                Les systèmes d'exploitations
+            </h1>
+            <div>
+                Pour utiliser correctement le plein potentiel d'un ordinateur, il existe un logiciel qui facilite la tâche : le système d'exploitation.
+                Cependant, c'est un mot un peu fourre-tout, qui peut être lié à beaucoup de choses, que nous allons découvrir ici.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Qu'est ce qu'est un système d'exploitation ?
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <p>
+                            <span class="important"><a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_d'exploitation" target="_blank">Un système d'exploitation</a> est, par définition, une suite de programme permettant d'utiliser un ordinateur.</span>
+                            En effet, ce n'est pas un seul programme, mais un ensemble de programmes permettant l'utilsation d'un ordinateur.
+                            <u>Il agit à plusieurs niveaux de l'ordinateur</u>, que ce soit très proche de l'hardware, comme proche de l'utilisateur.
+                        </p>
+                        <p>
+                            <u>Le premier programme lancé est un programme appelé le bootloader (ou chargeur d'amorçage en français)</u>.
+                            <span class="important">Le bootloader permet d'amorcer le système d'exploitation pour qu'il puisse démarer</span>.
+                            Il est lancé par le logiciel le plus bas niveau de l'ordinateur : le BIOS.
+                            <u>Le BIOS peut savoir où se situe le bootloader sur le disque grâce à un très précis système de cartographie du disque</u>.
+                            <span class="important">Un des plus célèbres bootloader est le bootloader possible pour Linux : <a href="https://doc.ubuntu-fr.org/grub-pc">GRUB</a></span>.
+                        </p>
+                        <p>
+                            <u>Le logiciel venant juste après est le kernel (ou noyau du système d'exploitation)</u>.
+                            <span class="important">Le kernel permet de faire l'interface entre les logiciels de l'ordinateur et l'hardware</span>.
+                            C'est lui qui gère en vrac : <u>la gestion de la mémoire, le travail du processeur, les interfaces IN / OUT...</u>
+                            C'est lui qui rend l'ordinateur utilisable.
+                            Il est cependant très complexe, et doit gérer une quantité aberrante de choses.
+                        </p>
+                        <p>
+                            <u>Finalement, viens au dessus l'interface utilisateur</u>.
+                            <span class="important">Elle permet l'utilisation de l'ordinateur pas l'utilisateur</span>.
+                            Plein de façons de faire existent, comme <a href="https://fr.wikipedia.org/wiki/Unix">Unix</a> (avec des lignes de commandes, dans un bien connu shell).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
