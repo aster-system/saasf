@@ -137,6 +137,22 @@
                                 C'est à ça que servent les parenthèses.
                             </p>
                             <p id="part_A_b_2">
+                                Cependant, dans certains cas, une valeur de paramètre peut être tellement redondante que devoir la mettre à chaque appel de la fonction peut être ennuyant.
+                                <u>Heuresement, vous pouvez spécifier une valeur par défaut à un paramètre</u>.
+                                <span class="important">Une valeur par défaut d'un paramètre est utilisé si le paramètre n'a pas de valeur lors de l'appel de la fonction</span>.
+                                Pour cela, il suffit simple de rajouter "= valeur" après la déclaration entre parenthèse, comme ça :
+                                <div class="code_sample">
+                                    // La valeur par défaut de "exposant" sera de 2</br>
+                                    fonction effectuer_racine(nombre nombre, nombre exposant = 2):</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retourner racine exposant de nombre</br></br>
+                                    fonction main():</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher(effectuer_racine(9)) // Exposant sera la valeur par défaut (2)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher(effectuer_racine(27, 3)) // Exposant sera la valeur entre parenthèse (3)</br>
+                                </div>
+                                Cependant, <span class="important">les paramètres prenant des valeurs par défaut doivent obligatoirement se trouver après ceux n'en prenant pas</span>.
+                                De plus, si vous mettez plusieurs paramètres avec des valeurs par défaut dans une même fonction, il vous faut spécier les valeurs de tous les paramètres AVANT le dernier paramètre par défaut auquel vous attribué une valeur (si vous en attribuez une à un quelconque paramètre par défaut, sinon ce n'est pas nécessaire).
+                            </p>
+                            <p id="part_A_b_3">
                                 La façon dont on passe les variables a des conséquences sur la façon dont elles seront utilisées dans la fonction.
                                 En effet, <span class="important">si on passe une variable comme dans l'exemple au-dessus, le contenu de la variable passée est copié dans le paramètre</span>.
                                 Donc, <u>la modification du paramètre n'influe pas la variable passée</u>.
@@ -173,6 +189,96 @@
                                 </div>
                                 <span class="important">La valeur après l'instruction "retourner" est la valeur retournée par la fonction</span>.
                                 D'ailleurs, la fonction "main" est de type "nombre" et retourne 0, et nous verrons pourquoi après.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Les fonctions en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Il est temps d'appliquer tout ce que nous avons vu au C++.
+                        Effectivement, le C++ sans fonction, c'est comme un ordinateur sans carte mère : inutile.
+                        <h3 id="part_B_a">
+                            a. Définir une fonction
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                La base de tout cela est, bien évidemment, de définir une fonction.
+                                J'ai choisi une syntaxe pseudo-code assez proche de ce que propose le C++.
+                                En effet, <span class="important">en C++, une fonction se définit comme ça :</span>
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    type_de_renvoi nom(type_parametre parametre) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instructions;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return variable;</br>
+                                    }
+                                </div>
+                                Par exemple, pour notre exemple effectuer_addition :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "effectuer_addition" renvoyant un "int", et prenant 2 "int" en paramètre</br>
+                                    int effectuer_addition(int nombre_1, int nombre_2) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return nombre_1 + nombre_2;</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; effectuer_addition(154, 789) &lt;&lt; std::endl; // Affiche 943</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_a_2">
+                                <span class="important">La valeur retournée sera la valeur situé après "return"</span>.
+                                Dés que la valeur est retournée, <u>la fonction s'arrête</u>.
+                                Cependant, <span class="important">une fonction peut avoir plusieurs "return" dans sa définition</span>.
+                                Dans ce cas là, il est conseillé d'utiliser une condition, comme ça :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "effectuer_division" renvoyant un "int", et prenant 2 "int" en paramètre</br>
+                                    int effectuer_division(int dividende, int diviseur) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(diviseur == 0) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// N'arrivera pas si diviseur == 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return dividende / diviseur;</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; effectuer_division(154, 0) &lt;&lt; std::endl; // Affiche 0</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                On peut aussi l'utiliser sans condition, mais il faut faire attention à bien savoir ce que l'on fait, pour éviter les comportements imprévus.
+                            </p>
+                            <p id="part_B_a_3">
+                                Pour attribuer des valeurs par défaut aux paramètres <span class="important">la syntaxe est la même qu'en pseudo-code</span>.
+                                Voici un très simple exemple :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "indicatif_telephone" renvoyant un "int", et prenant 1 "string" en paramètre, de valeur par défaut "France"</br>
+                                    int indicatif_telephone(string pays = "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pays == "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 33;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Russie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 7;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Turquie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 90;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone() &lt;&lt; std::endl; // Affiche 33</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone("Russie") &lt;&lt; std::endl; // Affiche 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
                             </p>
                         </div>
                     </div>
