@@ -189,6 +189,7 @@
                                 </div>
                                 <span class="important">La valeur après l'instruction "retourner" est la valeur retournée par la fonction</span>.
                                 D'ailleurs, la fonction "main" est de type "nombre" et retourne 0, et nous verrons pourquoi après.
+                                Plusieurs "retourner" peuvent apparaître dans la fonction, même si l'utilisation de conditions est conseillé pour bien utiliser le bon "retourner".
                             </p>
                         </div>
                     </div>
@@ -234,7 +235,7 @@
                             <p id="part_B_a_2">
                                 <span class="important">La valeur retournée sera la valeur situé après "return"</span>.
                                 Dés que la valeur est retournée, <u>la fonction s'arrête</u>.
-                                Cependant, <span class="important">une fonction peut avoir plusieurs "return" dans sa définition</span>.
+                                Cependant, comme en pseudo-code, <span class="important">une fonction peut avoir plusieurs "return" dans sa définition</span>.
                                 Dans ce cas là, il est conseillé d'utiliser une condition, comme ça :
                                 <div class="code_sample">
                                     #include &lt;iostream&gt;</br></br>
@@ -258,7 +259,8 @@
                                 Pour attribuer des valeurs par défaut aux paramètres <span class="important">la syntaxe est la même qu'en pseudo-code</span>.
                                 Voici un très simple exemple :
                                 <div class="code_sample">
-                                    #include &lt;iostream&gt;</br></br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
                                     using namespace std;</br></br>
                                     // Fonction "indicatif_telephone" renvoyant un "int", et prenant 1 "string" en paramètre, de valeur par défaut "France"</br>
                                     int indicatif_telephone(string pays = "France") {</br>
@@ -279,6 +281,190 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
                                     }
                                 </div>
+                            </p>
+                            <p id="part_B_a_4">
+                                <u>Si une fonction qui doit retourner un type ne retourne rien, des comportements inattendus peuvent apparaître</u>, de l'ignorance de la valeur avec le compiler MSVC, au crash avec le compiler GCC.
+                                Heuresement, <span class="important">il existe un type pour les fonctions ne retournant rien : void</span>.
+                                Dans ce cas, <u>le "return" peut être utilisé pour sortir de la fonction, mais aucune valeur n'est obstensible via cette dernière</u>.
+                                Cependant, <u>vous pouvez aussi ne pas mettre de "return" du tout, le compiler s'en chargera</u>.
+                                Voici un exemple inspiré des exemples précédents :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "indicatif_telephone" ne renvoyant rien, et prenant 1 "string" en paramètre, de valeur par défaut "France"</br>
+                                    void afficher_indicatif_telephone(string pays = "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pays == "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; std::cout &lt;&lt; 33 &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Russie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; std::cout &lt;&lt; 7 &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Turquie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; std::cout &lt;&lt; 90 &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Inconnu" &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher_indicatif_telephone(); // Affiche 33</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afficher_indicatif_telephone("Russie"); // Affiche 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Utiliser proprement une fonction
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                Savoir écrire des fonctions, c'est bien.
+                                <span class="important">Savoir les utiliser, c'est encore mieux</span>.
+                                En C++, <u>il existe pas mal de petits conseils pour pouvoir rendre ses fonctions les plus performantes possibles</u>.
+                            </p>
+                            <p id="part_B_b_2">
+                                L'avantage de séparer le code en fonction est de <u>pouvoir facilement modifier ce code après, sans grandes difficultés</u>.
+                                On peut donc <span class="important">optimiser le code autant que l'on veut, facilement</span>.
+                                Une opération pouvant prendre beaucoup de temps lors de l'appel d'une fonction est <span class="important">la copie des paramètres nécessaires</span>.
+                                En effet, si nous passons les paramètres comme vu en haut, ils seront juste copiés.
+                                D'ailleurs, pour mesurer l'optimisation d'un algorithme, on doit utiliser sa <a href="https://fr.wikipedia.org/wiki/Analyse_de_la_complexit%C3%A9_des_algorithmes">complexité</a>.
+                                Cependant, <span class="important">vous pouvez aussi utiliser en paramètre une référence de variable, pour éviter la phase de copie</span>.
+                                Dans ce cas là, <u>la variable ne sera pas copiée, mais référencée, ce qui peut faire gagner beaucoup de temps pour des grosses variables</u>.
+                                Voici un exemple pour la fonction vue juste au dessus :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "indicatif_telephone" renvoyant un "int", et prenant 1 "string" en paramètre, de valeur par défaut "France"</br>
+                                    int indicatif_telephone(string& pays) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pays == "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 33;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Russie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 7;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Turquie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 90;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string pays = "France";</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone(pays) &lt;&lt; std::endl; // Affiche 33</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pays = "Russie";</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone(pays) &lt;&lt; std::endl; // Affiche 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Dans ce cas là, seule des variables seront utilisables, et pas des valeurs littérales.
+                                De plus, <u>la variable référencée peut être modifiée par la fonction</u>.
+                                Si vous voulez à tout prix éviter ça, vous devez déclarer la référence comme constante :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "indicatif_telephone" renvoyant un "int", et prenant 1 "string" en paramètre, de valeur par défaut "France"</br>
+                                    int indicatif_telephone(const string& pays) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pays == "France") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 33;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Russie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 7;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(pays == "Turquie") {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 90;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string pays = "France";</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone(pays) &lt;&lt; std::endl; // Affiche 33</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pays = "Russie";</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; indicatif_telephone(pays) &lt;&lt; std::endl; // Affiche 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_b_3">
+                                Vous pouvez aussi utiliser des fonctions en elles même comme une boucle.
+                                <span class="important">Ce procédé s'appelle la récursion</span>.
+                                <u>Il s'agit d'une fonction qui s'appelle elle même</u>.
+                                <u>Il faut cependant faire extrêmement attention à ce que la fonction ne s'appelle pas à l'infini</u>, sinon le programme freeze.
+                                Le meilleur moyen est <span class="important">d'utiliser une condition où la fonction n'est plus appelée, nommée une condition de sortie</span>.
+                                Voici un exemple d'utilisation avec la fonction effectuer_multiplication :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    // Fonction "effectuer_multiplication" renvoyant un "int", et prenant 2 "unsigned int" en paramètre</br>
+                                    unsigned int effectuer_multiplication(unsigned int facteur_1, unsigned int facteur_2) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Condition de sortie</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(facteur_2 == 0) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// On retourne la somme du premier facteur et de la multiplication du premier facteur par le deuxième facteur - 1</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return facteur_1 + effectuer_multiplication(facteur_1, facteur_2 - 1);</br>
+                                    }</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; effectuer_multiplication(154, 8) &lt;&lt; std::endl; // Affiche 1232</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_b_4">
+                                Pour en finir avec tout ça, <span class="important">nous allons parler d'une fonction que nous avons déjà vu : la fonction "main"</span>.
+                                Pour rappel, <u>il s'agit de la fonction appelée automatiquement par le système d'exploitation lors du lancement du programme</u>.
+                                <u>Elle est de type "int", donc nombre entier signé</u>.
+                                En effet, <span class="important">le retour de la fonction "main" est le retour du programme entier</span>.
+                                En général, 0 veut dire "exécution normale".
+                                <u>Ce nombre retourné est le nombre affiché à la fin de la console du programme exécuté</u>.
+                                De plus, <u>la fonction "main" peut aussi prendre deux paramètres, passés, encore une fois, par le système d'exploitation</u>.
+                                <span class="important">Ces deux paramètres sont un "int", nommé par convention "argc", et un tableau de "char*", nommé par convention "argv"</span>.
+                                Nous verrons comment utiliser les tableaux dans les prochains cours.
+                                <u>Ces deux paramètres représentent les arguments passés au programme par le système d'exploitation</u>.
+                                <span class="important">Ces arguments représentent les mêmes que les arguments passés lors de l'exécution du programme via la ligne de commande, c'est pour ça qu'ils sont en format "char*" (texte bas niveau)</span>.
+                                À noter que quel que soit la façon de lancer le programme, il y aura au moins un argument : le chemin d'accés du programme exécuté.
+                            </p>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. Les méthodes
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                Pour finir les fonctions, nous allons voir un type de fonction extrêmement important à connaître, bien que nous n'avons pas encore les outils pour les comprendre totalement : les méthodes.
+                            </p>
+                            <p id="part_B_c_2">
+                                Quand vous créez une variable, quel quelle soit, <u>elle obéit à ce que son type lui permet de faire</u>, comme nous l'avons vu au premier cours.
+                                <span class="important">Certains types permettent d'utiliser des fonctions directement sur la variable</span>.
+                                <span class="important">Ces fonctions sont nommés des méthodes</span>.
+                                C'est un moyen de se passer de l'utilisation de seulement des références pour modifier une variable via une fonction.
+                                En général, <u>elles sont définies en même temps que le type, donc pas besoin de le faire nous même</u>.
+                                Pour les utiliser, <u>il faut utiliser un opérateur spécial avec la variable : l'opérateur d'accès aux membres de la variables, qui s'écrit "."</u>.
+                                Nous définirons le mot "membre" dans un prochaine cours.
+                                Malheuresement, <u>les types fondamentaux ne peuvent pas être utilisés via des membres</u>.
+                                Heuresement, les autres, comme les "string", peuvent.
+                                Voici un exemple d'utilisation de l'opérateur, avec un "string" et une de ses méthodes "size()" :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string pays = "France".</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; pays.size() &lt;&lt; std::endl; // Affiche 6</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                La méthode "size()" utilisé sur "pays" retourne la taille du texte contenu dans "pays", qui fait 6 caractères de long.
+                                <u>Certaines méthodes retournent des valeurs, d'autres modifient la variable, via des paramètres que vous devez passer, ou sans...</u>
+                                Les possibilités sont infinies.
+                            </p>
+                            <p id="part_B_c_3">
+                                En général, <span class="important">toutes les méthodes utilisables dans un type sont présentées dans un texte nommé "la documentation du type"</span>.
+                                Par exemple, toutes les méthodes utilisables dans "string" sont présentes <a href="https://cplusplus.com/reference/string/string/" target="_blank">sur ce site web</a>.
+                                Les opérateurs peuvent aussi être considérés comme des méthodes.
+                                Comme nous n'avons pas vu les classes pour le moment, certains termes peuvent rester abstraits.
+                                Essayez de vous concentrer sur ce que vous savez déjà, pour pouvoir faire de grandes choses !
                             </p>
                         </div>
                     </div>
