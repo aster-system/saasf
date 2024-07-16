@@ -3,7 +3,7 @@
     <head>
         <link href="../../styles/base.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SAASF - Hub</title>
+        <title>SAASF - Informatique</title>
 
         <!--Connect to google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,6 +69,35 @@
                             <u>Finalement, viens au dessus l'interface utilisateur</u>.
                             <span class="important">Elle permet l'utilisation de l'ordinateur pas l'utilisateur</span>.
                             Plein de façons de faire existent, comme <a href="https://fr.wikipedia.org/wiki/Unix">Unix</a> (avec des lignes de commandes, dans un bien connu shell).
+                        </p>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Les différentes tâches du Kernel
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <p>
+                            Comme nous l'avons vu plus haut, <span class="important">le kernel est l'interface entre les logiciels et l'hardware</span>.
+                            Il doit donc permettre de faire une liaison des deux, <u>et doic donc adopter l'extrême rigueur de l'hardware, comme l'adaptabilité des logiciels</u>.
+                            Pour cela, il doit pouvoir réaliser plusieurs tâches, décrites en partie ici.
+                        </p>
+                        <h3>
+                            Le stockage de données
+                        </h3>
+                        <p>
+                            Le kernel permet de facilement <span class="important">gérer et stocker des données via des périphériques de stockage, interne ou externe</span>.
+                            Pour cela, premièrement, <u>il décompose chaque périphérique en partition de stockage</u>.
+                            Pour <span class="important">manipuler les données dans ces partitions, il utilise des normes strictes nommées les <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_fichiers">systèmes de fichiers</a></span>.
+                            Elles <u>permettent d'oganiser proprement les données, stockées dans des groupes nommés "fichiers"</u>, pour rendre la partition utilisable.
+                            Il y a pas mal d'exemples de systèmes de fichiers célèbres, comme <a href="https://fr.wikipedia.org/wiki/NTFS" target="_blank">NTFS</a> de Microsoft, ou <a href="https://fr.wikipedia.org/wiki/FAT32" target="_blank">FAT32</a>.
+                            Pour créer un système de fichiers, il existe certains standards permettant de rendre les systèmes cross-plateforme, comme <a href="https://fr.wikipedia.org/wiki/POSIX">POSIX</a>.
+                        </p>
+                        <p>
+                            Cela représente la partie cachée de l'iceberg.
+                            Cependant, <u>un utilisateur classique n'aura jamais besoin de tout ça</u>.
+                            Le système est grandement simplifié pour lui, <span class="important">avec un système de stockage par fichiers, dossiers (pouvant contenir des fichiers) et chemins d'accés</span>.
                         </p>
                     </div>
                 </div>
