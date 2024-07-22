@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                5. Algorithmes et structures de données en C++
+            </h1>
+            <div>
+                Si vous regardez des "Memes" de programmation de temps à autre, vous pourriez en voir un passer : "Learning programmation / Learning data structures and algorithms".
+                En effet, cette section est souvent désignée par les développeurs comme une des parties les plus ennuyantes de leur apprentissage du développement.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Les structures de données en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Il est difficile de stocker des données... sans moyen de stocker des données ¯\_(ツ)_/¯.
+                        Pour cela, que ce soit dans n'importe quel langage de programmation, il existe un moyen de faire ça facilement : les structures de données.
+                        <h3 id="part_A_a">
+                            a. Qu'est ce qu'une structure de données ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                <span class="important">Une structure de données est une liste de normes, permettant de correctement structurer et stocker des données</span>.
+                                Ces normes régissent en général <u>la façon d'accéder (ou de ne pas accéder) aux données stockées, la façon permettant d'en rajouter, l'optimisation bas-niveau du code...</u>
+                            </p>
+                            <p id="part_A_a_2">
+                                <u>Il existe pas mal de structures célèbres, comme, en vrac</u> :
+                                <ul>
+                                    <li>
+                                        Le tableau dynamique, très modulable mais assez lent
+                                    </li>
+                                    <li>
+                                        Le tableau statique, très rapide mais peu modulable
+                                    </li>
+                                    <li>
+                                        La liste, extrêmement moduble mais assez lente
+                                    </li>
+                                    <li>
+                                        L'arbre binaire/pas binaire, accés spécial des données, sous forme de  noeuds itératifs
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        B. Les algorithmes en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Utiliser les structures de données en C++ sans algorithmes, c'est comme utiliser une voiture sans moteur : completement inutile.
+                        Il faut quand même bien comprendre la notion d'algorithme dans le cas présent, pour mieux les utiliser et mieux les appréhender. 
+                        <h3 id="part_B_a">
+                            a. Qu'est ce qu'est un algorithme ?
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                Nous avons déjà parlé d'algorithmes sur SAASF, <a href="../it/algorithms.html">dans ce cours là</a>.
+                                Cependant, il est accés grand public, et non personne apprenant le C++.
+                                La définition d'algorithme que nous allons utiliser est <span class="important">une suite d'action permettant d'aboutir à une tâche</span>.
+                                <u>Cela est très proche des définitions de la programmation</u> que nous avons établi au premier cours de C++.
+                            </p>
+                            <p id="part_B_a_2">
+                                Si vous devez traiter une grande quantité de données, un algorithme sera efficace si <u>il permet de réaliser la tâche qu'il doit résoudre rapidement</u>.
+                                Pour cela, il faut passer du temps pour l'optimiser.
+                                Cependant, pas tout le monde n'a que ça à faire, mais heuresement, <span class="important">il existe des algorithmes pré-définis et célèbres pour parvenir efficacement à la tâche nécessaire</span>.
+                                Malheuresement, <u>ils sont souvent fournis sous la forme de pseudo-code</u>, ce qui est mieux que rien, mais vous demande de l'implémenter vous même (bien que, en soit, ce n'est pas une si mauvaise chose pour progresser en programmation, bien que pas tout le monde n'est le temps pour ça).
+                            </p>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Les algorithmes par défaut en C++
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                En C++, le problème de l'implémentation ne se pose pas vraiment, <u>puis ce qu'il existe un moyen d'accéder à une grande quantité d'algorithmes</u>, sans ressources externes.
+                                En effet, <span class="important">il existe un moyen de pouvoir utiliser pleins d'algorithmes facilement, grâce à une simple ligne de code au début du programme</span> :
+                                <div class="code_sample">
+                                    // Ligne à ajouter</br>
+                                    #include &lt;algorithm&gt;</br></br>
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int i = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                L'ajout du morceau de code pour "&lt;algorithm&gt;" donne accés à une aberrante quantité de choses.
+                                La documentation pour savoir comment l'utiliser <a href="https://en.cppreference.com/w/cpp/header/algorithm" target="_blank">se trouve ici</a>.
+                                En général, ce code contient des fonctions avec des paramètres références, <a href="cpp_functions.html">vues au dernier cours</a>.
+                                Il est aussi très axé structures de données.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
