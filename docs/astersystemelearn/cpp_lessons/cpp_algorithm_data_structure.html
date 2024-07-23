@@ -66,12 +66,48 @@
                                         Le tableau statique, très rapide mais peu modulable
                                     </li>
                                     <li>
-                                        La liste, extrêmement moduble mais assez lente
+                                        Le dictionnaire, très pratique mais assez lent
                                     </li>
                                     <li>
                                         L'arbre binaire/pas binaire, accés spécial des données, sous forme de  noeuds itératifs
                                     </li>
+                                    <li>
+                                        D'autres sombres structures...
+                                    </li>
                                 </ul>
+                                Pour des raisons de clareté et d'efficacité, <span class="important">nous n'allons parler que des structures existantes en C++</span>.
+                            </p>
+                            <p id="part_A_a_3">
+                                <span class="important">La structure la plus bas-niveau en informatique est le tableau statique</span>.
+                                Il s'agit <span class="important">d'un ensemble de données, qui comporte toujours le même nombre de données, défini à la création du tableau</span>.
+                                <span class="important">Chaque donnée est accessible via un indice (ou index en anglais), représentant la position de la donnée, EN SACHANT QUE LA PREMIÈRE DONNÉES EST ACCESSIBLE PAR 0 ET PAS 1</span>.
+                                En général (si le langage utilisé est bien optimisé), <u>les données sont disposées dans la mémoire les unes à côtés des autres</u>.
+                                <u>Il a l'avantage d'être extrêmement rapide</u>, puis ce que l'on peut savoir précisément où se trouve la donnée avec un simple calcul.
+                                Cependant, <span class="important">on ne peut pas lui rajouter de nouvelles données, mais seulement modifier celles déjà présentes</span>.
+                            </p>
+                            <p id="part_A_a_4">
+                                <span class="important">Une autre structure très importante en informatique est le tableau dynamique</span>.
+                                Il s'agit <span class="important">d'un ensemble de données, avec un nombre de données stockés variable dans le temps</span>.
+                                <u>On peut donc rajouter et enlever des données, ou bien modifier celles déjà présentes</u>.
+                                On peut aussi avoir des informations générales sur le tableau, comme <u>le nombre de données ou certaines informations sur les valeurs stockées</u>.
+                                <u>On peut aussi y appliquer des algorithmes</u>, que nous verrons plus tard.
+                                Il existe plusieurs formes de tableaux dynamiques : <u>pile (ou stack en anglais), file (ou queue en anglais), liste (ou list en anglais)</u>...
+                            </p>
+                            <p id="part_A_a_5">
+                                <span class="important">Une autre structure très pratique dans plein de cas est le dictionnaire (ou tableau associatif, en terme plus précis)</span>.
+                                C'est une structure similaire au tableau dynamique, sauf que <span class="important">l'indice d'accés à une donnée peut être n'importe quoi, et pas juste sa position dans le tableau</span>.
+                                Par exemple, l'indice peut être un texte, comme un pseudonyme, pour contenir une certaine donnée accessible via un pseudonyme.
+                                Dans ce genre de cas (assez récurents, disons le), <u>cette structure est extrêmement efficace</u>.
+                                Cependant, la consulter autrement que via cette indice est compliqué, <u>ce qui peut la rendre assez peu intuitive dans certains cas</u>.
+                            </p>
+                            <p id="part_A_a_6">
+                                Nous pouvons présenter plein d'autres structures de données, mais ça ne serait pas très intéressant d'en présenter des milliards, pour en présenter des milliards.
+                                <u>Nous allons donc juste généraliser ce terme</u>.
+                                Pour rappel, <u>une structure de données est un moyen de stocker des données</u>.
+                                <span class="important">Il s'agit donc de plusieurs façon de faire, comme l'accés (via la position de la donnée, son indice...), la façon de modifier (ou de ne pas modifier) la structure, et les actions réalisables avec la structure en entier</span>.
+                                Il est aussi important de comprendre <u>pourquoi la structure marche comme ça, pour savoir quand et comment l'utiliser</u>.
+                                En tout cas, si cela vous intéresse, <a href="https://fr.wikipedia.org/wiki/Structure_de_donn%C3%A9es" target="_blank">vous trouverez ici une liste de structures de données, plus ou moins différentes que les structures très basiques que nous avons vu plus tôt</a>.
+                                <span class="important">Vous pouvez même créer les votres si besoins, en définissant vos propres règles</span>.
                             </p>
                         </div>
                     </div>
