@@ -110,6 +110,184 @@
                                 <span class="important">Vous pouvez même créer les votres si besoins, en définissant vos propres règles</span>.
                             </p>
                         </div>
+                        <h3 id="part_A_b">
+                            b. Les structure de données en C++
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Comme dans tous les langages, le C++ utilise des structures de données.
+                                Cependant, <u>une seule est considérée comme un type primaire en C++</u>.
+                                <span class="important">C'est le tableau statique</span>.
+                                <u>Il permet de contenir un nombre donné de données, d'un certain type</u>.
+                                Pour en définir une, il faut utiliser cette syntaxe, avec les crochets :
+                                <div class="code_sample">
+                                    type nom_du_tableau[taille_du_tableau];
+                                </div>
+                                Par exemple :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int tableau[5]; // Créer un tableau de nombre entier "int" contenant 5 éléments</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                <u>Les valeurs par défaut dans un tableau comme ça sont en général aléatoires</u>, si elles n'ont pas été modifiées après la création du tableau.
+                                Cependant, <u>on peut y attribuer des valeurs à la création du tableau</u>, comme ça :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int tableau[5] = {1, 2, 3, 5, 7}; // Créer un tableau de nombre entier "int" contenant les éléments 1, 2, 3, 5 et 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                <span class="important">Pour accéder à un élément du tableau, il faut utiliser sur le tableau un opérateur assez spécial : l'opérateur d'indice, utilisant les crochets</span>.
+                                <u>Chaque élément du tableau s'obient par sa position dans le tableau</u>.
+                                Une chose très importante, <u>LE PREMIER ÉLÉMENT DE LA LISTE S'OBTIENT AVEC LE CHIFFRE "0", et donc, le dernier s'obtient avec le chiffre taille_du_tableau - 1</u>.
+                                On peut l'utiliser de cette manière :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int tableau[5] = {1, 2, 3, 5, 7}; // Créer un tableau de nombre entier "int" contenant les éléments 1, 2, 3, 5 et 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; tableau[0] &lt;&lt; " " &lt;&lt; tableau[3] &lt;&lt; endl; // Affiche le premier et le 4ème élément du tableau, séparé<source> par un espace</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                D'ailleurs, <u>cette opérateur retourne une référence vers l'endroit où la donnée est stockée</u>.
+                                <span class="important">On peut donc la modifier directement avec cet opérateur</span>, comme ça :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int tableau[5] = {1, 2, 3, 5, 7}; // Créer un tableau de nombre entier "int" contenant les éléments 1, 2, 3, 5 et 7</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tableau[1] = 25; // Met la valeur du deuxième élément du tableau à 25</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; tableau[0] &lt;&lt; " " &lt;&lt; tableau[3] &lt;&lt; endl; // Affiche le premier et le 4ème élément du tableau, séparé<source> par un espace</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Si vous spécifier une références invalide (trop grand, négative...), <u>des comportements inatendus peuvent apparaître et faire disfonctionner le programme</u>.
+                                D'autres choses sont possibles avec ce tableaux, mais sans plus de connaissances en C++, nous ne pourrons les aborder pleinement.
+                                <u>Nous y reviendrons donc dans les prochains cours</u>.
+                            </p>
+                            <p id="part_A_b_2">
+                                <u>Toutes les autres structures ne sont pas définies par défaut en C++</u>.
+                                Il faudra donc utiliser du code avec "include", comme nous l'avons vu plus tôt.
+                                <span class="important">Le tableau dynamique est aussi présent en C++, sous le nom de "vector", que nous appellerons vecteur dans la suite du cours</span>.
+                                <u>Il utilise une mécanique que nous n'avons pas vu pour l'instant pour savoir quel type stocker : les templates</u>.
+                                Voici comment définir un vecteur :
+                                <div class="code_sample">
+                                    // Ligne à ajouter pour utiliser des vecteurs</br>
+                                    #include &lt;vector&gt;</br>
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau; // Créer un vecteur de nombre entier "int" vide</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau_2(5, 1); // Créer un autre vecteur de nombre entier "int" contenant 5 fois le nombre 1</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau_3({1, 10, 100}); // Créer un autre vecteur de nombre entier "int" contenant 1, 10 et 100</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; copie(tableau_2); // Créer un autre vecteur, une copie de tableau 2</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Voici quatres façons pratiques de définir des vecteurs.
+                                <u>Le système de template est le système permettant de spécifier un type, entre "&lt; &gt;", pour pouvoir créer un vecteur de n'importe quel type</u>.
+                                Appart ça, <u>ils s'utilisent exactement comme le tableau statique (opérateur "[]"...)</u>.
+                                Il offre cependant plusieurs possibilités supplémentaires intéressantes.
+                                Par exemple, <span class="important">comme le tableau est dynamique, vous pouvez y ajouter un élément avec la méthode (concept vu au dernier cours) "push_back"</span> :
+                                <div class="code_sample">
+                                    // Rajoute 78 au tableau</br>
+                                    tableau.push_back(78);
+                                </div>
+                                <span class="important">Vous pouvez aussi supprimer le dernier élement du tableau (avec l'indice le plus élevé) avec "pop_back"</span> :
+                                <div class="code_sample">
+                                    // Supprime le dernier élément du tableau</br>
+                                    tableau.pop_back();
+                                </div>
+                                <u>Vous pouvez aussi avoir la taille du tableau avec la méthode "size()" :</u>
+                                <div class="code_sample">
+                                    // Affiche la taille du tableau</br>
+                                    cout &lt;&lt; tableau.size() &lt;&lt; endl;
+                                </div>
+                                <u>Vous pouvez aussi vider le tableau avec la méthode "clear()" :</u>
+                                <div class="code_sample">
+                                    // Vide complétement le tableau</br>
+                                    tableau.clear();</br>
+                                    cout &lt;&lt; tableau.size() &lt;&lt; endl; // Affiche 0
+                                </div>
+                                Plein d'autres choses sont possibles avec ce type, mais ce serait trop long de tout présenter un par un.
+                                La documentation de ce type <a href="https://en.cppreference.com/w/cpp/container/vector" target="_blank">est disponible ici</a>.
+                            </p>
+                            <p id="part_A_b_3">
+                                Avec ces structures là, nous avons fait une par conséquente du travail, mais plein d'autres structures sont possibles en C++.
+                                En fait, <span class="important">les autres structures sont justes des utilisations différentes des structures déjà vu, selon leur type</span>.
+                                Par exemple, <u>le type "map" <a href="https://en.cppreference.com/w/cpp/container/map">documenté ici</a> représente les tableaux associatifs, utilisables comme les tableaux dynamiques</u>.
+                                <u>Elle utilise un tempalte double pour pouvoir utiliser n'importe quel type en indice</u>.
+                                Cependant, il n'y a ni "push_back()" ni "front_back()", <u>tout se fait via l'opérateur "[]", avec entre "[]" l'indice d'une valeur et en retour la référence vers la valeur</u>.
+                                Si l'indice n'est pas déjà dans le "map", il faut l'assigner via l'opérateur "=", comme ça :
+                                <div class="code_sample">
+                                    // Ligne à ajouter pour utiliser des maps</br>
+                                    #include &lt;map&gt;</br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map&lt;string, int&gt; habitants; // Créer un map de nombre entier "int" accessible via des "string" vide</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;habitants["france"] = 69000000; // Ajoute la valeur 69000000 accessible via "france"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;habitants["belgique"] = 12000000; // Ajoute la valeur 12000000 accessible via "belgique"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; habitants["france"] &lt;&lt; endl; // Affiche "69000000"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Plein d'autres structures sont possibles : <a href="https://en.cppreference.com/w/cpp/container/queue">queue (la file)</a>, <a href="https://en.cppreference.com/w/cpp/container/list">list (la liste)</a>, <a href="https://en.cppreference.com/w/cpp/header/string">string (la chaîne de caractère / texte)</a>... 
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Utiliser proprement des structures de données en C++
+                        </h3>
+                        <div>
+                            <p id="part_A_c_1">
+                                Bien que les structures de données peuvent contenir des méthodes très utiles pour les utiliser facilement, il y a cependant quelques petits trucs à connaître autres que les méthodes.
+                                <span class="important">Un moyen efficace de parcourir les données dans un vecteur ou un tableau statique est la boucle for</span>. 
+                                <u>L'idée est d'attribuer à la valeur défini pour la boucle toutes les valeurs, de 0 jusqu'à la dernière (taille_du_tableau - 1)</u>.
+                                Voici comment faire :
+                                <div class="code_sample">
+                                    // Ligne à ajouter pour utiliser des maps</br>
+                                    #include &lt;map&gt;</br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau({1, 10, 100}); // Créer un autre vecteur de nombre entier "int" contenant 1, 10 et 100</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; tableau.size();i++) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; tableau[i] &lt;&lt; endl; // Affiche "1" puis "10" puis "100" sur différentes lignes</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                La condition d'arrêt arrête la boucle quand "i" est égal à la taille du tableau, et donc la boucle s'exécutera quand "i" sera entre 0 et taille_du_tableau - 1 inclue, permettant de parcourir tout le tableau. 
+                            </p>
+                            <p id="part_A_c_2">
+                                De plus, les structures peuvent contenir beaucoup de données, <u>et devenir très lourdes</u>.
+                                <span class="important">Il est donc conseillé d'en créer le moins possible, si il y a une chance que la structure devienne vraiment lourde</span>.
+                                Par exemple, <span class="important">il est conseillé de les passer en tant que références constantes ou non dans les fonctions</span>.
+                                Cependant, <u>si la structure est constante, on ne pourra pas utiliser l'opérateur "[]"</u>.
+                                Pour pallier à ce problème, <u>on peut utiliser la méthode "at(int indice)", qui fonctionne exactement comme l'opérateur "[]", mais pour les structures constantes</u>.
+                                Cependant, elle ne permet pas de modifier la structure, parce qu'elle est constante.
+                                En général, <u>les algorithmes (que nous verrons après) utilisent des références non-constantes pour traiter les structures</u>.
+                            </p>
+                            <p id="part_A_c_3">
+                                Pour en finir, <u>nous allons parler de quelque chose de très important avec les structures de données : les itérateurs</u>.
+                                <span class="important">Les itérateurs permettent d'utiliser n'importe quel structure itérative (map, queue...) comme un vecteur</span>.
+                                Pour cela, ils utilisent un système que nous n'avons pas encore vu : les pointeurs.
+                                Donc, <u>nous allons seulement effleurer le concept</u>, avec les façon d'utiliser les itérateurs sans avoir besoin d'utiliser les pointeurs.
+                                <span class="important">La meilleur façon de les utiliser sont les méthodes "begin()" et "end().</span>
+                                <u>"begin()" représente l'itérateur du premier élément de la structure</u>, et <u>"end()" représente un élément vide, présent après le dernier éléments de la structure</u>.
+                                <u>Les itérateurs sont utilisables comme des nombres entiers positifs (pour des raisons que nous verrons lors du cours sur les pointeurs)</u>.
+                                Donc, <span class="important">"begin() + 3" représente l'itérateur du quatrième élément de la structure (pour rappel, on commence par 0) et "end() - 1" l'itérateur du dernier élement de la structure</span>.
+                                Ce terme nous sera utile dans la suite du cours.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="left_arrow_right_text_child">
