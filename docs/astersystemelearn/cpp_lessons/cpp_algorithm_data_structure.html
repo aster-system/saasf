@@ -252,13 +252,11 @@
                                 <u>L'idée est d'attribuer à la valeur défini pour la boucle toutes les valeurs, de 0 jusqu'à la dernière (taille_du_tableau - 1)</u>.
                                 Voici comment faire :
                                 <div class="code_sample">
-                                    // Ligne à ajouter pour utiliser des maps</br>
-                                    #include &lt;map&gt;</br>
                                     #include &lt;iostream&gt;</br>
-                                    #include &lt;string&gt;</br></br>
+                                    #include &lt;vector&gt;</br></br>
                                     using namespace std;</br></br>
                                     int main() {</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau({1, 10, 100}); // Créer un autre vecteur de nombre entier "int" contenant 1, 10 et 100</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau({1, 10, 100}); // Créer un vecteur de nombre entier "int" contenant 1, 10 et 100</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; tableau.size();i++) {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; tableau[i] &lt;&lt; endl; // Affiche "1" puis "10" puis "100" sur différentes lignes</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
@@ -316,12 +314,12 @@
                             </p>
                         </div>
                         <h3 id="part_B_b">
-                            b. Les algorithmes par défaut en C++
+                            b. Les algorithmes pour les structures de données en C++
                         </h3>
                         <div>
                             <p id="part_B_b_1">
-                                En C++, le problème de l'implémentation ne se pose pas vraiment, <u>puis ce qu'il existe un moyen d'accéder à une grande quantité d'algorithmes</u>, sans ressources externes.
-                                En effet, <span class="important">il existe un moyen de pouvoir utiliser pleins d'algorithmes facilement, grâce à une simple ligne de code au début du programme</span> :
+                                En C++, le problème de l'implémentation ne se pose pas vraiment, <u>puis ce qu'il existe un moyen d'accéder à une grande quantité d'algorithmes</u>, avec seulement un "include".
+                                En effet, <span class="important">il existe un morceau de code pour utiliser pleins d'algorithmes facilement, "algorithm"</span> :
                                 <div class="code_sample">
                                     // Ligne à ajouter</br>
                                     #include &lt;algorithm&gt;</br></br>
@@ -337,6 +335,84 @@
                                 En général, ce code contient des fonctions avec des paramètres références, <a href="cpp_functions.html">vues au dernier cours</a>.
                                 Il est aussi très axé structures de données.
                             </p>
+                            <p id="part_B_b_2">
+                                C'est ici que les itérateurs vus plus haut nous seront utile.
+                                En effet, <span class="important">la manipulation de structures de données est plus rapide via des itérateurs</span>.
+                                Par exemple, <u>il y a une fonction, dans "algorithm", permettant de trier une structure de donnée : <a href="https://en.cppreference.com/w/cpp/algorithm/sort">sort</a></u>.
+                                Étudions cette fonction d'un peu plus prés.
+                                Elle est sous la forme :
+                                <div class="code_sample">
+                                    void sort(RandomIt first, RandomIt last, Compare comp);
+                                </div>
+                                Elle ne retourne donc rien.
+                                <u>"first" et "last" représentent les itérateurs entre lesquelles le tri aura lieu (avec "first" inclu et "last" pas inclu)</u>.
+                                Leur type "RandomIt" ici est défini sous la forme d'un template par défaut, mais nous n'allons pas aller trop loin pour ne pas perdre tout le monde.
+                                <u>Retenons juste qu'il s'agit d'un itérateur</u>.
+                                <u>"comp" représente la fonction de comparaison lors de la comparaison entre deux objets dans la structure de données</u>.
+                                Son utilisation et compréhension précise nous demanderait plus de connaissance en programmation-orienté-objet, nous n'allons donc pas nous étaler dessus.
+                                Cependant, cette fonction a un argument par défaut équivalent à "&lt;" (trier du plus petit au plus grand).
+                                Voici une application de "sort" :
+                                <div class="code_sample">
+                                    #include &lt;algorithm&gt;</br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;vector&gt;</br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau({10, 1, 100}); // Créer un vecteur de nombre entier "int" contenant 10, 1 et 100</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort(tableau.begin(), tableau.end()); // Tri le vecteur</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i &lt; tableau.size();i++) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; tableau[i] &lt;&lt; endl; // Affiche "1" puis "10" puis "100" sur différentes lignes</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Les itérateurs étant, comme nous l'avons vu, une sorte de pointeur, alors on peut l'utiliser comme une référence vers la structure.
+                            </p>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Les autres algorithmes en C++
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                Les structure de données, c'est bien, mais il y a aussi d'autres algorithmes de disponibles directement en C++.
+                                Par exemple, <span class="important">plein d'algorithmes mathématiques sont disponible via l'include du code "cmath"</span>.
+                                La documentation de "cmath" est <a href="https://en.cppreference.com/w/cpp/header/cmath">présente ici</a>.
+                                Pour citer quelques exemples en vrac : <u>l'exposant d'un nombre avec pow(double nombre, double exposant), le cosinus d'un nombre avec cos(double nombre) en radians, l'inverse de la tangent hyperbolique avec atanh(double nombre)...</u>
+                                Avec ça, vous pourrez utiliser les mathématiques plus facilement en C++.
+                            </p>
+                            <p id="part_B_b_2">
+                                <u>Un autre algorithme très pratique est disponible via l'include de "random"</u>.
+                                <span class="important">Il permet la génération de nombres aléatoires</span>.
+                                En informatique, <u>un nombre aléatoire est obtenu grâce à une fonction mathématique si complexe que le prochain nombre de cette fonction est trop compliqué pour être prévisible</u>.
+                                Pour cela, <u>la fonction utilise une graine</u>, permettant la génération des nombres aléatoires.
+                                Si vous utilisez une même graîne dans deux mêmes fonctions différentes utilisées de la même manière, leurs résultats seront exactement les mêmes.
+                                Voici comment générer des nombres aléatoires en C++ :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;random&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Création des choses nécessaires</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random_device moteur;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mt19937 generateur(moteur());</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uniform_int_distribution distributeur(1, 6);</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int n = 0; n != 10; ++n) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Affiche 10 nombres aléatoires</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; distributeur(generateur) &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            On commence par créer un "moteur de génération aléatoire", de type "random_device" nommé "moteur".
+                            Il nous permettra d'utiliser le reste des fonctions aléatoires nécessaires.
+                            En suite, <u>on crée un "générateur de nombres aléatoires", de type "mt19937" nommé "generateur" et prenant notre moteur "moteur" en tant que moteur de génération</u>.
+                            Le générateur utilise l'algorithme <a href="https://fr.wikipedia.org/wiki/Mersenne_Twister" target="_blank">Mersenne Twitser</a> pour générer les nombres.
+                            Finalement, on crée le "distributeur de nobmre aléatoires uniformes" de nombre, de type "uniform_int_distribution" nommé "distributeur", permettant d'obtenir des nombres aléatoires contenus entre 1 et 6 inclus.
+                            <span class="important">L'obtension des nombres aléatoires ce fait via l'appel de "distributeur" avec en paramètre le générateur de nombre</span>.
+                            En effet, bien qu'il s'agisse d'une variable, on peut l'utiliser comme une fonction (nous verrons comment et pourquoi dans des prochains cours).
+                            <span class="important">Cet appel retournera un nombre aléatoire entre 1 et 6 inclus</span>.
+                            Plein d'autres utilisations sont possible avec les nombres aléatoires, <a href="https://en.cppreference.com/w/cpp/numeric/random" target="_blank">documentées ici</a>.
                         </div>
                     </div>
                 </div>
