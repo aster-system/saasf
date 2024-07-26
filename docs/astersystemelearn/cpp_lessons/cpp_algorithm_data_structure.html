@@ -403,19 +403,31 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
                                     }
                                 </div>
+                                On commence par créer un "moteur de génération aléatoire", de type "random_device" nommé "moteur".
+                                Il nous permettra d'utiliser le reste des fonctions aléatoires nécessaires.
+                                En suite, <u>on crée un "générateur de nombres aléatoires", de type "mt19937" nommé "generateur" et prenant notre moteur "moteur" en tant que moteur de génération</u>.
+                                Le générateur utilise l'algorithme <a href="https://fr.wikipedia.org/wiki/Mersenne_Twister" target="_blank">Mersenne Twitser</a> pour générer les nombres.
+                                Finalement, on crée le "distributeur de nobmre aléatoires uniformes" de nombre, de type "uniform_int_distribution" nommé "distributeur", permettant d'obtenir des nombres aléatoires contenus entre 1 et 6 inclus.
+                                <span class="important">L'obtension des nombres aléatoires ce fait via l'appel de "distributeur" avec en paramètre le générateur de nombre</span>.
+                                En effet, bien qu'il s'agisse d'une variable, on peut l'utiliser comme une fonction (nous verrons comment et pourquoi dans des prochains cours).
+                                <span class="important">Cet appel retournera un nombre aléatoire entre 1 et 6 inclus</span>.
+                                Plein d'autres utilisations sont possible avec les nombres aléatoires, <a href="https://en.cppreference.com/w/cpp/numeric/random" target="_blank">documentées ici</a>.
                             </p>
-                            On commence par créer un "moteur de génération aléatoire", de type "random_device" nommé "moteur".
-                            Il nous permettra d'utiliser le reste des fonctions aléatoires nécessaires.
-                            En suite, <u>on crée un "générateur de nombres aléatoires", de type "mt19937" nommé "generateur" et prenant notre moteur "moteur" en tant que moteur de génération</u>.
-                            Le générateur utilise l'algorithme <a href="https://fr.wikipedia.org/wiki/Mersenne_Twister" target="_blank">Mersenne Twitser</a> pour générer les nombres.
-                            Finalement, on crée le "distributeur de nobmre aléatoires uniformes" de nombre, de type "uniform_int_distribution" nommé "distributeur", permettant d'obtenir des nombres aléatoires contenus entre 1 et 6 inclus.
-                            <span class="important">L'obtension des nombres aléatoires ce fait via l'appel de "distributeur" avec en paramètre le générateur de nombre</span>.
-                            En effet, bien qu'il s'agisse d'une variable, on peut l'utiliser comme une fonction (nous verrons comment et pourquoi dans des prochains cours).
-                            <span class="important">Cet appel retournera un nombre aléatoire entre 1 et 6 inclus</span>.
-                            Plein d'autres utilisations sont possible avec les nombres aléatoires, <a href="https://en.cppreference.com/w/cpp/numeric/random" target="_blank">documentées ici</a>.
+                            <p id="part_B_c_3">
+                                Je vous ai montré ici deux exemples d'include offrant des algorithmes simples à utiliser, <u>mais des includes comme ça, il y en a plein d'autres</u>.
+                                <span class="important">Sur le site d'où je tire toutes les documentations, vous trouverez une liste d'includes <a href="https://en.cppreference.com/w/cpp/header" target="_blank">juste ici</a></span>.
+                                À partir de là, <u>votre mission est de s'entraîner à lire une documentation</u>, pour utiliser de mieux en mieux les programmes mis à disposition par le C++ primaire.
+                                Cependant, des bases d'anglais sont nécessaires pour bien comprendre le tout (sinon, il y a toujorus Google Traduction ou Reverso pour vous aider).
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                C'est sur cela que nous terminons cette partie très théorique du C++, et même, l'ensemble de cours très théoriques nécessaire pour comprendre le C++.
+                À partir de là, vous devriez déjà être capable de faire des petits programmes, selon vos envies.
+                Cependant, vous ne restez qu'un débutant en C++ pour l'instant.
+                Les parties avancées du C++ seront abordées dans les prochains chapitres de cours.
             </div>
         </div>
         <footer>
