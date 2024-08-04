@@ -98,6 +98,17 @@
                             Cela représente la partie cachée de l'iceberg.
                             Cependant, <u>un utilisateur classique n'aura jamais besoin de tout ça</u>.
                             Le système est grandement simplifié pour lui, <span class="important">avec un système de stockage par fichiers, dossiers (pouvant contenir des fichiers) et chemins d'accés</span>.
+                            <span class="important">Le chemin d'accés représente l'adresse d'un fichier pour y accéder via le système d'exploitation</span>.
+                            <u>Il est entièremement sour format textuel</u>.
+                            <u>La première partie du chemin représente la partition sur laquelle aller chercher le fichier, qui, dans ce cas là, est considérée comme un dossier</u>.
+                            Sur Windows, un fichier commençant par "C:" se trouve sur la partition "C" (ici, celle où est installé Windows).
+                            Sur Linux, un fichier commençant par "./" se trouve sur la partition où est installé la distribution Linux.
+                            <u>L'accés à l'intérieur d'un dossier est possible grâce au caractère "/"</u> (ou "\" des fois sur Windows).
+                            <span class="important">L'avantage de ce système est la possibilité de l'utiliser, non en partant de la partition, mais en partant d'un autre chemin d'accés</span>.
+                            <u>Un chemin d'accés utilisé comme tel est appelé un chemin d'accés relatif</u>.
+                            Par exemple, si vous partez du chemin d'accés vers le dossier "C:/documents/images/", le chemin d'accés relatif "photo.png" serez ici en entier "C:/documents/images/photo.png".
+                            <u>En utilisant les caractères "../", vous pouvez accéder aux dossier contenant le chemin d'accés d'où vous partez</u>.
+                            Par exemple, si vous partez du chemin d'accés vers le dossier "C:/documents/images/", le chemin d'accés relatif "../cours/science.pdf" serez ici en entier "C:/documents/cours/science.pdf".
                         </p>
                     </div>
                 </div>
