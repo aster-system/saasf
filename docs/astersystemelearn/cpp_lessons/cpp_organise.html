@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                II - 1. Organiser un projet en C++
+            </h1>
+            <div>
+                Si vous vous rappelez, le premier cours de cette série comprenait une partie similaire à ce qui va être exposé là.
+                Cependant, on ne faisait que froller les manières de configurer un projet en C++.
+                Dans ce cours, on va rentrer plus en détail, pour comprendre, et de nouvelles choses, et des choses qu'on a déjà vu, mais survolé dans les précédents cours.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Organiser son projet
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Le C++ offre plein de fonctionnalités permettant de configurer proprement votre projet C++.
+                        <h3 id="part_A_a">
+                            a. Les fichiers headers / sources
+                        </h3>
+                        <div>
+                            <p>
+                                Pour l'instant, notre code est écrit dans un fichier avec l'extension ".cpp".
+                                <span class="important">Ces fichiers sont des fichiers sources C++, ceux que le compiler va compiler en fichiers objets en ".o"</span>.
+                                <u>Pour rappel, le code objet est constitué <a href="https://fr.wikipedia.org/wiki/Assembleur">d'assembleur</a></u>.
+                                Plus les fichiers ".cpp" sont remplies, plus la compilation est longue.
+                                <u>On peut mettre autant de fichier ".cpp" dans notre projet que l'on veut</u>.
+                                Cependant, dans ce cas, <u>pour utiliser du code présent dans un autre fichier, il faut inclure le code du fichier à utiliser dans le fichier de base</u>.
+                                <span class="important">En C++, ce processus ce fait via une prédirective : "#include" (voir plus bas)</span>.
+                            </p>
+                            <p>
+                                Cependant, imaginons un projet avec 150 fichiers en ".cpp" (ce qui est possible, si votre projet est un minimum ambitieux).
+                                La modification d'un seul fichier demande de recompiler tout le gros bloc de 150 fichiers, vous laissant le temps de courir un marathon entre deux compilations.
+                                Heuresement, <u>il existe un moyen d'utiliser un fichier ".cpp", sans avoir à le recompiler à chaque fois : les fichiers headers en ".h"</u>.
+                                <span class="important">Un fichier header permet de déclarer quelque chose dans un code, sans avoir à le redéfinir, donc à le re-compiler (si il est déjà défini / compiler quelque part)</span>.
+                                <u>Dans le fichier exécutable final, produit par le linker, le linker lie les déclarations de chaque fichier objet à leur définition déjà compilé</u>.
+                                Si la définition de quelque chose déclaré n'est pas trouvé, le linker renvoie une erreur "undefined reference to `truc_pas_defini'".
+                                Un header peut contenir toutes les déclarations possibles et imagineables : variables, fonctions...
+                                Dans ce cas, la déclaration est réalisé via ce que l'on appelle un "lien externe" ("extern linkage" en anglais).
+                                En général, il est très fortement conseillé (voir obligatoire dans certains cas) de rajouter le mot clé "extern" devant la déclaration.
+                                <span class="important">Chaque fichier ".cpp" doit inclure le header contenant ses déclarations</span>.
+                            </p>
+                            <p>
+                                <span class="important">Il est important de noter que les fichiers headers peuvent aussi contenir des définitions</span>.
+                                <u>Cependant, dans ce cas là, le même problème qu'avec nos 150 fichiers ".cpp" apparaît</u>.
+                                De plus, le linker pourraît se perdre dans les multiples couples déclarations / définitions possibles, causant d'étranges erreurs de linker.
+                                Dans ce cas là, la déclaration est réalisé via ce que l'on appelle un "lien interne" ("internal linkage" en anglais).
+                                <span class="important">Un moyen d'éviter les erreurs est de définir la déclaration du header de manière statique, en rajoutant le mot clé "static" avant elle</span>.
+                                Avec cela, on garde notre problème des 150 fichiers ".cpp", mais chaque fichier objet à sa propre copie de la définition, évitant les erreurs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Organiser le code de son projet
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Certaines modifications textuelles du code permettent de configurer le projet, de manière plus étendue qu'on ne le pense.
+                        <h3 id="part_B_a">
+                            a. Utiliser les prédirectives
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                Bien que ce nom puisse faire un peu peur, <a href="https://cplusplus.com/doc/tutorial/preprocessor/" target="_blank">les prédirectives</a> sont assez simples d'utilisation.
+                                <span class="important">Il s'agit de morceau de texte dans le code, permettant au compiler de modifier le code avant la compilation</span>.
+                                <u>Elles permettent de rendre le code plus portatifs, par exemple en permettant au compiler de ne pas compiler une certaine partie de code si il ne peut pas</u>.
+                                <span class="important">Elles fonctionnent de manière entièrement textuel, et ne sont pas considérées comme des instructions</span>.
+                                Elles ne finissent pas par un ";", mais lors du saut de ligne.
+                                <u>Toutes les prédirectives en C++ commence par le symbole "#"</u>.
+                            </p>
+                            <p id="part_B_a_2">
+                                Nous avons déjà utilisés à plusieurs reprises une prédirectives : "#include".
+                                <span class="important">La prédirective "#include" permet, comme nous l'avons déjà vu, d'inclure un morceau de code dans un autre morceau de code</span>.
+                                Pour être plus précis, <u>le morceau de code à inclure remplace la ligne de prédirective dans le fichier de base</u>.
+                                Voici deux utilisation simples de la prédirective :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include "scls.h"
+                                </div>
+                                <u>En général, il est conseillé de n'inclure que des fichiers headers</u>, pour ne pas surcharger le code.
+                                Cette prédirective permet d'inclure tous les fichiers que vous voulez.
+                                <u>Si le chemin d'accés du fichier est entouré de chevrons (comme iostream), le fichier se trouve dans des fichiers inclus au compiler.
+                                Si le chemin d'accés est entouré de guillemets, il se trouve autre part (n'importe où dans le système), relativement au fichier de base.</u>
+                            </p>
+                            <p id="part_B_a_3">
+                                Si un morceau de code est inclut plusieurs fois, par exemple, dans deux autres morceaux de code différents, des conflits peuvent apparaître.
+                                <u>Pour éviter cela, il faut utiliser trois autres prédirectives, dont "#define"</u>.
+                                <span class="important">"#define" permet de définir un morceau de texte, nommé une macro</span>.
+                                <u>Une macro est un morceau de texte, utilisable par un nom, qui, si écrit (le nom) quelque part dans le code, est remplacé par le morceau de texte de la macro</u>.
+                                Voici un exemple de définition et d'usage d'une macro :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #define VERSION "1.5"</br></br>
+                                    using namespace std;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// VERSION est remplacé par "1.5" avant la compilation</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Version du logiciel : " &lt;&lt; VERSION &lt;&lt; endl; // Affiche "Version du logiciel : 1.5"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Cette prédirective est très utile pour utiliser des valeurs constantes, sans avoir à s'encombrer de variables constantes.
+                                En général, elles sont nommées avec des majuscules.
+                                <u>Il existe quelques macros pré-définies en C++</u>, comme "__LINE__" qui est remplacée par le numéro de la ligne actuelle (les autres sont documentées <a href="https://cplusplus.com/doc/tutorial/preprocessor/#predefined_macro_names" target="_blank">ici</a>).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
