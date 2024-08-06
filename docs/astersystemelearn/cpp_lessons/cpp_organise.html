@@ -132,6 +132,13 @@
                                         <u>Vous pouvez aussi passer aux compiler des arguments, de catégorie "#define", utilisables via les directives (voir plus bas)</u>.
                                     </li>
                                 </ul>
+                                <u>Deux ensembles de configurations possibles, réglables dans l'IDE, sont les configurations "Debug" et "Release"</u>.
+                                <span class="important">La configuration "Debug" permet d'utiliser un outil, nommé le débugueur, pour traquer les potentielles bugs du code</span>.
+                                Cependant, elle est moins performante et plus longue à compiler.
+                                <span class="important">La configuration "Release" permet de compiler normalement le code, sans possibilité de traquer les potentielles bugs</span>.
+                                <u>Cette configuration est nécessaire pour partager un logiciel compiler à autrui</u>.
+                                Cependant, pour pouvoir être utilisable hors de votre environnement, <span class="important">il faut rajouter dans le même dossier que l'exécuteur des morceaux de codes spéciaux, nommés les DLLs</span>.
+                                <u>Les DLLs primaires en C++ sont présents dans le dossier "bin" du compiler, et sont les DLLs "libstdc++", "libwinpthread-1" et "libgcc_s_seh-1"</u>.
                             </p>
                         </div>
                         <h3 id="part_A_c">
@@ -161,6 +168,7 @@
                                 Il est conseillé de les mettre dans un dossier dans le dossier include, pour les retrouver plus rapidement.
                                 Pour les codes pré-compilés, on va faire la même chose, et simplement les placer dans le sous-dossier "lib" de votre compiler</span>.
                                 Pour pouvoir les inclure au projet, <u>vous devez aller dans les paramètres du linker, et rajouter le chemin d'accès du code pré-compilé à utiliser dans la section "Librairies liées"</u>.
+                                <span class="important">Certaines librairies peuvent produire ou demander des DLLs, que vous devez juste inclure dans le dossier de l'éxecuteur</span>.
                             </p>
                         </div>
                     </div>
