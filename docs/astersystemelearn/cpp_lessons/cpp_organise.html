@@ -134,6 +134,35 @@
                                 </ul>
                             </p>
                         </div>
+                        <h3 id="part_A_c">
+                            c. Ajouter des dépendances externes
+                        </h3>
+                        <div>
+                            <p>
+                                Le code inclut dans l'environnement, c'est bien.
+                                <u>Les codes plus complexes, c'est mieux</u>.
+                                <span class="important">Pour télécharger du code provenant d'un autre endroit que de l'environnement, il y a pas mal de choses à faire</span>.
+                            </p>
+                            <p>
+                                <span class="important">Si vous téléchargez le code source à rajouter directement sous forme de fichiers ".cpp" et ".h", il vous faudra le compiler vous même une fois, pour le transformer en librairie</span>.
+                                Pour cela, <u>il y a plusieurs outils différents utilisables</u>.
+                                <span class="important">L'un d'eux est <a href="https://cmake.org/download/">CMake</a>, permettant de configurer un projet C++</span>, pour pouvoir le compiler après normalement, via un IDE, ou directement à même le compiler.
+                                <u>Les codes sources utilisant CMake contiennent des fichiers "CMakeList.txt"</u>.
+                                <span class="important">Une autre méthode plus répandu est la compilation via l'outil "Make"</span>.
+                                Pour cela, <u>il faut utiliser dans le même terminal que celui avec lequel vous avez installer votre compiler (MSYS, Cygwin...) la commande "make" avec comme argument le dossier vers le code source</u>.
+                                Avant cela, <u>il est conseillé d'effectuer la commande "./configure" pour configurer "make"</u>.
+                            </p>
+                            <p>
+                                <span class="important">Si vous trouvez le code directement pré-compilé dans une librairie, alors pas besoin de le compiler vous même</span>.
+                                Cependant, pour pouvoir pleinement l'utiliser, <u>il y a encore quelques petites choses à faire</u>.
+                                Actuellement, vous devriez avoir les headers et le code pré-compilé.
+                                <span class="important">Pour pouvoir utiliser les headers, nous allons prendre une technique simple, et simplement les placer dans le sous-dossier "include" de votre compiler</span>.
+                                Comme ça, un simple appel comme &lt;iostream&gt; suffit.
+                                Il est conseillé de les mettre dans un dossier dans le dossier include, pour les retrouver plus rapidement.
+                                Pour les codes pré-compilés, on va faire la même chose, et simplement les placer dans le sous-dossier "lib" de votre compiler</span>.
+                                Pour pouvoir les inclure au projet, <u>vous devez aller dans les paramètres du linker, et rajouter le chemin d'accès du code pré-compilé à utiliser dans la section "Librairies liées"</u>.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="left_arrow_right_text_child">
