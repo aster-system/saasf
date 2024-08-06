@@ -79,7 +79,59 @@
                                 De plus, le linker pourraît se perdre dans les multiples couples déclarations / définitions possibles, causant d'étranges erreurs de linker.
                                 Dans ce cas là, la déclaration est réalisé via ce que l'on appelle un "lien interne" ("internal linkage" en anglais).
                                 <span class="important">Un moyen d'éviter les erreurs est de définir la déclaration du header de manière statique, en rajoutant le mot clé "static" avant elle</span>.
-                                Avec cela, on garde notre problème des 150 fichiers ".cpp", mais chaque fichier objet à sa propre copie de la définition, évitant les erreurs.
+                                Avec cela, on garde notre problème des 150 fichiers ".cpp", car chaque fichier objet à sa propre copie de la définition, évitant les erreurs.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Configurer le compiler / linker
+                        </h3>
+                        <div>
+                            <p>
+                                Pour compiler correctement votre code, <u>il vous faut comprendre comment configurer le compiler et le linker</u>.
+                                <span class="important">En général, tous les IDEs offrent une GUI pour les configurer</span>.
+                                Sinon, une simple recherche Google devrait vous guider.
+                                <u>Sans IDE, le compiler et le linker doivent s'utiliser entièrement grâce aux lignes de commandes</u>.
+                                L'IDE se charge de passer les bons arguments au compiler.
+                            </p>
+                            <p>
+                                La première tâche est de choisir le bon duo cimpler / linker à utiliser.
+                                <span class="important">Dans le cas général (l'environnement <a href="https://www.mingw-w64.org/" target="_blank">MinGW</a>), tout ce qui est nécessaire à la compilation se trouve dans un même dossier</span>.
+                                De base, tout le nécessaire est présent sous Linux, de manière différente selon la distribution.
+                                Cependant, si vous ne l'avez pas encore d'installer, sachez que l'installer comme tel est assez déconseillé.
+                                <u>Il est fortement conseillé de passer par un environnement Linux, ou un émulateur d'environnement Linux si vous êtes sur Windows, comme <a href="https://www.msys2.org/" target="_blank">MSYS2</a> ou <a href="https://cygwin.com/" target="_blank">Cygwin</a></u>.
+                                Microsoft proporese un petit tutoriel, <a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank">juste ici</a>, pour l'installer avec MSYS2 (seule la partie MSYS2 nous intéresse ici).
+                                <span class="important">Dés que vous avez repérer le dossier le plus haut de votre MinGW, vous avez juste à le passer à l'IDE, qui fera la suite lui même</span>.
+                                <u>Si son chemin d'accès de ce dossier est ajoutée à la variable d'environnement "Path", alors l'IDE pourra le détécter automatiquement</u>.
+                            </p>
+                            <p>
+                                Ce dossier contient plusieurs sous-dossiers, que nous allons survoler, pour comprendre un peu mieux le tout.
+                                <span class="important">Le sous dossier "bin" contient tous les logiciels nécessaires à la compilation, comme le compiler</span>.
+                                <u>Le compiler C++ représente le logiciel "g++.exe", mais un compiler C est aussi fourni, sous le nom de "gcc.exe"</u>.
+                                Un compiler C++, spécialisé pour le debug, est aussi fourni : "gdb.exe".
+                                <span class="important">Un autre sous dossier important "include", qui contient tous les morceaux de codes que l'on pourra utiliser via "#include" (voir plus bas), sans avoir à fournir le chemin d'accès complet</span>.
+                                <u>Vous pouvez aller fouiller dedans si vous voulez, pour voir certains codes</u>, comme "string.h" pour &lt;string&gt;, ou bien "math.h" pour &lt;math&gt;.
+                                <span class="important">Le dernier sous dossier est "lib", contenant tous les fichiers ".cpp" compilés nécessaires, pour faire marcher votre programme C++</span>.
+                                En effet, les "#include" sont exclusivement des fichiers headers, mais leur partie compilé est présente, sous la forme de librairie.
+                                <u>Une librairie, d'extension ".a", ".so" ou ".lib" selon la plateforme, représente un ensemble de fichiers ".cpp" déjà compilés</u>.
+                                Ils permettent donc de ne pas avoir à recompiler tous les "#include" utilisés.
+                            </p>
+                            <p>
+                                <span class="important">Certains des arguments optionnels sont très importants, donc, voici une liste non-exhaustive de certains d'entre eux</span> :
+                                <ul>
+                                    <li>
+                                        <u>Le C++ se décline en plusieurs versions différents, et la version précise à spécifier peut l'être grâce à un argument vers le compiler C++ : "-std"</u>.
+                                        Si "-std" est "c++20", on utilise la version 20 du C++ (normalisée par l'ISO en 2020).
+                                        Si "-std" est "c++98", on utilise la version 98 du C++ (normalisée par l'ISO en 1998).
+                                    </li>
+                                    <li>
+                                        <u>Le C se décline en plusieurs versions différents (si vous devez utiliser du C à un moment dans votre projet), et la version précise à spécifier peut l'être grâce à un argument vers le compiler C : "-std"</u>.
+                                        Si "-std" est "c17", on utilise la version 20 du C (normalisée par l'ISO en 2017).
+                                        Si "-std" est "c90", on utilise la version 98 du C (normalisée par l'ISO en 1990).
+                                    </li>
+                                    <li>
+                                        <u>Vous pouvez aussi passer aux compiler des arguments, de catégorie "#define", utilisables via les directives (voir plus bas)</u>.
+                                    </li>
+                                </ul>
                             </p>
                         </div>
                     </div>
