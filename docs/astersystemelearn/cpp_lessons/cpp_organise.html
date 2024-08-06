@@ -81,6 +81,16 @@
                                 <span class="important">Un moyen d'éviter les erreurs est de définir la déclaration du header de manière statique, en rajoutant le mot clé "static" avant elle</span>.
                                 Avec cela, on garde notre problème des 150 fichiers ".cpp", car chaque fichier objet à sa propre copie de la définition, évitant les erreurs.
                             </p>
+                            <p>
+                                <span class="important">Un fichier header doit toujours avoir cette forme :</span>
+                                <div class="code_sample">
+                                    #ifndef NOM_DU_FICHER</br>
+                                    #define NOM_DU_FICHER</br></br>
+                                    // Trucs dans le header</br></br>
+                                    #endif NOM_DU_FICHER
+                                </div>
+                                Nous verrons pourquoi dans la partie sur les prédirectives.
+                            </p>
                         </div>
                         <h3 id="part_A_b">
                             b. Configurer le compiler / linker
