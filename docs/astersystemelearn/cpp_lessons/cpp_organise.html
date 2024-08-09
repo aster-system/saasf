@@ -237,7 +237,192 @@
                                 En général, elles sont nommées avec des majuscules.
                                 <u>Il existe quelques macros pré-définies en C++</u>, comme "__LINE__" qui est remplacée par le numéro de la ligne actuelle (les autres sont documentées <a href="https://cplusplus.com/doc/tutorial/preprocessor/#predefined_macro_names" target="_blank">ici</a>).
                             </p>
+                            <p id="part_B_a_4">
+                                Si un morceau de code est inclut plusieurs fois, par exemple, dans deux autres morceaux de code différents, des conflits peuvent apparaître.
+                                <u>Pour éviter cela, il faut utiliser trois autres prédirectives, dont "#define"</u>.
+                                <span class="important">"#define" permet de définir un morceau de texte, nommé une macro</span>.
+                                <u>Une macro est un morceau de texte, utilisable par un nom, qui, si écrit (le nom) quelque part dans le code, est remplacé par le morceau de texte de la macro</u>.
+                                Voici un exemple de définition et d'usage d'une macro :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #define VERSION "1.5"</br></br>
+                                    using namespace std;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// VERSION est remplacé par "1.5" avant la compilation</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Version du logiciel : " &lt;&lt; VERSION &lt;&lt; endl; // Affiche "Version du logiciel : 1.5"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Cette prédirective est très utile pour utiliser des valeurs constantes, sans avoir à s'encombrer de variables constantes.
+                                <span class="important">Vous pouvez même les supprimer, avec la prédirective "#undef NOM_DE_LA_MACRO", pour libérer le nom de la macro pour plus tard si besoin</span>.
+                                En général, elles sont nommées avec des majuscules.
+                                <u>Il existe quelques macros pré-définies en C++</u>, comme "__LINE__" qui est remplacée par le numéro de la ligne actuelle (les autres sont documentées <a href="https://cplusplus.com/doc/tutorial/preprocessor/#predefined_macro_names" target="_blank">ici</a>).
+                                <span class="important">Vous pouvez aussi utiliser des parenthèses pour customiser la macro selon vos besoins, avec des valeurs spécifiques</span>, comme par exemple :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #define VERSION_FINALE(version, sous_version) (string(version) + "." + sous_version)</br>
+                                    // L'utilisation de la fonction "string" pour "version" est nécessaire, car on ne peut pas additionner</br>
+                                    // deux chaînes de caractères sans en convertir au moins une en "string"</br></br>
+                                    using namespace std;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// VERSION_FINALE("1", "5") est remplacé par "1.5" avant la compilation</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Version du logiciel : " &lt;&lt; VERSION_FINALE("1", "5") &lt;&lt; endl; // Affiche "Version du logiciel : 1.5"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_a_5">
+                                Pour l'instant, toutes les prédirectives que nous avons vu sont que statique, et ne peuvent modifient pas le code selon une condition.
+                                <u>Cependant, il en existe d'autres pouvant le faire, de la même manière que "if", "else if" et "else"</u>.
+                                <span class="important">Ces prédirectives sont nommées prédirectives de conditions et sont sous la forme "#ifdef", "ifndef", "#if", "#else", "#elif" et "#endif"</span>.
+                                <span class="important">"#if" permet de ne pouvoir compiler un morceau de code que si une certaine condition est définie (implicant des macros), en sachant que sa syntaxe d'utilisation est la même que pour "if(condition)"</span>.
+                                <u>Elle peut être couplée avec "#elif" (else if(condition)) ou "#else" pour être rendue plus complète</u>.
+                                <span class="important">À la fin du morceau de code dans le "#if", il faut spécifier que l'on ferme la condition, avec "#endif"</span>.
+                                "#ifdef" est une version avancée de "#if".
+                                <u>En effet, elle est considérée comme "vraie" si une macro, spécifiée juste après, est définie avec "#define" ou via les "#defines" du compiler ou non</u>.
+                                <u>À l'inverse, "ifndef" permet de savoir si une macro n'est pas définie</u>.
+                                Un exemple d'utilisation de tout ça est le contenu obligatoire des fichiers headers.
+                                Un exercice que vous pouvez faire, et d'essayer de comprendre pourquoi leur structure est définie comme ça :
+                                <div class="code_sample">
+                                    #ifndef NOM_DU_FICHER</br>
+                                    #define NOM_DU_FICHER</br></br>
+                                    // Trucs dans le header</br></br>
+                                    #endif NOM_DU_FICHER
+                                </div>
+                                En tout cas, voici la réponse.
+                                Pour rappel, <u>les headers sont inclus via "#include", copiant juste leur contenu dans le fichier dans lequel ils sont inclus</u>.
+                                Cependant, si plusieurs fichiers appellent un même header, sont contenu est copié plusieurs fois, ce qui est inutile.
+                                Pour cela, <u>à chaque copie, on regarde si la macro "NOM_DU_FICHIER" a été définie</u>.
+                                À la première copie, <u>la macro n'est pas encore définie, on peut la définir</u>.
+                                Lors de tous les prochains "#include", la macro ayant déjà été définie, la copie ne se fera pas inutilement, optimisant le code à compiler.
+                                <span class="important">Cette technique est surtout utilisée pour permettre de ne pas compiler un morceau de code incompatible sur un certain environnement, sans avoir à le supprimer entièrement du code</span>.
+                                Par exemple, <u>si vous utilisez une fonction Windows qui n'est pas utilisable sur Linux, sa compilation sur Linux va retourner une erreur</u>.
+                                <u>En utilisant une prédirective conditionnelle, comme "#ifdef _WIN32", vous pouvez savoir si le code est compilé sur un environnement Windows</u> ("_WIN32" est une macro pré-définie pour dire si l'on se trouve dans un environnement Windows, minimum 32-bits).
+                                La macro pré-définie pour Linux est "__linux__".
+                            </p>
+                            <p id="part_B_a_6">
+                                Pour en finir avec les prédirectives, nous allons voir les prédirectives un peu moins importantes que celles déjà vues.
+                                <span class="important">La prédirective "#error Texte a afficher au compiler" permet de créer une erreur de compilation</span>.
+                                Elle est faite pour être utilisée avec les "#if" et ses homologues, <u>par exemple si un code ne doit pas être compilé sur un certain système</u>.
+                                <span class="important">La prédirective "#pragma parametre valeur" permet de spécifier un paramètre et sa valeur au compiler</span>.
+                                Les paramètres dépendent du compiler utilisé.
+                                <span class="important">Finalement, la prédirective "#line numero_de_ligne texte" permet de spécifier le fonctionnement d'une ligne de code, en vu d'une possible erreur</span>.
+                            </p>
                         </div>
+                        <h3 id="part_B_b">
+                            b. Utiliser les espaces de noms
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                Pour l'instant, parmis tous les codes que nous avons fait jusque ici, une seule ligne nous reste inexpliquée : "using namespace std;".
+                                <u>Pourtant, c'est celle qui nous permet d'utiliser tous les codes que nous avons "#include" facilement</u>.
+                                <span class="important">En effet, tous ces codes primaires aux C++ (string, iostream, math...) sont contenus dans ce que l'on appelle un espace de nom, nommé "std"</span>.
+                                <u>Pour accéder à une chose contenu dans un espace de nom, il faut utiliser l'opérateur d'accès à un certain espace, s'écrivant "::", sur l'espace de nom en question.</u>
+                                Dans le cas de string et iostream, il faudrai faire comme ça :
+                                <div class="code_sample">
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br></br>
+                                    int main()</br>
+                                    {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string nom = "Thomas";</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Nom de l'utilsiateur : " &lt;&lt; nom &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                            <p id="part_B_b_2">
+                                Cependant, pourquoi ne pas l'avoir utilisé plus tôt ?
+                                <span class="important">Pour une raison simple : l'utilisation du mot clé "using namespace" permet d'utiliser un espace de nom sans avoir à utiliser l'opérateur "::"</span>.
+                                L'avantage est de ne pas avoir à noter "std::" à chaque fois.
+                                <u>L'inconvénient est qu'il nous sera impossible d'écrire quelque avec le même nom que les fonctions déjà dans l'espace de nom "std"</u>, comme "string" ou "cout".
+                            </p>
+                            <p id="part_B_b_3">
+                                La création d'un espace de nom en C++ est très simple.
+                                <span class="important">Pour créer un espace de nom, il faut simplement utiliser le mot clé "namespace" (sans "using" ici), et en mettant le contenu entre accolades</span>.
+                                À noter qu'il est possible de déclarer des choses dans le headers dans un espace de nom, et de les définir dans un fichier source dans le même espace de nom, en réutilisant "namespace".
+                                Voici un exemple, pour un fichier header et source de gestion d'utilisateur :
+                                <div class="code_sample">
+                                    // gestion_utilisateur.h</br></br>
+                                    #ifndef GESTION_UTILISATEUR</br>
+                                    #define GESTION_UTILISATEUR</br></br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include &lt;string&gt;</br>
+                                    #include &lt;vector&gt;</br></br>
+                                    namespace gestion_utilisateur {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extern std::vector&lt;std::string&gt; utilisateurs;</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int nombre_utilisateurs();</br>
+                                    }</br></br>
+                                    #endif // GESTION_UTILISATEUR
+                                </div>
+                                <div class="code_sample">
+                                    // gestion_utilisateur.cpp</br></br>
+                                    #include "gestion_utilisateur.h"</br>
+                                    // Pas besoin d'inclure le reste, ils le sont déjà dans le header</br></br>
+                                    namespace gestion_utilisateur {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::string&gt; utilisateurs = std::vector&lt;std::string&gt;();</br></br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int nombre_utilisateurs() {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return utilisateurs.size();</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    }
+                                </div>
+                                <div class="code_sample">
+                                    // main.cpp</br></br>
+                                    #include "gestion_utilisateur.h"</br></br>
+                                    int main() {</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; gestion_utilisateur::nombre_utilisateurs(); // Affiche 0</br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                                Avec cela, organiser correctement votre code devient plus facile que jamais.
+                            </p>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. Déboguer son code
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                Pour finir avec cette partie, nous allons voir quelques manières de facilement déboguer son code, si besoin.
+                                <span class="important">Si votre code crash sans savoir pourquoi, une bonne chose à faire est d'utiliser un outil nommé le débogeur</span>.
+                                <u>Pour cela, il faut compiler votre code avec la configuration "Debug" (comme vu plus haut), et lancer le code via le débogeur</u>.
+                                Le débogueur est capable de vous dire précisément <u>quel ligne à fait planter votre code, quelles fonctions ont appelées la fonction de cette ligne</u>, les threads du crash...
+                                En contre partie, le code est un peu plus long à compiler, et moins efficace lors de son éxécution.
+                            </p>
+                            <p id="part_B_c_2">
+                                Un autre moyen de faire est de <span class="important">traquer les données qui peuvent potentiellement provoquer un crash, ou un comportement inattendu, via une succession de "std::cout"</span>.
+                                Pour cela, <u>l'idée est d'afficher les données concernées, d'inspecter leur valeur, et de les analyser pour voir si elles ont une part de responsabilité dans le crash</u>.
+                                Vous pouvez aussi utiliser cette technique via une itération de boucle / fonction, pour voir quel itération provoque le crash, et qu'elle est sa part de responsabilité.
+                                <span class="important">Mettez en où vous pouvez, dans une structure de condition si nécessaire, pour rendre le déboguage le plus efficace possible</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_C">
+                        Un petit truc en plus
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <p>
+                            Pour en finir avec cette partie du cours, je vais vous présenter en vrac des choses qu'il faut faire, mais que je ne savais pas où mettre précisément.
+                        </p>
+                        <p>
+                            La première chose : <span class="important">écrivez votre code en anglais</span>.
+                            En effet, c'est la langue internationalement acceptée pour coder.
+                            <u>Cela vous permettra d'être potentiellement aidé, si vous avez besoin d'aide, par n'importe qui sur Terre</u>.
+                            Beaucoup de forums de ce genre existent, comme <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>.
+                            Vous pourrez aussi plus facilement stocker et partager votre code, via par exemple le cloud de <a href="https://github.com/" target="_blank">Github</a>.
+                            Dans ce cas là, <u>il vous faut aussi comprendre comment fonctionnent les licences, pour ne pas vous faire juridiquement avoir</u>.
+                        </p>
+                        <p>
+                            La deuxième chose : <span class="important">pensez à documenter votre code pendant la réalisation</span>.
+                            Sinon, vous risquez de vous perdre, et de perdre un précieux temps de réalisation.
+                            <u>Le minimum est de commenter le code</u>, pour comprendre ce qu'il fait.
+                        </p>
+                        <p>
+                            Après tout cela, nous pourrons entrer dans du C++, un peu plus complexe.
+                        </p>
                     </div>
                 </div>
             </div>
