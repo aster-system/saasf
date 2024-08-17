@@ -51,8 +51,27 @@
                         </h3>
                         <div>
                             <p id="part_A_a_1">
-                                <span class="important">Une structure de données est une liste de normes, permettant de correctement structurer et stocker des données</span>.
-                                Ces normes régissent en général <u>la façon d'accéder (ou de ne pas accéder) aux données stockées, la façon permettant d'en rajouter, l'optimisation bas-niveau du code...</u>
+                                Comme je l'ai déjà écrit, <u>le C++ est découpé en plusieurs types différents, certains primaires, et d'autres non</u>.
+                                <span class="important">Parmis les types non primaires, il existe un moyen de créer votre propre type, grâce au système de classe</span>.
+                                <u>Le système de classe permet de définir toutes les règles du type que vous voulez créer</u>.
+                                Sans le savoir, nous avons déjà utilisé des types crées avec des classes, comme "string" ou "vector".
+                            </p>
+                            <p id="part_A_a_2">
+                                <span class="important">Le système de classe s'inclut dans le seul paradigme du C++ que nous n'avons pas étudié pour l'instant : <a href="https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_objet">la programmation orientée objet</a> (que nous appellerons POO à partir de maintenant)</span>.
+                                Ce paradigme est un des paradigmes de programmation les plus importants qu'il existe.
+                                <u>Il définit de manière très precise et pratique le fonctionnement du système de classe</u>.
+                                Il définit plusieurs concepts très importants, que nous aborderons petit à petit : <span class="important">l'abstraction, l'encapsulation, l'instanciation, le polymorphisme...</span>.
+                            </p>
+                            <p id="part_A_a_3">
+                                <span class="important">En C++, la déclaration d'une classe se fait très simplement :</span>
+                                <div class="code_sample">
+                                    class Nom_De_La_Classe {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Contenu de la classe</br>
+                                    };
+                                </div>
+                                À noter que, en général, les mots dans les noms de classes commencent par des lettres majuscules.
+                                Il faut aussi ne pas oublier le point virgule après les accollades.
+                                Tout ce qui sera dans la classe appartiendra d'ailleurs à l'espace de nom "Nom_De_La_Classe", crée automatiquement (même si, pour des raisons que nous verrons plus tard, savoir ça n'est pas très important).
                             </p>
                         </div>
                     </div>
