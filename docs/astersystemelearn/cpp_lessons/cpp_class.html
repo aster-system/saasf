@@ -54,7 +54,7 @@
                                 Comme je l'ai déjà écrit, <u>le C++ est découpé en plusieurs types différents, certains primaires, et d'autres non</u>.
                                 <span class="important">Parmis les types non primaires, il existe un moyen de créer votre propre type, grâce au système de classe</span>.
                                 <u>Le système de classe permet de définir toutes les règles du type que vous voulez créer</u>.
-                                Sans le savoir, nous avons déjà utilisé des types crées avec des classes, comme "string" ou "vector".
+                                Sans le savoir, nous avons déjà utilisé des types crées avec des classes, comme "std::string" ou "std::vector".
                             </p>
                             <p id="part_A_a_2">
                                 <span class="important">Le système de classe s'inclut dans le seul paradigme du C++ que nous n'avons pas étudié pour l'instant : <a href="https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_objet">la programmation orientée objet</a> (que nous appellerons POO à partir de maintenant)</span>.
@@ -69,9 +69,58 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Contenu de la classe</br>
                                     };
                                 </div>
-                                À noter que, en général, les mots dans les noms de classes commencent par des lettres majuscules.
+                                À noter que, <u>en général, les mots dans les noms de classes commencent par des lettres majuscules</u>.
                                 Il faut aussi ne pas oublier le point virgule après les accollades.
                                 Tout ce qui sera dans la classe appartiendra d'ailleurs à l'espace de nom "Nom_De_La_Classe", crée automatiquement (même si, pour des raisons que nous verrons plus tard, savoir ça n'est pas très important).
+                                <u>Pour créer une variable du type de la classe, il faut le créer comme n'importe qu'elle autre variable</u> :
+                                <div class="code_sample">
+                                    Nom_De_La_Classe une_variable;
+                                </div>
+                                <span class="important">Une variable qui a pour type une classe est nommée une instance de la classe, ou, plus communément, un objet</span>.
+                            </p>
+                            <p id="part_A_a_4">
+                                Il y a cependant un autre moyen de faire, légèrement différent.
+                                <span class="important">En effet, on peut aussi déclarer une classe avec le mot clé "struct" à la place de "class"</span>.
+                                Pour comprendre la différence entre les deux, <u>il faut que nous attendions de voir le principe d'encapsulation</u>.
+                            </p>
+                            <p id="part_A_a_5">
+                                <u>Pour pouvoir être utilisée, la classe peut contenir des variables ou bien des fonctions, utilisables sur une instance ou sur la classe en général</u>.
+                                <span class="important">Les variables contenues dans une instance sont nommées des attributs, et les fonctions utilisables via l'instance sont nommées des méthodes</span>.
+                                Elles sont accessibles via l'opérateur d'accès aux membres "." appliqué sur l'instance à utiliser.
+                                Nous avons déjà utilisé quelques méthodes, dans "std::string" ou dans "std::vector", comme :
+                                <div class="code_sample">
+                                    // Ligne à ajouter pour utiliser des vecteurs</br>
+                                    #include &lt;vector&gt;</br>
+                                    #include &lt;iostream&gt;</br></br>
+                                    using namespace std;</br></br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau_2(5, 1); // Créer un autre vecteur de nombre entier "int" contenant 5 fois le nombre 1</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tableau_2.push_back(10); // Utilisation de la méthode "push_back", pour rajouter "10" au tableau dynamique "tableau_2".</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Les méthodes et attributs de classe
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                <u>Les attributes de classes doivent être définies dans la classe, comme des variables normales</u> :
+                                <div class="code_sample">
+                                    class Personne {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Méthode permettant d'afficher l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void afficher_age() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Cette personne a " &lt;&lt; a_age &lt;&lt; " ans." &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int a_age = 40;</br>
+                                    };
+                                </div>
+                                Dans cette exemple, je définis "a_age" à 40, qui sera la valeur pas défaut pour chaque instance de la classe, tant qu'elle ne sera pas modifiée.
+                                Il est conseillé d'ajouter "a_" au début des noms d'attributs, "a_" comme "attribut", pour les différencier des autres variables.
+                                Il est important de noter que l'ordre dans lequel est écrit les attributs et méthodes n'influent en rien dans la classe, les attributs étant toujours déclarés avant par le compiler.
                             </p>
                         </div>
                     </div>
