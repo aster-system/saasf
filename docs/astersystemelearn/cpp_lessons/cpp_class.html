@@ -225,6 +225,57 @@
                                     };
                                 </div>
                             </p>
+                            <p id="part_A_b_5">
+                                En général, <span class="important">il est grandement conseillé de déclarer les classes dans un fichier header, et de définir les méthodes dans un fichier source</span>.
+                                Pour cela, <u>les méthodes dans la déclaration doivent être dépourvues de définitions (donc, des accolades et de leur contenu), mais terminées par un point virgule ";"</u>.
+                                Pour définir les méthodes dans le fichier source, ils ne faut pas oublier de spécifier l'espace de nom de la classe, avec "Nom_De_La_Classe::nom_de_la_methode".
+                                Voici ce que cela donne pour notre classe "Person" :
+                                <div class="code_sample">
+                                    // Fichier header "person.h"</br></br>
+                                    #ifndef PERSON</br>
+                                    #define PERSON</br></br>
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person();</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Affichage l'age de la "Person" (méthode constante)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void show_age() const;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };</br></br>
+                                    #endif // PERSON
+                                </div>
+                                <div class="code_sample">
+                                    // Fichier source "person.cpp"</br></br>
+                                    #include &lt;iostream&gt;</br>
+                                    #include "person.h"</br></br>
+                                    // Constructeur de la classe "Person"</br>
+                                    Person::Person(unsigned int age) : a_age(age) {}</br></br>
+                                    // Destructeur de la classe "Person"</br>
+                                    Person::~Person() {}</br></br>
+                                    // Affichage l'age de la "Person" (méthode constante)</br>
+                                    void Person::show_age() const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "This person is " &lt;&lt; a_age &lt;&lt; " years old." &lt;&lt; endl;</br>
+                                    }
+                                </div>
+                                Les attributs sont automatiquement définis en même temps que l'instance de classe, donc pas besoin de le faire soit même.
+                                Dans le cas où l'on crée un fichier source et un fichier header, <u>nous économisons du temps de compilation et de taille de fichiers objets</u>.
+                                Dans le cas contraire, nous faisons comme pour les fonctions statiques du dernier cours (une copie de la fonction par fichiers objets).
+                                Pour ne pas avoir à créer trop de fichiers différents, nous allons partir du principe que notre classe est entièrement déclarée et définie dans un fichier source, à partir de maintenant (où la combinaison des deux façons de faire, directement ou après, est possible).
+                            </p>
+                            <p id="part_A_b_6">
+                                Pour finir, <u>nous allons voir deux mots clés assez importants, que nous avons déjà vu, mais qui ont des propriétés différentes pour les classes : inline et static</u>.
+                                <span class="important">Une méthode déclarée avec "inline" est une méthode qui peut avoir ses appels dans le code remplacés par son code source assembleur</span>.
+                                <u>C'est légèrement plus rapide, mais ça prend plus de place en code assembleur, car la définition du code inline doit être obligatoirement juste après sa déclaration (pas de séparation en plusieurs fichiers possibles ici)</u>.
+                                En général, c'est grandement utilisé pour les petites fonctions très utilisées, comme les getters et setters.
+                                <span class="important">Une méthode déclarée avec "static" est une méthode qui n'est pas faite pour être utilisée sur une instance de classe, mais sur la classe toute entière</span>.
+                                Son appel ce fait donc comme ça : "Nom_De_La_Classe::nom_de_la_methode", sans possibilité de l'utiliser avec une instance.
+                                <span class="important">À l'instar des méthodes statiques, les attributs déclarés avec "static" sont des attributs qui n'appartiennent pas à une instance, mais à toute la classe</span>.
+                                Cependant, à l'inverse des méthodes inline, <u>elles doivent être définies dans un fichier source, comme les variables statiques hors d'une classe</u>.
+                                Une utilité de ses attributs est de compter le nombre d'instances d'une classe créees, en ajoutant un au nombre à chaque nouvelle instance, directement dans le constructeur.
+                            </p>
                         </div>
                         <h3 id="part_A_c">
                             c. Le principe d'encapsulation
@@ -239,6 +290,7 @@
                             <p id="part_A_c_2">
                                 <u>Pour séparer ce que vous voulez rendre accessible dans la classe et ce que vous ne voulez pas rendre accessible, il existe trois mots clés : "public", "protected" et "private"</u>.
                                 <span class="important">Tout ce qui est déclaré après "public" est accessible via une instance, tandis que ce qui est déclaré après "private" ne l'est pas hors des méthodes de classes</span>.
+                                Cependant, cela ne change rien pour les définitions de méthodes.
                                 "protected" est utilisé pour les classes héritées, que nous verrons plus tard.
                                 En général, <u>les attributs sont toujours "private"</u>.
                                 Par défaut, si aucun des mots clés n'est présent, tout ce qui se situe dans une classe est "private".
@@ -260,17 +312,15 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
                                     public:</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age);</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", utilisant un age par défaut et le passant à un autre constructeur</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person() : Person(40) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person();</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Supression d'une instance" &lt;&lt; endl;</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {};</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Retourne l'age de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int age() const { return a_age; };</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int age() const;</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Modifie l'age de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void set_age(unsigned int new_age) { a_age = new_age; };</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void set_age(unsigned int new_age);</br></br>
                                     private:</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
