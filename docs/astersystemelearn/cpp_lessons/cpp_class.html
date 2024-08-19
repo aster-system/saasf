@@ -204,6 +204,27 @@
                                     Person person_2;
                                 </div>
                             </p>
+                            <p id="part_A_b_4">
+                                À l'inverse, <span class="important">le destructeur fonctionne de la même manière, mais est appelé lorsque que l'instance est supprimée</span>.
+                                <u>L'instance est automatiquement supprimée par le programme quand on arrive à la fin de sa zone de définition, pour gagner de la mémoire</u>.
+                                Il se définit comme le constructeur, avec juste une vaguelette espagnole "~" devant le nom de classe :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// L'age est modifié directement lors de la création de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_age = age;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Supression d'une instance" &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                            </p>
                         </div>
                         <h3 id="part_A_c">
                             c. Le principe d'encapsulation
@@ -219,6 +240,42 @@
                                 <u>Pour séparer ce que vous voulez rendre accessible dans la classe et ce que vous ne voulez pas rendre accessible, il existe trois mots clés : "public", "protected" et "private"</u>.
                                 <span class="important">Tout ce qui est déclaré après "public" est accessible via une instance, tandis que ce qui est déclaré après "private" ne l'est pas hors des méthodes de classes</span>.
                                 "protected" est utilisé pour les classes héritées, que nous verrons plus tard.
+                                En général, <u>les attributs sont toujours "private"</u>.
+                                Par défaut, si aucun des mots clés n'est présent, tout ce qui se situe dans une classe est "private".
+                                C'est d'ailleurs la différence entre une classe définit avec "class", et une définie avec "struct", car, dans struct, si aucun des mots clés n'est présent, tout ce qui se situe dans une classe est "public".
+                            </p>
+                            <p id="part_A_c_3">
+                                <span class="important">Pour accéder aux attributs, il faut passer par des méthodes spéciales, souvent appelées "getters" et "setters"</span>.
+                                <u>Les getters doivent retourner la valeur d'un attribut dans une instance de classe</u>.
+                                En général, il est conseillé de les déclarer "const".
+                                Elles prennent habituellement, soit le nom de l'attribut, soit "get_" suivi du nom de l'attribut.
+                                <u>Les setters doivent permettre de modifier la valeur d'un attribut dans une classe</u>.
+                                Généralement, elles commencent par "set_" pour se démarquer des autres méthodes.
+                                L'avantage est d'avoir une interface pour la modification ou la récupération d'un attribut, permettant de rendre tout cela plus modulable.
+                            </p>
+                            <p id="part_A_c_4">
+                                En respectant tout ça, nous pouvons re-définir notre classe "Person" :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", utilisant un age par défaut et le passant à un autre constructeur</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person() : Person(40) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Supression d'une instance" &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Retourne l'age de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int age() const { return a_age; };</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Modifie l'age de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void set_age(unsigned int new_age) { a_age = new_age; };</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
                             </p>
                         </div>
                     </div>
