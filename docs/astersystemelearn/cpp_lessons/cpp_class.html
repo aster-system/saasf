@@ -106,21 +106,119 @@
                         </h3>
                         <div>
                             <p id="part_A_b_1">
-                                <u>Les attributes de classes doivent être définies dans la classe, comme des variables normales</u> :
+                                <span class="important">Les attributs de classes doivent être définies dans la classe, comme des variables normales</span> :
                                 <div class="code_sample">
-                                    class Personne {</br>
+                                    class Person {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Méthode permettant d'afficher l'âge de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void afficher_age() {</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Cette personne a " &lt;&lt; a_age &lt;&lt; " ans." &lt;&lt; endl;</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int a_age = 40;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
                                     };
                                 </div>
                                 Dans cette exemple, je définis "a_age" à 40, qui sera la valeur pas défaut pour chaque instance de la classe, tant qu'elle ne sera pas modifiée.
                                 Il est conseillé d'ajouter "a_" au début des noms d'attributs, "a_" comme "attribut", pour les différencier des autres variables.
                                 Il est important de noter que l'ordre dans lequel est écrit les attributs et méthodes n'influent en rien dans la classe, les attributs étant toujours déclarés avant par le compiler.
+                            </p>
+                            <p id="part_A_b_2">
+                                <span class="important">Les méthodes de classes doivent être définies dans la classe, comme des fonctions normales</span> :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Méthode permettant d'afficher l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void show_age() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "This person is " &lt;&lt; a_age &lt;&lt; " years old." &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                Les attributs sont directement utilisables dans les méthodes.
+                                <u>Il est possible de définir des méthodes constantes avec "const", si elles ne modifient pas directement l'objet</u>, comme pour "show_age" :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Méthode non-constante permettant de modifier l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void set_age(unsigned int new_age) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_age = new_age;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Méthode constante permettant d'afficher l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void show_age() const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "This person is " &lt;&lt; a_age &lt;&lt; " years old." &lt;&lt; endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                <u>Seules les méthodes "const" peuvent être utilisées sur une instance constante de la classe</u>.
+                                <u>Parmis toutes les méthodes, il y en a deux très spéciales : le constructeur et le destructeur de classe</u>.
+                            </p>
+                            <p id="part_A_b_3">
+                                Parmis les méthodes spéciales, <span class="important">le constructeur de classe est une méthode appelé lors de la création d'une instance, et le destructeur est appelé lors de sa destruction</span>.
+                                Elles ne retournent rien, même pas "void", et se définissent comme ça :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// L'age est modifié directement lors de la création de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_age = age;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                Les paramètres passés au constructeur doivent être utilisé lors de la création de l'instance :
+                                <div class="code_sample">
+                                    // Création d'une personne de 17 ans</br>
+                                    Person person_1(17);</br></br>
+                                    // Autre manière d'utiliser le constructeur, ici pour créer une personne de 41 ans</br>
+                                    Person person_2 = Person(41);
+                                </div>
+                                Il est d'ailleurs possible de modifier une valeur via le constructeur de manière encore plus direct :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                Cette façon de faire est obligatoire pour définir les attributs constants.
+                                Vous pouvez aussi déclarer plusieurs constructeurs différents selon leurs paramètres, qui peuvent même s'appeler entre eux, de la même façon que la définition directe des variables :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", utilisant un age par défaut et le passant à un autre constructeur</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person() : Person(40) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                Les deux constructeurs sont utilisables dans les instances :
+                                <div class="code_sample">
+                                    // Création d'une personne de 17 ans</br>
+                                    Person person_1(17);</br></br>
+                                    // Création d'une personne sans age spécifié, qui sera donc de 40 par défaut</br>
+                                    Person person_2;
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Le principe d'encapsulation
+                        </h3>
+                        <div>
+                            <p id="part_A_c_1">
+                                Avant de pouvoir utiliser pleinement notre classe, <u>il nous manque un principe extrêmement important : l'encapsulation</u>.
+                                En effet, avec les méthodes, <span class="important">chaque instance de classe peut avoir une interface simple de gestion de l'instance, sans passer par les attributs</span>.
+                                Par exemple, des opérations complexes sur les attributs peuvent être directement gérées via des méthodes, ce qui rend l'utilisation de la classe très simple pour l'utilisateur.
+                                <span class="important">Ce principe de simplification de l'utilisation de classe est nommé le principe d'encapsulation : ne rendre accessible que ce qui est nécessaire, et laisser le reste encapsuler dans la classe</span>.
+                            </p>
+                            <p id="part_A_c_2">
+                                <u>Pour séparer ce que vous voulez rendre accessible dans la classe et ce que vous ne voulez pas rendre accessible, il existe trois mots clés : "public", "protected" et "private"</u>.
+                                <span class="important">Tout ce qui est déclaré après "public" est accessible via une instance, tandis que ce qui est déclaré après "private" ne l'est pas hors des méthodes de classes</span>.
+                                "protected" est utilisé pour les classes héritées, que nous verrons plus tard.
                             </p>
                         </div>
                     </div>
