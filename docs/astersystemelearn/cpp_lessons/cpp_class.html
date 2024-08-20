@@ -149,7 +149,8 @@
                                     };
                                 </div>
                                 <u>Seules les méthodes "const" peuvent être utilisées sur une instance constante de la classe</u>.
-                                <u>Parmis toutes les méthodes, il y en a deux très spéciales : le constructeur et le destructeur de classe</u>.
+                                Chaque classe contient quelques méthodes de bases, que nous examinerons plus tard.
+                                <u>Parmis toutes les méthodes de bases, il y en a deux très spéciales et importantes : le constructeur et le destructeur de classe</u>.
                             </p>
                             <p id="part_A_b_3">
                                 Parmis les méthodes spéciales, <span class="important">le constructeur de classe est une méthode appelé lors de la création d'une instance, et le destructeur est appelé lors de sa destruction</span>.
@@ -312,20 +313,36 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
                                     public:</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", utilisant un age par défaut et le passant à un autre constructeur</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person();</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person() : Person(40) {};</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {};</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Retourne l'age de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int age() const;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inline unsigned int age() const { return a_age; };</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Modifie l'age de la personne</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void set_age(unsigned int new_age);</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inline void set_age(unsigned int new_age) { a_age = new_age; };</br></br>
                                     private:</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
                                     };
                                 </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Le polymorphisme et l'héritage
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3 id="part_B_a">
+                            a. Quand une classe... peut en être une autre
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Comme je l'ai déjà écrit, <u>le C++ est découpé en plusieurs types différents, certains primaires, et d'autres non</u>.
                             </p>
                         </div>
                     </div>
