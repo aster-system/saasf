@@ -343,6 +343,15 @@
                         <div>
                             <p id="part_A_a_1">
                                 Comme je l'ai déjà écrit, <u>le C++ est découpé en plusieurs types différents, certains primaires, et d'autres non</u>.
+                                Cependant, <u>un type peut contenir des données parfaitement similaires à un autre, par exemple si l'un est juste une version spécifique de l'autre</u>.
+                                Par exemple, notre type "Person" représente une personne quelconque, et contient des données sur cette personne.
+                                Cependant, un potentiel type "Developer" devrait contenir des informations sur le métier du dévelopeur, mais aussi sur la personne qu'est le développeur, déjà contenu dans "Person".
+                                <span class="important">Le système de classe offre un moyen de créer un type dérivant d'un autre, grâce au système de polymorphisme</span>.
+                                Avec ça, on peut créer notre classe "Developer", contenant ses propres attributs et membres, mais aussi ceux de "Person".
+                                Dans ce cas, <span class="important">une instance de "Developer" pourra être interprétée comme un instance de "Person" par le compiler (même si l'inverse n'est pas vraie)</span>.
+                                Quand une classe "B" dérive d'une classe "A", <u>on dit que la classe "B" est héritée de "A"</u>.
+                                Ce système marche autant de fois qu'on ne le veut, avec par exemple la classe "C" qui hérite de "B", "D" qui hérite de "C"...
+                                Toutes dériveront de "A", toutes sauf "B" dériveront de "B", toutes sauf "B" et "C" dériveront de "C"...
                             </p>
                         </div>
                     </div>
