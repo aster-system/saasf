@@ -341,7 +341,7 @@
                             a. Quand une classe... peut en être une autre
                         </h3>
                         <div>
-                            <p id="part_A_a_1">
+                            <p id="part_B_a_1">
                                 Comme je l'ai déjà écrit, <u>le C++ est découpé en plusieurs types différents, certains primaires, et d'autres non</u>.
                                 Cependant, <u>un type peut contenir des données parfaitement similaires à un autre, par exemple si l'un est juste une version spécifique de l'autre</u>.
                                 Par exemple, notre type "Person" représente une personne quelconque, et contient des données sur cette personne.
@@ -349,9 +349,136 @@
                                 <span class="important">Le système de classe offre un moyen de créer un type dérivant d'un autre, grâce au système de polymorphisme</span>.
                                 Avec ça, on peut créer notre classe "Developer", contenant ses propres attributs et membres, mais aussi ceux de "Person".
                                 Dans ce cas, <span class="important">une instance de "Developer" pourra être interprétée comme un instance de "Person" par le compiler (même si l'inverse n'est pas vraie)</span>.
-                                Quand une classe "B" dérive d'une classe "A", <u>on dit que la classe "B" est héritée de "A"</u>.
+                                Quand une classe "B" dérive d'une classe "A", <u>on dit que la classe "B" est héritée de "A", et que "A" est la classe parent de "B"</u>.
                                 Ce système marche autant de fois qu'on ne le veut, avec par exemple la classe "C" qui hérite de "B", "D" qui hérite de "C"...
-                                Toutes dériveront de "A", toutes sauf "B" dériveront de "B", toutes sauf "B" et "C" dériveront de "C"...
+                                Toutes hériteront de "A", toutes sauf "B" hériteront de "B", toutes sauf "B" et "C" hériteront de "C"...
+                            </p>
+                            <p id="part_B_a_2">
+                                Pour qu'une classe hérite d'une autre, la syntaxe est très simple :
+                                <div class="code_sample">
+                                    class Developer : public Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un développeur, héritant de "Person"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Developer", modifiant directement la valeur de l'age et du language</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developer(unsigned int age, std::string language) : Person(age), a_language(language) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Developer", utilisant un age et un language par défaut et le passant à un autre constructeur</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developer() : Developer(40) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Developer"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Developer() {};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "std::string", contenant le language pratiqué par le développeur</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string a_language = "C++";</br>
+                                    };
+                                </div>
+                                Il suffit de rajouter ": public Classe_Parent" après le "class Nom_De_La_Classe".
+                                Nous verrons les propriétés du mot "public" ici dans quelques instants.
+                                <span class="important">Il est à noter ici que, dans le constructeur de "Developer", on appelle le constructeur de la classe parent "Person", pour directement construire la partie "Person" de "Developer"</span>.
+                            </p>
+                            <p>
+                                <span class="important">L'énorme avantage du polymorphisme est la possibilité d'utiliser une instance de "Developer" comme une instance de "Person", par exemple comme ça</span> :
+                                <div class="code_sample">
+                                    // Fonction qui retourne si une personne est majeure ou pas</br>
+                                    bool is_major(const Person& person) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return person.age() >= 18;</br>
+                                    };</br></br>
+                                    // Fonction main du programme</br>
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developer dev(14, "Javascript");</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(is_major(dev)) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "This developer is major." &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "This developer is minor." &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    };
+                                </div>
+                                En effet, <u>"Developer" héritant de "Person", on peut très bien l'utiliser comme une "Person", permettant de créer un type global pour certaines actions, qu'on peut spécialiser en sous-types pour d'autres actions</u>.
+                                <span class="important">Cela est possible grâce à un procédé nommé l'héritage des membres</span>.
+                            </p>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. L'héritage des membres de classe
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                Comment ce fait-il que, dans l'exemple précédent, j'ai pu utiliser la méthode "age" de "Developer", alors qu'elle n'ai pas déclaré dans la classe "Developer" ?
+                                La réponse : <span class="important">une classe qui hérite d'une autre hérite aussi de ses méthodes et attributs</span>.
+                                <u>Ils sont donc utilisables dans la classe qui hérite d'eux</u>.
+                                En fait, <u>je n'ai pas utiliser la méthode "age" de "Developer", mais celle de "Person", puis ce que "Developer" a hérité de tout le nécessaire pour l'utiliser</u>.
+                                C'est d'ailleurs pour cela qu'on peut aussi utiliser le constructeur de "Person" dans celui de "Developer".
+                            </p>
+                            <p id="part_B_b_2">
+                                Malgré tout cela, <u>il faut garder en tête le principe d'encapsulation, qui joue un rôle très important ici aussi</u>.
+                                En effet, <span class="important">le petit mot entre le ":" et le nom de la classe parent représente la façon dont les méthodes définis publics dans la classe parent vont être dans la classe enfant</span>.
+                                En général, il s'agit de "public", permettant un accés public aux méthodes publics du parent.
+                                De plus, <span class="important">tout ce qui est défini en tant que "private" dans la classe parent n'est pas accessible dans la classe enfant (bien qu'elle en hérite bel et bien), de quelque manière que ce soit</span>.
+                                <u>Il est cependant possible de passer outre ce problème avec le mot clé "protected", déjà mentionné un peu plus haut</u>.
+                                <span class="important">Tout ce qui est défini en tant que "protected" dans la classe parent est accessible dans ses classes enfants en tant que "private"</span>.
+                                Grâce à tout cela, le principe d'encapsulation est respecté sans problèmes.
+                            </p>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. L'abstraction de méthodes en C++
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                Si l'héritage de méthode ne semble pas assez puissant comme ça, <u>on peut encore le rendre plus puissant, avec le concept d'abstraction</u>.
+                                <span class="important">L'abstraction est un principe permettant de définir (ou re-définir) une méthode héritée différement dans une classe enfant</span>.
+                                L'avantage de ce principe est que, <u>pour une instance d'une classe enfant, quelque soit la manière dont la méthode est appelée, la méthode de la classe enfant a lieu à la place de celle de la classe parent</u>.
+                                Un exemple d'utilisation est de créer une méthode générale pour une classe parente de plein d'autres classes, et de pouvoir re-définir les méthodes dans les classes enfants pour ne pas avoir à créer plein de méthodes différentes et complexes sans intêret.
+                                <span class="important">Il existe cependant un moyen d'appeller la méthode défini comme dans la classe parent, en utilisant la syntaxe "Nom_De_La_CLasse_Parent::methode"</span>.
+                                Comme ça, vous pouvez définir un comportement générale et nécessaire dans la classe parent, et spécifier les comportements dans les classes enfants.
+                            </p>
+                            <p id="part_B_c_2">
+                                Cependant, cela n'est pas possible avec toutes les méthodes.
+                                En effet, <span class="important">cela n'est possible qu'avec un certain type de méthodes de la classe parent, nommées les méthodes virtuels</span>.
+                                <u>Elles se définissent avec le mot clé "virtual" écrit avant le nom de la fonction</u> :
+                                <div class="code_sample">
+                                    class Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une personne</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Person", modifiant directement la valeur de l'age</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person(unsigned int age) : a_age(age) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Person"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Person() {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Retourne le travail de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;virtual std::string job() const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return std::string("Unknown");</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "unsigned int", contenant l'âge de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int a_age = 40;</br>
+                                    };
+                                </div>
+                                Comme ça, on peut faire dans la classe enfant :
+                                <div class="code_sample">
+                                    class Developer : public Person {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un développeur, héritant de "Person"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Developer", modifiant directement la valeur de l'age et du language</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developer(unsigned int age, std::string language) : Person(age), a_language(language) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Destructeur de la classe "Developer"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~Developer() {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Retourne le travail de la personne</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;virtual std::string job() const override {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return std::string(a_language + " developer");</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Attribut de type "std::string", contenant le language pratiqué par le développeur</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string a_language = "C++";</br>
+                                    };
+                                </div>
+                                Dans ce cas exact, un attribut "protected" suffirait, mais une méthode virtuelle aussi.
+                                Cependant, <u>la réalisation du travail demandant des actions différentes par classe nécessiterait impérativement une méthode virtuelle</u>.
+                                D'ailleurs, le mot "override" n'est pas obligatoire, mais juste là pour détecter les méthodes héritées de méthodes virtuelles de classes parents (je ne l'utiliserai pas dans la suite du cours).
+                                <u>Faite attention à bien vérifier la syntaxe de ce genre de méthode, pour qu'elles soient exactement similaires, pour éviter les erreurs ou comportements inatendus</u>.
+                            </p>
+                            <p id="part_B_c_3">
+                                D'ailleurs, <span class="important">une des méthodes spéciales que nous avons vu doit toujours être virtuelle : le destructeur</span>.
+                                En effet, quand vous voulez détruire une instance, si qu'une partie de la destruction a lieu, alors vous pourriez avoir des bugs de mémoire.
+                                <u>Avec un destructeur virtuel, tous les destructeurs de toutes les classes parents sont appelé automatiquement (pas besoin de les appeler manuellement)</u>.
+                                <span class="important">Donc, le destructeur doit toujours être virtuel, le compiler s'occupera du reste.</span>
                             </p>
                         </div>
                     </div>
