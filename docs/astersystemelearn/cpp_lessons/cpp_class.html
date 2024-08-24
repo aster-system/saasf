@@ -94,7 +94,7 @@
                                     #include &lt;iostream&gt;</br></br>
                                     using namespace std;</br></br>
                                     int main() {</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; tableau_2(5, 1); // Créer un autre vecteur de nombre entier "int" contenant 5 fois le nombre 1</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;int&gt; tableau_2(5, 1); // Créer un autre vecteur de nombre entier "int" contenant 5 fois le nombre 1</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tableau_2.push_back(10); // Utilisation de la méthode "push_back", pour rajouter "10" au tableau dynamique "tableau_2".</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
                                     }
@@ -432,7 +432,7 @@
                             </p>
                             <p id="part_B_c_2">
                                 Cependant, cela n'est pas possible avec toutes les méthodes.
-                                En effet, <span class="important">cela n'est possible qu'avec un certain type de méthodes de la classe parent, nommées les méthodes virtuels</span>.
+                                En effet, <span class="important">cela n'est possible qu'avec un certain type de méthodes de la classe parent, nommées les méthodes virtuelles</span>.
                                 <u>Elles se définissent avec le mot clé "virtual" écrit avant le nom de la fonction</u> :
                                 <div class="code_sample">
                                     class Person {</br>
