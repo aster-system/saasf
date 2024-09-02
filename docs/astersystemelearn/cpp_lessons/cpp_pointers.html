@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Lecon C++ - Pointeurs</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                II - 3. Les pointeurs en C++
+            </h1>
+            <div>
+                Parmis tous les types fondamentaux en C++, il ne nous en reste plus qu'un à étudier en profondeur : les pointeurs.
+                Ce type est un cauchemar pour les étudiants en informatique, car il est l'un des plus difficile à utiliser dans sa totalité.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Le type "pointeur" en C++
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3 id="part_A_a">
+                            a. Qu'est ce qu'est un pointeur ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Pour comprendre les pointeurs, <u>nous allons avant déchiqueter un autre type que nous avons déjà vu : la référence</u>.
+                                <span class="important">Une référence est un moyen d'accéder à une variable en copiant son adresse mémoire et en y accédant directement via elle</span>.
+                                Pour rappel, nous en avons parler lors du cours sur les variables, <a href="cpp_variables.html">juste ici</a>.
+                                Toutes modification à la référence seront appliquées à la variable référencée (d'où le nom) via l'adresse mémoire.
+                                <u>Il n'y aucun moyen de modifier ou d'utiliser l'adresse mémoire en elle même (sans toucher à la variable référencée), la rendant particulièrement stable, mais aussi assez limité</u>.
+                                Donc, <u>la variable référencée doit l'être à la création de la référence, et ne sera pas modifiable après</u>.
+                                Par exemple, une utilité des références et de référencer en tant qu'attribut de classe une variable global hors de la classe, et de l'utiliser quand même via la référence.
+                                Dans ce cas, comme nous l'avons déjà vu, la référence doit être passée via le constructeur et initialisée dans la classe avec la technique  :
+                                <div class="code_sample">
+                                    Constructeur(type variable_reference): reference(variable_reference) {}
+                                </div>
+                            </p>
+                            <p id="part_A_a_2">
+                                <u>La référence est, en fait, un type précis de pointeur</u>.
+                                <span class="important">En effet, un pointeur est un moyen d'accéder à une variable en copiant son adresse mémoire et en y accédant directement via elle</span>.
+                                Si vous êtes attentif, vous observerez que cette définition est exactement la même que celle de la référence.
+                                En effet, <span class="important">la seule différence entre le pointeur et la référence est que, avec le pointeur, on peut agir sur l'adresse mémoire en elle même (sans toucher à la variable référencée)</span>.
+                                En fait, <u>le pointeur représente plus une manipulation de l'adresse mémoire, qu'une manipulation de la variable pointée (on va utiliser ce terme ici, plutôt que référencée), bien que les deux soit possibles</u>.
+                                Une variable "pointeur" peut pointer vers une autre variable n'importe quel type, selon sa déclaration, qui se fait avec un "*", comme ça :
+                                <div class="code_sample">
+                                    int age = 50;</br>
+                                    int* pointeur_vers_age = &age;</br>
+                                    int *pointeur_vers_age = &age; // La position du "*" n'importe pas ici
+                                </div>
+                                Cependant, avec les références, le compiler pouvait aller chercher l'adresse lui même.
+                                Là, il faut lui attribuer l'adresse de la variable vous même.
+                                <u>Pour accéder à l'adresse d'une variable, il faut rajouter un "&" devant</u>.
+                                Vous pouvez connaître cette adresse grâce à "std::cout" (la valeur sera affiché en héxadécimal) :
+                                <div class="code_sample">
+                                    int age = 50;</br>
+                                    int* pointeur_vers_age = &age;</br>
+                                    std::cout &lt;&lt; "Adresse de la variable : " &lt;&lt; pointeur_vers_age &lt;&lt; std::endl;
+                                </div>
+                                Il est à noter qu'un pointeur, quel qu'il soit, occupe 8 octets dans la mémoire.
+                            </p>
+                            <p id="part_A_a_3">
+                                <u>Si vous utilisez le pointeur directement, vous ne ferez rien sur la variable</u>.
+                                <span class="important">Pour accéder à une simple référence vers la variable (et l'utiliser très simplement), vous devez rajouter "*" devant le nom du pointeur, comme ça </span>:
+                                <div class="code_sample">
+                                    int age = 50;</br>
+                                    int* pointeur_vers_age = &age;</br>
+                                    std::cout &lt;&lt; "Adresse de la variable : " &lt;&lt; pointeur_vers_age &lt;&lt; ", valeur dans la variable : " &lt;&lt; *pointeur_vers_age &lt;&lt; std::endl;</br></br>
+                                    *pointeur_vers_age = 75;</br>
+                                    std::cout &lt;&lt; "Nouvelle valeur de la variable : " &lt;&lt; *pointeur_vers_age &lt;&lt; std::endl;
+                                </div>
+                                Si vous pointez vers une instance de classe (comme la classe "Developer" vu <a href="cpp_class.html">au dernier cours</a>), <u>vous pouvez accéder aux méthodes via le pointeur avec l'aide d'un opérateur : "->" (vous avez juste à remplacer l'opérateur "." par celui ci) :</u>
+                                <div class="code_sample">
+                                    Developer dev = Developer(35, "Javascript");</br>
+                                    Developer* pointeur_dev = &dev;</br>
+                                    std::cout &lt;&lt; pointeur_dev->job() &lt;&lt; std::endl;</br>
+                                    std::cout &lt;&lt; (*pointeur_dev).job() &lt;&lt; std::endl; // Fonctionne aussi (mais presque jamais utilisé)
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Utiliser un pointeur
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                Modifier la variable pointée, c'est bien. Modifier le pointeur directement, c'est mieux.
+                                En effet, <u>bien que cela soit impossible pour les références, on peut modifier plusieurs choses sur le pointeur sans altérer la variable pointée</u>.
+                                Par exemple, <span class="important">on peut modifier la variable pointée dans le pointeur, en modifiant l'adresse dans le pointeur</span>.
+                                Pour cela, c'est très simple :
+                                <div class="code_sample">
+                                    int age = 50;</br>
+                                    int taille = 180;</br></br>
+                                    int* pointeur_vers_age = &age;</br>
+                                    std::cout &lt;&lt; "Adresse de la variable : " &lt;&lt; pointeur_vers_age &lt;&lt; ", valeur de la variable : " &lt;&lt; *pointeur_vers_age &lt;&lt; std::endl;</br>
+                                    // Affiche une adresse et 50</br></br>
+                                    pointeur_vers_age = &taille;</br>
+                                    std::cout &lt;&lt; "Adresse de la variable : " &lt;&lt; pointeur_vers_age &lt;&lt; ", valeur de la variable : " &lt;&lt; *pointeur_vers_age &lt;&lt; std::endl;</br>
+                                    // Affiche une autre adresse (pas très loin de la première) et 180
+                                </div>
+                            </p>
+                            <p id="part_A_b_2">
+                                <u>On peut aussi utiliser des opérations arithmétiques sur des pointeurs</u>.
+                                Cependant, cela n'est pas conseillé dans toutes les situations.
+                                Cependant, <span class="important">une situation sécurisée est assez simple permettant ces opérations est l'utilisation d'itérateurs</span>.
+                                Nous avons déjà vu ce terme lors du cours sur les structures de données, <a href="cpp_algorithm_data_structure.html">juste ici</a>.
+                                En fait, <span class="important">un itérateur est une sorte de pointeur utilisée dans une structure de donnée, qui pointe vers un élément de la structure</span>.
+                                Chaque structures a son propre type d'itérateur, définit dans la classe de la structure en question (par exemple, pour vector, on doit y accéder avec std::vector&lt;Type_Dans_Le_Vecteur&gt;::iterator), avec les mêmes membres que le type <a href="https://cplusplus.com/reference/iterator/iterator/" target="_blank">"iterator"</a>.
+                                Cependant, leur utilisation pour les structures simples est complétèment inutile, assez complexe, et déconseillée (c'est comme utiliser les méthodes en moins bien).
+                                <u>Il est plus intéressant de les utiliser dans des structures plus complexes, comme dans les map</u>.
+                                Par exemple, les itérateurs de map ne pointent pas seulement vers une valeur, mais vers un objet (nommé une <a href="https://cplusplus.com/reference/utility/pair/">pair</a>) contenant la clé et la valeur d'une itération du map à une certaine position (le premier élément ajouté est le premier itérateur, le deuxième est le deuxième itérateur...).
+                                <u>C'est là que les opérations arithmétiques rentrent en jeu</u>.
+                                Voici un petit exemple d'utilisation d'opérations sur les itérateurs :
+                                <div class="code_sample">
+                                    // On crée un map, et on le rempli un peu</br>
+                                    std::map&lt;std::string, int&gt; age;</br>
+                                    age["Lucas"] = 14;</br>
+                                    age["Corentin"] = 27;</br>
+                                    age["Thierry"] = 56;</br></br>
+                                    // On accéde à tous les itérateurs du map en incrémentant un itérateur, et on affiche leur contenu</br>
+                                    for(std::map&lt;std::string, int&gt;::iterator it = age.begin();it!=age.end();it++) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; it->first &lt;&lt; " : " &lt;&lt; it->second &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                En effet, on peut le deviner, mais "age.begin()" représente le premier itérateur, "age.begin() + 1" le deuxième, "age.begin() + 2" le troisième...
+                                <span class="important">Effectuer une addition avec un pointeur permet d'accéder à l'adresse mémoire juste après celle dans le pointeur</span>.
+                                Plus précisément, si le premier pointeur pointe vers un objet de taille X, son addition amène à l'objet X octets après celui là.
+                                <u>Donc, dans le cas des itérateurs utilisés dans les structures de données, les itérateurs sont structurés de telle manière que l'addition d'un itérateur amène au prochain itérateur de la structure</u>.
+                                Si vous trouvez le fonctionnement interne des itérateurs complexe, ne vous inquiétez pas, cela ne nous servira à rien pour l'instant.
+                                Seul l'utilisation externe nous intéresse ici.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
