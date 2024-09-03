@@ -124,6 +124,10 @@
                                     std::cout &lt;&lt; "Adresse de la variable : " &lt;&lt; pointeur_vers_age &lt;&lt; ", valeur de la variable : " &lt;&lt; *pointeur_vers_age &lt;&lt; std::endl;</br>
                                     // Affiche une autre adresse (pas très loin de la première) et 180
                                 </div>
+                                <u>D'ailleurs, une valeur générale pour les pointeurs est la valeur "0"</u>.
+                                <span class="important">Un pointeur de valeur 0 est un pointeur ne pointant vers rien</span>.
+                                Par exemple, si vous créez un pointeur qui pointera vers une variable après sa définition, sa valeur doit être de 0 entre la définition du pointeur et l'attribution de la bonne valeur.
+                                <span class="important">TOUJOURS assigner 0 aux pointeurs ne pointant vers rien, car, si vous ne le faites pas, des erreurs très problématiques peuvent apparaître</span>.
                             </p>
                             <p id="part_A_b_2">
                                 <u>On peut aussi utiliser des opérations arithmétiques sur des pointeurs</u>.
@@ -145,6 +149,7 @@
                                     age["Thierry"] = 56;</br></br>
                                     // On accéde à tous les itérateurs du map en incrémentant un itérateur, et on affiche leur contenu</br>
                                     for(std::map&lt;std::string, int&gt;::iterator it = age.begin();it!=age.end();it++) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Dans un pair de map, "first" représente la clé et "second" la valeur</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; it->first &lt;&lt; " : " &lt;&lt; it->second &lt;&lt; std::endl;</br>
                                     }
                                 </div>
@@ -154,6 +159,60 @@
                                 <u>Donc, dans le cas des itérateurs utilisés dans les structures de données, les itérateurs sont structurés de telle manière que l'addition d'un itérateur amène au prochain itérateur de la structure</u>.
                                 Si vous trouvez le fonctionnement interne des itérateurs complexe, ne vous inquiétez pas, cela ne nous servira à rien pour l'instant.
                                 Seul l'utilisation externe nous intéresse ici.
+                            </p>
+                            <p id="part_A_b_3">
+                                Avec ces définitions des pointeurs, on peut donc modifier la variable pointée facilement.
+                                Cependant, comme nous l'avons vu lors du cours <a href="./cpp_variables.html">sur les variables</a>, <u>certaines variables peuvent être constantes, et ne sont pas modifiables</u>.
+                                <u>Il n'est pas possible d'utiliser un simple pointeur pour ces variables</u>.
+                                Cependant, <span class="important">nous pouvons définir un pointeur qui pointe vers une variable constante, de cette façon</span> :
+                                <div class="code_sample">
+                                    // On crée une variable constante et un pointeur vers cette variable en ajoutant "const" avant</br>
+                                    const int taille = 180;</br>
+                                    const int* pointeur_vers_taille = &taille;
+                                </div>
+                                Vous pouvez aussi définir un pointeur comme ça, même si la variable pointée n'est pas constante (vous ne pourrez pas la modifier avec le pointeur).
+                                Avec cette méthode, <u>nous pouvons toujours modifier l'adresse dans le pointeur comme nous l'avons vu (seul la valeur à l'adresse dans le pointeur n'est pas modifiable)</u>.
+                                <span class="important">Si vous voulez rendre les modifications de la variable pointée possible, mais les modifications de l'adresse contenu imposse, il faut changer le "const" de place</span> :
+                                <div class="code_sample">
+                                    // On crée une variable et un pointeur vers cette variable qui ne pointera jamais autre part que la variable</br>
+                                    int taille = 180;</br>
+                                    int* const pointeur_vers_taille = &taille;</br></br>
+                                    // Vous pouvez aussi combiner les deux (adresse constante et variable pointée constante)</br>
+                                    const int* const pointeur_constant_vers_taille = &taille;
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_a_c">
+                            c. Les dangers des pointeurs
+                        </h3>
+                        <div>
+                            <p id="part_a_c_1">
+                                Vous l'aurez peut être deviné, mais les pointeurs peuvent causer des bugs, voir des crashs dans votre programme.
+                                <span class="important">Les erreurs de pointeurs sont, en général, appelées les erreurs de segmentation (ou segmantation fault)</span>.
+                                <u>L'erreur de segmentation la moins problèmatique est la modification d'une variable via un pointeur pointant vers 0 (donc, ne pointant vers rien)</u>.
+                                Cela provoque un simple crash, sans autre incidents inatendus.
+                                Un moyen d'éviter cette erreur est de rajouter une comparaison à 0 avant l'utilisation, et d'éviter l'utilisation si la valeur du pointeur est de 0 :
+                                <div class="code_sample">
+                                    int* pointeur_vers_taille = 0;</br>
+                                    if(pointeur_vers_taille == 0) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Modification impossible" &lt;&lt; std::endl;</br>
+                                    }</br>
+                                    else {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*pointeur_vers_taille = 170;</br>
+                                    }</br>
+                                </div>
+                            </p>
+                            <p id="part_a_c_2">
+                                Cependant, vous pouvez faire pire avec ces pointeurs.
+                                En effet, <u>même si le pointeur n'est pas video, la variable pointée par le pointeur peut causer des problèmes</u>.
+                                <span class="important">Le premier bug possible est d'accéder / modifier à la mauvaise variable</span>.
+                                Dans ce cas, deux comportements sont possibles.
+                                <u>Si l'adresse pointée est hors des adresses possibles dans le programme, dans les systèmes d'exploitation moderne, le programme plante</u>.
+                                Dans les systèmes d'exploitation peut sécuriser, vous pouvez agir comme vous voulez sur cette adresse, bousillant la donnée s'y trouvant (pouvant être une image d'un autre programme, comme votre mot de passe pour le système).
+                                Dans l'autre cas, <u>l'adresse pointée est dans les adresses accessibles au programme, bousillant toutes les variables du programme se trouvant là</u>.
+                                Avec les syntaxes que nous avons vu, <u>ce cas de figure peut arriver, par exemple, quand le pointeur pointe vers une variable, et que l'on utilise le pointeur hors de la zone de définition de cette variable (donc, quand la variable a été supprimée)</u>.
+                                Le pointeur pointe vers cette adresse lorsque qu'elle existait, or, après sa suppression, une autre variable peut remplacer la variable voulu, sans que le pointeur ne le sache.
+                                <span class="important">Faites donc bien attention à éviter ce genre d'erreur</span>.
                             </p>
                         </div>
                     </div>
