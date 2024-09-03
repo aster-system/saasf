@@ -212,7 +212,74 @@
                                 Dans l'autre cas, <u>l'adresse pointée est dans les adresses accessibles au programme, bousillant toutes les variables du programme se trouvant là</u>.
                                 Avec les syntaxes que nous avons vu, <u>ce cas de figure peut arriver, par exemple, quand le pointeur pointe vers une variable, et que l'on utilise le pointeur hors de la zone de définition de cette variable (donc, quand la variable a été supprimée)</u>.
                                 Le pointeur pointe vers cette adresse lorsque qu'elle existait, or, après sa suppression, une autre variable peut remplacer la variable voulu, sans que le pointeur ne le sache.
-                                <span class="important">Faites donc bien attention à éviter ce genre d'erreur</span>.
+                                <span class="important">Faites donc bien attention à éviter ce genre d'erreur, surtout que le programme ne plante pas toujours avec ce genre d'erreurs</span>.
+                            </p>
+                            <p id="part_a_c_3">
+                                <u>Une autre erreur possible est une utilisation incontrôlée des types avec les pointeurs</u>.
+                                En effet, <span class="important">des pointeurs vers différents types peuvent être interprétés de la même façon par le compiler, créant des erreurs de segmentation avec l'accès au variable</span>.
+                                Cependant, pour qu'une erreur de ce genre arrive, il faut pouvoir convertir un pointeur pointant vers un type en un pointeur convertissant vers un autre type, ce qui n'est pas nécessaire pour l'instant.
+                                <u>Le risque peut en valoir le coût dans certains cas, lorsque l'on veut stocker une adresse mémoire d'une variable, sans connaître son type précis</u>.
+                                En général, on crée une classe parent, qui servira de type pour stocker les variables, qui sera la base de classes, utilisant la technique d'abstraction pour fonctionner de manière plus spécialisé.
+                                Cependant, quand ce n'est pas possible, il faut recourir à une conversion, pour utiliser la variable avec un type spécifique, via les pointeurs.
+                                Reprenons l'exemple des classes "Person" et "Developer", vu au cours sur <a href="./cpp_class.html">les classes et objets</a>.
+                                Imagineons une methode "std::string language()" pour "Developer", qui retourne le language utilisé par le développeur, mais inutilisable dans "Person".
+                                Réalisons une conversion :
+                                <div class="code_sample">
+                                    // Création d'un développeur</br>
+                                    Person dev = Developer(34, "C"); // Possible selon le principe de polymorphisme, vu au derniers cours</br>
+                                    Person* person = &dev;</br></br>
+                                    // On réinterprète le pointeur "Person" vers un pointeur de "Developer" avec "reinterpret_cast"</br>
+                                    // Non-problématique car le pointeur pointe vers une variable crée avec "Developer"</br>
+                                    Developer* dev_pointeur = reinterpret_cast&lt;Developer*&gt;(person);</br>
+                                    std::cout &lt;&lt; dev_pointeur->language() &lt;&lt; std::endl;
+                                </div>
+                                Bon, dans ce cas là, la conversion est complètement inutile, puisque l'on peut directement crée le "Developer" dans une variable déclaré "Developer", au lieu de s'embêter à faire ça.
+                                Cependant, si nous n'avons accès qu'à une version de "Developer" (ou de n'import quelle autre objet) via une adresse de pointeur "Person*", cette technique fonctionne.
+                                <span class="important">Cependant, faites bien attention de ne pas vous tromper de type, pour ne pas provoquer d'erreurs</span>.
+                                D'ailleurs, <u>un pointeur ne pointant vers aucun type (mais contenant quand même une adresse de n'importe quel type) est un pointeur de type "void*", ou la conversion est obligatoire pour l'utilisation (à utiliser avec précaution)</u>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        B. Les mémoires "stack" et "heap"
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3 id="part_B_a">
+                            a. Qu'est ce que sont les mémoires "stack" et "heap" ?
+                        </h3>
+                        <div>
+                            <p id="part_B_a_1">
+                                Le compiler est un outil particulièrement complexe, tellement qu'il nous permet de définir toutes les variables que l'on veut sans problème.
+                                Pour comprendre cette partie, nous allons le décortiquer, grâce à <a href="https://godbolt.org/">Compiler Explorer</a>.
+                                Prenons un très simple code, comme :
+                                <div class="code_sample">
+                                    int main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char variable_1[128];</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int variable_2 = 8;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</br>
+                                    }</br>
+                                </div>
+                                Laissons ce code être converti en assembleur.
+                                Ici, 4 lignes d'assembleur nous intéressent :
+                                <div class="code_sample">
+                                    push&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rbp</br>
+                                    mov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rbp, rsp</br>
+                                    sub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rsp, 24</br>
+                                    mov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD PTR [rbp-4], 8
+                                </div>
+                                Pour comprendre ce que l'on doit comprendre, il va falloir vulgariser, parce que nous ne sommes pas dans un cours d'assembleur.
+                                La première ligne permet d'utiliser la mémoire facilement dans la fonction main, via le mot clé "rbp".
+                                En fait, <u>"rbp" représente un moyen d'accéder à la mémoire que la fonction va utiliser</u>.
+                                Cependant, si l'on crée une autre fonction, on se rend compte que "rbp" est aussi utilisé dans cette fonction.
+                                En fait, <span class="important">le système d'exploitation va permettre à tout le programme d'utiliser une même partie de la mémoire, accessible via "rbp"</span>.
+                                <u>Cette mémoire a une taille fixe, défini grâce à l'instruction "sub" du code assembleur</u>.
+                                La taille précise de la mémoire est de 128 octets, plus le nombre d'octets après l'instruction "sub" (un peu plus que le nombre d'octets nécessaire au programme, pour éviter les bugs).
+                                Calculer la taille précise de la mémoire utilisable ici est une perte de temps (et un exercice extrêmement complexe, à cause de la volatilité du language assembleur), <u>puisque ce qui nous intéresse c'est le terme de fixe</u>.
+                                <span class="important">Cette mémoire fixe utilisable partout dans le programme est nommé la mémoire "stack" (stack pour "pile", car les données sont empilées dans le programme)</span>.
+                                <u>Sa taille et son contenu sont définis pendant la compilation (si vous rajoutez une variable dans le code, la prochaine compilation va le prendre en compte, et redéfinir la taille fixe)</u>.
                             </p>
                         </div>
                     </div>
