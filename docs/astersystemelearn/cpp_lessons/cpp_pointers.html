@@ -204,7 +204,7 @@
                             </p>
                             <p id="part_a_c_2">
                                 Cependant, vous pouvez faire pire avec ces pointeurs.
-                                En effet, <u>même si le pointeur n'est pas video, la variable pointée par le pointeur peut causer des problèmes</u>.
+                                En effet, <u>même si le pointeur n'est pas vide, la variable pointée par le pointeur peut causer des problèmes</u>.
                                 <span class="important">Le premier bug possible est d'accéder / modifier à la mauvaise variable</span>.
                                 Dans ce cas, deux comportements sont possibles.
                                 <u>Si l'adresse pointée est hors des adresses possibles dans le programme, dans les systèmes d'exploitation moderne, le programme plante</u>.
@@ -275,11 +275,37 @@
                                 En fait, <u>"rbp" représente un moyen d'accéder à la mémoire que la fonction va utiliser</u>.
                                 Cependant, si l'on crée une autre fonction, on se rend compte que "rbp" est aussi utilisé dans cette fonction.
                                 En fait, <span class="important">le système d'exploitation va permettre à tout le programme d'utiliser une même partie de la mémoire, accessible via "rbp"</span>.
+                                D'ailleurs, l'instruction "mov" est l'instruction responsable de l'attribution de la variable "variable_2", via "rbp" ("variable_1" est aussi définie, mais comme aucune valeur ne lui est attribuée, alors pas besoin de "mov", juste d'augmenter le nombre après "sub").
                                 <u>Cette mémoire a une taille fixe, défini grâce à l'instruction "sub" du code assembleur</u>.
-                                La taille précise de la mémoire est de 128 octets, plus le nombre d'octets après l'instruction "sub" (un peu plus que le nombre d'octets nécessaire au programme, pour éviter les bugs).
+                                La taille précise de la mémoire est de 128 octets, au quel on additionne le nombre d'octets après l'instruction "sub" (un peu plus que le nombre d'octets nécessaire au programme, pour éviter les bugs).
                                 Calculer la taille précise de la mémoire utilisable ici est une perte de temps (et un exercice extrêmement complexe, à cause de la volatilité du language assembleur), <u>puisque ce qui nous intéresse c'est le terme de fixe</u>.
                                 <span class="important">Cette mémoire fixe utilisable partout dans le programme est nommé la mémoire "stack" (stack pour "pile", car les données sont empilées dans le programme)</span>.
                                 <u>Sa taille et son contenu sont définis pendant la compilation (si vous rajoutez une variable dans le code, la prochaine compilation va le prendre en compte, et redéfinir la taille fixe)</u>.
+                            </p>
+                            <p id="part_B_a_2">
+                                Maintenant, <u>imagineons que nous voulons rajouter des variables dans la mémoire, pendant l'exécution du programme (comme ajouter un élement à une liste)</u>.
+                                Avec cette définition de la mémoire stack, <span class="important">on ne peut pas rajouter cette variable dans la mémoire stack, car sa taille est fixe</span>.
+                                Heuresement, <u>il existe un autre type de mémoire, utilisable librement, sans contrainte de mémoire fixe</u>.
+                                Pour cela, <span class="important">il faut accéder à une mémoire, nommée la mémoire "heap" (tas en français)</span>.
+                                Cependant, elle n'est pas dans la mémoire définie spécialement dans le programme, <u>donc on ne pourra pas y accéder via "rbp"</u>.
+                                <u>On ne pourra y accéder que via son adresse mémoire</u>.
+                                Nous n'allons pas voir d'exemples en Assembleur, car il nous seront inutile ici.
+                            </p> 
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Utiliser le heap en C++
+                        </h3>
+                        <div>
+                            <p id="part_B_b_1">
+                                Pour créer une variable dans le "heap" en C++, <span class="important">il faut utiliser un constructeur primaire du C++ : le constructeur "new", qu'il faut spécifier avant le type a créer</span>.
+                                <u>Ce constructeur retourne l'adresse mémoire de l'espace crée dans le "heap", stockable dans un simple pointeur</u>.
+                                Voici un exemple d'utilisation :
+                                <div class="code_sample">
+                                    int* pointeur = new int(8);
+                                </div>
+                                Il faut obligatoirement utiliser l'assignation avec la technique du "= type(parametre)" pour utiliser new.
+                                Grâce à ça, <u>nous pouvons commencer à manipuler des variables dans le "heap" en C++</u>.
+                                D'ailleurs, c'est la technique utiliser dans les vecteurs pour rajouter des élements.
                             </p>
                         </div>
                     </div>
