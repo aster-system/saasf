@@ -306,6 +306,103 @@
                                 Il faut obligatoirement utiliser l'assignation avec la technique du "= type(parametre)" pour utiliser new.
                                 Grâce à ça, <u>nous pouvons commencer à manipuler des variables dans le "heap" en C++</u>.
                                 D'ailleurs, c'est la technique utiliser dans les vecteurs pour rajouter des élements.
+                                En parlant de structures de données, <span class="important">vous pouvez aussi définir de simples tableaux dans le "heap", avec l'opérateur new[taille_de_la_structure]</span>.
+                                Voici un petit exemple :
+                                <div class="code_sample">
+                                    int* pointeur_vers_tableau = new int[8];
+                                </div>
+                                Vous devrez cependant définir les valeurs dans le tableau vous même après sa création.
+                                De plus, <u>le pointeur renvoyé est, en fait, un itérateur vers le premier élément du tableau dans le "heap", utilisable ici comme un tableau</u>.
+                                <div class="code_sample">
+                                    int* pointeur_vers_tableau = new int[8];</br>
+                                    pointeur_vers_tableau[3] = 45; // Fonctionne parfaitement ici
+                                </div>
+                                D'ailleurs, au cours sur les variable, <a href="./cpp_variables.html">présent juste ici</a>, nous avons parlé du type text "char*".
+                                Ce type s'utilise exactement comme cela, avec des "char" à la place des "int" (et aussi que le compiler peut convertir un texte en guillemet directement en "char*").
+                            </p>
+                            <p id="part_B_b_2">
+                                <u>Imagineons que nous voulons une énorme quantité de données stockée dans un simple tableau d'octets pour une fonction</u>.
+                                Pour des raisons de sécurité, <u>on va le déclarer dans le "heap"</u>, car la taille fixe du "stack" la rend vulnérable aux tableaux trops louds.
+                                Écrivons la fonction :
+                                <div class="code_sample">
+                                    void datas() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;int datas_size = 100000000;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;char* datas = new char[datas_size];</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i&lt;datas_size;i++) datas[i] = 1; // On utilise chaque espace du tableau</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "On a crée un tableau de 100 MO de données." &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                Si nous regardons dans le gestionnaire de ressource, <u>pendant que le programme est dans la fonction (donc, un très bref moment), la mémoire consommée par le programme devrait augmenter de au moins 100 MO</u>.
+                                Cependant, <u>après en être sortie, ces 100 MO n'ont pas disparus</u>.
+                                La raison est assez simple : <span class="important">là où la mémoire dans le "stack" se supprime toute seul, la mémoire dans le "heap" ne se supprime pas toute seule</span>.
+                                <span class="important">Il faut donc le faire vous même, avec un opérateur appliqué sur le pointeur contenant l'objet stocké dans le "heap" : le pointeur "delete" (vous devez placer le pointeur après "delete")</span>.
+                                <u>On dit qu'on libère la mémoire</u>.
+                                Le système d'exploitation effectue automatiquement cette tâche à la fermeture du programme pour la mémoire "heap", mais la place n'est pas accessible pendant l'exécution du programme.
+                                Cependant, <u>dans le cas des tableaux (comme nous venons de faire), il faut utiliser l'opérateur "delete[]"</u>.
+                                Voici une bonne utilisation de "delete" :
+                                <div class="code_sample">
+                                    void datas() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;int* datas_size = new int(100000000);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;char* datas = new char[*datas_size];</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i&lt;*datas_size;i++) datas[i] = 1; // On utilise chaque espace du tableau</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "On a crée un tableau de 100 MO de données." &lt;&lt; std::endl;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;delete datas_size; // Libération de la mémoire</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;delete[] datas;</br>
+                                    }
+                                </div>
+                                <u>Le contrôle de cette opérateur est cependant très peu sécurisé, et faire n'importe quoi avec est très facile</u>.
+                                <span class="important">Faites donc attention à ne pas supprimer une variable dans le "heap" déjà supprimée, ou un pointeur pointant vers 0, ou un pointeur vers une variable dans le "stack"</span>.
+                                <u>Cela pourrait causer des erreurs</u>.
+                                Cependant, il existe un moyen pour éviter la complexe planification de la suppression des pointeurs : laisser une classe s'en charger.
+                            </p>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. Utiliser le heap via les pointeurs partagés
+                        </h3>
+                        <div>
+                            <p id="part_B_c_1">
+                                <u>Le meilleur moyen d'utiliser les variables dans le "heap" est d'utiliser ce que l'on appelle les pointeurs partagé, ou "shared pointers" en anglais</u>.
+                                <span class="important">Les pointeurs partagés consistent en des pointeurs pouvant communiquer entre eux pour savoir quand et comment utiliser "delete" sur une variable, vous épargnant cette tâche</span>.
+                                Pour les utiliser, <u>il faut inclure dans votre programme C++ le fichier &lt;memory&gt;</u>.
+                                La documentation du ficher est disponible <a href="https://en.cppreference.com/w/cpp/header/memory" target="_blank">juste ici</a>.
+                                Nous allons nous intéresser au type <a href="https://en.cppreference.com/w/cpp/memory/shared_ptr" target="_blank">std::shared_ptr</a>, dans l'espace de nom "std", mais aussi un peu à <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr" target="_blank">std::unique_ptr</a> et <a href="https://en.cppreference.com/w/cpp/memory/weak_ptr" target="_blank">std::weak_ptr</a>.
+                            </p>
+                            <p id="part_B_c_2">
+                                Comme les pointeurs classiques, <u>un "shared_ptr" pointe vers un type en particulier, que l'on peut spécifier comme avec les vectors (entre chevrons)</u>.
+                                Voici comment définir un "shared_ptr" :
+                                <div class="code_sample">
+                                    std::shared_ptr&lt;int&gt; pointeur_partage = std::make_shared&lt;int&gt;(8);
+                                </div>
+                                <u>La fonction "make_shared" fonctionne de manière similaire à "new", aux exceptions qu'elle utilise un type entre chevrons, et qu'elle retourne un shared_ptr à copier dans "pointeur_partage"</u>.
+                                <span class="important">La notion de copie peut paraître peu intéressante, mais elle fait cependant toute la force des pointeurs partagés</span>.
+                                <u>C'est la copie entre "shared_ptr" qui permet de les connecter, pour supprimer la variable au bon moment</u>.
+                                En fait, <span class="important">la variable est supprimée quand un "shared_ptr" ne détecte que plus aucun autre "shared_ptr" ne pointe vers elle</span>.
+                                Cette détection se fait grâce à la copie d'un premier "shared_ptr", vers tous les autres.
+                            </p>
+                            <p id="part_B_c_3">
+                                Comme pour les pointeurs, vous ne pouvez pas manipuler directement la variable pointée via le "shared_ptr".
+                                <span class="important">Pour accéder à un simple pointeur vers la variable, vous devez utiliser la méthode "get()"</span>.
+                                Vous pouvez aussi utiliser l'opérateur "->" directement sur lui, pour accéder à la variable directement.
+                                <u>Pour changer l'adresse vers laquelle pointe le pointeur, vous devez utiliser la méthode "reset(nouvelle_adresse)" (si l'adresse ne vient pas d'un autre "shared_ptr"), "reset" sans paramètres (pour pointer vers 0) ou l'opérateur "=" vers un autre "shared_ptr" (l'adresse vient d'un autre "shared_ptr", pour les synchroniser)</u>.
+                                Vous pouvez même avoir le nombre d'autres "shared_ptr" pointant vers la même variable, grâce à la méthode "use_count()".
+                                Voici quelques exemples d'utilisation :
+                                <div class="code_sample">
+                                    std::shared_ptr&lt;int&gt; pointeur_partage_1 = std::make_shared&lt;int&gt;(8);</br>
+                                    std::shared_ptr&lt;int&gt; pointeur_partage_2 = pointeur_partage_1;</br>
+                                    std::cout &lt;&lt; pointeur_partage_1.use_count() &lt;&lt; std::endl; // Affiche "2"</br></br>
+                                    pointeur_partage_2.reset(); // Met "pointeur_partage_2" à 0</br>
+                                    std::cout &lt;&lt; pointeur_partage_1.use_count() &lt;&lt; std::endl; // Affiche "1"</br></br>
+                                    pointeur_partage_1.reset(new int(4)); // Met "pointeur_partage_1" à une nouvelle variable (et supprime la première)</br>
+                                    std::cout &lt;&lt; *pointeur_partage_1.get() &lt;&lt; " : " &lt;&lt; pointeur_partage_1.use_count() &lt;&lt; std::endl; // Affiche "4 : 1"</br>
+                                </div>
+                                Lors de la destruction des pointeurs partagés, la mémoire est libérée correctement.
+                            </p>
+                            <p id="part_B_c_4">
+                                Pour finir, on va jeter un petit coup d'oeil aux pointeurs "weak_ptr" et "unique_ptr".
+                                <span class="important">Un "weak_ptr" est un "shared_ptr", qui ne compte pas dans la détection de "shared_ptr", lors de la suppression de l'un d'eux</span>.
+                                Donc, il ne permet pas de garder une variable dans le temps (la variable peut être supprimer même si lui ne l'est pas), bien qu'il soit informé de sa destruction (grâce à la méthode "expired()").
+                                À l'inverse, <span class="important">un "unique_ptr" est un "shared_ptr", qui n'est pas possible de copier (et donc, qui n'est pas partagé), malgré la suppression de la variable en même temps que sa suppression à lui</span>.
+                                Pour en créer un, il faut utiliser la fonction "make_unique&lt;type&gt;()", et pas "make_shared&lt;type&gt;()".
                             </p>
                         </div>
                     </div>
