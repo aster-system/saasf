@@ -208,7 +208,7 @@
                                 <span class="important">Le premier bug possible est d'accéder / modifier à la mauvaise variable</span>.
                                 Dans ce cas, deux comportements sont possibles.
                                 <u>Si l'adresse pointée est hors des adresses possibles dans le programme, dans les systèmes d'exploitation moderne, le programme plante</u>.
-                                Dans les systèmes d'exploitation peut sécuriser, vous pouvez agir comme vous voulez sur cette adresse, bousillant la donnée s'y trouvant (pouvant être une image d'un autre programme, comme votre mot de passe pour le système).
+                                Dans les systèmes d'exploitation peu sécuriser, vous pouvez agir comme vous voulez sur cette adresse, bousillant la donnée s'y trouvant (pouvant être une image d'un autre programme, comme votre mot de passe pour le système).
                                 Dans l'autre cas, <u>l'adresse pointée est dans les adresses accessibles au programme, bousillant toutes les variables du programme se trouvant là</u>.
                                 Avec les syntaxes que nous avons vu, <u>ce cas de figure peut arriver, par exemple, quand le pointeur pointe vers une variable, et que l'on utilise le pointeur hors de la zone de définition de cette variable (donc, quand la variable a été supprimée)</u>.
                                 Le pointeur pointe vers cette adresse lorsque qu'elle existait, or, après sa suppression, une autre variable peut remplacer la variable voulu, sans que le pointeur ne le sache.
