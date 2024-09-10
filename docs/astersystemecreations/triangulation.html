@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                La triangulation via les coordonnées carthésiennes
+            </h1>
+            <div>
+                Sur ordinateur, pour utiliser une forme 2D ou 3D, vous devez bien évidemment renseigner des informations sur la forme.
+                Une des informations nécessaire est la forme de la forme.
+                Pour obtenir la forme d'une forme, nous devons passer tous les sommets délimitant la forme.
+                Hors, pratiquement tous les formats utilisant ce système demandent des formes simplifiées en triangles.
+                Donc, vous ne pouvez pas passer une forme autre qu'un triangle dans ces formats.
+                Si vous voulez magnier une forme plus complexe, il faut la découper en triangles, opération nommée la "triangulation".
+                Cette page présente l'algorithme de triangulation utilisé dans la première version (et versions supérieures) de l'algorithme SCLS Math "Carl", utilisant en grande partie les coordonénes carthésiennes.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Le nécessaire pour comprendre la page
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <p>
+                            Pour comprendre cette page, des mathématiques niveau première environ sont nécessaires.
+                            Les plus important est le concept de coordonnées carthésiennes.
+                            De bonnes connaissances géométriques sont aussi nécessaires.
+                        </p>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Les principes logiques de cette triangulation
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <h3>
+                            Comment fonctionne une forme 2D ?
+                        </h3>
+                        <div>
+                            <p>
+                                Définissons l'espace 2D.
+                                Cette espace est l'espace où nous travaillerons de A à Z.
+                                Sur cet espace, nous pouvons définir des points, défini comme P(Px, Py) où Px est la coordonnée X du point et Py la coordonnée Y du point.
+                                Imagineons un ensemble de points, contenant au minimum 3 points, en supposant que chaque points forment deux segments, partant des prochain et dernier points.
+                                Dans cette ensemble, passer après le dernier élément de l'ensemble correspond à revenir au début de l'ensemble.
+                                La forme ne doit pas se superposer à un quelconque point et doit être pleine.
+                                Ici chaque segments est nommé un côté de la forme et chaque points un sommet de la forme.
+                            </p>
+                            <p>
+                                Une forme constitué de 3 côtés est nommé un triangle.
+                                Nous pouvons aussi passer d'un triangle à une forme à 4 côtés : un rectangle.
+                                Pour cela, il nous suffit d'ajouter un point entre deux autres points, et le tour est joué.
+                                Hors, si cette opération est valide, alors nous pouvons relier le nouveau point avec les deux points autour de lui, mais l'opération de relier les deux points autour de lui est toujours possible.
+                                Dans ce cas, nous formons un nouveau triangle avec les deux points entres lesquelles nous avons ajouter le nouveau point, et le nouveau point.
+                                En fait, une façon de décrire l'opération est que nous avons coller 2 triangles entre eux, pour former le carré.
+                                Donc, ce carré peut être subdivisé entre ces deux triangles, et est donc triangulable.
+                                En fait, nous pouvons généraliser cette opération à n'importe quel côté de n'importe quel forme.
+                                Donc, selon le principe de récurrence, toutes les formes 2D sont triangulables.
+                                Comme il existe autant de façon de tracer le nouveau triangle ajouté à la forme que de côté entre lequel placer le nouveau point, alors nous pouvons imaginer une énorme quantité de triangulation, toutes valables.
+                            </p>
+                        </div>
+                        <h3>
+                            Trouver les triangles pour la triangulation
+                        </h3>
+                        <div>
+                            <p>
+                                Quand vous dessinez une quelconque forme, en général, vous ne la dessinez pas triangulée, mais entière.
+                                Si je vous demande de trianguler une quelconque forme, vous pourrez le faire facilement, ou un peu plus difficilement selon votre habilité géométrique.
+                                Pour trianguler la forme, vous pouvez placer par un algorithme.
+                                Cependant, cette algorithme se doit d'être très précis, pour ne pas comporter d'erreurs grossières.
+                                Cette algorithme prend en entrée l'ensemble de points à étudier, et doit ressortir un ensemble de point triangulé (donc, l'ordre des points correspond à l'ordre de traçage de la forme pour qu'elle soit triangulée).
+                                Comme nous avons raisonné par récurrence pour la démonstration, nous ferons de m^me pour l'algorithme.
+                            </p>
+                            <p>
+                                <ul>
+                                    <li>
+                                        Variable d'entrée : ensemble de points Ep
+                                    </li>
+                                    <li>
+                                        Répéter la taille d'Ep fois avec indice à 0, incrémenté à chaque tour :
+                                        <ul>
+                                            <li>
+                                                Définir P1 comme le point d'indice indice
+                                            </li>
+                                            <li>
+                                                Définir P2 comme le point d'indice indice + 1
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Application mathématique
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <h3>
+                            Calculer les coordonnées carthésiennes
+                        </h3>
+                        <div>
+                            Pour chaque côtés, nous cherchons une forme carthésienne de ces données, tel que:</br>
+                                <math>
+                                    <ms>ax</ms><mo>+</mo><ms>by</ms><mo>+</mo><ms>c</ms><mo>=</mo><mn>0</mn>
+                                </math></br>
+                                Pour une droite "d", nous pouvons trouver son équation carthésienne, grâce à un de ses vecteurs directeurs.
+                                Pour un segment délimité par deux points P1 et P2, nous pouvons récupérer un vecteur directeur V via la différence de P1 à P2 :</br>
+                                <math>
+                                    <ms>V</ms><mo>=</mo><ms>(</ms><mfrac><ms>P2x - P1x</ms><mn>2</mn></mfrac><mo>,</mo><mfrac><ms>P2y - P1y</ms><mn>2</mn></mfrac><ms>)</ms>
+                                </math></br>
+                                Nous savons que un vecteur directeur de "d" peut s'écrire sous la forme :</br>
+                                <math>
+                                    <ms>V</ms><mo>=</mo><ms>(-b</ms><mo>,</mo><ms>a)</ms>
+                                </math></br>
+                                Donc :</br>
+                                <math><ms>-b</ms><mo>=</mo><mfrac><ms>P2x - P1x</ms><mn>2</mn></mfrac><mo>≡</mo><ms>b</ms><mo>=</mo><ms>-</ms><mfrac><ms>P2x - P1x</ms><mn>2</mn></mfrac></math></br>
+                                <math><ms>a</ms><mo>=</mo><mfrac><ms>P2y - P1y</ms><mn>2</mn></mfrac></math></br>
+                                Cela étant dit, nous pouvons trouver la valeur de c, en appliquant la formule à un des points du segment, comme P1 :</br>
+                                <math><ms>aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>+</mo><ms>c</ms><mo>=</mo><mn>0</mn><mo>≡</mo><ms>aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>=</mo><ms>-c</ms><mo>≡</mo><ms>-aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>=</mo><ms>c</ms></math></br>
+                                Grâce à ces formules, nous pouvons obtenir les coordonnées carthésiennes de n'importe quel côté.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
