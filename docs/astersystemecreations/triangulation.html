@@ -88,6 +88,26 @@
                                 En fait, nous pouvons généraliser cette opération à n'importe quel côté de n'importe quel forme.
                                 Donc, selon le principe de récurrence, toutes les formes 2D sont triangulables.
                                 Comme il existe autant de façon de tracer le nouveau triangle ajouté à la forme que de côté entre lequel placer le nouveau point, alors nous pouvons imaginer une énorme quantité de triangulation, toutes valables.
+                                Cependant, le segment tracé par les deux points servant de base du triangle doivent respecter certains conditions.
+                                Premièrement, il ne doit pas traverser la frontière de la forme, et donc, soit rester entièrement dedans, soit rester entièrement dehors.
+                                Deuxièmement, il faut s'assurer que le point au milieu du segment se situe bien dans la figure, et que le segment est donc entièrement dans la forme.
+                            </p>
+                        </div>
+                        <h3>
+                            Comment étudier un segment ?
+                        </h3>
+                        <div>
+                            <p>
+                                Pour étudier un segment, nous allons utiliser un outil mathématique nommé "son équation carthésienne".
+                                Grâce à cette équation, nous pourrons mathématiquement trouver le point sécant de ce segment et de n'importe quel autre segment.
+                                Grâce à ça, nous pourrons vérifier si le segment traverse les frontières de la forme, en le comparant à tous les segments formant la frontière de la forme.
+                                Avec cette outil, nous pouvons aussi étudier se situe dans une forme ou pas.
+                                Pour cela, nous définissons un segment correspondant à un segment horizontal du point.
+                                En suite, nous regardons combien de fois la frontière de la forme est traversée au dessus du point sur le segment.
+                                En effet, si le point se situe dans la forme, alors nous trouverons un nombre impair de points sécants.
+                                En effet, sur cette ligne, nous trouverons des pairs de points, correspond à l'entrée et la sortie du segment, en sachant que les deux peuvent être confondues.
+                                Donc, si le point est dans la forme, alors il doit être entre une ouverture et une fermeture du segment, et donc n'en détecter qu'une seule au dessus de lui.
+                                On peut en suite détecter autant de pair que possible, ça ne change pas le fait que 2n + 1 est impair, et le point est donc dans la forme
                             </p>
                         </div>
                         <h3>
