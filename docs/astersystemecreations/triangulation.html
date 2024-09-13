@@ -128,17 +128,185 @@
                                         Variable d'entrée : ensemble de points Ep
                                     </li>
                                     <li>
-                                        Répéter la taille d'Ep fois avec indice à 0, incrémenté à chaque tour :
+                                        Définir Ea comme l'ensemble de points Ep modifiable dans l'algorithme
+                                    </li>
+                                    <li>
+                                        Définir Pfinal comme l'ensemble des points dans l'ordre triangulé
+                                    </li>
+                                    <li>
+                                        Répéter la taille d'Ep - 2 fois avec indice à 0, incrémenté à chaque tour :
                                         <ul>
                                             <li>
-                                                Définir P1 comme le point d'indice indice
+                                                Définir P1 comme le point d'indice indice dans Ea
                                             </li>
                                             <li>
-                                                Définir P2 comme le point d'indice indice + 1
+                                                Définir P2 comme le point d'indice indice + 1 dans Ea
+                                            </li>
+                                            <li>
+                                                Définir P3 comme le point d'indice indice + 1 dans Ea
+                                            </li>
+                                            <li>
+                                                Définir Pm comme le milieu de P1 - P3
+                                            </li>
+                                            <li>
+                                                Si Pm est dans la forme de Ep, incrémenter indice et revenir au début de la boucle
+                                            </li>
+                                            <li>
+                                                Si le segment P1 - P3 traverse la frontière dans la forme de Ep, incrémenter indice et revenir au début de la boucle
+                                            </li>
+                                            <li>
+                                                Rajouter le triangle P1 - P2 - P3 à Pfinal
+                                            </li>
+                                            <li>
+                                                Supprimer P3 de l'ensemble Ea, vu que son triangle est dorénavant connu
+                                            </li>
+                                            <li>
+                                                Mettre indice à 0
+                                            </li>
+                                        </ul>
+                                        <li>
+                                            Définir P1 comme le point d'indice indice
+                                        </li>
+                                        <li>
+                                            Définir P2 comme le point d'indice indice + 1
+                                        </li>
+                                        <li>
+                                            Définir P3 comme le point d'indice indice + 1
+                                        </li>
+                                        <li>
+                                            Rajouter le dernier triangle P1 - P2 - P3 à Pfinal
+                                        </li>
+                                        <li>
+                                            Retourner en sortie Pfinal
+                                        </li>
+                                    </li>
+                                </ul>
+                                Ici, il nous reste deux opérations à définir : "est dans la forme" et "traverse la frontière".
+                            </p>
+                            <h3>
+                                Les algorithmes "est dans la forme" et "traverse la frontière"
+                            </h3>
+                            <p>
+                                Pour commencer, nous devons trouver un algorithme permettant de savoir où deux lignes se croisent, grâce à deux de leur point :
+                                <ul>
+                                    <li>
+                                        Variable d'entrée : points Pl1_1, Pl1_1, Pl2_1, Pl2_2
+                                    </li>
+                                    <li>
+                                        Calculer les coordonnées carthésiennes de la ligne 1 définit par Pl1_1 - Pl1_2
+                                    </li>
+                                    <li>
+                                        Calculer les coordonnées carthésiennes de la ligne 2 définit par Pl2_1 - Pl2_2
+                                    </li>
+                                    <li>
+                                        Définir Cx et Cy, les coordonnées X et Y du point de croisement entre la ligne 1 et la ligne 2, via une résolution d'équation avec les coordonnées carthésiennes
+                                    </li>
+                                    <li>
+                                        Retourner Cx et Cy
+                                    </li>
+                                </ul>
+                                Avec cela fait, nous pouvons donc créer un algorithme pour savoir si deux segments sont sécants :
+                                <ul>
+                                    <li>
+                                        Variable d'entrée : points Pl1_1, Pl1_1, Pl2_1, Pl2_2
+                                    </li>
+                                    <li>
+                                        Définir Cx et Cy, les coordonnées X et Y du point de croisement entre la ligne 1 et la ligne 2
+                                    </li>
+                                    <li>
+                                        Si ligne 1 verticale, retourner si Cx se situe entre Pl2_1 et Pl2_2
+                                    </li>
+                                    <li>
+                                        Si ligne 2 verticale, retourner si Cx se situe entre Pl1_1 et Pl1_2
+                                    </li>
+                                    <li>
+                                        Si ligne 1 horizontale, retourner si Cy se situe entre Pl2_1 et Pl2_2
+                                    </li>
+                                    <li>
+                                        Si ligne 2 horizontale, retourner si Cy se situe entre Pl1_1 et Pl1_2
+                                    </li>
+                                    <li>
+                                        Retourne si Cy se situe entre Pl1_1 et Pl1_2 et entre Pl2_1 et Pl2_2
+                                    </li>
+                                </ul>
+                                Maintenant que cela est fait, nous pouvons donc savoir si un segment traverse une frontière de forme :
+                                <ul>
+                                    <li>
+                                        Variable d'entrée : points P1, P2, ensemble de point à tester Ep
+                                    </li>
+                                    <li>
+                                        Répéter la taille d'Ep - 2 fois avec indice à 0, incrémenté à chaque tour :
+                                        <ul>
+                                            <li>
+                                                Définir Pe1 comme le point d'indice indice dans Ep
+                                            </li>
+                                            <li>
+                                                Définir Pe2 comme le point d'indice indice + 1 dans Ep
+                                            </li>
+                                            <li>
+                                                Si la ligne P1 - P2 traverse la ligne Pe1 - Pe2, retourner "vrai"
                                             </li>
                                         </ul>
                                     </li>
+                                    <li>
+                                        Définir Pe1 comme le dernier point dans Ep
+                                    </li>
+                                    <li>
+                                        Définir Pe2 comme le premier point dans Ep
+                                    </li>
+                                    <li>
+                                        Si la ligne P1 - P2 traverse la ligne Pe1 - Pe2, retourner "vrai"
+                                    </li>
+                                    <li>
+                                        Retourner "faux", car aucun contact n'a été détecté
+                                    </li>
                                 </ul>
+                                Et finalement, nous pouvons savoir si un point se situe dans une forme :
+                                <ul>
+                                    <li>
+                                        Variable d'entrée : points P1, ensemble de point à tester Ep
+                                    </li>
+                                    <li>
+                                        Définir P2 comme le point situé à 1 unité au dessus de P1
+                                    </li>
+                                    <li>
+                                        Définir N comme le nombre de contact de la frontière au dessus de P1
+                                    </li>
+                                    <li>
+                                        Répéter la taille d'Ep - 2 fois avec indice à 0, incrémenté à chaque tour :
+                                        <ul>
+                                            <li>
+                                                Définir Pe1 comme le point d'indice indice dans Ep
+                                            </li>
+                                            <li>
+                                                Définir Pe2 comme le point d'indice indice + 1 dans Ep
+                                            </li>
+                                            <li>
+                                                Si la ligne P1 - P2 ne traverse pas la ligne Pe1 - Pe2, incrémenter indice et retourner au début de la boucle
+                                            </li>
+                                            <li>
+                                                Si le point d'impact entre P1 - P2 et Pe1 - Pe2 se situe au dessus de P1, incrémenter N de 1
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Définir Pe1 comme le dernier point dans Ep
+                                    </li>
+                                    <li>
+                                        Définir Pe2 comme le premier point dans Ep
+                                    </li>
+                                    <li>
+                                        Si la ligne P1 - P2 ne traverse pas la ligne Pe1 - Pe2, incrémenter indice et retourner au début de la boucle
+                                    </li>
+                                    <li>
+                                        Si le point d'impact entre P1 - P2 et Pe1 - Pe2 se situe au dessus de P1, incrémenter N de 1
+                                    </li>
+                                    <li>
+                                        Retourner si N est impair
+                                    </li>
+                                </ul>
+                                Grâce à tout cela, nous savons comment implémenter tout cela.
+                                Plus qu'à traduire cette algorithme en langage mathématique.
                             </p>
                         </div>
                     </div>
