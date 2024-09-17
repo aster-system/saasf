@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                II - 4. Les templates en C++
+            </h1>
+            <div>
+                Si j'ai bien fait mon travail, il n'y a plus grand chose que vous ne comprenez pas, parmis tout ce que nous avons vu.
+                Cependant, il reste un petit quelque chose que nous devons voir.
+                Si vous vous rappelez bien, quand nous avons parlé des vecteurs dans les <a href="./cpp_algorithm_data_structure.html">structures de données</a>, j'avais employé le terme de "template".
+                Je l'ai aussi employé pour les pointeurs partagés, dans le cours sur <a href="./cpp_pointers.html">les pointeurs</a>.
+                Nous allons voir de quoi il s'agit dans ce petit cours.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Les "templates"
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3 id="part_A_a">
+                            a. Que ce qu'est un "template" ?
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Pour l'instant, <u>tout ce que nous avons vu (ou presque) est utilisé par le compiler pour être converti en langage machine</u> (voir <a href="./cpp_organise.html">le cours sur les projets C++ pour plus d'informations</a>).
+                                Donc, le code C++ est directement converti, sans modification.
+                                Or, dans certains cas, cela n'est pas possible.
+                                Par exemple, <u>imagineons créer une classe, représentant un vecteur d'un quelconque type</u>.
+                                Pour rappel, <u>il faut définir le type dans la classe</u>.
+                                Cependant, si nous avons besoin de créer un nouveau type, allons nous rajouter une modification de notre classe, juste pour ce type ?
+                                Ce n'est pas une option viable.
+                                À la place, <span class="important">nous allons ajouter la possibilité de générer du code C++ (dans notre cas, les classes spécifiques nécessaires pour notre liste) pendant la compilation (avant la conversion en code machine), grâce au système de template</span>.
+                            </p>
+                            <p id="part_A_a_2">
+                                En fait, <span class="important">un template permet d'utiliser un bout de code, avec une partie que l'on peut spécifier plus tard dans le code</span>.
+                                Dans le cas du vecteur, le "plus tard dans le code" représente au moment de la définition d'un vecteur.
+                                Pour les templates, <span class="important">la spécification du bout de code doit se situer entre chevrons</span>, comme ça :
+                                <div class="code_sample">
+                                    std::vector&lt;int&gt; numbers;</br>
+                                    std::shared_ptr&lt;std::vector&lt;double&gt;&gt; shared_ptr_towards_vector; // Pointeur partagé vers un vecteur de "double"</br>
+                                </div>
+                                Il faut imaginer ça comme si une nouvelle forme de la classe "vector" utilisant le type "int" se crée dans le code (le linker s'occupe des possibles erreurs de redéfinition).
+                                En général, <u>les templates s'utilisent pour les classes (comme nous l'avons vu), ou pour les fonctions</u>.
+                                Cependant, <span class="important">il faut faire attention à ce que le type que vous spécifiez entre chevron puisse être entièrement utilisé dans la classe / fonction (sans erreur de type "méthode n'est pas déclarée dans type", car aucune vérification n'est effectuée avant la compilation)</span>.
+                                Pour cela, <u>il faut soit utiliser les objets pour des fonctions / classes très génériques, soit utiliser convenablement l'héritage de membres</u>.
+                            </p>
+                            <p id="part_A_a_3">
+                                Dans ce cas là, <u>nous avons utiliser les templates avec des types (l'utilisation la plus courant des templates)</u>.
+                                Cependant, <span class="important">selon la façon dont est définie le template, vous pouvez mettre d'autre valeur litérale dedans, comme des nombres (int ou double)</span>.
+                                Néanmoins, ce cas est assez rare.
+                                Un exemple de classe l'utilisant est la classe <a href="https://en.cppreference.com/w/cpp/utility/bitset/bitset">bitset</a>, permettant d'utiliser un ensemble de bit, dont la taille est définie par template :
+                                <div class="code_sample">
+                                    std::bitset&lt;32&gt; number;</br>
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Crée un template
+                        </h3>
+                        <div></div>
+                            <p id="part_A_b_1">
+                                Créer sa propre utilisation des templates est assez simple.
+                                <u>Pour commencer soft, nous allons premièrement voir l'implémentation via une fonction</u>.
+                                <span class="important">Les templates se déclarent juste avant la déclaration / définition de la fonction, avec le mot clé template couplé à des instructions entre chevrons</span>.
+                                Les instructions entre chevrons dépendent de ce que vous voulez utiliser avec la template.
+                                <u>Pour utiliser un type spécifiable, il faut utiliser l'instruction "typename nom_type_specifiable"</u>.
+                                Nous pouvons l'utiliser dans les paramètres :
+                                <div class="code_sample">
+                                    template &lt;typename T&gt;</br>
+                                    void print(T object) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; T &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                Dans ce cas là, la spécification du type lors de l'appel de la fonction via les chevrons n'est pas utile (le compiler peut le faire tout seul).
+                                Vous pouvez aussi l'utiliser pour un type de retour :
+                                <div class="code_sample">
+                                    template &lt;typename T&gt;</br>
+                                    T number() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return 5;</br>
+                                    }
+                                </div>
+                                Dans ce cas là, la spécification est nécessaire, et le type spécifier doit pouvoir être de valeur 5 (donc un int, un double...).
+                                Vous pouvez aussi utiliser plusieurs types :
+                                <div class="code_sample">
+                                    template &lt;typename T, typename T_2&gt;</br>
+                                    T_2 add_number(T& vecteur, T_2 number) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;number *= 2;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;vecteur.push_back(number);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return number;</br>
+                                    }
+                                </div>
+                                Dans ce cas là, nous utilisons une référence vers le type "T", qui doit pouvoir utiliser la méthode "push_back" avec un type "T_2" (comme un std::vector&lt;T_2&gt;), et "T_2" qui doit pouvoir être multiplié par 2.
+                                Comme ces deux types sont utilsés en argument, aucun des deux n'a besoin d'être spécifié.
+                                Cependant, dans cette exemple :
+                                <div class="code_sample">
+                                    template &lt;typename T, typename T_2&gt;</br>
+                                    T_2 add_number(T& vecteur) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double number = 2;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;vecteur.push_back(number);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return number;</br>
+                                    }
+                                </div>
+                                "T_2" n'est pas automatique, et doit donc être défini.
+                                Or, comme "T_2" est déclaré après "T", il faut définir les deux (comme pour des arguments par défauts de fonctions).
+                                Faite bien attention à comment vous disposer vos templates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
