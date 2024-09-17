@@ -341,6 +341,80 @@
                                 <math><ms>aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>+</mo><ms>c</ms><mo>=</mo><mn>0</mn><mo>≡</mo><ms>aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>=</mo><ms>-c</ms><mo>≡</mo><ms>-aP1x</ms><mo>*</mo><ms>bP2x</ms><mo>=</mo><ms>c</ms></math></br>
                                 Grâce à ces formules, nous pouvons obtenir les coordonnées carthésiennes de n'importe quel côté.
                         </div>
+                        <h3>
+                            Calculer le point de croisement entre deux lignes
+                        </h3>
+                        <div>
+                            Cette étape est peut être la plus compliquée de tout l'algorithme.
+                            L'idée ici est de trouver le point de croisement de deux lignes, via leur coordonnées carthésiennes.
+                            Définissons ce point comme Pc, et donc ses valeurs X et Y comme PcX et PcY.
+                            Pour trouver le point d'intersection entre les lignes, il nous faut un système à 2 inconnus (PcX et Pcy), à deux équations :</br>
+                            <math>
+                                <ms>aPxC</ms><mo>+</mo><ms>bPyC</ms><mo>+</mo><ms>c</ms><mo>=</mo><ms>0</ms>
+                            </math></br>
+                            <math>
+                                <ms>dPxC</ms><mo>+</mo><ms>ePyC</ms><mo>+</mo><ms>f</ms><mo>=</mo><ms>0</ms>
+                            </math></br>
+                            Donc,</br>
+                            <math>
+                                <ms>aPxC</ms><mo>+</mo><ms>bPyC</ms><mo>+</mo><ms>c</ms><mo>=</mo><ms>dPxC</ms><mo>+</mo><ms>ePyC</ms><mo>+</mo><ms>f</ms>
+                            </math></br>
+                            <math>
+                                <mo>&lt;=&gt;</mo><ms>aPxC</ms><mo>-</mo><ms>dPxC</ms><mo>=</mo><ms>ePyC</ms><mo>+</mo><ms>f</ms><mo>-</mo><ms>(bPyC</ms><mo>+</mo><ms>c)</ms><mo>=</mo><ms>PxC(a</ms><mo>-</mo><ms>d)</ms>
+                            </math></br>
+                            <math>
+                                <mo>&lt;=&gt;</mo><ms>PxC</ms><mo>=</mo><mfrac><mrow><ms>ePyC</ms><mo>+</mo><ms>f</ms><mo>-</mo><ms>(bPyC</ms><mo>+</mo><ms>c)</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                            </math></br>
+                            Une fois cet ignoble calcul réalisé, nous avons donc un moyen de remplacer PxC par cette horreur, et donc enlever une inconnu à l'équation :</br>
+                            <math>
+                                <ms>bPyC</ms><mo>+</mo><ms>a</ms><mfrac><mrow><ms>ePyC</ms><mo>+</mo><ms>f</ms><mo>-</mo><ms>(bPyC</ms><mo>+</mo><ms>c)</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac><mo>+</mo><ms>c</ms><mo>=</mo><ms>0</ms>
+                            </math></br>
+                            <math>
+                                <mo>=</mo><ms>bPyC</ms><mo>+</mo><mfrac><mrow><ms>aPyC(e</ms><mo>-</mo><ms>b)</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>+</mo><mfrac><mrow><ms>af</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>-</mo><mfrac><mrow><ms>ac</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>+</mo><ms>c</ms><mo>=</mo><ms>0</ms>
+                            </math></br>
+                            <math>
+                                <mo>&lt;=&gt;</mo><ms>bPyC</ms>
+                                <mo>+</mo><mfrac><mrow><ms>aPyC(e</ms><mo>-</mo><ms>b)</ms></mrow>
+                                <mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>=</mo><mfrac><mrow><ms>ac</ms></mrow>
+                                <mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>-</mo><ms>(</ms><mfrac><mrow><ms>af</ms></mrow><mrow><ms>a</ms><mo>-</mo><ms>d</ms></mrow></mfrac>
+                                <mo>+</mo><ms>c)</ms>
+                            </math></br>
+                            <math>
+                                <mo>&lt;=&gt;</mo><ms>abPyC</ms>
+                                <mo>+</mo><ms>aPyC(e</ms><mo>-</mo><ms>b)</ms>
+                                <mo>-</mo><ms>dbPyC</ms>
+                                <mo>=</mo><ms>ac</ms>
+                                <mo>-</mo><ms>(af</ms><mo>+</mo><ms>ac</ms><mo>-</mo><ms>cd)</ms>
+                                <mo>=</mo><ms>cd</ms><mo>-</mo><ms>af</ms>
+                            </math></br>
+                            <math>
+                                <mo>&lt;=&gt;</mo><ms>PyC</ms>
+                                <mo>=</mo><mfrac><mrow><ms>ad</ms><mo>+</mo><ms>cd</ms></mrow><mrow>
+                                <ms>ab</ms><mo>+</mo><ms>a(e-b)</ms>
+                                <mo>-</mo><ms>db</ms>
+                                </mrow></mfrac>
+                                <mo>=</mo><mfrac><mrow><ms>cd</ms><mo>-</mo><ms>af</ms></mrow><mrow>
+                                <ms>ae</ms>
+                                <mo>-</mo><ms>db</ms>
+                                </mrow></mfrac>
+                            </math></br>
+                            Après cette série de calcul démoniaque, nous arrivons à une expression de PyC particulièrement satisfaisante.
+                            Grâce à celle si, nous pouvons calculer PxC, en appliquant une simple équation, où PyC n'est plus une inconnue :</br>
+                            <math>
+                                <ms>aPxC</ms><mo>+</mo><ms>bPyC</ms><mo>+</mo><ms>c</ms><mo>=</mo><ms>0</ms>
+                            </math></br>
+                            <math>
+                                <ms>PxC</ms><mo>=</mo><mfrac><mrow><mo>-</mo><ms>bPyC</ms><mo>-</mo><ms>c</ms></mrow>
+                                <mrow><ms>a</ms></mrow>
+                                </mfrac>
+                            </math></br>
+                            Nous pouvonns maintenant calculer les points d'intersection des deux lignes.
+                        </div>
                     </div>
                 </div>
             </div>
