@@ -80,7 +80,7 @@
                                 Dans ce cas là, <u>nous avons utiliser les templates avec des types (l'utilisation la plus courant des templates)</u>.
                                 Cependant, <span class="important">selon la façon dont est définie le template, vous pouvez mettre d'autre valeur litérale dedans, comme des nombres (int ou double)</span>.
                                 Néanmoins, ce cas est assez rare.
-                                Un exemple de classe l'utilisant est la classe <a href="https://en.cppreference.com/w/cpp/utility/bitset/bitset">bitset</a>, permettant d'utiliser un ensemble de bit, dont la taille est définie par template :
+                                Un exemple de classe l'utilisant est la classe <a href="https://en.cppreference.com/w/cpp/utility/bitset/bitset" target="_blank">bitset</a>, permettant d'utiliser un ensemble de bit, dont la taille est définie par template :
                                 <div class="code_sample">
                                     std::bitset&lt;32&gt; number;</br>
                                 </div>
@@ -89,16 +89,17 @@
                         <h3 id="part_A_b">
                             b. Crée un template
                         </h3>
-                        <div></div>
+                        <div>
                             <p id="part_A_b_1">
                                 Créer sa propre utilisation des templates est assez simple.
                                 <u>Pour commencer soft, nous allons premièrement voir l'implémentation via une fonction</u>.
                                 <span class="important">Les templates se déclarent juste avant la déclaration / définition de la fonction, avec le mot clé template couplé à des instructions entre chevrons</span>.
                                 Les instructions entre chevrons dépendent de ce que vous voulez utiliser avec la template.
                                 <u>Pour utiliser un type spécifiable, il faut utiliser l'instruction "typename nom_type_specifiable"</u>.
+                                D'ailleurs, le mot clé "typename" peut être remplacé par le mot clé "class", sans que cela ne change quoi que ce soit.
                                 Nous pouvons l'utiliser dans les paramètres :
                                 <div class="code_sample">
-                                    template &lt;typename T&gt;</br>
+                                    template &lt;typename T&gt; // Utilisation de "typename"</br>
                                     void print(T object) {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; T &lt;&lt; std::endl;</br>
                                     }
@@ -106,7 +107,7 @@
                                 Dans ce cas là, la spécification du type lors de l'appel de la fonction via les chevrons n'est pas utile (le compiler peut le faire tout seul).
                                 Vous pouvez aussi l'utiliser pour un type de retour :
                                 <div class="code_sample">
-                                    template &lt;typename T&gt;</br>
+                                    template &lt;class T&gt; // Utilisation de "class" (aucune différence avec "typename")</br>
                                     T number() {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;return 5;</br>
                                     }
@@ -134,7 +135,115 @@
                                 </div>
                                 "T_2" n'est pas automatique, et doit donc être défini.
                                 Or, comme "T_2" est déclaré après "T", il faut définir les deux (comme pour des arguments par défauts de fonctions).
-                                Faite bien attention à comment vous disposer vos templates.
+                                D'ailleurs, tout comme les fonctions, nous pouvons définir des types par défaut à un template :
+                                <div class="code_sample">
+                                    template &lt;typename T, typename T_2 = double&gt;</br>
+                                    T_2 add_number(T& vecteur) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double number = 2;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;vecteur.push_back(number);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return number;</br>
+                                    }
+                                </div>
+                                Faite donc bien attention à comment vous disposer vos templates.
+                            </p>
+                            <p id="part_A_b_2">
+                                <span class="important">L'utilisation des templates avec des classes est extrêmement similaire à celle dans les fonctions :</span>
+                                <div class="code_sample">
+                                    template &lt;typename T&gt;</br>
+                                    class Super_Vector {</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Super_Vector(){}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;T&gt;& datas() {return a_datas;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;T&gt; a_datas;</br>
+                                    };
+                                </div>
+                                Avec ça, nous créeons un super vecteur, utilisable avec n'importe quel type de données.
+                            </p>
+                            <p id="part_A_b_3">
+                                Il existe un cas spécial, nécessitant quelques précautions supplémentaires : <span class="important">utiliser en template un type, défini avec un template</span>.
+                                Imagineons la classe "Ultra_Vector", qui prend en template un type simialire à "Super_Vector" ou à "std::vector" :
+                                <div class="code_sample">
+                                    template &lt;typename T, typename T_2&gt;</br>
+                                    class Ultra_Vector {</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Ultra_Vector(){}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;T_2&lt;T&gt;& datas() {return a_datas;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;T_2&lt;T&gt; a_datas;</br>
+                                    };
+                                </div>
+                                Ce code ne marche pas, car T_2 n'est pas déclaré comme un type utilisant un template (et donc des erreurs apparaissent aux lignes contenant T_2&lt;T&gt;).
+                                Il faut donc le ré-indiquer dans le template, en spécifiant que ce type utilise un template avec "typename".
+                                <div class="code_sample">
+                                    template &lt;typename T, template&lt;typename&gt; typename T_2&gt;</br>
+                                    class Ultra_Vector {</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Ultra_Vector(){}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;T_2&lt;T&gt;& datas() {return a_datas;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;T_2&lt;T&gt; a_datas;</br>
+                                    };
+                                </div>
+                                Dans ce cas là, indiquer le type utilisé dans T_2 est inutile lors de l'utilisation ultérieure du template (la classe s'en chargera elle même, avec le type T).
+                            </p>
+                            <p id="part_A_b_4">
+                                <span class="important">Pour utiliser un template avec une autre valeur, comme un nombre, il vous faut remplacer "typename" par le type de la valeur :</span>
+                                <div class="code_sample">
+                                    template &lt;int T&gt;</br>
+                                    void repeat(std::string to_repeat) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0;i&lt;T;i++) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; to_repeat &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}</br>
+                                    }
+                                </div>
+                                Cependant, cela ne marche pas avec tous les types.
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            c. Simplifier l'utilisation des types
+                        </h3>
+                        <div>
+                            <p id="part_A_b_1">
+                                D'un point de vue direct, <u>les templates permettent de créer des classes simplement, de manière extrêmement varié</u>.
+                                Le problème : <span class="important">l'utilisation de la classe / template adéquat pour une instanciation de variable peut s'avérer long et / ou compliqué</span>.
+                                Pour bien comprendre cette partie, <u>intéressons nous à un trype que nous avons vu et revu : "std::string"</u>.
+                                Sur le site de documentation du C++ <a href="https://en.cppreference.com/w/cpp/string/basic_string" target="_blank">présente juste ici</a>, <u>ce type ne répond pas au nom de "string", mais de "template&lt;class CharT, class Traits = std::char_traits&lt;CharT&gt;, class Allocator = std::allocator&lt;CharT&gt;&gt; class basic_string"</u>.
+                                En effet, <span class="important">le type "string" n'existe pas, mais est juste une appellation du type "basic_string", où le template "CharT" représente le type "char"</span>.
+                                Tout cela est écrit en bas de la déclaration du type (vous avez aussi les wstring, u8string...).
+                            </p>
+                            <p id="part_A_b_2">
+                                <u>Cette appellation du type "basic_string&lt;char&gt;" en "string" est possible grâce à un outil assez proche des templates : le typedef</u>.
+                                <span class="important">Un typedef permet de donner une autre appellation à un type complexe, nécessitant des templates spécifiques (ou non)</span>.
+                                Le nouveau nom du type est en suite directement utilisable comme le nom originale dans le code.
+                                Son utilisation est assez simple.
+                                <u>Vous devez utiliser le mot clé "typedef", suivi du type à renommer, et du nouveau nom de ce type</u>.
+                                Définissons la classe "Basic_Calculator" pour l'utiliser :
+                                <div class="code_sample">
+                                    template &lt;typename Number_Type&gt;</br>
+                                    class Basic_Calculator {</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Basic_Calculator() {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Number_Type add(Number_Type number_1, Number_Type number_2) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_last_value = number_1 + number_2;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a_last_value;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number_Type a_last_value;</br>
+                                    };
+                                </div>
+                                Maitnenant, nous aimerions créer un type simple pour des calculatrices 8, 16, 32, et 64 bits :
+                                <div class="code_sample">
+                                    typedef Basic_Calculator&lt;char&gt; Calculator_8_Bits;</br>
+                                    typedef Basic_Calculator&lt;short&gt; Calculator_16_Bits;</br>
+                                    typedef Basic_Calculator&lt;int&gt; Calculator_32_Bits;</br>
+                                    typedef Basic_Calculator&lt;long long&gt; Calculator;</br>
+                                </div>
+                                Vous pouvez aussi créer un nom spécial pour un pointeur vers un type ou vers un tableau statique de type, en ajoutant "*" ou "[taille_du_tableau]" sur le nouveau nom du type :
+                                <div class="code_sample">
+                                    typedef Basic_Calculator&lt;long long&gt; Calculator, *Calculator_ptr, Calculator_array[10];</br>
+                                </div>
+                                En général, les typedefs ne sont utilisés que pour simplifier la tâche des développeurs utilisant un type régulièrement.
                             </p>
                         </div>
                     </div>
