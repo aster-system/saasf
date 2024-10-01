@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - Hub</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <img alt="Logo de SAASF" src="../../images/logo.png"/>
+            <nav>
+                <div>
+                    <a>
+                        Lycée
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        Aster Système Learn
+                        <img alt="Défiler" src="../../images/arrow.png" style="transform: rotate(90deg);height: 0.6em;">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="main_div">
+            <h1>
+                II - 5. Manier les type dans leur intégralité
+            </h1>
+            <div>
+                Nous n'en avons pas fini des types et de leur maniement.
+                En effet, il y a encore des choses plus secondaires à dire, bien que très pratique dans beaucoup de cas.
+                Nous allons en finir avec eux dans ce cours, via tous les paradigmes que nous avons vu jusque ici.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Étendre leur utilisation
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Cette partie est axée réalisation de types via les classes, bien qu'elle pérsente aussi bien une partie de leur utilisation hors des classes.
+                        <h3 id="part_A_a">
+                            a. Les opérateurs de classes
+                        </h3>
+                        <div>
+                            <p id="part_A_a_1">
+                                Pour l'instant, <u>tout ce que nous avons vu (ou presque) est utilisé par le compiler pour être converti en langage machine</u> (voir <a href="./cpp_organise.html">le cours sur les projets C++ pour plus d'informations</a>).
+                                Donc, le code C++ est directement converti, sans modification.
+                                Or, dans certains cas, cela n'est pas possible.
+                                Par exemple, <u>imagineons créer une classe, représentant un vecteur d'un quelconque type</u>.
+                                Pour rappel, <u>il faut définir le type dans la classe</u>.
+                                Cependant, si nous avons besoin de créer un nouveau type, allons nous rajouter une modification de notre classe, juste pour ce type ?
+                                Ce n'est pas une option viable.
+                                À la place, <span class="important">nous allons ajouter la possibilité de générer du code C++ (dans notre cas, les classes spécifiques nécessaires pour notre liste) pendant la compilation (avant la conversion en code machine), grâce au système de template</span>.
+                            </p>
+                            <p id="part_A_a_2">
+                                En fait, <span class="important">un template permet d'utiliser un bout de code, avec une partie que l'on peut spécifier plus tard dans le code</span>.
+                                Dans le cas du vecteur, le "plus tard dans le code" représente au moment de la définition d'un vecteur.
+                                Pour les templates, <span class="important">la spécification du bout de code doit se situer entre chevrons</span>, comme ça :
+                                <div class="code_sample">
+                                    std::vector&lt;int&gt; numbers;</br>
+                                    std::shared_ptr&lt;std::vector&lt;double&gt;&gt; shared_ptr_towards_vector; // Pointeur partagé vers un vecteur de "double"</br>
+                                </div>
+                                Il faut imaginer ça comme si une nouvelle forme de la classe "vector" utilisant le type "int" se crée dans le code (le linker s'occupe des possibles erreurs de redéfinition).
+                                En général, <u>les templates s'utilisent pour les classes (comme nous l'avons vu), ou pour les fonctions</u>.
+                                Cependant, <span class="important">il faut faire attention à ce que le type que vous spécifiez entre chevron puisse être entièrement utilisé dans la classe / fonction (sans erreur de type "méthode n'est pas déclarée dans type", car aucune vérification n'est effectuée avant la compilation)</span>.
+                                Pour cela, <u>il faut soit utiliser les objets pour des fonctions / classes très génériques, soit utiliser convenablement l'héritage de membres</u>.
+                            </p>
+                            <p id="part_A_a_3">
+                                Dans ce cas là, <u>nous avons utiliser les templates avec des types (l'utilisation la plus courant des templates)</u>.
+                                Cependant, <span class="important">selon la façon dont est définie le template, vous pouvez mettre d'autre valeur litérale dedans, comme des nombres (int ou double)</span>.
+                                Néanmoins, ce cas est assez rare.
+                                Un exemple de classe l'utilisant est la classe <a href="https://en.cppreference.com/w/cpp/utility/bitset/bitset" target="_blank">bitset</a>, permettant d'utiliser un ensemble de bit, dont la taille est définie par template :
+                                <div class="code_sample">
+                                    std::bitset&lt;32&gt; number;</br>
+                                </div>
+                            </p>
+                        </div>
+                        <h3 id="part_A_b">
+                            b. Les conversions de types
+                        </h3>
+                        <div>
+                        </div>
+                        <h3 id="part_A_c">
+                            c. Optimiser le fonctionnement des types
+                        </h3>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_B">
+                        B. Utiliser leur plein potentiel
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        Cette partie est axée plutot sur l'utilisation des types hors des classes.
+                        <h3 id="part_B_a">
+                            a. Le "type" fonction
+                        </h3>
+                        <div>
+                        </div>
+                        <h3 id="part_B_b">
+                            b. Les types standards
+                        </h3>
+                        <div>
+                        </div>
+                        <h3 id="part_B_c">
+                            c. Les documentations de types
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
