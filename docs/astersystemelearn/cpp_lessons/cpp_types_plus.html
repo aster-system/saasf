@@ -53,36 +53,163 @@
                         </h3>
                         <div>
                             <p id="part_A_a_1">
-                                Pour l'instant, <u>tout ce que nous avons vu (ou presque) est utilisé par le compiler pour être converti en langage machine</u> (voir <a href="./cpp_organise.html">le cours sur les projets C++ pour plus d'informations</a>).
-                                Donc, le code C++ est directement converti, sans modification.
-                                Or, dans certains cas, cela n'est pas possible.
-                                Par exemple, <u>imagineons créer une classe, représentant un vecteur d'un quelconque type</u>.
-                                Pour rappel, <u>il faut définir le type dans la classe</u>.
-                                Cependant, si nous avons besoin de créer un nouveau type, allons nous rajouter une modification de notre classe, juste pour ce type ?
-                                Ce n'est pas une option viable.
-                                À la place, <span class="important">nous allons ajouter la possibilité de générer du code C++ (dans notre cas, les classes spécifiques nécessaires pour notre liste) pendant la compilation (avant la conversion en code machine), grâce au système de template</span>.
+                                Nous avons déjà parlé des opérateurs il y a bien longtemps, avec le cours <a href="./cpp_variables.html">sur les variables</a>.
+                                Par exemple, nous pouvons écrire "int a = 5 + 8;".
+                                En effet, <u>le C++ convertit cela en code assembleur permettant une addition de deux nombres</u>.
+                                Cependant, nous pouvons aussi faire "std::string a = "Hello"; std::string b = " world !";".
+                                La question ici est comment le C++ utiliser l'opérateur "+" avec des valeurs qui ne sont pas des nombres ?
+                                La réponse est simple : <span class="important">nous pouvons définir dans une classe la façon dont une instance va réagir avec un opérateur</span>.
+                                C'est grâce à ça que des sommes de string donne des strings plus long.
                             </p>
                             <p id="part_A_a_2">
-                                En fait, <span class="important">un template permet d'utiliser un bout de code, avec une partie que l'on peut spécifier plus tard dans le code</span>.
-                                Dans le cas du vecteur, le "plus tard dans le code" représente au moment de la définition d'un vecteur.
-                                Pour les templates, <span class="important">la spécification du bout de code doit se situer entre chevrons</span>, comme ça :
+                                En fait, <span class="important">ces opérateurs appellent des fonctions spéciales dans les classes, que nous pouvons donc réecrire via le principe d'héritage (voir <a href="./cpp_class.html">le cours sur les classes</a>)</span>.
+                                <u>Cette opération est nommée la surchage d'opérateurs</u>.
+                                Dans le cas des opérateurs simples "+", "-", "*" et "/", la fonction en question est très simple :
                                 <div class="code_sample">
-                                    std::vector&lt;int&gt; numbers;</br>
-                                    std::shared_ptr&lt;std::vector&lt;double&gt;&gt; shared_ptr_towards_vector; // Pointeur partagé vers un vecteur de "double"</br>
+                                    class Complex {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un nombre complex "R + iIm"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex(double real, double imaginary) : a_imaginary(imaginary), a_real(real) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double imaginary() const {return a_imaginary;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double real() const {return a_real;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur +</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex operator+(Complex other_complex) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Complex(real() + other_complex.real(), imaginary() + other_complex.imaginary());</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur -</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex operator-(Complex other_complex) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Complex(real() - other_complex.real(), imaginary() - other_complex.imaginary());</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur imaginaire du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_imaginary = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur réelle du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_real = 0;</br>
+                                    };
                                 </div>
-                                Il faut imaginer ça comme si une nouvelle forme de la classe "vector" utilisant le type "int" se crée dans le code (le linker s'occupe des possibles erreurs de redéfinition).
-                                En général, <u>les templates s'utilisent pour les classes (comme nous l'avons vu), ou pour les fonctions</u>.
-                                Cependant, <span class="important">il faut faire attention à ce que le type que vous spécifiez entre chevron puisse être entièrement utilisé dans la classe / fonction (sans erreur de type "méthode n'est pas déclarée dans type", car aucune vérification n'est effectuée avant la compilation)</span>.
-                                Pour cela, <u>il faut soit utiliser les objets pour des fonctions / classes très génériques, soit utiliser convenablement l'héritage de membres</u>.
+                                Cette syntaxe marche aussi avec les opérateurs "*" et "/", mais je vous épargne leur implémentation avec des nombres complexes.
+                                Ici, les fonctions effectuent les opérations sur une nouvelle instance de complexe, et retourne la résultat (qui sera interprété comme le résutlat de l'opérateur).
+                                La fonction n'a pas besoin d'être modifié ici, elle peut être notée constante.
+                                Vous pouvez maintenant faire des opérations simples avec les classes.
                             </p>
                             <p id="part_A_a_3">
-                                Dans ce cas là, <u>nous avons utiliser les templates avec des types (l'utilisation la plus courant des templates)</u>.
-                                Cependant, <span class="important">selon la façon dont est définie le template, vous pouvez mettre d'autre valeur litérale dedans, comme des nombres (int ou double)</span>.
-                                Néanmoins, ce cas est assez rare.
-                                Un exemple de classe l'utilisant est la classe <a href="https://en.cppreference.com/w/cpp/utility/bitset/bitset" target="_blank">bitset</a>, permettant d'utiliser un ensemble de bit, dont la taille est définie par template :
+                                Vous pouvez aussi magnier d'autres opérateurs, <span class="important">comme les opérateurs d'assignement</span>.
+                                <u>Il peut s'agir de n'importe quel opérateur contenant un "=", comme "+=" ou "/="</u>:
                                 <div class="code_sample">
-                                    std::bitset&lt;32&gt; number;</br>
+                                    class Complex {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un nombre complex "R + iIm"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex(double real, double imaginary) : a_imaginary(imaginary), a_real(real) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double imaginary() const {return a_imaginary;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double real() const {return a_real;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur +=</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;void operator+=(Complex other_complex) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_real += other_complex.real();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_imaginary += other_complex.imaginary();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur -=</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;void operator-=(Complex other_complex) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_real -= other_complex.real();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_imaginary -= other_complex.imaginary();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur imaginaire du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_imaginary = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur réelle du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_real = 0;</br>
+                                    };
                                 </div>
+                                Ici, ils modifient l'instance, et donc ne sont pas constants.
+                                De plus, il n'ont (en général) pas besoin de retourner quoi que ce soit, donc ils ne retournent rien.
+                            </p>
+                            <p id="part_A_a_4">
+                                <span class="important">Les derniers types d'opérateurs surchageables très utilisés sont les opérateurs de comparaisons</span>.
+                                Leur fonctionnement reste très similaire:
+                                <div class="code_sample">
+                                    class Complex {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un nombre complex "R + iIm"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex(double real, double imaginary) : a_imaginary(imaginary), a_real(real) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double imaginary() const {return a_imaginary;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double real() const {return a_real;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur ==</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;bool operator==(Complex other_complex) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return real() == other_complex.real() && imaginary() == other_complex.imaginary();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur ></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;bool operator>(Complex other_complex) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return real() > other_complex.real();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur imaginaire du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_imaginary = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur réelle du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_real = 0;</br>
+                                    };
+                                </div>
+                                Ici, ils ne modifient pas l'instance, et donc peuvent être constants.
+                                Ils retournent le résultat de l'opération, sous forme de booléen, de manièr extrêmement similaire aux opérateurs vus plus haut.
+                                Il est cependant à noter que dire qu'un nombre complexe est plus grand qu'un nombre est superflu, mais par soucis de simplicité, on va dire que, ici, un nombre complexe est plus grand si sa partie réelle est plus grande (s'il vous plait les professeurs de maths, ne me tapez pas).
+                            </p>
+                            <p id="part_A_a_5">
+                                Une fois que vous compris le fonctionnement de ces fonctions, <span class="important">vous pouvez créer l'opérateur que vous voulez, selon le même principe</span>.
+                                Voici quelques exemples d'opérateurs (très aléatoire et peu adaptés à une classe complexe, mais là pour l'exemple):
+                                <div class="code_sample">
+                                    class Complex {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant un nombre complex "R + iIm"</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Complex(double real, double imaginary) : a_imaginary(imaginary), a_real(real) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double imaginary() const {return a_imaginary;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline double real() const {return a_real;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur []</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double operator[](unsigned int index) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(index == 0) return real();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return imaginary();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur ()</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;bool operator->(Complex other_complex) const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return real() > other_complex.real();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br></br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur imaginaire du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_imaginary = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Valeur réelle du complexe</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double a_real = 0;</br>
+                                    };
+                                </div>
+                                Ici, l'opérateur "()" est un opérateur utilisable sur une instance (pas une fonction, mais une instance), pour lui faire faire ce que l'on veut.
+                                C'est d'ailleurs l'opérateur utilisé pour la génération de nombres aléatoires, vu dans le cours <a href="./cpp_algorithm_data_structure.html">sur les algorithmes</a>.
+                                Les possibilités sont infinies.
+                            </p>
+                            <p id="part_A_a_6">
+                                <span class="important">Une dernière façon de faire est la définition de fonction d'opérateurs hors d'une classe</span>.
+                                Ce cas est utile par exemple pour pouvoir utiliser une classe avec "std::cout" et l'opérateur "&lt;&lt;", ou pour utiliser un "int" avant un opérateur quelconque.
+                                En effet, <u>chaque fonction d'opérateur peut en fait être surcharger hors de la classe (c'est moins intuitif, mais nécessaires dans certains cas)</u>.
+                                <u>La valeur / type du premier opérande est donc spécifié en 1er paramètre de la fonction, et la valeur / type du second opérande est le deuxième paramètre (l'ordre à un sens très important ici)</u>:
+                                <div class="code_sample">
+                                std::ostream& operator&lt;&lt;(std::ostream& os, Complex c) {</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;// Permet de "std::cout" un "Complex"</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return os &lt;&lt; c.real() &lt;&lt; " + " &lt;&lt; c.imaginary() &lt;&lt; " * i";</br>
+                                }</br></br>
+                                Complex operator+(int n, Complex c) {</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;// Permet d'additioner un "int" avec un "Complex"</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return Complex(c.real() + n, c.imaginary());</br>
+                                }</br>
+                                Complex operator+(Complex c, int n) {</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;// Permet d'additioner un "Complex" avec un "int" (exactement pareil à la fonction définie dans la classe)</br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return Complex(c.real() + n, c.imaginary());</br>
+                                }
+                                </div>
+                                D'ailleurs, il faut savoir que "std::cout" est l'instance (globale) d'une classe <a href="https://en.cppreference.com/w/cpp/io/basic_ostream" target="_blank">"std::ostream"</a>, ici utilisable via la référence "os" (que l'on doit d'ailleurs retourner juste après).
+                                Faite bien attention à l'ordre, et rendez vous la vie plus facile avec ces systèmes.
                             </p>
                         </div>
                         <h3 id="part_A_b">
