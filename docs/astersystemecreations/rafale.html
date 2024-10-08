@@ -3,7 +3,7 @@
     <head>
         <link href="../styles/base.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SAASF - Hub</title>
+        <title>SAASF - Rafale</title>
 
         <!--Connect to google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,8 +48,79 @@
                         Les dépendances du projet
                     </h2>
                     <div class="left_arrow_right_text_text">
+                        <h3>
+                            Les dépendances en codes
+                        </h3>
                         <p>
-                            Page pas encore remplie.
+                            Le projet Rafale utilise la librairie MLib-Super, développé sous la responsabilité de Aster Système.
+                            Cette même librairie utilise la librairie Pygame.
+                        </p>
+                        <h3>
+                            Les dépendances en connaissances
+                        </h3>
+                        <p>
+                            Pour comprendre comment utiliser ce Rafale, il faut avoir quelques bases d'aérodynamiques.
+                            De plus, une certaines connaissances du domaine de l'armement est requis.
+                        </p>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Le fonctionnement du projet
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <h3>
+                            Partie 1 : L'usage de MLib-Super
+                        </h3>
+                        <p>
+                            Réaliser un avion de chasse, c'est dur, très dur.
+                            Pour cela, il faut une plateforme stable : MLib-Super.
+                            Pour utilisé correctement MLib-Super dans le projet, il faut une interface pratique à utiliser et modifier, inspiré du système d'interface de SCLS Graphic "Benoit".
+                            Donc, on y retrouve la base de cette librairie SCLS : texture, objets, textes, évènements...
+                        </p>
+                        <p>
+                            Le petit plus de MLib-Super par rapport à SCLS est l'ajout d'une interface spéciale pour la gestion de la 3D en Python, via le Raycast.
+                            Pour cela, on doit utiliser, et un moteur de Raycast, et un objet d'affichage du Raycast.
+                            Pour l'affichage, le moteur mélange les technologies de Raycast et d'affichage d'OpenGL, pour maximiser les performances.
+                            Toute la partie complexe est directement gèrée par MLib-Super.
+                            Elle gère la map, les objets, les mathématiques, l'affichage...
+                            Globalement, l'idée est d'utiliser la puissance de la POO (programmation orientée objet) pour rendre la librairie le plus simple possible.
+                        </p>
+                        <h3>
+                            Partie 2 : La création d'un avion de chasse
+                        </h3>
+                        <p>
+                            En laissant la partie complexe à MLib-Super, l'accent pouvant être posé sur l'avion de chasse.
+                            Il s'agit bien évidemment d'un Rafale de Dassault.
+                            Dans le moteur Raycast, il s'agit d'un objet dynamique, bougeant comme l'utilisateur lui demande de bouger.
+                            Pour cela, il est équipé de 2 moteurs M88 de Snecma, qui effectue une poussée variable vers l'avant (entre 0 et 50 kN, ou 75 kN avec post combustion).
+                            L'air peut le ralentir (en agissant sur son vecteur vitesse), et la rotation du Rafale est ordonnée via son orientation (et donc via le concept de rétention d'énergie).
+                            De plus, la gravité agit aussi sur le Rafale, ainsi que ça façon de gérer l'altitude.
+                            Tout cela est effectué dans la fonction de mise à jour de la classe enfant du Rafale.
+                            En accélération pleine, il peut taper les 1500km/h en ligne droite.
+                        </p>
+                        <p>
+                            Pour aller détruire les cibles, le Rafale est constitué d'un canon DEFA de 30mm.
+                            Ces canons sont purement théoriques (il ne sont pas affiché dans le Raycast), mais constituent quand même une classe à part dans le code.
+                            Cependant, leur mise à feu permet la création de munitions devant le Rafale, explusées à environ 2 - 3 km/s.
+                            Leur vitesse dépend de la position avant du Rafale pendant leur tir.
+                            Elle n'existent que pendant une certaine durée de temps, pour éviter le trop plein de munitions pouvant altérer les performances du jeu.
+                        </p>
+                        <h3>
+                            Partie 3 : La création de l'environnement
+                        </h3>
+                        <p>
+                            Le Rafale évolue dans une map de 40 X 40 km, en plein milieu de l'océan, ponctuer par quelques îles de temps en temps.
+                            Une unité de map dans le jeu correspond à 1km dans la simulation.
+                            Théoriquement, la map pourrait être bien plus grande, mais longue à entièrement optimiser.
+                            De plus, trop se rapprocher du sol de la map peut causer quelques bugs de rendu (fish eye entre autre).
+                        </p>
+                        <p>
+                            Les cibles apparaîssent de temps à autre dans la map, à des positions aléatoires, et à des hauteurs de entre 1 et 5km.
+                            Pour rendre le jeu facile, elles mesurent près de 500 mètres de rayons.
+                            Si une munition touche une balle, alors la balle est supprimée, et le score du joueur augmente légèrement.
+                            Une nouvelle balle réapparaît de manière aléatoire sur la map.
                         </p>
                     </div>
                 </div>

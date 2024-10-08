@@ -3,7 +3,7 @@
     <head>
         <link href="../../styles/base.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SAASF - Hub</title>
+        <title>SAASF - C++ II-5</title>
 
         <!--Connect to google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -216,10 +216,104 @@
                             b. Les conversions de types
                         </h3>
                         <div>
+                            <p id="part_A_b_1">
+                                Pour rappel, <u>il existe une aberrante quantité de façon de typer un nombre : int, double, long</u>...
+                                Cependant, <u>il n'y a pas de problème à convertir un int en double, (ou un double en int), avec une simple assignation</u>.
+                                Nous avons pourtant vu dans le <a href="./cpp_variables.html">cours sur les variables</a> que les doubles ne sont pas représentés en binaire de la même façon que les int, un changement de forme doit donc être fait.
+                                <span class="important">L'opération de transformer une donnée d'une certaine forme en une donnée d'une autre forme (mais d'inteprération similaire), et donc d'un autre type est nommée la conversion de type</span>.
+                                Dans le cas des nombres, <u>cette opération est effectuée automatiquement par le compiler (c'est ce que l'on appelle une conversion implicite)</u>.
+                                De plus, il y a plusieurs moyens de faire cette conversion, que allons voir tout de suite.
+                            </p>
+                            <p id="part_A_b_2">
+                                <span class="important">Les autres types de conversions sont appellées conversions explicites</span>.
+                                La façon la plus simple de convertir explicitement un type est d'utiliser des parenthèses avec le type nécessaire, avant la valeur à convertir:
+                                <div class="code_sample">
+                                    int entier = 6;</br>
+                                    double decimal = (double)entier;
+                                </div>
+                                Ici, on prend la valeur de "entier", on obtient sa valeur en double, et on l'assigne dans "decimal".
+                                Cependant, <u>la façon dont fonctionne cette conversion dépend du type, car il y a en effet plusieurs types de conversion possibles</u> (le compiler choisit la plus adaptée lors de la compilation).
+                            </p>
+                            <p id="part_A_b_3">
+                                Cette méthode reste imprécise, puis ce qu'elle nous permet pas de spécifier très précisément le type de conversion.
+                                Pour effectuer une conversion de manière plus précise, <span class="important">il faut utiliser un opérateur de conversion</span>.
+                                <span class="important">Le plus utilisé est l'opérateur "static_cast&lt;nouveau_type&gt;(variable_a_convertir)"</span>.
+                                <u>Il demande au compiler d'aller chercher dans le type de la variable à convertir un moyen de conversion vers le type demandé</u>.
+                                Pour cela, <u>il cherche une surchage d'une méthode très précise : la méthode de l'opérateur "nouveau_type()"</u>.
+                                Cette méthode retourne une instance du type final de la conversion, qui peut s'interpréter comme l'instance utilisée pour la conversion.
+                                Voici un exemple d'utilisation de cette méthode :
+                                <div class="code_sample">
+                                    class Fraction {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une fraction</br></br>
+                                    public:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Fraction(double numerator, double denominator) : a_denominator(denominator), a_numerator(numerator) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline long long denominator() const {return a_denominator;};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;inline long long numerator() const {return a_numerator;};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur de conversion vers "double"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double double() const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return numerator() / denominator();</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;};</br>
+                                    private:</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Dénominateur de la fraction</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;long long a_denominator = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Numérateur de la fraction</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;long long a_numerator = 0;</br>
+                                    };
+                                </div>
+                                Donc, une bonne utilisation de "static_cast" pour tout cela serai :
+                                <div class="code_sample">
+                                    Fraction f(54, 65);</br>
+                                    double to_double = static_cast&lt;double&gt;(f);</br>
+                                    to_double = (double)f; // Fonctionne aussi</br>
+                                    int to_int = static_cast&lt;int&gt;(to_double);
+                                </div>
+                                Dans le cas des types primaires numériques, la conversion est une simple perte de précision des valeurs (par exemple, de 32 à 16 bits, ou de décimal à entier).
+                            </p>
+                            <p id="part_A_b_4">
+                                La conversion via "static_cast" est la plus sécurisée et la plus sûre, car <u>elle s'appuie sur quelque chose de définit par l'utilisateur</u>.
+                                Cependant, dans certains cas, d'autre types de conversions s'avèrent nécessaire.
+                                <span class="important">L'autre type de conversion assez utilisée est la conversion via "reinterpret_cast&lt;nouveau_type&gt;(valeur)"</span>.
+                                La conversion de la valeur est effectué vers le type demandé, mais <u>la valeur n'est absolument pas modifiée dans la mémoire (la façon dont les bits sont agencés dans la mémoire n'est pas modifiée)</u>.
+                                <u>Si la valeur à convertir n'est pas utilisable avec le nouveau type (même taille, même erreurs possibles...), vous pouvez avoir des erreurs de mémoire (particulièrement aganceant à détecter)</u>.
+                                Un exemple d'utilisation est la conversion d'une valeur quelconque en valeur numérique, pour pouvoir y effectuer des opérations binaires.
+                                Voici une implémentation de cette exemple :
+                                <div class="code_sample">
+                                    double to_double = 0.4523;</br>
+                                    long long to_long_long = reinterpret_cast&lt;long long&gt;(to_double); // Même taille de variable (64 bits)</br>
+                                    char deconseille = reinterpret_cast&lt;char&gt;(to_double); // Pas la lême taille de variable (8 bits et 64 bits)
+                                </div>
+                                Donc, à utiliser avec modération.
+                            </p>
+                            <p id="part_A_b_5">
+                                Pour finir, vous avez aussi des types de conversions moins utilisés.
+                                <span class="important">Un autre opérateur qui peut être utile dans certains cas est "dynamic_cast&lt;nouveau_type*&gt;(pointeur*)"</span>.
+                                <u>Il s'agit d'un convertisseur de pointeur vers une classe en convertisseur de pointeur vers une autre classe</u>.
+                                Il ne modifie pas l'adresse du pointeur, mais juste la façon dont le type à cette variable doit être interprété.
+                                Il ressemble beaucoup à "reinterpret_cast", <u>avec comme seule différence qu'il ne prend que des pointeurs, et qu'il effectue une vérification de la possibilité d'effectuer la conversion (au moment de la conversion)</u>.
+                                Cela prend un peu de temps, mais est nécessaire dans certains cas (par exemple, pour gérer du polymorphisme, ou un type parent représente tous les enfants, et que nous devons le convertir en un type enfant pour X ou Y raison).
+                                <span class="important">C'est tout l'inverse du certain opérateur, qui est (à mon avis) totalement inutile: "const_cast&lt;nouveau_type*&gt;(pointeur_constant)"</span>.
+                                <u>Il permet de rendre un type étant définit "constant" comme un type normal, et vice versa</u>.
+                                Il est (à mon avis) inutile car le premier cas n'est pas sencé avoir lieu (le type est constant pour une raison), et le 2 peut être fait de manière implicite par le compiler.
+                                Il peut quand même être utilisé dans certains cas extrêmement (vraiment) particulier.
+                            </p>
                         </div>
                         <h3 id="part_A_c">
                             c. Optimiser le fonctionnement des types
                         </h3>
+                        <div>
+                            <p id="part_A_c_1">
+                                <u>La création / utilisation de type peut être un processus assez complexe, qui demande pas mal de réflection</u>.
+                                Il est donc important de bien réflechier à ce que l'on va faire, pour ne pas casser le code (et l'ordinateur avec).
+                            </p>
+                            <p id="part_A_c_2">
+                                <span class="important">Une chose assez important est de prioriser l'utilisation de pointeur dans les classes à l'utilisation d'objet bruts</span>.
+                                En effet, une classe peut très vite devenir très lourde dans la mémoire, et poser des problèmes de mémoire.
+                                <u>C'est ici que les pointeurs partagés seront utiles, pour éviter de tout casser bêtement</u>.
+                                Donc, n'ayez pas peur de les utiliser quand c'est nécessaire.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="left_arrow_right_text_child">
