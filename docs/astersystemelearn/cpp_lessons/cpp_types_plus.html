@@ -239,20 +239,23 @@
                                 Pour effectuer une conversion de manière plus précise, <span class="important">il faut utiliser un opérateur de conversion</span>.
                                 <span class="important">Le plus utilisé est l'opérateur "static_cast&lt;nouveau_type&gt;(variable_a_convertir)"</span>.
                                 <u>Il demande au compiler d'aller chercher dans le type de la variable à convertir un moyen de conversion vers le type demandé</u>.
-                                Pour cela, <u>il cherche une surchage d'une méthode très précise : la méthode de l'opérateur "nouveau_type()"</u>.
-                                Cette méthode retourne une instance du type final de la conversion, qui peut s'interpréter comme l'instance utilisée pour la conversion.
-                                Voici un exemple d'utilisation de cette méthode :
+                                Pour cela, <u>il cherche une surchage de deux méthodes très précises : la méthode de l'opérateur "operator nouveau_type()" et les constructeurs des conversions</u>.
+                                Ma méthode "operateur" retourne une instance du type final de la conversion, qui peut s'interpréter comme l'instance utilisée pour la conversion.
+                                Le constructeur converti une valeur donnée d'un certain type, directement vers l'instance.
+                                Voici un exemple d'utilisation de ces méthodes :
                                 <div class="code_sample">
                                     class Fraction {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Classe décrivant une fraction</br></br>
                                     public:</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de la classe "Complex"</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;Fraction(double numerator, double denominator) : a_denominator(denominator), a_numerator(numerator) {};</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Fraction(double numerator, double denominator) : a_denominator(denominator), a_numerator(numerator) {};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Constructeur de conversion (long long vers Fraction)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Fraction(long long numerator) : Fraction(numerator, 1) {};</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Getters et setters</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;inline long long denominator() const {return a_denominator;};</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;inline long long numerator() const {return a_numerator;};</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Surchage de l'opérateur de conversion vers "double"</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;double double() const {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;operator double() const {</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return numerator() / denominator();</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;};</br>
                                     private:</br>
@@ -267,7 +270,8 @@
                                     Fraction f(54, 65);</br>
                                     double to_double = static_cast&lt;double&gt;(f);</br>
                                     to_double = (double)f; // Fonctionne aussi</br>
-                                    int to_int = static_cast&lt;int&gt;(to_double);
+                                    int to_int = static_cast&lt;int&gt;(to_double);</br>
+                                    f = 148; // Fonctionne grâce au constructeur de conversion
                                 </div>
                                 Dans le cas des types primaires numériques, la conversion est une simple perte de précision des valeurs (par exemple, de 32 à 16 bits, ou de décimal à entier).
                             </p>
@@ -284,6 +288,7 @@
                                     long long to_long_long = reinterpret_cast&lt;long long&gt;(to_double); // Même taille de variable (64 bits)</br>
                                     char deconseille = reinterpret_cast&lt;char&gt;(to_double); // Pas la lême taille de variable (8 bits et 64 bits)
                                 </div>
+                                Elle peut aussi être utilisée pour réinterpréter des pointeurs facilement (avec les mêmes risques mentionnés avant).
                                 Donc, à utiliser avec modération.
                             </p>
                             <p id="part_A_b_5">

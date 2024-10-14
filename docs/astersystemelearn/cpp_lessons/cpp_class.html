@@ -471,7 +471,8 @@
                                 </div>
                                 Dans ce cas exact, un attribut "protected" suffirait, mais une méthode virtuelle aussi.
                                 Cependant, <u>la réalisation du travail demandant des actions différentes par classe nécessiterait impérativement une méthode virtuelle</u>.
-                                À noter qu'une classe virtuelle ne peut pas être inline ou statique.
+                                À noter qu'une méthode virtuelle ne peut pas être inline ou statique.
+                                De plus, pour que ce soit la méthode enfant qui soit appelée (et pas la méthode parent), il faut que l'instance (de la classe enfant) soit manipulée via un pointeur ou une référence vers l'enfant (voir <a href="./cpp_variables.html">cours sur les variables</a>), et pas via une simple variable.
                                 D'ailleurs, le mot "override" n'est pas obligatoire, mais juste là pour détecter les méthodes héritées de méthodes virtuelles de classes parents (je ne l'utiliserai pas dans la suite du cours).
                                 <u>Faite attention à bien vérifier la syntaxe de ce genre de méthode, pour qu'elles soient exactement similaires, pour éviter les erreurs ou comportements inatendus</u>.
                             </p>
