@@ -33,7 +33,7 @@
         </header>
         <div id="main_div">
             <h1>
-                II - 5. Manier les type dans leur intégralité
+                II - 5. Manier les types dans leur intégralité
             </h1>
             <div>
                 Nous n'en avons pas fini des types et de leur maniement.
@@ -332,6 +332,54 @@
                             a. Le "type" fonction
                         </h3>
                         <div>
+                            <p id="part_B_a_1">
+                                Jusqu'à maintenant, nous nous sommes efforcés de bien différencier les variables des fonctions.
+                                Cependant, dans cette partie, <u>nous allons établir un lien définitif entre ces 2 concepts</u>.
+                                En effet, <span class="important">une fonction peut être utilisée via un pointeur ou une référence</span>.
+                                La variable pointeur / référence (contenant l'adresse vers la fonction) se comporte comme n'importe quel pointeur / référence.
+                            </p>
+                            <p id="part_B_a_2">
+                                Pour créer un pointeur ou une référence vers une fonction, la syntaxe est assez complexe.
+                                <span class="important">Elle demande le type de retour et les types d'arguments, sous la forme : "type_de_retour (*nom_du_pointeur)(type_d_argument...)"</span>.
+                                Voici un exemple d'utilisation :
+                                <div class="code_sample">
+                                    // Création d'une fonction cobaye</br>
+                                    int function(int value) {return value * 10 - 4;};</br></br>
+                                    // Création d'un pointeur vers des fonctions retournant "int" prenant 1 argument "int"</br>
+                                    int (*pointeur)(int) = &function; // Pointe vers "function"</br>
+                                    int (&pointeur)(int) = function; // Référence vers "function"
+                                </div>
+                                Les opérations classiques des fonctions (appel) peuvent être effectué directement via le pointeur (sans modifications nécessaires à apporter au pointeur) :
+                                <div class="code_sample">
+                                    // Appel de "function"</br>
+                                    int valeur = pointeur(23);
+                                </div>
+                                L'écriture du type nécessaire pouvant s'avérer assez longue dans certains cas, <u>vous pouvez aussi utiliser typedef, et définir les pointeurs via ce typedef</u>:
+                                <div class="code_sample">
+                                    // Création du type de pointeur nécessaire</br>
+                                    typedef int (*Pointeur)(int)</br>
+                                    typedef int (&Reference)(int)</br></br>
+                                    // Création d'un pointeur vers des fonctions retournant "int" prenant 1 argument "int"</br>
+                                    Pointeur pointeur = &function; // Pointe vers "function"</br>
+                                    Reference reference = function; // Référence vers "function"
+                                </div>
+                            </p>
+                            <p id="part_B_a_3">
+                                <span class="important">L'avantage de ces types spéciaux est l'utilisation possible de fonction spécifiques, non via leur appel direct, mais via un pointeur</span>.
+                                Cela peut être très intéressant pour certaines tâches nécessitant une utilisation très spécifique via une fonction, mais où la réimplémentation à chaque fois s'avère complexe.
+                                Un exemple est une fonction définie dans l'include "algorithm" du C++ : <a href="https://en.cppreference.com/w/cpp/algorithm/sort">sort</a>, qui permet de trier un tableau.
+                                En effet, pour vérifier si un objet est plus petit qu'un autre, <u>il peut faire appel à une fonction spéciale, passée en paramètre</u>.
+                                Voici un exemple d'utilisation de cette fonction :
+                                <div class="code_sample">
+                                    // Création de la fonction de comparaisons</br>
+                                    bool compare_string(const std::string& a, const std::string& b) {return a.size() &lt; b.size();}</br></br>
+                                    // Création d'un vecteur quelconque de std::string</br>
+                                    std::vector&lt;std::string&gt; texts = lot_of_texts();</br>
+                                    std::sort(texts.begin(), texts.end(), compare_string); // Tri du tableau</br>
+                                </div>
+                                La seule condition est que la fonction est la forme demandée dans la documentation, donc "bool cmp(const Type1& a, const Type2& b)".
+                                Grâce à ça, les possibilités deviennent infinies.
+                            </p>
                         </div>
                         <h3 id="part_B_b">
                             b. Les types standards
