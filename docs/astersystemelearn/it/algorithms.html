@@ -150,6 +150,35 @@
                                 <span class="important">Si vous n'avez aucune information sur le rangement des données, il faut toutes les essayer une par une, pour trouver la bonne (cette technique est appelée la force brute)</span>.
                             </p>
                         </div>
+                        <h3>
+                            Les machines de Turing
+                        </h3>
+                        <div>
+                            <p>
+                                On pourrait passer des siècles à énumérer tous les algorithmes existants, mais ce n'est pas le plus intéressant à faire.
+                                À la place, <u>nous allons voir un moyen de savoir si une suite d'instruction peut être considérée comme un algorithme ou pas</u>.
+                                <span class="important">Une façon de faire est de représenter l'algorithme sous forme de <a href="https://fr.wikipedia.org/wiki/Machine_de_Turing">machine de Turing</a>.</span>
+                                La machine de Turing est (à contrario de ce que son nom de "machine" laisse paraître) un concept purement mathématique.
+                                <u>Il s'agit d'un ensemble de règles, qu'un algorithme doit respecter pour pouvoir être utilisé sans problèmes</u>.
+                                Ces règles sont assez simples.
+                                La première dit que <u>la machine est composé d'un ruban horizontal infini coupé en cases</u>, pouvant comporter une données, sur lequel l'algorithme va travailler.
+                                La deuxième règle consiste à dire que <u>ce ruban est modifiable via une tête de lecture</u>, qui peut aller n'importe où sur le ruban.
+                                En gros, <span class="important">ces deux règles signifient que l'algorithme doit pouvoir travailler (lire et modifier) de la mémoire</span>.
+                                La troisième règle dit que, à un moment T de son exécution, <u>la machine se trouve dans un état (position / comportement de la tête de lecture) parfaitement défini parmi une liste d'états fini</u>.
+                                À chaque mouvement de la tête de lecture, l'état change vers un autre.
+                                Il y a cependant deux états spéciaux : un état de commencement et un état final, qui arrête la machine.
+                                Finalement, <u>la dernière règle oblige la machine à définir un comportement pour chaque état de la machine : modification de la mémoire, de la tête de lecture et de l'état actuelle</u>.
+                                <span class="important">Ces 2 règles assurent que l'algorithme est une suite successif d'étapes, permettant son évolution dans le temps tant que la machine n'est pas arrêtée</span>.
+                                <span class="important">Si une machine de Turing peut être réalisée via votre idée, alors elle peut être considérée comme un algorithme</span>.
+                            </p>
+                            <p>
+                                Si une simple machine de Turing pouvait décrire tous les algorithmes, le monde serait génial.
+                                Cependant, <u>une simple machine de Turing ne suffit pas pour faire, par exemple, un jeu vidéo 3D</u>.
+                                Pour cela, <span class="important">il faut une machine plus complexe, qui peut simuler le comportement de toutes les machines de Turing possible : une machine de Turing universelle</span>.
+                                <u>Par exemple, bien qu'il n'égale pas la perfection d'une machine de Turing universelle, un ordinateur s'en rapproche fortement, puis ce qu'il peut exécuter un très grand nombre d'algorithmes</u>.
+                                <span class="important">Ce concept reste l'un des meilleurs pour exprimer mathématiquement le fonctionnement précis des algorithmes</span>.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
