@@ -385,6 +385,37 @@
                             b. Les types standards
                         </h3>
                         <div>
+                            <p id="part_B_b_1">
+                                Pour l'instant, vous pouvez créer et faire un peu ce que vous voulez avec vos propres types.
+                                Cependant, <u>l'utilisation des types crées par d'autres personnes peut s'avérer plus compliqué</u>.
+                                Dans le cas où vous seriez un sage gourou des montagnes, vous pouvez vous passer d'utiliser beaucoup de types qui ne sont pas fait par vous.
+                                Cependant, <span class="important">il y a une catégorie de types auquelles vous ne pourrez pas échapper : les types standard</span>.
+                                Nous en avons déjà beaucoup parlé, <u>puis ce qu'il s'agit des types que nous pouvons utiliser avec des "includes"</u>.
+                                En effet, je vous les avez très légèrement introduit lors du cours sur <a bref="./cpp_organise.html">les projets C++</a>.
+                                Ici, on va en reparler plus précisément.
+                            </p>
+                            <p id="part_B_b_2">
+                                Les types standard que nous avons le plus utilisé sont <a href="https://en.cppreference.com/w/cpp/string/basic_string" target="_blank">string</a>, <a href="https://en.cppreference.com/w/cpp/container/vector" target="_blank">vector</a> et <a href="https://en.cppreference.com/w/cpp/io/basic_iostream" target="_blank">iostream</a>.
+                                Vous pouvez consulter leur documentation respective, en cliquant sur la classe que vous souhaitez découvrir.
+                                Bien qu'il existe une myriade de documentations C++, <span class="important">celle que j'utilise pour les types standards est le site web <a href="https://en.cppreference.com/w/" target="_blank">C++ Reference</a>, un site web de forme wiki en anglais.</span>
+                                Cependant, si vous n'êtes pas à l'aise en anglais, plein d'autres documentations existent, en plein de langues, comme <a href="https://learn.microsoft.com/fr-fr/cpp/cpp/cpp-language-reference?view=msvc-170" target="_blank">celle en français de Microsoft</a>.
+                                Surtout, <span class="important">n'ayez pas peur de cliquer sur des trucs au hasard pour découvrir, et n'ayez pas peur de faire des recherches (directement sur le site web ou sur Google) si vous avez un problème</span>.
+                                Théoriquement, Vous devriez être capable de tout capable avec le cours présent ici (accompagné de recherches Google si nécessaire).
+                            </p>
+                            <p id="part_B_b_2">
+                                Pour vous aider, nous allons plonger dans la documentation d'un type bien précis, et très utile dans grand nombre de manipulation en C++ : <a rhef="https://en.cppreference.com/w/cpp/io/basic_ios">basic_ios et ses enfants</a>.
+                                En effet, <span class="important">une des opérations primaires pour un ordinateur que nous n'avons pas réalisé pour l'instant est la modification de fichiers</span>.
+                                Cette opération est une sorte de sortie de données vers un fichier, réalisée via la classe <a href="https://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank">fstream</a>, enfant de "basic_ios".
+                                Pour l'utiliser (comme dans toutes les classes), <u>la documentation met à disposition la façon de faire, ainsi que les méthodes nécessaires</u>.
+                                Selon CPP Reference, on apprend que cette classe sert à manipuler un fichier, avec le système de "stream".
+                                En lisant un peu plus, on apprend que cette classe est fille de <a href="https://en.cppreference.com/w/cpp/io/basic_istream" target="_blank">ifstream</a>, qui permet de faire rentrer des données dans le "stream", et <a href="https://en.cppreference.com/w/cpp/io/basic_ostream" target="_blank">ostream</a>, qui permet de faire sortir des données venant du "stream".
+                                En gros, <u>l'entrée représente l'écriture dans un fichier, et la sortie représente la lecture d'un fichier</u>, <span class="important">donc cette classe permet de lire et écrire dans un fichier</span>.
+                                En lisant les documentations de ces deux classes, <u>vous pouvez donc réaliser précisément des opérations sur des fichiers</u>.
+                                <span class="important">Un petit défi pour vous serait de vous demander de réaliser un petit programme pour écrire ce que bon vous semble dans un fichier, juste avec la documentation</span>.
+                                Tout ça pour dire que la documentation est extrêmement importante à étudier pour écrire votre code, tout en contenant des données que vous ne pourriez ne pas avoir remarqué sans (comme, par exemple, l'origine de <a href="https://en.cppreference.com/w/cpp/io/cout" target="_blank">cout</a> et ses liens avec istream).
+                                D'ailleurs, l'opérateur de "stream" "operator&lt;&lt;" et la syntaxe nécessaire pour l'écrire que nous avons créer tout à l'heure est présent dans la documentation de <a href="https://en.cppreference.com/w/cpp/io/basic_ostream" target="_blank">ostream</a> (je vous laisse chercher où, et <a href="https://en.cppreference.com/w/cpp/io/basic_ostream/operator_ltlt2" target="_blank">voici la réponse pour ce que ne trouverait pas</a>).
+                                Faites attention, il est présent à deux endroit différents, dans la partie membre (définie dans la classe) et dans la partie non-membre (définie hors de la classe, comme nous avons fait), il faut donc choisir la bonne (et donc bien lire ce qui est écrit dans la documentation).
+                            </p>
                         </div>
                         <h3 id="part_B_c">
                             c. Les documentations de types
