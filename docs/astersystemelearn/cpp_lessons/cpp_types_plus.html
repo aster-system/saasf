@@ -125,6 +125,10 @@
                                 </div>
                                 Ici, ils modifient l'instance, et donc ne sont pas constants.
                                 De plus, il n'ont (en général) pas besoin de retourner quoi que ce soit, donc ils ne retournent rien.
+                                Cependant, si pour une quelconque raison, un retour est demandé, <u>alors il s'agit presque toujours d'une référence vers l'instance de la classe qui subit l'opération</u>.
+                                Pour cela, <span class="important">il vous faut un moyen d'accéder à la classe directement via elle même, en utilisant le mot clé "this", qui renvoit un pointeur vers l'instance elle même</span>.
+                                Pour le spécifier en référence, il faut donc rajouter "*" dedans (voir <a href="./cpp_pointers.html">le cours sur les pointeurs</a>), et retourner "return *this;".
+                                <u>Ce mot clé peut être utilisé dés que vous avez besoin d'un pointeur ou d'une référence vers l'instance, directement dans l'instance elle même</u>.
                             </p>
                             <p id="part_A_a_4">
                                 <span class="important">Les derniers types d'opérateurs surchageables très utilisés sont les opérateurs de comparaisons</span>.
