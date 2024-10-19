@@ -64,6 +64,123 @@
                                 Cependant, <u>il existe plusieurs types de champs</u>.
                                 <span class="important">Un champ est scalaire si chaque point dans le champ peut avoir une certaine valeur, selon sa position dans le champ</span>.
                                 Par exemple, un champ contenant des distances à la box WiFi serait un champ scalaire, où chaque point contient une valeur : sa distance à la box WiFi.
+                                <span class="important">Un champ est vectorielle si chaque point dans le champ peut avoir un certain vecteur, selon sa position dans le champ</span>.
+                                Par exemple, un champ contenant des forces gravitationelles serait un champ vectorielle, où chaque point contient un vecteur : le vecteur de la force de gravité à la position exacte, relatif aux points d'applications environnants.
+                            </p>
+                        </div>
+                        <h3>
+                            Le fonctionnement de l'électromagnétisme
+                        </h3>
+                        <div>
+                            <p>
+                                Pour comprendre l'électromagnétisme, <u>il faut comprendre comment fonctionne plus précisément le lien entre matière, charges électriques et magnétisme</u>.
+                            </p>
+                            <p>
+                                <span class="important">Un des champs composant le champ électromagnétique est le <a href="https://fr.wikipedia.org/wiki/Champ_%C3%A9lectrique" target="_blank">champ électrique</a>, u champ vectorielle où les sources des forces sont les <a href="./matter.html#electric_charge">charges électriques</a> (et dont les vecteurs vont des charges positives aux charges négatives)</span>.
+                                Il est décrit par la première <a href="https://fr.wikipedia.org/wiki/%C3%89quations_de_Maxwell">équation de Maxwell</a>, l'équation de Maxwell-Gauss :</br>
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mstyle displaystyle="true">
+                                      <mrow class="MJX-TeXAtom-ORD">
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi mathvariant="normal">&#x2207;<!-- ∇ --></mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                        <mo>&#x22C5;<!-- ⋅ --></mo>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi>E</mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                          <mi>p</mi>
+                                          <mi>&#x03F5;<!-- ϵ --></mi>
+                                        </mfrac>
+                                      </mrow>
+                                    </mstyle>
+                                </math></br>
+                                De manière vulgarisée, cette équation décrit le changement de la force du champ électromagnétique E produit par une certaine source p (ϵ représente la capacité du vide à transmettre une force via le champ).
+                                L'opérateur ∇ représente l'opération <a href="https://fr.wikipedia.org/wiki/Nabla">nabla</a>, aussi connu comme opérateur de divergence.
+                            </p>
+                        </div>
+                        <h3>
+                            Le champ électromagnétique
+                        </h3>
+                        <div>
+                            <p>
+                                <span class="important">Un <a href="https://fr.wikipedia.org/wiki/Champ_%C3%A9lectromagn%C3%A9tique" target="_blank">champ électromagnétique</a> est la combinaison de deux champs : le <a href="https://fr.wikipedia.org/wiki/Champ_magn%C3%A9tique" target="_blank">champ magnétique</a> et le <a href="https://fr.wikipedia.org/wiki/Champ_%C3%A9lectrique" target="_blank">champ électrique</a>.</span>
+                                <u>Un <a href="https://fr.wikipedia.org/wiki/Champ_%C3%A9lectrique" target="_blank">champ électrique</a> est le champ vectorielle, où les sources des forces sont les <a href="./matter.html#electric_charge">charges électriques</a> (et dont les vecteurs vont des charges positives aux charges négatives)</u>.
+                                Dans un champ électrique, <u>les valeurs des forces utilisent l'unité volts/mètres cubes</u>.
+                                Tout ce qui se situe dans ce champ et est assez proche d'une charge électrique peuvent ressentir une force : la force électriques.
+                            </p>
+                            <p>
+                                Grâce à tout cela, <u>on peut définir la force magnétique</u>.
+                                <span class="important">La force électromagnétique est donnée par une équation nommée <a href="https://fr.wikipedia.org/wiki/Force_%C3%A9lectromagn%C3%A9tique" target="_blank">la force de Lorentz</a></span>:</br>
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mstyle displaystyle="true">
+                                      <mrow class="MJX-TeXAtom-ORD">
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi>F</mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                        <mo>=</mo>
+                                        <mi>q</mi>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi>E</mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                        <mo>+</mo>
+                                        <mi>q</mi>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi>v</mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                        <mo>&#x2227;<!-- ∧ --></mo>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mover>
+                                            <mi>B</mi>
+                                            <mo stretchy="false">&#x2192;<!-- → --></mo>
+                                          </mover>
+                                        </mrow>
+                                      </mrow>
+                                    </mstyle>
+                                </math></br>
+                                F est la force électrique, q la charge du receveur, E la valeur du champ électrique du receveur, B la valeur du champ magnétique du receveur et v la vitesse relative aux champs de la particule.
+                                L'opérateur "∧" représente l'opérateur produit vectoriel.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title">
+                        Les conséquences de l'électromagnétisme
+                    </h2>
+                    <div class="left_arrow_right_text_text">
+                        <h3>
+                            L'électricité
+                        </h3>
+                        <div>
+                            <p>
+                                <u>Une des conséquences de l'électromagnétisme est l'électricité</u>.
+                                <span class="important"><a href="https://fr.wikipedia.org/wiki/%C3%89lectricit%C3%A9" target="_blank">L'électricité</a> représente les phénomènes de mouvements de charges électriques, portées par des particules (comme les <a href="./matter.html">électrons</a>).</span>.
+                                Pour être plus précis, le courant électrique représente le mouvement des charges.
+                                Quand un courant passe, <span class="important">le nombre de charges passant par un certain endroit par seconde est nommé <a href="https://fr.wikipedia.org/wiki/Courant_%C3%A9lectrique" target="_blank">l'intensité électrique</a>, exprimée en ampères A.</span>.
+                                Un ampère représente le passage de 1 coulomb en 1 seconde.
+                                <u>La capacité d'un matériau à faire passer le courant est nommée la <a href="https://fr.wikipedia.org/wiki/Conductivit%C3%A9_%C3%A9lectrique" target="_blank">conduction du matériau</a></u>.
+                                Pour passer, <span class="important">le courant nécessite un champ électrique, transmit à travers un circuit électrique, crée par un potentiel électrique (nommée la <a href="https://fr.wikipedia.org/wiki/Tension_%C3%A9lectrique" target="_blank">tension</a>, exprimé en volts V)</span>.
+                                Plus le potentiel est élevé, plus le champ est fort.
+                                Un volt est la différence de potentiel électrique nécessaire pour que le champ électrique puisse transmettre une énergie de 1 joule à 1 coulomb.
+                                <span class="important">La multiplication de l'intensité et de la tension représente une force de travail par secondes, soit une puissance, exprimée en Watts W</span>.
                             </p>
                         </div>
                     </div>
@@ -77,7 +194,8 @@
                 Le site web est disponible sur Github, <a href="https://github.com/aster-system/aster-school" target="_blank">dans ce repositorie</a>.</br>
                 <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
                     <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
-                </span>
+                </span></br>
+                Toutes les équations présentes ici sont réalisées grâce au site web <a href="https://visualmatheditor.equatheque.net/">Visual Math Editor</a>.
             </div>
         </footer>
     </body>
