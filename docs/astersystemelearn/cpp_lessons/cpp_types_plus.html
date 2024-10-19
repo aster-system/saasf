@@ -284,15 +284,15 @@
                                 Cependant, dans certains cas, d'autre types de conversions s'avèrent nécessaire.
                                 <span class="important">L'autre type de conversion assez utilisée est la conversion via "reinterpret_cast&lt;nouveau_type&gt;(valeur)"</span>.
                                 La conversion de la valeur est effectué vers le type demandé, mais <u>la valeur n'est absolument pas modifiée dans la mémoire (la façon dont les bits sont agencés dans la mémoire n'est pas modifiée)</u>.
-                                <u>Si la valeur à convertir n'est pas utilisable avec le nouveau type (même taille, même erreurs possibles...), vous pouvez avoir des erreurs de mémoire (particulièrement aganceant à détecter)</u>.
-                                Un exemple d'utilisation est la conversion d'une valeur quelconque en valeur numérique, pour pouvoir y effectuer des opérations binaires.
+                                <u>Si la valeur à convertir n'est pas utilisable avec le nouveau type (même taille, même erreurs possibles...), vous pouvez avoir des erreurs de compiler (forçant à passer par des pointeurs, comme dans l'exemple ci-dessous) ou de mémoire (particulièrement aganceant à détecter)</u>.
+                                Un exemple d'utilisation est la conversion d'une valeur quelconque en valeur numérique via un pointeur, pour pouvoir y effectuer des opérations binaires.
                                 Voici une implémentation de cette exemple :
                                 <div class="code_sample">
                                     double to_double = 0.4523;</br>
-                                    long long to_long_long = reinterpret_cast&lt;long long&gt;(to_double); // Même taille de variable (64 bits)</br>
-                                    char deconseille = reinterpret_cast&lt;char&gt;(to_double); // Pas la lême taille de variable (8 bits et 64 bits)
+                                    long long to_long_long = *reinterpret_cast&lt;long long*&gt;(to_double); // Même taille de variable (64 bits)</br>
+                                    char deconseille = *reinterpret_cast&lt;char*&gt;(to_double); // Pas la lême taille de variable (8 bits et 64 bits)
                                 </div>
-                                Elle peut aussi être utilisée pour réinterpréter des pointeurs facilement (avec les mêmes risques mentionnés avant).
+                                Elle est utilisée ici pour réinterpréter un pointeur facilement (avec les mêmes risques mentionnés avant), pour lire le "double" en "long long".
                                 Donc, à utiliser avec modération.
                             </p>
                             <p id="part_A_b_5">
