@@ -81,6 +81,80 @@ Mais avant, mettons précisément au point notre algorithme de lancer de rayon.<
                             </div>
                         </div>
                     
+                        <div class="left_arrow_right_text_child">
+                            <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="..//images/arrow.png">
+                            <h2 class="left_arrow_right_text_title">
+                                Créer l'algorithme Raycast
+                            </h2>
+                            <div class="left_arrow_right_text_text">
+                                <h3>Les bases de l'algorithme</h3>
+<p>Pour que notre algorithme marche, nous allons devoir poser quelques bases.
+Premièrement, la map du jeu sera contenu dans une liste à deux dimensions.
+La première dimension représente la coordonnée Y de la case, et la deuxième dimension la coordonnée X de la case.
+Définissons ces données comme statiques dans le temps.</p>
+<p>L'algorithme aura besoin de deux entrées principales : les coordonnées de la caméra, et l'angle de la caméra.
+Par définition, l'angle de la caméra représente le "devant" de la caméra, vers où projeter le rayon.
+Pour des soucis de simplicité mathématique, le départ de l'angle représente la droite partant vers la droite de la caméra.
+L'algorithme sortira le point de collision entre le premier mur trouvé (ou le fond de la map si aucun mur n'est trouvé) et le rayon.
+Si on résume, l'algorithme aura comme donnée de départ :</p>
+<img alt="Données de départ" src="../images/raycast/input.png" style="max-width:300px;">
+<h3>Simuler l'avancée du rayon</h3>
+<p>Pour simuler l'avancée du rayon, nous allons utiliser les propriétés de notre map cadriller.
+En effet, à chaque fois que notre rayon va avancer d'une case horizontale, il va avancer d'un certain nombre de cases verticals, que nous appellerons horizontal_ratio.
+Et, vice versa, à chaque fois que la rayon va avancer d'une case verticale,
+il va avancer d'un certain nombre de cases horizontales (l'inverse de horizontal_ratio), que nous appellerons vertical_ratio.
+Grâce à cette propriété, on peut connaître les zones de collisions avec chaque cases devant le rayon, en avançant cases par cases.
+Pour n'en louper aucune, il faut avancer horizontalement et verticalement aux cases, en prenant en compte que l'avancer peut se faire à sens arrière, selon les orientations du rayon.
+Les orientations en question seront nommées horizontal_advance et vertical_advance.
+Nous devrons aussi prendre en compte que la position de départ du rayon n'est pas un nombre entier, mais rationnel, et qu'il faudra passer à la case précédente / suivante pour ne pas décaler le rayon.
+Si une case contient un mur, on arrête la progression du rayon : il a heurté un mur.</p>
+<p>Parler, c'est bien.
+Cependant, pour avoir tous ses résultats, il va falloir faire un peu de mathématiques.
+Pour calculer les ratios, il nous faut la valeur de la pente du rayon tracé par l'angle avant pour une case horizontal / vertical parcourue.
+Pour effectuer ce calcul, nous allons utiliser un peu de <a href="https://fr.wikipedia.org/wiki/Trigonom%C3%A9trie" target="_blank">trigonométrie</a>, et, plus précisément, nous allons utiliser le <a href="https://fr.wikipedia.org/wiki/Cercle_trigonom%C3%A9trique" target="_blank">cercle trigonométrique</a>.
+En effet, les propriétés de ce cercle nous disent que nous pouvons obtenir les valeurs précises de la pente du rayon, horizontalement avec le cosinus et verticalement avec le sinus.
+Pour des raisons de simplicité, nous allons prendre les valeurs absolues dans les calculs.
+Grâce à cette propriété, une simple division suffit à calculer les ratios, et nous obtenons les valeurs nécessaires :</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    <mrow class="MJX-TeXAtom-ORD">
+      <mi>horizontal_ratio</mi>
+      <mo>=</mo>
+      <mfrac>
+        <mrow>
+          <mi>|sin(angle)|</mi>
+        </mrow>
+        <mrow>
+          <mi>|cos(angle)|</mi>
+        </mrow>
+      </mfrac>
+      </mrow>
+    </mstyle>
+</math></br></br>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    <mrow class="MJX-TeXAtom-ORD">
+      <mi>vertical_ratio</mi>
+      <mo>=</mo>
+      <mfrac>
+        <mrow>
+          <mi>1</mi>
+        </mrow>
+        <mrow>
+          <mi>horizontal_ratio</mi>
+        </mrow>
+      </mfrac>
+    </mrow>
+  </mstyle>
+</math>
+<p>Maintenant que cela est fait, calculons horizontal_advance et vertical_advance.
+Pour ces deux variables, deux valeurs sont possibles : 1 ou -1.
+Si l'angle pointe vers l'avant (donc, que la valeur du cosinus de l'angle est positive), l'avancement horizontal est positif.
+Sinon, elle est négative.
+C'est la même chose pour l'avancement vertical, avec la valeur du sinus cette fois ci.</p>
+                            </div>
+                        </div>
+                    
                 </div>
         </div>
         <footer>
