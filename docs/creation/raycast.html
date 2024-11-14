@@ -147,6 +147,15 @@ Grâce à cette propriété, une simple division suffit à calculer les ratios, 
     </mrow>
   </mstyle>
 </math>
+<p>Après cela, quelques modifications sont nécessaires, pour ne pas avoir cetaines erreurs.
+Premièrement, si le sinus de l'angle est égal à 0, alors la division pour le ratio vertical peut être faussé.
+De même, si le cosinus de l'angle est égal à 0, c'est le ratio horizontal qui est faussé.
+Pour ne pas avoir ce genre de problème, nous devons remplacer le sinus / cosinus par un tout peit nombre (comme 0.000001) dans le calcul.
+Pour finir, le dernier comportement à prendre en compte est le signe des ratios.
+Une chose à comprendre est que le signe de l'axe référence (horizontal pour le ratio horizontal et vertical pour le ratio vertical) est présent grâce aux variables advances, donc il n'importe pas ici.
+Le seul axe qui importe ici est l'autre axe du ratio, puisqu'il doit progresser vers lui.
+Donc, le signe du ratio vertical représente le signe de l'axe horizontal, et le signe du ratio horizontal représente le signe de l'axe vertical.
+En termes plus mathématiques, le signe de horizontal_ratio est celui du sinus et celui de vertical_ratio est celui du cosinus.</p>
 <p>Maintenant que cela est fait, calculons horizontal_advance et vertical_advance.
 Pour ces deux variables, deux valeurs sont possibles : 1 ou -1.
 Si l'angle pointe vers l'avant (donc, que la valeur du cosinus de l'angle est positive), l'avancement horizontal est positif.
