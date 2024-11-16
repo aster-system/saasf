@@ -150,7 +150,7 @@ Grâce à cette propriété, une simple division suffit à calculer les ratios, 
 <p>Après cela, quelques modifications sont nécessaires, pour ne pas avoir cetaines erreurs.
 Premièrement, si le sinus de l'angle est égal à 0, alors la division pour le ratio vertical peut être faussé.
 De même, si le cosinus de l'angle est égal à 0, c'est le ratio horizontal qui est faussé.
-Pour ne pas avoir ce genre de problème, nous devons remplacer le sinus / cosinus par un tout peit nombre (comme 0.000001) dans le calcul.
+Pour ne pas avoir ce genre de problème, nous devons remplacer le sinus / cosinus par un tout petit nombre (comme 0.000001) dans le calcul.
 Pour finir, le dernier comportement à prendre en compte est le signe des ratios.
 Une chose à comprendre est que le signe de l'axe référence (horizontal pour le ratio horizontal et vertical pour le ratio vertical) est présent grâce aux variables advances, donc il n'importe pas ici.
 Le seul axe qui importe ici est l'autre axe du ratio, puisqu'il doit progresser vers lui.
@@ -160,7 +160,127 @@ En termes plus mathématiques, le signe de horizontal_ratio est celui du sinus e
 Pour ces deux variables, deux valeurs sont possibles : 1 ou -1.
 Si l'angle pointe vers l'avant (donc, que la valeur du cosinus de l'angle est positive), l'avancement horizontal est positif.
 Sinon, elle est négative.
-C'est la même chose pour l'avancement vertical, avec la valeur du sinus cette fois ci.</p>
+C'est la même chose pour l'avancement vertical, avec la valeur du sinus cette fois ci.
+Et... c'est tout pour cette valeur.
+Cependant, elle va nous être utile directement pour la prochaine
+étape du lancé : avancer la position actuelle du rayon vers une valeur entière.
+Pour être plus précis, le rayon horizontal doit avancer à la prochaine valeur entièere de X, et le rayon vertical doit avancer à la prochaine valeur entière de Y.
+Bien que cette étape semble simple, elle nécessite de n'oublier aucune valeur à modifier.
+La première étape est de calculer ce que l'on appelle "prochaine valeur" (cela compte pour les deux rayons).
+En effet, si l'avancement est négatif, alors il ne s'agit pas de la prochaine valeur, mais de la dernière valeur.
+Donc, la valeur précise ici est défini par l'advance du rayon (arrondi vers le bas pour un advance négatif, et arrondi vers le haut pour un advance positif).
+Maintenant, appliquons le ratio nécessaire.
+Le calcul est assez simple : on ajoute à la position pas encore modifiée le produit du ratio et de la valeur absolue entre l'ancienne position et la "prochaine" position.
+Comme ça, votre rayon est bien calibré.</p>
+<p>Maintenant, nous pouvons commencer à simuler le parcours du rayon.
+Nous commençons par voir si la case actuelle du rayon est pleine ou pas.
+Cependant, attention à ne pas se tromper pour choisir les coordonnées de la case.
+En effet, si l'advance est négatif, alors la case du rayon est celle sur lequel il est passé, et pas celle qui vise.
+Donc, la coordonnées sur l'axe du rayon doit être diminué de 1.
+Cette étape dépend de comment vous découper votre map, mais, généralement, ce problème arrive souvent.
+Mais, à l'inverse, la coordonnée de l'autre axe représente en général l'arrondi vers le bas de la coordonnée.
+Si la case est vide, alors on continue, jusqu'à ce que le rayon sort de la map ou touche une autre case avec un mur.
+Ici, "continuer" veut dire avancer de "advance" sur l'axe du rayon et du "ratio" sur l'autre axe.
+Dés que les deux rayons ont finis leur parcours, nous devons prendre en résultat final le rayon le plus proche de la caméra.
+Grâce à cela, vous savez vers quoi tape le rayon.</p>
+                            </div>
+                        </div>
+                    
+                        <div class="left_arrow_right_text_child">
+                            <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="..//images/arrow.png">
+                            <h2 class="left_arrow_right_text_title">
+                                Passer à la 3D
+                            </h2>
+                            <div class="left_arrow_right_text_text">
+                                <h3>Différents moyens de faire de la 3D</h3>
+<p>En théorie, le problème principal des éléments à afficher pour votre rendu est réglé.
+Cependant, il ne vous reste plus qu'à afficher les objets.
+Pour être parfaitement honnête, il n'y a pas un moyen de faire ça, mais une immense quantité.
+Vous pouvez faire du OpenGL like, en les affichant un par un, avec les calculs mathématiques nécessaires.
+Cependant, ces calculs sont assez complexes, et peuvent changer selon les besoins du jeu.
+Vous pouvez aussi faire entièrement avec de la perspective / sans perspective.
+L'avantage de ses systèmes est qu'ils sont très modulables, même si ils sont très complexes.
+Si vous ne savez pas comment faire exactement, ne vous inquiétez pas, il existe un moyen de faire, n'utilisante que le Raycast.</p>
+<h3>La perspective 3D via le Raycast</h3>
+<p>La technique que je vais vous présenter permet de faire un rendu 3D, entièrement avec des rayons (et le théorème de Thalès).
+Premièrement, il faut adapter l'algorithme à permettre d'avoir la distance du mur touché (en général, ce n'est pas l'adaptation la plus complexe de l'algorithme).
+Maintenant que cela est fait, créeons une image qui représentera le rendu 3D.
+L'idée va être de remplir cette image avec le résultat des rayons, en mettant un rayon par pixels pour un affichage fluide.
+Comment va t-on faire cela ?
+Comme nous l'avons vu plus haut, nous allons envoyer pleins de rayons proches, qui donnerons chacun un résultat propre.
+La différence d'angle entre le premier et le dernier angle représente le champ de vision du joueur, aussi appelé FOV du joueur.
+En suite, attribuons une colonne de pixel par rayon.
+L'ordre d'attribution est assez important ici : si vous faites comme les rayons présents plus haut, alors l'angle le plus grand (selon le cercle trigonométrique) représente le pixel le plus à gauche de l'écran.
+Donc, l'angle le plus petit représente le pixel le plus à droite, et les autres pixels sont eux dispersés dans le même ordre.
+Il est à noter que, si votre ordinateur n'est pas assez pussant, vous pouvez réduire le nombre de rayon, et augmenter la largeur des colonnes proportionellement.
+Dans chacune de ces colonnes, traçons la vision qu'à le joueur du bloc touché selon le rayon.
+C'est là que le théorème de Thalès entre en jeu : la hauteur perçu du rayon est proportionnel à sa distance du joueur.
+Disons qu'une case à 1 case de distance occupe parfaitement toute la colonne, le calcul en devient très simple :</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    <mrow class="MJX-TeXAtom-ORD">
+      <msub>
+        <mi>d</mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi>a</mi>
+        </mrow>
+      </msub>
+      <mo>=</mo>
+      <mfrac>
+        <mn>1</mn>
+        <msub>
+          <mi>d</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>r</mi>
+          </mrow>
+        </msub>
+      </mfrac>
+    </mrow>
+  </mstyle>
+</math>
+<p>Cette formule nous donne la proportion de la colonne occupée par la case, il faut donc la multiplié par la hauteur de la colonne pour obtenir la valeur totale nécessaire.
+Pour finir, il faut prendre en compte que la case doit être placé correctement dans la colonne.
+Pour rester simple et suivre correctement les règles de perspective, disons que la case se trouve pile sur la ligne d'horizon de la caméra, et donc pile au milieu de son champ de vision.
+En effet, dans notre cas, l'horizon représente le milieu de l'image.
+Donc, la position y de la colonne se note :</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle displaystyle="true">
+    <mrow class="MJX-TeXAtom-ORD">
+      <msub>
+        <mi>y</mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi>a</mi>
+        </mrow>
+      </msub>
+      <mo>=</mo>
+      <mn>0.5</mn>
+      <mo>&#x2212;<!-- - --></mo>
+      <mfrac>
+        <msub>
+          <mi>d</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>a</mi>
+          </mrow>
+        </msub>
+        <mn>2</mn>
+      </mfrac>
+    </mrow>
+  </mstyle>
+</math>
+<p>Ce résultat est encore en pourcentage, et doit donc être multiplié par la hauteur de la colonne pour être utilisable.
+Définissons la couleur rouge pour les cases pleines, et la couleur verte si le rayon sort de la map.
+De plus, pour faire plus joli, rajoutant un rectangle bleu dans la moitié supérieure de l'image, pour simuler le ciel.
+Nous obtenons ce résultat :</p>
+<img alt="Résultat 3D" src="../images/raycast/3d.png" style="max-width:300px;">
+<p>Bon, pour l'instant le résultat n'est pas extraordinaire.
+Cependant, ce n'est pas vraiment la question ici.
+En effet, cet algorithme (assez simple, disons le) est très facilement modulable et customisable à souhait.
+D'ailleurs, il l'est tellement qu'il soit fortement probable que, dans votre esprit, les formules décrites plus haut sont formulées autrement (ce qui est une très bonne chose, tant qu'elles marchent) !
+Rien que avec ce petit départ, vous pouvez faire des très grande choses, comme tous les jeux vidéos des années 90 l'ont prouvés.
+De plus, c'est un très bon exercice pour s'améliorer en manipulation d'algorithmes, car ils vous demandent une refléxion particulièrement intense.
+Maintenant, c'est à vous de jouer, de moduler cet algorithme comme bon vous semble.
+Pleins d'améliorations sont possibles : textures (en dessinant mieux sur la colonne allouée aux cases), meilleure gestion de la hauteur (en jouant sur les formules vues plus haut)...
+Essayez de faire ce qui vous semble le plus intéressant, et de pondre le prochain AAA qui inondera Internet !</p>
                             </div>
                         </div>
                     
