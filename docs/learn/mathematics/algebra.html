@@ -6,8 +6,8 @@
         <link href="../..//styles/style.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hammersmith+Onedisplay=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800display=swap" rel="stylesheet">
 
     </head>
 
@@ -45,6 +45,36 @@ Cependant, <u>les règles d'utilisation de ces opérations peuvent changer lég�
 Bien qu'une grande quantité de systèmes d'axiomes existent, tous avec leurs avantages / défauts, <u>mais les axiomes principalement utilisées sont <a href="https://fr.wikipedia.org/wiki/Axiomes_de_Peano" target="_blank">les axiomes de Peano</a></u>.
 En théorie, il ne s'agit que d'axiomes traitant des nombres entiers naturels.
 En pratique, avec un peu de débrouille, on peut redéfinir toute l'arithmétique en ne partant que d'eux.</p>
+<h3>Le principe de l'algèbre</h3>
+<p>Pourquoi avoir défini l'arithmétique avant l'algèbre ?
+En fait, <u>l'arithmétique permet de définir une catégorie d'algèbre utilisant des chiffres</u>.
+Pour être précis, <span class="important"><a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre" target="_blank">l'algèbre</a> est une branche mathématique permettant de définir des règles (opérations, équations, interprétations...) à une certaine catégorie d'objets</span>.
+Grâce à l'arithmétique, <u>on peut définir une algèbre donnant des règles à des nombres</u>, nommée <a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre_classique" target="_blank">algèbre classique</a>.
+Cependant, l'algèbre toute seul ne sert pas à grand chose.
+Pour la rendre utile, <u>il faut la combiner à d'autres branches mathématiques, comme l'arithmétique, la géométrie, la topologie</u>...
+Cependant, à elle toute seule, elle contient quand même quelques propriétés très utiles, comme le concept d'équations.
+La forme la plus complète (et moderne) d'algèbre est nommée <a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre_g%C3%A9n%C3%A9rale" target="_blank">algèbre générale</a>.
+</p>
+<p>Pour définir ces règles sur l'objet que l'on veut étudier, nous pouvons nous aider d'un concept assez pratique : les structures algébriques.
+<span class="important">Une <a href="https://fr.wikipedia.org/wiki/Structure_alg%C3%A9brique" target="_blank">structure algébrique</a> est un moyen de définir ces règles (avec, bien évidemment, des axiomes), permettant une certaine cohérence entre chaque structures</span>.
+Selon l'objet étudier, <u>une structure peut être munie de certains règles / opérations bien connues et définies, comme l'addition, la multiplication...</u>
+Les opérations sont aussi nommées "lois de compositions internes" dans ce contexte là.
+De même, <u>une loi de composition interne peut aussi obéir à certaines propriétés (plus technique), comme l'associativité, la commutativité...</u>
+Ici, une loi est associative si x # (y # z) = (x # y) # z, avec # l'opérateur permettant l'application de cette règle.
+Une loi est commutative si x # y = y # z, avec # l'opérateur permettant l'application de cette règle.
+Par exemple, dans l'algèbre classique, l'addition obéit à ces deux principes, mais pas la division (vous pouvez le tester en essayant un calcul vite fait).
+Selon le nombre de lois et leurs propriétés, <span cnass="important">la structure peut appartenir à une certaine famille de structures algébriques</span>.
+Bien qu'il en existe une très (trop) grande quantité, nous pouvons citer les plus importantes :
+<ul>
+<li>Un <a href="https://fr.wikipedia.org/wiki/Magma_(alg%C3%A8bre)" target="_blank">magma</a> est une structure avec au moins une loi de composition interne quelconque.</li>
+<li>Un <a href="https://fr.wikipedia.org/wiki/Groupe_(math%C3%A9matiques)" target="_blank">groupe</a> est un magma, où la loi est associative, symétrique est admet un élément neutre.</li>
+<li>Un <a href="https://fr.wikipedia.org/wiki/Anneau_unitaire" target="_blank">anneau</a> est une structure avec au moins deux lois de compositions internes, obéissant à plusieurs propriétés spécifiques (associativité, distributivité...).</li>
+<li>Un <a href="https://fr.wikipedia.org/wiki/Corps_commutatif" target="_blank">corps commutatif</a> est un anneau, où toutes les règles / opérations communes des nombres sont appliquées (division, symétrie, inverses...).</li>
+</ul>
+Au final, on a beaucoup de mots "compliqués" pour un concept, en réalité, assez simple.
+Une structure s'écrit (E, #, $), où E est l'ensemble des objets qu'étudie la structure, # la première loi de composition interne, et % la deuxième loi de composition interne (si elle existe).
+Par exemple, nous pouvons définir un corps permettant de travailler sur les nombres réels, comme ça : (R, +, X).
+</p>
                             </div>
                         </div>
                     
