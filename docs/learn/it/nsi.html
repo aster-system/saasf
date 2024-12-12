@@ -32,16 +32,125 @@ Bien évidemment, nous allons utiliser le programme fourni par <a href="https://
                                 Dans cette partie, je vous présenterai tout ce que vous avez probablement fait lors du premier trimestre de l'année de NSI.
 <h3>Les structures de données</h3>
 <p>Un des thêmes principaux lors de l'année de terminal sont les structures de données.
-En toute logique, les premières que vous avez dû traiter sont les piles et les files.</p>
-<p>Brièvement, les piles représentent une liste plus ou moins normale, mais où seules quelques opérations sont possibles.
-Ces deux opérations sont l'empillage (ajout d'une donnée à la fin de la liste) et le dépillage (retrait et obtension de la donnée à la fin de la liste).
-Elle suit la logique du LIFO (last-in-first-out, ou DEPS en français), où seule une donnée peut être retirée de la liste à un moment donné : la dernière donnée ajoutée.
+En toute logique, les premières structures officielles que vous avez dû traiter sont les piles et les files.
+Officieusement, il est toujours possible que vous ayez vu d'autres systèmes très simples et concrets (cartes, livres, fractions...), s'apparentant aux structure de données, avant les autres.</p>
+<p>Généralement, <span class="important">une structure de données représente un ensemble de règles pour stocker des données</span>.
+Il n'y a pas vraiment de limites à ses règles, <u>tant qu'elles respectent les bases de la logique</u>.
+En vérité, <u>pleins de concepts utilisés en première comptent comme des structure de données</u> : listes, tuples...
+Plusieurs ensembles de règles existent, permettant de définir plusieurs types différents de structures.
+<u>Celles qui nous intéressent en premier sont les piles et les files</u>.</p>
+<p>Brièvement, <span class="important">les piles représentent une liste plus ou moins normale, mais où seules quelques opérations sont possibles</span>.
+Ces deux opérations sont <span class="important">l'empillage (ajout d'une donnée à la fin de la liste) et le dépillage (retrait et obtension de la donnée à la fin de la liste)</span>.
+Elle suit <u>la logique du LIFO (last-in-first-out, ou DEPS en français), où seule une donnée peut être retirée de la liste à un moment donné</u> : la dernière donnée ajoutée.
 </p>
 <img alt="Exemple de pile" src="../../images/nsi/stack.png" style="max-height:250px;">
-<p>À l'inverse des piles, les files représentent aussi une sorte de liste normale, avec d'autres opérations possibles.
-Ici, il s'agit de l'enfillage (ajout d'une donnée au début de la liste, poussant vers la fin celles déjà présentes) et du défillage (retrait et obtension de la donnée à la fin de la liste).
-La logique suivie ici est FIFI (first-in-first-out, ou PEPS en français), où seule une donnée peut être retirée de la liste à un moment donné : la première donnée rajoutée.</p>
-<p></p>
+<p>À l'inverse des piles, <span class="important">les files représentent aussi une sorte de liste normale, avec d'autres opérations possibles</span>.
+Ici, il s'agit de <span class="important">l'enfillage (ajout d'une donnée au début de la liste, poussant vers la fin celles déjà présentes) et du défillage (retrait et obtension de la donnée à la fin de la liste)</span>.
+La logique suivie ici est <u>FIFO (first-in-first-out, ou PEPS en français), où seule une donnée peut être retirée de la liste à un moment donné</u> : la première donnée rajoutée.</p>
+<img alt="Exemple de file" src="../../images/nsi/queue.png" style="max-height:250px;">
+<p>De plus, <span class="important">tout ce qui entoure le concept doit aussi être comprit (représentation, implémentation, utilisation...)</span>.
+En général, <u>pleins d'implémentations différentes sont aussi menées : avec des classes, sans classes, avec des listes, des dictionnaires</u>...
+La seule constante entre ces implémentations est qu'elles sont menées en language Python.</p>
+<p><span class="important">Le but de cette introduction aux piles et aux files semble de représenter une introduction à tout le concept de structure de données</span>.
+Ici, <u>on n'utilise plus les structures déjà fournie au pif : on les crée</u>.
+Avec tous les types d'implémentations différents, <u>on symbolise toutes les façons possibles de créer une structure de données</u>, que nous pouvons trouver pendant un développement.
+Parallèlement, <span class="important">on pose des bases de raisonnements logiques, en définissant les règles nécessaires aux structures créées</span>.
+On va dire qu'il s'agit d'une introduction en douceur aux si redoutées structures de données.</p>
+<h3>Algorithmes récursifs</h3>
+<p>Tout comme en première, <span class="important">la question des algorithmes est reprise en terminal</span>.
+Plusieurs nouveaux algorithmes sont mentionnées, qui partagent une caractéristique : <u>ils sont récursifs</u>.</p>
+<p>En algorithmique, <span class="important">la récursivité représente l'utilisation d'un algorithme, dans ce même algorithme</span>.
+Si vous faites cela comme ça, <u>alors l'algorithme va juste s'appeller indéfiniment</u>.
+C'est pour cela <span class="important">qu'il faut penser à définir des cas, dit cas de base, où l'algorithme ne s'appelle pas lui même</span>.
+Pleins d'algorithmes peuvent utiliser cette propriété : factorielles mathématiques, exposants, analyse de texte...</p>
+<img alt="Algorithme récursif" src="../../images/nsi/recursion.png" style="max-height:300px;">
+<p><span class="important">La première famille d'algorithmes étudiée est la famille des <a href="https://fr.wikipedia.org/wiki/Dichotomie" target="_blank">algorithme dichotomiques</a></span>.
+Le plus connu est <u>la recherche dichotomique</u>.
+L'idée est de <u>chercher un élément dans une structure de données triée</u>.
+Pour cela, <u>on réduit la zone de recherche</u> (en la divisant par la données médiane, donc en deux), et on fait la recherche dans cette zone plus petite.
+Pour choisir parmi les deux zones plus petites obtenues, on regarde si la donnée médiane est avant ou après la donnée recherchée (ou bien égale, représentant un cas de base).
+Ici, <u>l'autre cas de base représente le cas où un seul élément compose la zone à rechercher : soit c'est l'élément rechercher, soit non</u>.
+Pleins d'implémentations différentes sont possibles : récursif avec / sans listes, itératif avec / sans listes...</p>
+<p><span class="important">L'autre algorithme, lui aussi dichotomique, assez présent est le tri fusion</span>.
+Il s'agit d'un algorithme de tri, <u>où un tableau non triée est découpé en deux à de multiples reprises, trier les tableaux plus petits, et fusionner les tableaux triés</u>.
+Comme chaque parties découpées du tableau est traitées (donc, plus petit que le tableau initial), l'algorithme utilise la technique <a href="https://fr.wikipedia.org/wiki/Diviser_pour_r%C3%A9gner_(informatique)" target="_blank">diviser pour mieux régner</a>.
+Ici, <u>le cas de base est le cas où le tableau ne contient qu'un seul élément : il est déjà trié</u>.
+Cette algorithme de tri est, si auncune autre information ne le contredit, le plus efficace possible.</p>
+<p>En parlant d'efficacité, d'autres notions peuvent être abordées à propos de l'algorithmique.
+<span class="important">La notion la plus importante ici est la notion de complexité temporelle : un nombre représentant une estimation du temps que met l'algorithme à s'éxécuter</span>.
+Il s'agit en général <u>d'un multiple du nombre de données que l'algorithme doit traiter</u>.
+Par exemple, la complexité temporelle du tri fusion pour n données à trier est de "n * log2(n)".
+Plus le nombre est petit, plus l'algorithme est rapide et efficace.
+Une autre forme de complexité existe : <u>la complexité spaciale</u> (l'espace mémoire utilisée par l'algorithme), qui n'est pas abordée en terminal.
+Deux autres notions plus mathématiques peuvent être abordées : la decidabilité et la calculabilité.
+<span class="important">Un algorithme est dit décidable selon un ensemble de règles (dit axiomes) si il est formulable via ces règles</span> (nous rentrons plus en détail sur les axiomes dans <a href="../mathematics/logic.html">notre cours sur la logique mathématique</a>).
+Ce même algorithme décidable est dit <span class="important">calculable (toujours selon nos règles) si nous sommes sur qu'il donnera une réponse un jour</span>.
+Par exemple, un algorithme tournant à l'infini n'est pas calculable.</p>
+<p>Avec tout cela, <span class="important">l'idée est de préparer les élèves à l'étude avancée des algorithmes, avec un nouveau paradigme (la recursivité) et quelques notions utiles</span>.
+Comme pour les structures de données, <u>pleins d'implémentations différentes sont menées (toujours en Python), pour préparer aux mésaventures de la réalité</u>.
+Cependant, nous n'entrons pas encore dans une phase de "création d'algorithme", mais juste des modifications d'algorithmes existants.
+Tous les concepts restent assez simples, mais nécessaires pour la suite.</p>
+<h3>La programmation orientée objet</h3>
+<p>Après le théorique, place à la pratique.
+Bien évidemment, <u>la programmation orientée objet est enseignée dés la classe de terminale en NSI</u>.
+Ici, <span class="important">la notion de classe est enseigné entièrement avec le language Python</span>.</p>
+<p>Nous avons déjà fait un cours de C++ sur la programmation orientée objet, <a href="../../astersystemelearn/cpp_lessons/cpp_class.html">juste ici</a>.
+Pour faire simple, en programmation, <span class="important">les classes sont un moyen de créer un nouveau type (abordé en première), avec ses propres variables et fonctions</span>.
+<span class="important">Les objets sont des variables appartenant à un type défini par une classe</span>.
+Ici, <u>les variables sont appelées "attributs" et les fonctions sont appelées "méthodes"</u>.
+Certaines méthodes sont assez spéciales, comme la méthode constructeur, appelée directement à la création de l'objet.
+Selon le language, il y a d'autres méthodes spéciales (destructeur, conversion de type...).</p>
+<p>De plus, <span class="important">toutes les propriétés de base des classes sont présentées</span>.
+<u>Le principe d'encapsulation (visant à rendre les attributs utilisables seulement avec des méthodes)</u>, est introduit très tôt.
+Les méthodes d'accés à l'attributs sont nommé "getters" et les méthodes de manipulations des attributs sont nommées "setters".
+Cependant, <span class="important">d'autres notions aussi très basiques, comme l'héritage ou le polymorphisme, ne sont pas abordées</span>.</p>
+<p>Comme le cours déjà présent pour le C++ est... en C++, voici un exemple d'implémentation d'une classe "Personnage" en Python, et un petit exemple d'utilisation :</p>
+<div class="code_sample">
+class Personnage :</br>
+&nbsp;&nbsp;&nbsp&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, prenom, nom) : # Ne pas oublier le "self"</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;""" Constructeur de la classe """</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.prenom = prenom</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nom = nom</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;def presentation(self) :</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;""" Retourne la présentation de la personne """</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Bonjour, je suis " + self.get_nom() + " " + self.get_prenom()</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __str__(self) :</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;""" Converti le personnage en chaîne de caractère """</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.presentation()</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;def get_nom(self) :</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.nom</br>
+&nbsp;&nbsp;&nbsp;&nbsp;def get_prenom(self):</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.prenom</br></br>
+# Programme principal</br>
+riche = Personnage("Elon", "Musk")</br>
+print(riche)
+</div>
+<p>Théoriquement, <span class="important">tout cela est considéré acquis pour le reste de l'année</span>.
+C'est pour cela qu'il s'agit probablement de un des chapitres les plus importants du trimestre.
+De plus, <u>la pratique de la programmation orientée objet va continuer jusqu'à la fin de l'année, et pour divers sujets (structures de données, algorithmes...)</u>
+Il est cependant dommage de noter que certaines parties de ce paradigme ont été ignorés.</p>
+<h3>Les bases de données</h3>
+<p>Le traitement de donnée est aussi présent dans le programme de NSI terminal.
+Pour cela, <span class="important">rien de mieux que les bases de données</span>.
+<u>Le programme offre une première approche de ce concept</u>, bien que assez superficiel.</p>
+<p>Pour utiliser les bases de données, <span class="important">le language utilisé est <a href="https://sql.sh/" target="_blank">SQL</a></span>.
+Pour cela, <u>plusieurs programmes peuvent être utilisés, comme <a href="https://www.mysql.com/fr/" target="_blank">MySQL</a></u>.
+Plusieurs requêtes doivent être connues par coeur : SELECT, FROM, WHERE, JOIN, CREATE TABLE, SELECTE ou même UPDATE.
+Cependant, si vous voulez faire du No-SQL, ça ne sera pas ici : il n'est pas traité dans le programme.</p>
+<p>Avec tout cela, <u>certains concepts des bases de données sont aussi à connaître</u>.
+<span class="important">Le plus important est le concept de relations de bases de données (le type de base de donnée utilisé ici)</span>.
+L'idée, <u>c'est de définir comment la base doit se comporter (unicité, jointures...) avec certaines constantes : tableaux à 2 dimensions</u>.
+Ces comportements permettent d'utiliser pleins d'outils assez intéressants : clé primaires, clé étrangères...
+Bien évidemment, avec cela, est fourni tous les outils proposés par une base de donnée classique : recherche, modification...
+Avec tout cela, <span class="important">les représentations basiques des bases de données doivent être connues (relations, interfaces)</span>.</p>
+<p>En plus de tout cela, <u>ce chapitre est l'un des meilleurs pour introduire un autre concept : les API</u>.
+<span class="important">Une API, pour Application Programming Interface, est un moyen de communiquer des données entre plusieurs programmes</span>.
+Bien que cela puisse se faire sur le même ordinateur, <u>on l'utilise en général via une base de données distantes (sur un autre ordinateurs)</u>.
+Plusieurs APIs peuvent être utilisées pour des bases de données, comme MySQL, la plus utilisée.</p>
+<p>Tous comme les autres chapitres vues ici, <span class="important">ce chapitre est une introduction au concept de gestion de données</span>.
+En effet, la gestion de données n'est pas vraiment aborder en première, <u>seule la définition d'une donnée est abordée</u>.
+Ce chapitre permet donc de faire le lien entre les données et un moyen de les gérer, en attente de prochain concepts plus complexes.</p>
                             </div>
                         </div>
                     
