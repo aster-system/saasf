@@ -13,7 +13,9 @@
 
     <body class="open-sans-bold">
         <header class="hammersmith-one-regular">
-    <img alt="Logo de SAASF" src="../..//images/aster_system_logo.png">
+<a href="../..//index.html">
+    <img alt="Logo de SAASF" src="../..//images/aster_system_logo.png" style="max-height:150px;">
+</a>
 </header>
         <div id="main_div">
             <h1>SAASF - L'analyse</h1>
@@ -35,16 +37,76 @@ En général, le concept en question est défini grâce à une <a href="./algebr
                                 <h3>Les "fonctions simples"</h3>
 <p><span class="important">Le <a href="https://fr.wikipedia.org/wiki/Calcul_diff%C3%A9rentiel" target="_blank">calcul différentiel</a> représente l'analyse de fonctions simples</span>.
 Pour analyser une fonction simple, <u>nous devons avant la définir précisément</u>.
-<span class="important">une fonction simple est une <a href="./algrebra.html">fonction (que nous avons déjà défini sur la page dédiée à l'algèbre)</a> prenant comme entrée et comme sortie 1 unique <a href="./algebra.html">nombre (aussi défini sur la page dédiée à l'algèbre)</a>, au maximum complexe</span>.
+<span class="important">Une fonction simple est une <a href="./algebra.html">fonction (que nous avons déjà défini sur la page dédiée à l'algèbre)</a> prenant comme entrée et comme sortie 1 unique <a href="./algebra.html">nombre (aussi défini sur la page dédiée à l'algèbre)</a>, au maximum complexe</span>.
 Comme elles n'ont qu'une sortie par entrée, l'étude en devient plus facile.</p>
 <h3>La dérivation</h3>
 <p><u>La dérivation est souvent considérée comme une des opérations primaires de l'analyse</u>.
 En fait, <span class="important">nous pouvons l'appliquer à plusieurs objets différents (nombres, fonctions...), avec plusieurs interprétations différentes</span> (mais de sens assez proche).
-Par exemple, <span class="important">la dérivée d'une fonction à un point d'ordonné y est la variation locale de la valeur de cette fonction à ce point là</span>.
+Par exemple, <span class="important"><a href="https://fr.wikipedia.org/wiki/D%C3%A9riv%C3%A9e" target="_blank">la dérivée</a> d'une fonction à un point d'abscisse x est la variation locale de la valeur de cette fonction à ce point là</span>.
 En d'autre terme, <u>il s'agit du taux d'accroissement de cette fonction à ce même point</u>.
+Dans ce cas, <u>on parle de nombre dérivé</u>.
 De manière vulgarisée, si l'on prend ce point et un autre point infiniment proche de celui si, la variation entre ces deux points représente la dérivée de la fonction à ce même point.
-Par exemple, pour une fonction de vitesse d'un objet dans le temps, sa dérivée à un instant t représente la variation de la  vitesse à ce même instant, aussi nommée accélération de l'objet à ce même point.
-En effet, <u>ce concept est très utilisé en physique, pour pleins de branches diverses</u>.</p>
+Par exemple, pour une fonction de vitesse d'un objet dans le temps, sa dérivée à un instant t représente la variation de la vitesse à ce même instant, aussi nommée accélération de l'objet à ce même point.
+En effet, <u>ce concept est très utilisé en physique, pour pleins de branches diverses</u>.
+Pour calculer de manière brute la dérivée d'une fonction f pour une certaine valeur f(x), <span class="important">il faut obtenir la différence entre cette valeur f(x) et une valeur f(w) avec w très proche de x (tellement que sa différence avec x, notée h, peut être considérée comme nulle) avec h = w - x, et remise à l'échelle (selon h)</span>.
+Donc, le calcul brut de la dérivée d'une fonction est :</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mi>d</mi><mo>=</mo>
+<mfrac><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo><mo>&#x2212;<!-- - --></mo><mi>f</mi>
+<mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>w</mi><mo>&#x2212;<!-- - --></mo><mi>x</m
+i></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>h</mi>
+<mo stretchy="false">)</mo><mo>&#x2212;<!-- - --></mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo>
+</mrow><mi>h</mi></mfrac></mrow><mtext>&nbsp;avec h tendant vers 0.</mtext></mstyle></math></br>
+<span class="important">Si ce calcul marche pour une (ou un quelconque ensemble) valeur de x, la fonction est dite dérivable sur cette valeur (ou ce quelconque ensemble)</span>.
+</p>
+<p>Cependant, ne nous limitons pas qu'aux antécédents de fonctions.
+<span class="important">Vous pouvez aussi dérivée l'entièreté de la fonction d'un coup, pour obtenir une fonction prédisant chaque nombres dérivés de la fonction pour une même image</span>.
+<u>Le calcul de l'image dérivée est le même que celui présenté en haut, en gardant comme "x" l'inconnu x et en remplaçant "d" par la fonction dérivée (notée plus loin)</u>.
+Un nombre dérivé de la fonction f pour x = a se note :</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><msup><mi>f</mi></msup>
+<mo>'</mo><mo>(</mo><mi>x</mi><mo>)</mo><mtext>&nbsp;ou&nbsp;</mtext><mfrac><mrow><mi>df</mi></mrow><mi>dx</mi></mfrac>
+</mrow><mo>(</mo><mi>x</mi><mo>)</mo></mstyle></math></br>
+Une fonction dérivée de la fonction f se note :</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><msup><mi>f</mi>
+<mo>&#x2032;</mo></msup><mtext>&nbsp;ou&nbsp;</mtext><mfrac><mrow><mi>df</mi>
+</mrow><mi>dx</mi></mfrac></mrow></mstyle></math></br>
+Cependant, <u>imagineons une fonction f(x, y), comment dériver une fonction avec plusieurs variable</u> ?
+La façon la plus simple est de <span class="important">dériver la fonction avec une variable en considérant toutes les autres constantes</span>.
+<span class="important">Pour la fonction f(x, y), dériver la fonction via une seule variable, comme x, demande de considérer y constante : cette opération s'appelle <a href="https://fr.wikipedia.org/wiki/D%C3%A9riv%C3%A9e_partielle" target="_blank">la dérivée partielle</a> de f par rapport à la variable x</span>.
+Appart cela, <u>son calcul est exactement similaire à celui de la dérivée, en considérant "x" comme seulement la variable à dériver et en ne touchant pas aux autres</u>.
+La dérivée partielle de f d'image f(x, y) par rapport à x pour y = a se note :</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mfrac><mrow>
+<mi mathvariant="normal">&#x2202;</mi><mi>f</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>x</mi>
+</mrow></mfrac></mrow><mo>(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo>)</mo></mstyle></math>
+</br>La dérivée partielle de f(x, y) par rapport à x se note :</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mfrac><mrow>
+<mi mathvariant="normal">&#x2202;<!-- ? --></mi><mi>f</mi></mrow><mrow><mi mathvariant="normal">&#x2202;<!-- ? --></mi><mi>x</mi>
+</mrow></mfrac></mrow></mstyle></math></br>
+Le symbôle &#x2202; est nommé "d rond".
+<span class="important">La somme de toutes les dérivées partielles de toutes les variables d'une fonction pour un certain point est nommée <a href="https://fr.wikipedia.org/wiki/Diff%C3%A9rentielle" target="_blank">la différentielle totale</a> de la fonction en ce point.</span>.
+Dans le cas où la fonction n'a qu'une variable, <u>la dérivée partielle de cette variable est égale à la dérivée de la fonction (aussi égale à sa différencielle)</u>.
+</p>
+<p>Bien que le calcul d'une fonction dérivée peut sembler compliquée, <u>il existe des raccourcis possibles, pour déduire la fonction dérivée facilement</u>.
+En effet, <span class="important">en découpant votre fonction, vous pouvez savoir comment dériver chaque parties de la fonction</span>.
+Voici une compilation de quelques formes de f(x) et la valeur de f'(x) :</br>
+</p>
+<table>
+    <tr><td>f(x)</td><td>f'(x)</td></tr>
+    <tr><th>Constante</th><th>0</th></tr>
+    <tr><th>m * x</th><th>m</th></tr>
+    <tr><th>n * x ^ m</th><th>(n * m) * x ^ (m - 1)</th></tr>
+    <tr><th>e ^ x</th><th>x' * e ^ x</th></tr>
+</table>
+<p>
+C'est formules sont toutes déduites via la formule vue plus haut.
+<span class="important">Si la fonction est composée d'opérations entre différentes formes mentionnées dans le tableau, vous pouvez aussi appliquer certaines formules pour obtenir leur dérivée</span>.
+Voici quelques exemples de formules applicables, avec deux formes déduites de f(x) nommées u(x) et v(x) :
+</p>
+<table>
+    <tr><td>f(x)</td><td>f'(x)</td></tr>
+    <tr><th>u(x) + v(x)</th><th>u'(x) + v'(x)</th><tr>
+    <tr><th>u(x) * v(x)</th><th>u'(x) * v(x) + u(x) * v'(x)</th></tr>
+    <tr><th>u(x) / v(x)</th><th>(u'(x) * v(x) - u(x) * v'(x))/(v(x) ^ 2)</th></tr>
+</table>
 <h3>L'intégration</h3>
 <p>Après la dérivation, <u>l'intégration est la deuxième opération de base de l'analyse</u>.
 Pour comprendre ce que c'est, <u>imaginez une fonction quelconque, tracée dans un repère orthonormé (x, y)</u>.
