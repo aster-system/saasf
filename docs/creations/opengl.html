@@ -228,6 +228,39 @@ void main() {</br>
 <p>Cependant, comme le (0, 0) d'une texture OpenGL représente le bas et que le (0, 0) d'une image représente généralement le haut, <u>il peut être nécessaire d'inverser l'image avant de la passer à OpenGL</u>.
 Comme pour le "vertex shader", vous pouvez modifier ce code comme bon vous semble, pour faire le rendu de ce que vous voulez,
 comme un <a href="https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot" target="_blank">ensemble de Mandelbrot</a>.</p>
+<h3>Créer une GUI</h3>
+<p>Dans tous les cas ici, nous parlons de forme affichées en 3D.
+Cependant, <u>que se passe t'il si nous ne voulons qu'une forme simple en 2D, comme une GUI</u> ?
+Pour cela, <span class="important">le mieux est d'utiliser un VBO purement 2D, et d'utiliser avec lui un shader adapté pour l'affichage 2D</span>.
+<u>Le VBO peut ici être un simple rectangle, et le seul shader à modifier est le "vertex shader"</u>.
+En effet, le vertex shader n'a plus besoin des données de la caméra et de la projection 2D, vous pouvez donc simplifier son code :</p>
+<div class="code_sample">
+// Version d'OpenGL</br>
+#version 330 core</br></br>
+// Données du VBO (vec3 représente un point 3D et vec2 représente un point 2D)</br>
+layout(location = 0) in vec3 pos; // Position du point P</br>
+layout(location = 1) in vec2 pos_texture; // Position de la texture pour ce point</br></br>
+// Données à passer au prochain shader<br>out vec2 position_texture; // Position de la texture à passer</br></br>
+// Données changeant entre chaque rendus (noté "uniform", avecmat4 représentant une matrice 4*4)</br>
+uniform mat4 model; // Matrice M</br></br>
+// Fonction de base du shader</br>
+void main() {</br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Assignement de la bonne valeur à la donnée à passer</br>
+&nbsp;&nbsp;&nbsp;&nbsp;texture_position = pos_texture;</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+&nbsp;&nbsp;&nbsp;&nbsp;gl_Position = model * vec4(pos.xyz, 1.0)</br>
+}
+</div>
+<p>Grâce à ce shader, <u>vous pouvez appliquer des textures à vos GUIs</u>.
+Il est aussi à noter que le milieu de l'écran 2D représente la coordonnée (0, 0), la partie en bas à gauche représente (-1, -1) et la partie en haut à droite représente (1, 1).
+Faites y bien attention dans le calcul de position de la GUI.</p>
+<h3>Gérer la lumière</h3>
+<p>Disons le, <span class="important">la lumière n'est pas un phénomène "basique" en OpenGL, mais un processus extrêmement complexe</span>.
+Essayez d'imaginer un quelconque algorithme de gestion de lumière 3D : c'est pas facile.
+C'est pour cela que nous n'aborderons pas cette question sur cette page là.
+En plus, <u>la gestion de la lumière relève plus des mathématiques que de l'OpenGL</u>.
+Cela est pareil pour les ombres : un phénomènes très complexe à implémenter en OpenGL.
+Nous ferons dans le futur une page dédier à l'utilisation de la lumière en OpenGL.</p>
                             </div>
                         </div>
                     
