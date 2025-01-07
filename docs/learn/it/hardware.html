@@ -152,20 +152,44 @@ Les fils jaunes apportent 12V, les fils rouges 5V, les fils oranges 3.3V, les fi
                             </h2>
                             <div class="left_arrow_right_text_text">
                                 <h3>Les périphériques entrées / sorties</h3>
-<p>Nous, pauvres humains, ne pouvons pas (encore) connecter nos cerveaux aux ordinateurs pour communiquer avec lui.
+
+<p>
+Nous, pauvres humains, ne pouvons pas (encore) connecter nos cerveaux aux ordinateurs pour communiquer avec lui.
 Donc, <span class="important">pour communiquer avec lui, nous devons utiliser des outils bien physiques, nommés des<a href="https://fr.wikipedia.org/wiki/P%C3%A9riph%C3%A9rique_informatique" target="_blank">périphériques entrées / sorties</a></span>.
 Pour connecter ces mêmes périphériques, <u>on peut, soit faire sans fils (Bluetooth, WiFi...) soit via un fil, brancher dans un trou de l'ordinateur nommé un port matériel</u>.
 Les formes de ports les plus connus sont USB, HDMI, Ethernet...
 Une autre catégorie de port existe pour les composants internes (et non pour l'entrée / sortie), contenant les sockets de processeurs, les ports SATA...
 Ils sont en général beaucoup moins connus que les autres.
 </p>
-<p>Même si cela peut paraître bizarre, <u>les données transmises via les ports ne dépendent en général pas du port en question</u>.
+
+<p>
+Même si cela peut paraître bizarre, <u>les données transmises via les ports ne dépendent en général pas du port en question</u>.
 Par exemple, un port USB peut en même temps transférer des données de souris, comme de clavier, de clé USB...
 La branche de l'ingénieurie étudiant ces communications est nommées <span class="https://fr.wikipedia.org/wiki/Connectique" target="_blank">la connectique</span>.
 Pour chaque ports, <span class="important">les informations importantes sont l'arrangement physique des câbles (la forme du port), le courant électrique supporté par le port et les protocoles de transport des signaux électriques physiques</span>.
 Par exemple, le port USB A 3.0 est constitué de 4 fils internes (2 d'alimentations électrique et 2 de transfert de données), communiquant avec des signaux alternant entre 0 et 5 V pour le transfert et jusqu'à 20 pour l'alimentation.
 Cependant, à l'échelle logicielle, <u>les données peuvent être transférées selon n'importe quelle norme, et décodées via un programme nommé un pilote</u> (déjà abordé dans la page des <a href="../../astersystemelearn/it/os.html">systèmes d'exploitation</a>).
 Par exemple, pour les périphériques utilisant de la vidéo (comme une caméra), les données sont (en général) codées avec la norme H.264, qui requiet des pilotes de décodage spécifique.
+</p>
+
+<h3>Les écrans</h3>
+
+<p>
+Sans affichage graphique, un ordinateur ne peut pas faire grand chose.
+En général, <u>le périphérique graphique le plus utilisé sur un ordinateur est un écran</u>.
+<span class="important">Un écran est un périphérique permettant d'afficher une (ou plutôt "des") images provenant de l'ordinateur</span>.
+Pour cela, <u>on peut connecter les deux via différents types de ports (et de protocoles associés) différents : HDMI, Display Port, USB-C</u>...
+Le nombre maximal d'images que l'écran peut afficher par seconde est une fréquence (exprimé donc en hertz) nommé le taux de rafraichissement.
+Pour afficher chaque parties de l'image, <span class="important">l'écran est composé de pixels</span>.
+Un circuit embarqué dans l'écran s'occupe de décoder l'image et de l'afficher pixels par pixels sur l'écran.
+L'écran peut se démarquer par sa taille réelle (souvent exprimé en pouces, avec 1 pouce = 2,54 cm) et le nombre de pixels sur l'écran, nommé la définition de l'écran.
+Le nombre de pixels pour une certaine unité de taille réelle (comme le pouce, en général) est nommée la résolution de l'écran.
+Le nombre de pixels de large de l'écran divisé par le nombre de pixels de haut de l'écran est nommée le ratio de l'écran (16/9, 4/3...).
+</p>
+<p>
+Parmi les différents écrans, <span class="important">la seule différence autre que les unités "basiques" de l'écran (définition, taille...) est la technologie utilisée dans l'affichage des pixels</span>.
+Actuellement, la technologie la plus utilisée est la technologie <a href="https://fr.wikipedia.org/wiki/%C3%89cran_%C3%A0_cristaux_liquides" target="_blank">LCD (plus communément appelée écrans à cristaux liquides)</a>.
+
 </p>
                             </div>
                         </div>

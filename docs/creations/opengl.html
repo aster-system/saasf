@@ -137,7 +137,7 @@ uniform mat4 view; // Matrice C</br></br>
 // Fonction de base du shader</br>
 void main() {</br>
 &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
-&nbsp;&nbsp;&nbsp;&nbsp;gl_Position = project * view * model * vec4(pos.xyz, 1.0);</br>
+&nbsp;&nbsp;&nbsp;&nbsp;gl_Position = projection * view * model * vec4(pos.xyz, 1.0);</br>
 }
 </div>
 <p>Voici un exemple de GLSL pour un "fragment shader" :</p>
@@ -193,7 +193,7 @@ uniform mat4 projection; // Matrice J</br>
 uniform mat4 view; // Matrice C</br></br>
 // Fonction de base du shader<br>void main() {</br>
 &nbsp;&nbsp;&nbsp;&nbsp;// Assignement de la bonne valeur à la donnée à passer</br>
-&nbsp;&nbsp;&nbsp;&nbsp;texture_position = pos_texture;</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;position_texture = pos_texture;</br></br>
 &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
 &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = project * view * model * vec4(pos.xyz, 1.0);</br>
 }
