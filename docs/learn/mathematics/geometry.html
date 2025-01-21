@@ -61,6 +61,66 @@ Pour l'étudier plus précisément, <u>on peut y introduire une base</u>.
 Grâce à ce système, <u>on peut utiliser le concept de coordonnée</u>.
 En fait, les coordonnées d'un vecteur représentent chaque multiples des vecteurs de bases nécessaires pour obtenir la position du vecteur dans la base.
 Si chaque vecteurs de bases d'une base sont orthogonaux (perpendiculaires) et de la même norme, la base est dite orthonormée.</p>
+
+<h3>Les vecteurs</h3>
+
+<p>
+Grâce à des coordonnées, <u>vous pouvez définir des vecteurs</u>.
+D'un point de vue géométrie euclidienne, <span class="important"><a href="https://fr.wikipedia.org/wiki/Vecteur" target="_blank">un vecteur</a> est un ensemble fini de coordonnées</span>.
+Il s'écrivent avec une petite flèche au dessus de leur nom.
+En réalité, il s'agit d'un objet fourre-tout : <u>beaucoup de choses peuvent être représentés avec des vecteurs</u>.
+Par exemple, un vecteur peut directement désigner une position par rapport à un repère, un mouvement (ou, de manière plus mathématique, une translation), une remise à l'échelle...
+Cependant, ces objets étant plus complexes, il est nécessaire de leur définir certaines règles bien connues.
+Ils ont aussi des implications en physiques, pour divers objets.
+En prenant deux vecteurs en référentiel et en les traçant, <u>ils peuvent ne pas avoir la même direction : ils forment un angle entre eux</u>.
+Cet angle se note :</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD">
+<mrow class="MJX-TeXAtom-ORD"><mover><mrow><mo stretchy="false">(</mo><mrow class="MJX-TeXAtom-ORD"><mover><mi>A</mi>
+<mo stretchy="false">&#x2192;<!-- ? --></mo></mover></mrow><mo>,</mo><mrow class="MJX-TeXAtom-ORD"><mover><mi>B</mi>
+<mo stretchy="false">&#x2192;<!-- ? --></mo> </mover></mrow><mo stretchy="false">)</mo></mrow><mo>&#x005E;<!-- ^--></mo></mover>
+</mrow> </mrow></mstyle></math>
+<p>
+Cette définition est important pour permettre d'utiliser des référentiel communs à plusieurs vecteurs.
+<span class="important">La longueur d'un vecteur (la distance entre la position du vecteur et la position de l'origine, généralement (0, ..., 0)) est nommée sa norme</span>.
+Si le vecteur a une norme de 1, il est dit unitaire (généralement utilisé pour définir des bases).
+La norme d'un vecteur s'exprime :</br>
+</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mo>&#x2225;</mo>
+<mrow class="MJX-TeXAtom-ORD"><mover><mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow><mo>&#x2225;</mo>
+</mrow></mstyle></math>
+
+<p>
+Ils ont l'avantage d'être définie grâce à toute une algèbre : l'algèbre linéaire.
+<span class="important">Cette algèbre (et donc, les vecteurs qui la composent) respectent
+<a href="https://fr.wikipedia.org/wiki/Application_lin%C3%A9aire" target="_blank">les applications linéaires</a> : l'addition vectorielle (addition des coordonnées de vecteurs) et la multiplication par un nombre (multiplication des coordonnées du vecteur)</span>.
+Il existe aussi des opérations vecteur à vecteurs, comme le produit scalaire ou le produit vectoriel.
+<u>Vous pouvez même effectuer des applications linéaires sur tout le plan (et donc également sur tout ce qui le compose)</u>.
+Si vous faites cette application sur un plan, et que vous étudiez le plan transformé via le plan de départ, vous faites ce que l'on appelle un <a href="https://fr.wikipedia.org/wiki/Endomorphisme_lin%C3%A9aire" target="_blank">endomorphisme linéaire</a>.
+Ici, <u>le produit scalaire de deux vecteurs permet d'obtenir un produit des vecteurs, en prenant en compte leurs normes, mais aussi l'angle les séparant</u>.
+Le produit vectoriel, qui ne marche que en dimension 3, permet d'obtenir un vecteur perpendiculaire à deux vecteurs, et de taille égale à leur produit scalaire
+</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD">
+<mrow class="MJX-TeXAtom-ORD"> <mover> <mi>C</mi><mo stretchy="false">&#x2192;</mo></mover></mrow><mo>=</mo>
+<mrow class="MJX-TeXAtom-ORD"> <mover> <mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow><mo>+</mo>
+<mrow class="MJX-TeXAtom-ORD"> <mover> <mi>B</mi><mo stretchy="false">&#x2192;</mo></mover></mrow>
+<mo stretchy="false">&#x21D4;</mo><mrow class="MJX-TeXAtom-ORD"><mover><mi>C</mi><mo stretchy="false">&#x2192;</mo>
+</mover></mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD">
+<mover><mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow></mrow></msub><mo>+</mo><msub><mi>x</mi>
+<mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD"><mover><mi>B</mi><mo stretchy="false">&#x2192;</mo></mover>
+</mrow></mrow></msub><mo>,</mo><mi>...</mi><mo>,</mo><msub><mi>z</mi><mrow class="MJX-TeXAtom-ORD">
+<mrow class="MJX-TeXAtom-ORD"><mover><mi>A</mi><mo stretchy="false">&#x2192;<!-- ? --></mo></mover></mrow></mrow></msub>
+<mo>+</mo><msub><mi>z</mi><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD"><mover><mi>B</mi>
+<mo stretchy="false">&#x2192;<!-- ? --></mo></mover></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mstyle></math>
+</br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD">
+<mrow class="MJX-TeXAtom-ORD"><mover><mi>C</mi><mo stretchy="false">&#x2192;</mo></mover></mrow><mo>=</mo>
+<mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mover><mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow>
+<mo stretchy="false">&#x21D4;<!-- ? --></mo> <mrow class="MJX-TeXAtom-ORD"><mover><mi>C</mi> <mo stretchy="false">&#x2192;</mo>
+</mover> </mrow> <mo stretchy="false">(</mo><mn>3</mn><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD">
+<mrow class="MJX-TeXAtom-ORD"><mover><mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow></mrow></msub><mo>,</mo>
+<mi>...</mi><mo>,</mo><mn>3</mn><msub><mi>z</mi><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD">
+<mover><mi>A</mi><mo stretchy="false">&#x2192;</mo></mover></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mstyle></math>
+
                             </div>
                         </div>
                     

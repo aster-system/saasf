@@ -30,25 +30,31 @@ la branche les étudiants avec le plus de précision est la branche de l'algèbr
                                 Les bases de l'algèbre
                             </h2>
                             <div class="left_arrow_right_text_text">
-                                <h3>L'arithmétique</h3>
-<p>Pour être très précis, <span class="important"><a href="https://fr.wikipedia.org/wiki/Arithm%C3%A9tique" target="_blank">l'arithmétique</a> est la branche des mathématiques consacrée à l'étude des nombres bruts</span>.
+                                <h3 id="arithmetic">L'arithmétique</h3>
+<p>
+Pour être très précis, <span class="important"><a href="https://fr.wikipedia.org/wiki/Arithm%C3%A9tique" target="_blank">l'arithmétique</a> est la branche des mathématiques consacrée à l'étude des nombres bruts</span>.
 Elle offre une découpe précise des nombres, permettant de les catégoriser et de les utiliser de la manière la plus logique possible.
 <u>Le premier stade des nombres représente l'ensemble des nombres entiers naturels, représentant des quantités réelles et entières (comme 1, 2, 8...)</u>.
 En rajoutant un signe (+ ou -) devant les nombres entiers naturels permettant d'inverser leurs propriétés, on obtient l'ensemble des nombres entiers relatifs.
 <u>La division d'un nombre entier relatif avec un autre correspond à un nombre rationnel (exprimé sous la forme de fractions)</u>.
 Finalement, <u>tous les autres nombres simples font partie des nombres réels</u>.
 Dans ce cas, <span class="important">les catégories de nombres sont en réalité des ensembles de nombres, piqués de la <a href="https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_ensembles_de_Zermelo" target="_blank">théorie des ensembles</a></span>.
-Leurs propriétés précises (et extrêmement nombreuses) seront étudiées plus loin.</p>
-<p>Pour pouvoir être utilisé, les nombres ont besoins d'être... utilisable.
+Leurs propriétés précises (et extrêmement nombreuses) seront étudiées plus loin.
+</p>
+<p>
+Pour pouvoir être utilisé, les nombres ont besoins d'être... utilisable.
 Pour cela, <u>on doit pouvoir y effectuer des opérations basiques, tel que l'addition ou la multiplication</u>.
 Bien évidemment, <span class="important">toutes les célèbres opérations numériques peuvent être appliquées à chaque ensembles vus plus haut</span>.
 Cependant, <u>les règles d'utilisation de ces opérations peuvent changer légèrement selon l'ensemble</u>.
 <span class="important">Comme vue dans la page sur <a href="./logic.html">la logique mathématique</a>,ces opérations ont besoin d'axiomes pour exister</span>.
 Bien qu'une grande quantité de systèmes d'axiomes existent, tous avec leurs avantages / défauts, <u>mais les axiomes principalement utilisées sont <a href="https://fr.wikipedia.org/wiki/Axiomes_de_Peano" target="_blank">les axiomes de Peano</a></u>.
 En théorie, il ne s'agit que d'axiomes traitant des nombres entiers naturels.
-En pratique, avec un peu de débrouille, on peut redéfinir toute l'arithmétique en ne partant que d'eux.</p>
+En pratique, avec un peu de débrouille, on peut redéfinir toute l'arithmétique en ne partant que d'eux.
+</p>
+
 <h3>Le principe de l'algèbre</h3>
-<p>Pourquoi avoir défini l'arithmétique avant l'algèbre ?
+<p>
+Pourquoi avoir défini l'arithmétique avant l'algèbre ?
 En fait, <u>l'arithmétique permet de définir une catégorie d'algèbre utilisant des chiffres</u>.
 Pour être précis, <span class="important"><a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre" target="_blank">l'algèbre</a> est une branche mathématique permettant de définir des règles (opérations, équations, interprétations...) à une certaine catégorie d'objets</span>.
 Grâce à l'arithmétique, <u>on peut définir une algèbre donnant des règles à des nombres</u>, nommée <a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre_classique" target="_blank">algèbre classique</a>.
@@ -57,7 +63,8 @@ Pour la rendre utile, <u>il faut la combiner à d'autres branches mathématiques
 Cependant, à elle toute seule, elle contient quand même quelques propriétés très utiles, comme le concept d'équations.
 La forme la plus complète (et moderne) d'algèbre est nommée <a href="https://fr.wikipedia.org/wiki/Alg%C3%A8bre_g%C3%A9n%C3%A9rale" target="_blank">algèbre générale</a>.
 </p>
-<p>Pour définir ces règles sur l'objet que l'on veut étudier, nous pouvons nous aider d'un concept assez pratique : les structures algébriques.
+<p>
+Pour définir ces règles sur l'objet que l'on veut étudier, nous pouvons nous aider d'un concept assez pratique : les structures algébriques.
 <span class="important">Une <a href="https://fr.wikipedia.org/wiki/Structure_alg%C3%A9brique" target="_blank">structure algébrique</a> est un moyen de définir ces règles (avec, bien évidemment, des axiomes), permettant une certaine cohérence entre chaque structures</span>.
 Selon l'objet étudier, <u>une structure peut être munie de certains règles / opérations bien connues et définies, comme l'addition, la multiplication...</u>
 Les opérations sont aussi nommées "lois de compositions internes" dans ce contexte là.
@@ -107,6 +114,41 @@ Cependant, <u>il est aussi commun de passer des objets plus complexes, comme des
 L'image de l'objet passer peut être de n'importe quel forme aussi, indépendamment des antécédents.
 Par exemple, une fonction "distance" devrait prendre deux points (donc, deux coordonnées), et retourner leur distance (donc, un nombre réel).
 Selon les formes passées / transformées et la nature de la transformation, <u>la fonction peut obéir à différentes propriétés, la rendant plus simple à analyser</u>.
+</p>
+
+<h3>La théorie des nombres</h3>
+<p>
+Nous avons défini les ensembles les plus utilisés <a href="#arithmetic">un peu plus haut</a>, mais ils ne sont pas les seuls ensembles de nombres existants.
+<u>Le contre exemple le plus connu est l'ensemble des nombres complexes Z</u>.
+Il faut savoir que la puissance d'un nombre réel est toujours positive.
+Or, <u>il est possible de définir un nombre dont le carré vaut -1, qui n'est donc pas un nombre réel</u>.
+Ce nombre est donc appelé un <a href="https://fr.wikipedia.org/wiki/Nombre_imaginaire_pur" target="_blank">nombre imaginaire</a>, noté "i".
+<span class="important">La somme d'un nombre réel et d'un multiple de ce fameux "i" est nommé un <a href="https://fr.wikipedia.org/wiki/Nombre_complexe" target="_blank">nombre comple</a></span>.
+L'algèbre des nombres complexes représente un corps commutatif (la seule différence est que la multiplication de "i" par "i" donne "i" au carré, soit -1).
+Un nombre complexe z s'écrit comme ça :
+</br></br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mi>z</mi><mo>=</mo>
+<mi>a</mi><mo>+</mo><mi>b</mi><mi>i</mi></mrow></mstyle></math>
+</br></br>
+Avec "a" nommé "la partie réelle" de z (aussi noté "Re(z)") et "b" nommé "la partie imaginaire" de z (aussi noté "Im(z)").
+De plus, <u>un nombre z_ ayant même partie réelle qu'on nombre z et la partie imaginaire opposé de z est nommé le conjugué de z</u>.
+</p>
+<p>
+Il est possible d'utiliser les nombres complexes en géométrie 2D.
+En effet, <span class="important">il est possible de faire correspondre un nombre comple z a un vecteur V(a, b) : on dit que z est l'affixe de V</span>.
+<u>La norme de V est nommée le module de z</u>.
+<u>L'angle formé entre V et le vecteur u(1, 0) est nommé l'argument de z</u>.
+Il est donc possible de définir un nombre complexe avec des coordonnées cartésiennes et polaires.
+<span class="important">Les propriétés multiplicatives des nombres complexes (avec "i" carré égal à -1) lui permet de rendre les opérations vectorielles associées bien plus intéressantes</span> (avec, par exemple, des rotations).
+De plus, la forme polaire de ces nombres permet une écriture dite trigonométrique, <u>qui est elle même une écriture exponentielle</u>.
+</br></br>
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mi>z</mi><mo>=</mo>
+<mi>m</mi><mo>&#x2217;<!-- * --></mo><mo stretchy="false">(</mo><mi>cos</mi><mo stretchy="false">(</mo><mi>c</mi>
+<mo stretchy="false">)</mo><mo>+</mo><mi>i</mi><mi>sin</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo>
+<mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mo>&#x2217;<!-- * --></mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD">
+<mi>i</mi><mi>c</mi></mrow></msup></mrow></mstyle></math>
+</br></br>
+Avec m le module, c l'argument.
 </p>
                             </div>
                         </div>
