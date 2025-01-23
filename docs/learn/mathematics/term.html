@@ -65,6 +65,7 @@ Si vous êtes un professeur, avec plusieurs élèves doués, n'hésitez pas à l
                                 <p>
 Dans cette partie, je vous présenterai tout ce que vous avez probablement fait lors du premier trimestre de l'année de mathématiques.
 </p>
+
 <h3>L'analyse de suites et de fonctions</h3>
 <p>
 Les suites mathématiques sont abordées en première.
@@ -96,7 +97,7 @@ Dans ce cas, <u>on parle de limite à gauche (inférieure) et à droite (supéri
 <p>
 Dans cette exemple, on peut conjecturer graphiquement que la fonction décrite par cette courbe tend vers + l'infini en + l'infini et vers - l'infini en - l'infini.
 De plus, si elle tend vers -0.7, la fonction converge vers + l'infini à gauche et - l'infini à droite.
-Donc, cette courbe
+Donc, cette courbe admet une asymptote verticale, d'équation de droite "y = -0.7".
 </p>
 </div>
 <p>
@@ -119,6 +120,64 @@ Heureusement, <span class="important">il existe des formes bien connues pour con
 <tr><td>a * x avec a &lt; 0</td><td>- l'infini</td><td>+ l'infini</td></tr>
 <tr><td>a / x avec a différent de 0</td><td>0</td><td>0</td></tr>
 </tbody></table>
+<p>
+Pour en finir avec les fonctions, <span class="important">un autre concept étudié est le concept de dérivation</span>.
+Théoriquement, <u>la dérivation est étudiée en première</u>.
+En terminale, le concept est affiné pour plus de détails.
+<span class="important">Les dérivées secondes (dérivées de dérivées) et les concepts de convexité et concavité sont abordés</span>.
+Pour étudier cela, le concept de corde est introduit.
+Ici, <u>une corde représente un segment (obstensible via une équation de droite) entre deux points de la courbe tracée par la fonction</u>.
+Localement (entre les deux points du segment), la fonction est concave si l'entiéreté des valeurs de la fonction sont supérieures à celles du segment (si la courbe est au dessus du segment).
+À l'inverse, elle est convexe si l'entiéreté des valeurs de la fonction sont inférieures à celles du segment (si la courbe est en-dessous du segment).
+Cependant, <span class="important">le signe de la dérivée seconde permet de savoir si une fonction est concave ou convexe en un point précis</span>.
+Si la dérivée seconde est négative, la fonction est concave, et si elle est positive, la fonction est convexe.
+En réalité, <u>les dérivées secondes représentent les accélérations (ou freinages) des variations de la fonction, expliquant pourquoi elles sont nécessaires ici</u>.
+En revanche, si le signe de la dérivée seconde s'inverse, la fonction passe de concave à convexe.
+Cet endroit est nommé un point d'inflexion.
+</p>
+
+<h3>La géométrie</h3>
+<p>
+Tout cela ne serait pas drôle sans géométrie.
+<span class="important">Nous commençons avec toutes les bases définies en première : vecteurs, relation de Chasles (et, plus implicitement, toute l'algèbre "basique" des vecteurs), combinaisons linéaires...</span>.
+Ici, l'idée est d'approfondir ces concepts.
+</p>
+<p>
+Le premier concept abordé est les plans et droites de l'espace 3D.
+Ici, <span class="important">un plan représente une surface 2D dans un espace 3D, et une droite représente une ligne dans ce même espace</span>.
+Pour les caractériser, <u>le concept de vecteur directeur de plans et de droites est introduit</u>.
+On peut définir un plan avec deux droites sécantes (et leurs vecteurs directeurs).
+<u>Le terme "coplanaire" est aussi introduit, représentant des vecteurs (ou des points / droites) sur le même plan</u>.
+Ce terme rejoint le concept de plans et droites sécantes entre eux / elles, ainsi que de droites et plans parallèles, et finalement de vecteurs colinéaires.
+Grâce à ces termes, on peut aussi parler de positions relatives entres objets géométriques, pour savoir si plusieurs objets partagent ces caractéristiques.
+De plus, <span class="important">la présence de plan permet de définir des sous-espaces 2D sur ce plan, permettant de faire du calcul via ce plan</span>.
+Par exemple, pour savoir si un vecteur est sur un plan, il suffit de savoir si il existe une combinaison linéaire via un repère de ce plan.
+</p>
+<p>
+Pour utiliser tous ces termes de manière calculatoire, <u>une formule très utile est aussi introduite : la représentation paramétrique d'une droite</u>.
+<span class="important">La représentation paramétrique d'une droite représente un système d'équation permettant de savoir quels points appartiennent à la droite</span>.
+Voici un la représentation pure d'une représentation paramétrique de droite :
+</p>
+<math>x = at + e</math></br>
+<math>y = bt + f</math></br>
+<math>z = ct + g</math>
+<p>
+Ici, u(a, b, c) représente un vecteur directeur de la droite et p(e, f, g) représente un point quelconque de la droite.
+En réalité, <u>il existe une infinité de représentations possibles</u>.
+Grâce à cette représentation, <u>il est possible de lier tous les calculs présentés au-dessus, pour étudier proprement la géométrie en 3D</u>.
+</p>
+
+<h3>Les probabilités</h3>
+<p>
+Les probabilités sont considérées comme un des chapitres les plus simples du programme.
+Bien évidemment, ils s'agit encore d'approfondissement de notions déjà connues : univers, épreuves, évènements...
+En terminale, <u>l'accent est mit sur la loi binomiale</u>.
+Dans ce domaine, <span class="important">la loi binomiale est un moyen de représenter une suite d'évènements spéciaux, nommés des épreuves de Bernoulli</span>.
+<u>Une épreuve de Bernoulli est une épreuve amenant à deux issues, nommées succès et échec</u>.
+En toute logique, le succès a une certaine probabilité d'arrivée, et l'échec la probabilité inverse.
+<u>Une suite d'une même épreuve de Bernoulli indépendante est appelée un schéma de Bernoulli</u>, représentable sous forme d'arbre pondéré.
+<span class="important">La correspondance d'un schéma de Bernoulli et de sa probabilité de succés est nommé une loi binomiale</span>.
+</p>
                             </div>
                         </div>
                     
