@@ -132,9 +132,30 @@ Localement (entre les deux points du segment), la fonction est concave si l'enti
 Cependant, <span class="important">le signe de la dérivée seconde permet de savoir si une fonction est concave ou convexe en un point précis</span>.
 Si la dérivée seconde est négative, la fonction est concave, et si elle est positive, la fonction est convexe.
 En réalité, <u>les dérivées secondes représentent les accélérations (ou freinages) des variations de la fonction, expliquant pourquoi elles sont nécessaires ici</u>.
-En revanche, si le signe de la dérivée seconde s'inverse, la fonction passe de concave à convexe.
+En revanche, si le signe de la dérivée seconde s'inverse, la fonction passe de concave à convexe (ou de convexe à concave).
 Cet endroit est nommé un point d'inflexion.
 </p>
+<div style="display:flex;flex-direction:vertical;">
+<img alt="Démonstration graphique" src="../../images/maths_term/convexity.png" style="max-width:300px;max-height=300px;">
+<p>
+Nous avons la fonction définie sur l'ensemble des réels par :
+</br></br>
+<math><mi>f(x)</mi><mo>=</mo><msup><mi>4x</mi><mi>3</mi></msup><mo>+</mo><msup><mi>2x</mi><mi>2</mi></msup></math>
+</br></br>
+Sur cette fonction, toute la partie bleue est concave, et la partie verte est convexe.
+Le point d'inflexion se trouve là où est la croix.
+Cette fonction est dérivable deux fois sur R.
+Nous pouvons calculer la dérivée première et seconde de cette fonction.
+</br></br>
+<math><mi>f'(x)</mi><mo>=</mo><msup><mi>12x</mi><mi>2</mi></msup><mo>+</mo><mi>4x</mi></math>
+</br>
+<math><mi>f''(x)</mi><mo>=</mo><mi>24x</mi><mo>+</mo><mi>4</mi></math>
+</br></br>
+Cette fonction est inférieure à 0 de - l'infini à -1/6, elle est donc concave sur cette intervalle.
+De -1/6 à + l'infini, elle est donc convexe.
+Comme elle s'annule pour x = -1/6, on sait donc qu'il s'agit du point d'inflexion de f.
+</p>
+</div>
 
 <h3>La géométrie</h3>
 <p>
@@ -158,9 +179,9 @@ Pour utiliser tous ces termes de manière calculatoire, <u>une formule très uti
 <span class="important">La représentation paramétrique d'une droite représente un système d'équation permettant de savoir quels points appartiennent à la droite</span>.
 Voici un la représentation pure d'une représentation paramétrique de droite :
 </p>
-<math>x = at + e</math></br>
-<math>y = bt + f</math></br>
-<math>z = ct + g</math>
+<math><mi>x</mi><mo>=</mo><mi>at</mi><mo></mo>+<mi>e</mi></math></br>
+<math><mi>y</mi><mo>=</mo><mi>bt</mi><mo>+</mo><mi>f</mi></math></br>
+<math><mi>z</mi><mo>=</mo><mi>ct</mi><mo>+</mo><mi>g</mi></math>
 <p>
 Ici, u(a, b, c) représente un vecteur directeur de la droite et p(e, f, g) représente un point quelconque de la droite.
 En réalité, <u>il existe une infinité de représentations possibles</u>.
