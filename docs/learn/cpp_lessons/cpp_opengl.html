@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link href="../../styles/base.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAASF - OpenGL en C++</title>
+
+        <!--Connect to google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!--Get the Hammersmith One font, see https://fonts.google.com/specimen/Hammersmith+One for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+        <!--Get the OpenSans font, see https://fonts.google.com/specimen/Open+Sans for more informations-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="open-sans-bold">
+        <header class="hammersmith-one-regular">
+            <a href="../../index.html">
+                <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
+            </a>
+        </header>
+        <div id="main_div">
+            <h1>
+                Utiliser OpenGL en C++
+            </h1>
+            <div>
+                Pour l'instant, les seules interactions que nous pouvons avoir avec notre programme C++ sont les fichiers et la console.
+                Nous allons ici apprendre à augmenter les possibilités d'interactions avec le programme, grâce à une API très connue : <a href="https://www.khronos.org/opengl/" target="_blank">OpenGL</a>.
+                Pour rappel, nous avons déjà fait un cours sur OpenGL, <a href="../../creations/opengl.html">juste ici</a>.
+                Pour des raisons de temps, nous allons considérer tout ce qui a été vu sur ce cours comme acquis.
+            </div>
+            <div class="left_arrow_right_text">
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        A. Créez votre fenêtre OpenGL
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3>
+                            a. Mettre en place votre environnement
+                        </h3>
+                        <div>
+                            <p>
+                                Disons le, <u>OpenGL est une librairie assez complexe à utiliser</u>.
+                                Pour y accéder, chaque systèmes d'exploitations offrent nativement différents outils pour y accéder.
+                                Cependant, pour gagner du temps, <span class="important">nous allons utiliser des librairies C++ qui permettent d'utiliser simplement tout ça</span>.
+                                Nous allons utiliser 3 librairies : <a href="https://www.glfw.org/" target="_blank">GLFW</a>, <a href="https://glad.dav1d.de/" target="_blank">Glad</a> et <a href="https://github.com/g-truc/glm" target="_blank">GLM</a>.
+                            </p>
+                            <p>
+                                <span class="important">GLFW va être un moyen simple d'utiliser un contexte OpenGL</span>.
+                                En effet, <u>elle est pleine de fonctions très utiles pour travailler avec OpenGL</u>.
+                                Elle a l'avantage d'être cross-platforme et en libre accès.
+                                Pour installer GLFW, <a href="https://www.glfw.org/download.html" target="_blank">rendez vous sur cette page</a>.
+                                Vous pouvez télécharger le code source et le compiler vous même, ou utiliser du code pré-compilé.
+                                Pour rappel, nous avons déjà traité de l'utilisation de librairies de ce genre, <a href="../../astersystemelearn/cpp_lessons/cpp_bases.html" target="_blank">dans ce cours là</a>.
+                                Vous devrez théoriquement avoir accès a un DLL, deux fichiers librairies, et un ensemble de headers.
+                            </p>
+                            <p>
+                                <span class="important">Glad va avoir pour tâche de rendre notre code OpenGL cross-plateforme</span>.
+                                En effet, comme nous l'avons vu, chaque plateforme propose sa propre implémentation d'OpenGL.
+                                <u>Glad réuni tous les types possibles, et les rend accessibles selon la plateforme actuelle</u> grâce au système de <a href="../../astersystemelearn/cpp_lessons/cpp_templates.html">template</a>.
+                                Pour installer Glad, <a href="https://glad.dav1d.de/" target="_blank">rendez vous sur cette page</a>.
+                                Elle vous demandera pas mal de configuration pour le fichier environnement généré.
+                                <span class="important">Comme langage, sélectionnez "C/C++"". Comme spécification, sélectionnez "OpenGL". Comem API, sélectionnez "Version 3.3" dans "gl" (Comme sur notre cours d'OpenGL). Comme "Profile", choisissez "Core".</span>
+                                Cependant, à l'inverse de GLFW, Glad ne propose pas de fichiers pré-compilés.
+                                <u>Le site vous proposera un dossier de headers, ainsi qu'un fichier "glad.c", à ajouter aux fichiers compilés de votre code</u>.
+                            </p>
+                            <p>
+                                Finalement, <span class="important">GLM va nous apporter un ensemble d'outils mathématiques, très importants pour OpenGL</span>.
+                                En effet, <u>les mathématiques nécessaires seront très avancés ici</u>.
+                                Heuresement, GLM en propose une partie.
+                                Pour installer GLM, <a href="https://github.com/g-truc/glm" target="_blank">rendez vous sur cette page</a>.
+                                Vous y trouverez l'ensemble du projet GLM.
+                                <span class="important">Vous aurez besoin de tous les headers présents dans le dossier "glm"</span>.
+                                Dans cette librairie, il n'y a que des headers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h1>Plus d'informations</h1>
+            <div class="open-sans-regular">
+                SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.</br>
+                Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.</br>
+                <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+                    <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>
