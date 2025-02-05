@@ -74,6 +74,104 @@
                                 <span class="important">Vous aurez besoin de tous les headers présents dans le dossier "glm"</span>.
                                 Dans cette librairie, il n'y a que des headers.
                             </p>
+                            <p>
+                                Dés que tout cela est installé, vous pouvez créer votre projet pour commencer à travailler avec OpenGL.
+                            </p>
+                        </div>
+                        <h3>
+                            b. Créer votre première fenêtre
+                        </h3>
+                        <div>
+                            <p>
+                                Pour créer notre première fenêtre avec OpenGL, <span class="important">il va falloir commencer à écrire le code permettant de configurer OpenGL</span>.
+                                <u>Nous vous conseillons grandement de bien le structurer, pour pouvoir l'utiliser de manière plus simple</u>.
+                                Cependant, si vous avez la flemme (déconseillé), vous pouvez tout mettre directement dans la fonction "main" de votre code.
+                                Avant tout, <u>initialisons GLFW, avec quelques simples lignes de code</u>.
+                                <div class="code_sample">
+                                    // Initialisation de GLFW</br>
+                                    glfwInit();</br>
+                                    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);</br>
+                                    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);</br>
+                                    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+                                </div>
+                                Ces fonctions sont assez claires : "glfwInit()" initialise GLFW, et "glfwWindowHint()" permet de configurer certaines valeurs de GLFW, grâce à deux paramètres : la configuration à modifier, et sa nouvelle valeur.
+                                Dans ce cas, nous configurons la version (majeure et mineure) d'OpenGL, en 3.3 ici, puis nous indiquons à GLFW que nous utiliser la version "core" d'OpenGL (téléchargée plus haut via Glad).
+                                En suite, <u>créeons notre contexte OpenGL</u>.
+                                <div class="code_sample">
+                                    // Création du contexte OpenGL</br>
+                                    GLFWwindow* window = glfwCreateWindow(500, 500, "Mon programme OpenGL", NULL, NULL);</br>
+                                    if (window == NULL) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Failed to create GLFW window" &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glfwTerminate();</br>
+                                    }</br>
+                                    glfwMakeContextCurrent(window);
+                                </div>
+                                Ces fonctions restent aussi assez claires : "glfwCreateWindow()" crée la fenêtre pour OpenGL et la retourne sous forme de pointeur vers un objet <a href="https://www.glfw.org/docs/latest/group__window.html#ga3c96d80d363e67d13a41b5d1821f3242" target="_blank">"GLFWwindow"</a>, la condition vérifie si la création a bien eu lieu, et "glfwMakeContextCurrent()" indique à GLFW (et, indirectement, à l'OS du PC) que le contexte actuel du programme est le contexte passé en paramètre.
+                                Nous pouvons constater la fonction "glfwTerminate()" dans la condition, qui a pour tâche de décharger GLFW pour le programme (si il doit s'arrêter).
+                                Attardons nous sur <a href="https://www.glfw.org/docs/latest/group__window.html#ga3555a418df92ad53f917597fe2f64aeb" target="_blank">"glfwCreateWindow()"</a>.
+                                Elle prend beaucoup de paramètres.
+                                <u>Les deux premiers représentent la largeur et la hauteur de la fenêtre</u>.
+                                Le troisième représente le titre affiché en haut à gauche de la fenêtre.
+                                Le quatrième représente un pointeur vers un objet <a href="https://www.glfw.org/docs/latest/group__monitor.html#ga8d9efd1cde9426692c73fe40437d0ae3" target="_blank">GLFWmonitor</a>.
+                                Si ce pointeur est utilisé, alors le programme va être en plein écran sur l'écran demandé.
+                                Sinon (comme maintenant), il ne sera pas en plein écran.
+                                Le cinquième permet de lier une autre fenêtre déjà crée avec celle-ci pour un partage de ressources entre fenêtre si besoin (nous n'en aurons pas besoin ici).
+                                <span class="important">Si la fenêtre ne peut pas être générée, la fonction renvoie un pointeur nul, et la condition d'erreur est activée, affichant un mesage d'erreur et déchargeant GLFW</span>.
+                                En suite, <u>chargeons Glad</u>.
+                                <div class="code_sample">
+                                    // Chargement de Glad</br>
+                                    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Failed to initialize GLAD" &lt;&lt; std::endl;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glfwTerminate();</br>
+                                    }
+                                </div>
+                                <span class="important">Glad est chargé dans la fonction "gladLoadGLLoader()", qui renvoie "true" si le chargement est bon, ou "false" si il n'est pas bon</span>.
+                                Si il ne l'est pas, la condition d'erreur est activée, affichant un mesage d'erreur et déchargeant GLFW.
+                                Cette fonction est assez complexe : elle prend la fonction <a href="https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163" target="_blank">"glfwGetProcAddress()"</a> de GLFW en paramètre, retournant un pointeur vers la bonne API OpenGL utilisée par le contexte actuel.
+                                N'hésitez pas à aller voir la documentation si cette fonction vous intéresse.
+                                Dés que tout cela est fait, <span class="important">la partie configuration est terminée</span>.
+                            </p>
+                            <p>
+                                Maintenant, <span class="important">nous allons implémenter la boucle qui va permettre à notre programme de tenir dans le temps</span>.
+                                Tout aura lieu dans une boucle, qui s'arrêtera en même temps que le programme.
+                                La boucle aura cette allure :
+                                <div class="code_sample">
+                                    // Boucle de temps</br>
+                                    while(!glfwWindowShouldClose(window)) {</br></br>
+
+                                    }</br>
+                                    glfwTerminate();
+                                </div>
+                                Ici, <a href="https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163" target="_blank">"glfwWindowShouldClose()"</a> vérifiera si la fenêtre doit se fermer.
+                                Après avoir fermer la fenêtre, on décharge GLFW avec "glfwTerminate()".
+                                <u>Si nous lançons le programme comme ça, rien ne va se passer, et le programme ne pourra même pas se fermer tout seul</u>.
+                                Pour utiliser la fenêtre, nous allons modifier l'intérieur de la boucle.
+                                <div class="code_sample">
+                                    // Boucle de temps</br>
+                                    while(!glfwWindowShouldClose(window)) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Préparer l'affichage OpenGL</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glClearColor(0, 0.4, 0.9, 1.0);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glClear(GL_COLOR_BUFFER_BIT);</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Met à jour OpenGL</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glfwSwapBuffers(window);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glfwPollEvents();</br>
+                                    }</br>
+                                    glfwTerminate();
+                                </div>
+                                Ce code rend la page tout à fait utilisable : décrivons le étape par étape.
+                                <span class="important"><a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClear.xhtml" target="_blank">"glClear()"</a> permet de remettre les zones mémoires générées auparavant d'OpenGL à 0 (ou ne fait rien si aucune zone mémoire n'a été générée)</span>.
+                                Comme ça, vous n'encombrez pas la mémoire de choses inutiles.
+                                Ici, on passe en paramètre "GL_COLOR_BUFFER_BIT", pour n'effacer que la partie "couleur" d'OpenGL (l'ancienne zone d'affichage).
+                                Il s'agit d'une fonction de base d'OpenGL (rendue utilisable par Glad).
+                                Cependant, <u>OpenGL va remplir la nouvelle zone de mémoire d'affichage par une nouvelle couleur, spécifiée via la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml" target="_blank">glClearColor()</a></u>.
+                                Elle prend 4 paramètres : les valeurs RGBA de la couleur nécessaire (qui peuvent être des valeurs sur 255, ramenée à entre 0 et 1).
+                                Ces valeurs doivent être entre 0 et 1.
+                                Ici, il s'agit d'un bleu ciel (le même que la couleur d'arrière plan de la fenêtre nouvellement crée).
+                                En suite, <span class="important">on demande à GLFW de confirmer l'affichage de la fenêtre, qui va être envoyée à la carte graphique avec <a href="https://www.glfw.org/docs/latest/group__window.html#ga15a5a1ee5b3c2ca6b15ca209a12efd14" target="_blank">glfwSwapBuffers()</a></span>.
+                                Finalement, <u><a href="https://www.glfw.org/docs/latest/group__window.html#ga37bd57223967b4211d60ca1a0bf3c832" target="_blank">"glfwPollEvents()"</a> met à jour les évènements ayant eu lieu depuis le dernier appel de la fonction (clique de souris, entré clavier, fermeture de la fenêtre...)</u>.
+                                Cet données seront par la suite accessible via des fonctions, que nous verrons plus tard.
+                                <u>Maintenant que cette fenêtre est crée, commençons à la rendre utilisable</u>.
+                            </p>
                         </div>
                     </div>
                 </div>
