@@ -94,7 +94,7 @@
                                     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);</br>
                                     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
                                 </div>
-                                Ces fonctions sont assez claires : "glfwInit()" initialise GLFW, et "glfwWindowHint()" permet de configurer certaines valeurs de GLFW, grâce à deux paramètres : la configuration à modifier, et sa nouvelle valeur.
+                                Ces fonctions sont assez claires : "glfwInit()" initialise GLFW, et <a href="https://www.glfw.org/docs/3.3/group__window.html" target="_blank">"glfwWindowHint()"</a> permet de configurer certaines valeurs de GLFW, grâce à deux paramètres : la configuration à modifier, et sa nouvelle valeur.
                                 Dans ce cas, nous configurons la version (majeure et mineure) d'OpenGL, en 3.3 ici, puis nous indiquons à GLFW que nous utiliser la version "core" d'OpenGL (téléchargée plus haut via Glad).
                                 En suite, <u>créeons notre contexte OpenGL</u>.
                                 <div class="code_sample">
@@ -107,7 +107,7 @@
                                     glfwMakeContextCurrent(window);
                                 </div>
                                 Ces fonctions restent aussi assez claires : "glfwCreateWindow()" crée la fenêtre pour OpenGL et la retourne sous forme de pointeur vers un objet <a href="https://www.glfw.org/docs/latest/group__window.html#ga3c96d80d363e67d13a41b5d1821f3242" target="_blank">"GLFWwindow"</a>, la condition vérifie si la création a bien eu lieu, et "glfwMakeContextCurrent()" indique à GLFW (et, indirectement, à l'OS du PC) que le contexte actuel du programme est le contexte passé en paramètre.
-                                Nous pouvons constater la fonction "glfwTerminate()" dans la condition, qui a pour tâche de décharger GLFW pour le programme (si il doit s'arrêter).
+                                Nous pouvons constater la fonction <a href="https://www.glfw.org/docs/3.3/group__init.html#gaaae48c0a18607ea4a4ba951d939f0901" target="_blank">"glfwTerminate()"</a> dans la condition, qui a pour tâche de décharger GLFW pour le programme (si il doit s'arrêter).
                                 Attardons nous sur <a href="https://www.glfw.org/docs/latest/group__window.html#ga3555a418df92ad53f917597fe2f64aeb" target="_blank">"glfwCreateWindow()"</a>.
                                 Elle prend beaucoup de paramètres.
                                 <u>Les deux premiers représentent la largeur et la hauteur de la fenêtre</u>.
@@ -172,6 +172,281 @@
                                 Cet données seront par la suite accessible via des fonctions, que nous verrons plus tard.
                                 <u>Maintenant que cette fenêtre est crée, commençons à la rendre utilisable</u>.
                             </p>
+                            <img alt="Fenêtre OpenGL" src="../../images/cpp_opengl/window.png" style="max-height:300px;">
+                        </div>
+                        <h3>
+                            c. Créer des objets OpenGL
+                        </h3>
+                        <div>
+                            <p>
+                                Pour pouvour utiliser pleinement OpenGL, <span class="important">nous allons créer des objets dans OpenGL</span>.
+                                Comme nous l'avons vu dans la présentation d'OpenGL, <span class="important">les objets OpenGL sont utilisés via des VAOs, des VBOs et des shaders</span>.
+                            </p>
+                            <p>
+                                <span class="important">Commençons par le plus simple : les VBOs</span>.
+                                Pour des raisons de simplicité, nous mettrons l'entiereté des données d'un VBO dans une structure.
+                                <div class="code_sample">
+                                    // Structure pour un VBO</br>
+                                    struct VBO {</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Id du VBO</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;unsigned int id;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Points dans le VBO</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;float&gt; points;</br>
+                                    };
+                                </div>
+                                Nous l'étudierons plus précisément plus tard.
+                                Pour passer des VBOs à OpenGL, <u>il vous faut une liste de points</u>.
+                                Ici, notre liste sera dans le vecteur "points".
+                                <span class="important">Pour commencer simplement, faisons un simple triangle</span> (pour rappel, OpenGL ne peut qu'afficher des triangles).
+                                <div class="code_sample">
+                                    // Création du VBO nécessaire</br>
+                                    VBO triangle;</br></br>
+                                    // Création d'un triangle</br>
+                                    vbo->points.push_back(-0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(0);vbo->points.push_back(0.5);vbo->points.push_back(0);
+                                </div>
+                                Dans une fenêtre OpenGL, les extrémités (gauche / droite, bas / haut) représentent les coordonnées -1 et 1.
+                                Dés que cela est fait, <u>nous allons les passer à OpenGL</u>.
+                                <div class="code_sample">
+                                    // Attribution d'un espace mémoire pour le VBO</br>
+                                    glGenBuffers(1, &triangle.id);</br></br>
+                                    // Passage du VBO à OpenGL</br>
+                                    glBindBuffer(GL_ARRAY_BUFFER, triangle.id);</br>
+                                    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * triangle.points.size(), triangle.points.data(), GL_STATIC_DRAW);</br>
+                                </div>
+                                Premièrement, obtenons de la part d'OpenGL une partie de mémoire, via la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenBuffers.xhtml" target="_blank">glGenBuffers()</a>.
+                                Son premier paramètre représente le nombre d'objets OpenGL que nous allons crée (ici, qu'un seul VBO), et le deuxième représente une référence vers un nombre (unsigned int), qui aura une valeur que nous pourrons utiliser pour accéder à cet objet OpenGL.
+                                En suite, nous indiquons à OpenGL que nous allons utiliser la partie de mémoire créée comme le VBO actuellement utilisé (GL_ARRAY_BUFFER) par OpenGL grâce à la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml" target="_blank">glGenBuffers()</a>.
+                                Finalement, <u>nous envoyons dans cette partie de mémoire les données du VBO</u>.
+                                Pour cela, nous utilisons la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml" target="_blank">glBufferData()</a>, permettant d'envoyer des données dans une zone de mémoire OpenGL.
+                                Le premier paramètre représente l'endroit où envoyer les données (ici, le VBO actuellement utilisé, défini plus haut).
+                                Le deuxième paramètre représente la taille en octet de données que nous allons passer à la mémoire.
+                                Nous n'allons passer que des "float" (4 octets de mémoire), autant qu'il y en a dans le vecteur des points du triangle.
+                                <u>Le troisième paramètre nous permet d'indiquer les données à passer à la mémoire</u>.
+                                Elle prend en paramètre un pointeur vers un tableau de données C++.
+                                Ici, nous lui passons un pointeur vers les données du vecteur sous forme de tableau, grâce à la méthode "data".
+                                Finalement, le dernier paramètre représente la façon dont OpenGL doit écrire les données.
+                                La méthode "GL_STATIC_DRAW" est la plus rapide à utiliser, mais sera plus longue à modifier dans le futur si besoin (nous ne le ferons pas ici).
+                                Pour en finir, il nous faut ajouter un moyen de supprimer les données allouées par OpenGL à la mémoire.
+                                <div class="code_sample">
+                                    // Libère la mémoire allouée pour le VBO</br>
+                                    glDeleteBuffers(1, &triangle.id);
+                                </div>
+                                La fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteBuffers.xhtml" target="_blank">glDeleteBuffers()</a> fonctionne de la même manière que "glGenBuffers()", vue plus haut.
+                                Cette opération doit être effectuée après la boucle d'éxecution.
+                                Maintenant, <span class="important">votre VBO est bien chargé dans la mémoire d'OpenGL</span>.
+                            </p>
+                            <p>
+                                En suite, <span class="important">nous allons passer le shader vers OpenGL</span>.
+                                Pour commencer, <u>il vous faudra vos deux shaders nécessaires : un vertex shader et un fragment shader</u>.
+                                Nous allons simplement recopier une version simplifiée de ceux dans le cours d'introduction à OpenGL.
+                                <div class="code_sample">
+                                    // Vertex</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Données du VBO (vec3 représente un point 3D)</br>
+                                    layout(location = 0) in vec3 pos; // Position du point P</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = vec4(pos.xyz, 1.0);</br>
+                                    }
+                                </div>
+                                <div class="code_sample">
+                                    // Fragment</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Couleur sortie du shader</br>
+                                    out vec4 FragColor;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp&nbsp;// Calcul de la couleur nécessaire, avec ici le rouge, ou RGBA(255, 0, 0, 255)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;FragColor = vec4(1, 0, 0, 1);</br>
+                                    }
+                                </div>
+                                Plaçons ces codes dans des "std::string", que nous appellerons respectivement "vertex_shader" et "fragment_shader".
+                                Ces codes vont être directement compilés par OpenGL.
+                                <div class="code_sample">
+                                    // Compilation du fragment shader</br>
+                                    unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);</br>
+                                    char* current_shader = new char[fragment_shader.size()];</br>
+                                    for(int i = 0;i&lt;fragment_shader.size();i++){current_shader[i]=fragment_shader[i];}</br>
+                                    int shader_size = fragment_shader.size();</br>
+                                    glShaderSource(fragment, 1, &current_shader, &shader_size);</br>
+                                    glCompileShader(fragment); delete current_shader;</br></br>
+                                    // Compilation du vertex shader</br>
+                                    unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);</br>
+                                    current_shader = new char[vertex_shader.size()];</br>
+                                    for(int i = 0;i&lt;vertex_shader.size();i++){current_shader[i]=vertex_shader[i];}</br>
+                                    glShaderSource(vertex, 1, &current_shader, &shader_size);</br>
+                                    glCompileShader(vertex); delete current_shader;
+                                </div>
+                                Le code est quasiment le même pour les deux shaders.
+                                Nous commençons par créer un simple shader (de type GL_FRAGMENT_SHADER ou GL_VERTEX_SHADER) grâce à la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml" target="_blank">glCreateShader()</a>.
+                                Elle retourne ensuite un ID, qui permettra d'accéder au shader nouvellement créé.
+                                En suite, <u>nous spécifions au shader nouvellement créé le code qui le constitue, grâce à <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glShaderSource.xhtml" target="_blank">glShaderSource()</a></u>.
+                                Cette fonction prend en premier paramètre le shader à traiter (via son ID).
+                                Le deuxième paramètre permet de savoir combien de shaders vont être compilés (qu'un seul ici).
+                                Le troisième paramètre est assez spécial.
+                                <u>Il s'agit d'un pointeur VERS un pointeur VERS le contenu du shader, sous forme de tableau de caractère</u>.
+                                C'est pour cela que nous le créeons dans un nouveau tableau de caractère, grâce à "current_shader" et à la boucle.
+                                Finalement, le dernier paramètre prend un pointeur vers une variable contenant la taille du shader a compilé.
+                                Dés que le shader est entièrement passé, <span class="important">il est compilé avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml" target="_blank">glCompileShader()</a></span>.
+                                N'oubliez pas de supprimer le tableau de caracètre crée à la fin, pour ne pas perdre d'espace mémoire.
+                                Dés que cela est fait, nous devons nous assurer que rien n'est arrivé pendant la compilation.
+                                <div class="code_sample">
+                                    // Vérifier le fragment shader</br>
+                                    int  success = 0;</br>
+                                    char infoLog[512];</br>
+                                    glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);</br>
+                                    if (!success) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glGetShaderInfoLog(fragment, 512, NULL, infoLog);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Erreur de compilation sur le fragment" &lt;&lt; std::endl &lt;&lt; infoLog &lt;&lt; std::endl;</br>
+                                    }</br></br>
+                                    // Vérifier le vertex shader</br>
+                                    success = 0;</br>
+                                    glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);</br>
+                                    if (!success) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glGetShaderInfoLog(vertex, 512, NULL, infoLog);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Erreur de compilation sur le vertex shader" &lt;&lt; std::endl &lt;&lt; infoLog &lt;&lt; std::endl;</br>
+                                    }
+                                </div>
+                                Ici, <a href="https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glGetShaderiv.xml" target="_blank">glGetShaderiv()</a> permet de récupérer une information sur le shader.
+                                Le premier paramètre représente le shader à tester, le deuxième représente l'information à tester, et le troisième représente une référence vers un entier contenant la réponse de la fonction.
+                                Si le shader n'a pas pu être compilé, <span class="important">on cherche ce qui ne va pas grâce à la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderInfoLog.xhtml" target="_blank">glGetShaderInfoLog()</a></span>.
+                                Son premier paramètre représente le shader à tester, le deuxième représente la taille maximale des informations sorties par la fonction, la troisième représente un pointeur vers une variable contenant la taille réelle renvoyée et la quatrième représente l'endroit où écrire l'information.
+                                Nous afficheons en suite cette erreur à l'écran.
+                                Si tout cela fonctionne, alors nous pouvons finir de créer notre shader.
+                                <div class="code_sample">
+                                    // Génération du shader dans OpenGL</br>
+                                    unsigned int shader_program = glCreateProgram();</br>
+                                    glAttachShader(shader_program, vertex);</br>
+                                    glAttachShader(shader_program, fragment);</br>
+                                    glLinkProgram(shader_program);
+                                </div>
+                                Nous commençons par créer un programme entier de shader via <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml" target="_blank">glCreateProgram()</a>, encore une fois sous la forme de "unsigned int".
+                                Après, <span class="important">nous attachons les programmes compilés à ce programme avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml" target="_blank">glAttachShader()</a></span>.
+                                Finalement, vous liez le programme final avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml" target="_blank">glLinkProgram()</a>, et le tour est joué.
+                                Il reste trois dernière étapes avant d'en finir.
+                                <div class="code_sample">
+                                    // Vérifier le shader final</br>
+                                    success = 0;</br>
+                                    glGetProgramiv(shader_program, GL_LINK_STATUS, &success);</br>
+                                    if (!success) {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;glGetProgramInfoLog(shader_program, 512, NULL, infoLog);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Erreur de compilation" &lt;&lt; infoLog &lt;&lt; std::endl;</br>
+                                    }</br></br>
+                                    // Supression des ressources inutiles</br>
+                                    glDeleteShader(vertex);</br>
+                                    glDeleteShader(fragment);
+                                </div>
+                                Nous commençons par une dernière vérification du shader, puis nous supprimons les shaders compilé (le nouveau programme de shader en aura fait une copie).
+                                Dés que tout cela est fait, il ne nous reste plus qu'à préciser au shaders les paramètres d'entrées du vertex shader.
+                                <div class="code_sample">
+                                    // Shader actuellement utilisé</br>
+                                    glUseProgram(shader_program);</br></br>
+                                    // Paramètre nécessaire</br>
+                                    int taille_actuelle = 0;</br>
+                                    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3, (void*)taille_actuelle);</br>
+                                    glEnableVertexAttribArray(0);
+                                </div>
+                                Nous définissons "shader_program" comme le shader actuellement utilisé avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml" target="_blank">glUseProgram()</a>.
+                                En suite, nous définissons une nouvelle entrée pour le vertex shader, via <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml" target="_blank">glVertexAttribPointer()</a>.
+                                Le premier paramètre prend la position de l'entrée actuelle passée.
+                                Si vous passez plusieurs entrée (ce que nous ferons plus tard), il faut mettre le nombre nécessaire pour chaque entrées.
+                                Le deuxième paramètre représente le nombre de données prise par cette variable.
+                                En d'autre terme, <u>il s'agit de la taille du vecteur représenté par cette variable (ou 1 si il ne s'agit pas d'un vecteur)</u>.
+                                Le troisième paramètre représente le type d'un composant du vecteur, ici un "float".
+                                Le quatrième paramètre indique si OpenGL doit normaliser le vecteur ou non.
+                                Le cinquième paramètre représente le nombre total d'octets entre deux occurences de cette entrée dans le VBO.
+                                Pour finir, le dernier paramètre représente le décalage nécessaire à partir du début de toutes les données dans un shader par rapport à la première donnée pour arriver à celle-ci.
+                                En quelque sorte, <u>c'est la position de cette donnée par rapport aux autres</u>.
+                                Plus précisement, il s'agit d'un pointeur vers une variable contenant cette donnée (ici taille_actuelle).
+                                <span class="important">Petite précision : cette fonction nécessite que le VBO est déjà été crée et qu'il soit défini comme VBO actuel d'OpenGL : nous verrons comment bien s'organiser avec ça après</span>.
+                                En suite, cette entrée (ou du moins, l'entrée ayant comme position le paramètre de la fonction) est validée au shader par <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml" target="_blank">glEnableVertexAttribArray()</a>.
+                                Finalement, comme toujours, nous devons libérer la mémoire à la fin du programme.
+                                <div class="code_sample">
+                                    // Suppression de la mémoire</br>
+                                    glDeleteProgram(shader_program);
+                                </div>
+                                <span class="important">Maintenant, nous pouvons utiliser ce shader</span>.
+                            </p>
+                            <p>
+                                Finalement, <span class="important">nous allons pouvoir commencer à créer le shader</span>.
+                                Cependant, cette étape va devoir reprendre toutes les étapes que nous avons vu dans cette partie.
+                                Donc, <u>nous allons créer pleins de fonctions, qui reprennent tout ce que l'on n'a fait sous un seul nom</u>.
+                                <ul>
+                                    <li>
+                                        Le chargement d'un VBO (plaçage des points dans l'espace mémoire) sera assurée par une fonction "charger_vbo".
+                                    </li>
+                                    <li>
+                                        La création et chargement d'un shader sera assurée par une fonction "creer_shader".
+                                    </li>
+                                    <li>
+                                        La création d'un VBO (de ces points et de son espace mémoire) sera assurée par une fonction "creer_vbo".
+                                    </li>
+                                    <li>
+                                        La suppression d'un shader sera assurée par une fonction "supprimer_shader".
+                                    </li>
+                                    <li>
+                                        La suppression d'un VBO sera assurée par une fonction "supprimer_vbo".
+                                    </li>
+                                </ul>
+                                Après tout ça, votre code avant la boucle devrait ressembler à ça.
+                                <div class="code_sample">
+                                    // Créer le VBO</br>
+                                    VBO* vbo = creer_vbo();</br>
+                                    charger_vbo(vbo);</br></br>
+                                    // Créer le shader</br>
+                                    unsigned int shader = creer_shader();
+                                </div>
+                                Nous allons partir de cette base pour créer le VAO.
+                                Commençons par créer le VAO dans la mémoire.
+                                <div class="code_sample">
+                                    // Créer le VAO</br>
+                                    unsigned int vao;</br>
+                                    glGenVertexArrays(1, &vao);
+                                </div>
+                                Ici, c'est <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml" target="_blank">glGenVertexArrays()</a> qui s'en occupe, toujours avec le système de "unsigned int".
+                                Une fois le VAO crée, attachons-y le VBO, que nous créeons donc à cet instant là.
+                                <div class="code_sample">
+                                    // Attache du VBO</br>
+                                    glBindVertexArray(vao);</br>
+                                    VBO* vbo = creer_vbo();</br>
+                                    charger_vbo(vbo);
+                                </div>
+                                <u>L'ordre d'appel est très important ici, et c'est pour ça qu'on a découpé le programme en fonctions plus précises</u>.
+                                Nous commençons par fait de "vao" le VAO actuellement utilisé par OpenGL avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml" target="_blank">glBindVertexArray()</a>, puis nous créeons le VBO juste après.
+                                En suite, viens la création du shader, qui doit avoir lieu après celle du VBO (comme nous avons vu plus haut).
+                                <div class="code_sample">
+                                    // Créer le VAO</br>
+                                    unsigned int vao;</br>
+                                    glGenVertexArrays(1, &vao);</br></br>
+                                    // Attache du VBO</br>
+                                    VBO* vbo = creer_vbo();</br>
+                                    glBindVertexArray(vao);</br>
+                                    charger_vbo(vbo);</br></br>
+                                    // Créer le shader</br>
+                                    unsigned int shader = creer_shader();
+                                </div>
+                                Maintenant que tout cela est fait, <span class="important">utilisons notre VAO pour effectuer un rendu fonctionnel</span>.
+                                Tout ce qui va suivre doit, en toute logique, se trouver dans la boucle d'exécution.
+                                <div class="code_sample">
+                                    // Dessin du triangle</br></br>
+                                    // Shader actuellement utilisé</br>
+                                    glUseProgram(shader);</br></br>
+                                    // Tracer les points via le VAO</br>
+                                    glBindVertexArray(vao);</br>
+                                    glDrawArrays(GL_TRIANGLES, 0, vbo->points.size() / 3.0);
+                                </div>
+                                Nous devons réutiliser la fonction "glUseProgram()", pour dire à OpenGL qu'on utilise ce shader.
+                                En suite, nous définissons "vao" comme la VAO utilisé actuellement par OpenGL, grâce à "glBindVertexArray()".
+                                Pour finir, <span class="important">le traçage des formes sur le contexte actuel est ordonné par la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml" target="_blank">glDrawArrays()</a></span>.
+                                Elle prend en premier paramètre le type de forme à tracer, en deuxième paramètre le décalage nécessaire de données dans le VBO pour commencer le traçage (avec ici aucun décalage), et finalement en troisième paramètre le nombre de points à tracer.
+                                Théoriquement, <span class="important">votre triangle devrait être bien tracé sur votre fenêtre OpenGL</span>.
+                            </p>
+                            <img alt="Fenêtre OpenGL avec un triangle" src="../../images/cpp_opengl/triangle.png" style="max-height:300px;">
                         </div>
                     </div>
                 </div>

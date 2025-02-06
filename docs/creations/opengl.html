@@ -34,132 +34,144 @@ Il est aussi possible de l'utiliser avec Python, Java...
                             </h2>
                             <div class="left_arrow_right_text_text">
                                 <h3>Qu'est ce qu'est OpenGL ?</h3>
-<p>Après l'arrivée des premiers jeux 3D grâce au Raycast, les limites de cette technologie ont rapidement était atteintes.
-Pour y remédier, en 1992, <span class="important">l'entreprise <a href="https://fr.wikipedia.org/wiki/Silicon_Graphics" target="_blank">Silicon Graphics</a> a lancé un ensembles de méthodes de rendus 3D, réunies sous le nom <a href="https://www.opengl.org/" target="_blank">d'OpenGL</a></span>.
-Pour des raisons de simplicité, <u>cette libraire est toujours restée très ouverte</u>, que ce soit dans l'apprentissage (avec des sites comme <a href="https://learnopengl.com/" target="_blank">LearnOpenGL</a>) ou dans les ressources.
-Les droits d'OpenGL sont détenus par le consortium <a href="https://www.khronos.org/" target="_blank">Khronos</a>.
-Aujourd'hui, il existe pleins de versions d'OpenGL, de là 1.5 à la 4.6.
-Une version mobile existe aussi : <a href="https://www.khronos.org/opengles/" target="_blank">OpenGL ES</a>.
-Depuis 2016, <u>les nouvelles versions d'OpenGL portent le nom de Vulkan</u>.
-Sur cette page, <span class="important">nous allons étudier la version d'OpenGL la plus répendue : OpenGL 3.3</span>.
-</p>
-<p>Pour programmer en OpenGL, <u>il existe beaucoup de moyens différents selon le language</u>.
-En C++, <span class="important">au moins deux librairies sont nécessaires : GLFW et GLAD</span>.
-En Python, <u>la librairie <a href="https://pypi.org/project/PyOpenGL/" target="_blank">PyOpenGL</a> peut suffire</u>.
-En Java, vous pouvez utiliser la même librairie que celle utilisée dans Minecraft : <a href="https://www.lwjgl.org/guide" target="_blank">LWJGL</a>.
-Il est aussi assez conseillé de coupler ces librairies avec des librairies permettant de gérer les mathématiques nécessaires au rendu 3D, comme <a href="https://www.opengl.org/sdk/libs/GLM/" target="_blank">GLM</a>.
-Beaucoup de possibilités s'offrent à vous.
-</p>
-<p>Cependant, <u>les étapes précises à suivre pour utiliser OpenGL dépendent du language utilisé (bien que les concepts restent les mêmes)</u>.
-Quelque soit le language, <span class="important">vous devez définir une passerelle vers OpenGL dans votre programme, nommé un contexte OpenGL</span>.
-Vous pouvez aussi lui passer différents paramètres, pour moduler votre programme OpenGL (taille de la fenêtre, titre de la fenêtre...).
-Dés que ce contexte est crée, pour l'utiliser, <span class="important">vous aurez besoin d'une boucle qui tournera jusqu'à ce que le programme ferme</span>.
-Dans cette boucle, <u>vous devrez spécifier à OpenGL que le rendu doit être effectué (via différentes fonctions, dépendantes du language)</u>.
-La gestion de cette boucle dépent de l'utilisation que vous devez en faire.</p>
-<img alt="Action à mener pour OpenGL" src="../images/opengl/steps.png" style="max-height:300px;">
-<h3>Les VBOs</h3>
-<p>Quelque soit l'objet que vous voulez afficher, <u>OpenGL à besoin de connaître toutes les données nécessaires à propos de lui (forme, couleur...)</u>.
-Parmi ces données, certaines ne changeront jamais (ou très rarement), mais on besoin d'être rapidement accessible (comme la forme de l'objet).
-Pour cela, <span class="important">vous devez spécifier dans la mémoire d'OpenGL leur forme, via ce que l'on appelle des VBOs</span>.
-Les VBO, pour "Vertex Buffer Object", <u>sont des objets stockés en mémoire et utiliser directement pour le rendu</u>.
-Comme tous objets mémoires bas-niveau, ils ne sont composés que de nombres (1-octet, 2-octets, 8-octets...).
-Cependant, <span class="important">vous pouvez gérer le traitement de ces objets, grâce un programme nommé un shader</span>.</p>
-<h3>Les shaders</h3>
-<p><span class="important">Les programmes exécutés par OpenGL pour effectuer les rendus se nomment les shaders</span>.
-Ces programmes utilisent de très complexes architectures matérielles dans la carte graphique pour s'exécuter rapidement.
-<u>Ils sont au nombre de 6</u>.
-Chaque shader prend des données du shader précedent, et en envoie au prochain shader.
-Dans le cas du premier shader, les données viennent d'un VBO spécifique (spécifié dans le code du programme).
-Dans le cas du dernier shader, la donnée renvoyée est l'image finale.
-</p>
-<img alt="Shaders OpenGL" src="../images/opengl/shaders.png" style="max-height:300px;">
-<p><u>Le premier shader est nommé le "vertex shader"</u>.
-Il doit entièrement être fait par le développeur.
-Ce shader a directement accés aux données du VBOs, selon une méthode de découpe de ces données précisée dans le shader.
-En fait, <span class="important">ce shader a pour tâche de passer précisément à OpenGL les points à afficher dans le bon ordre (et d'autres informations utiles si nécessaire) et avec la bonne position sur l'écran</span>.
-En général, <u>il formate juste les données présentes dans le VBO utilisé</u>.
-Dans le cas de l'ordre des points de la forme, l'ordre nécessaire des points est la traingulation de la forme à afficher.
-En effet, <u>les formes complexes doivent être coupées en triangles pour être représentées</u>.
-De plus, <u>il est grandement conseillé de proprement définir quel partie de la face est la partie avant est quelle partie de la face est la partie arrière</u>.
-Effectivement, selon la façon dont vous regarder la forme, vous pouvez voir les points : soit dans le sens des aiguilles d'une montre, soit dans l'autre sens.
-Pour OpenGL, la face est vue de par l'avant quand les points sont vus dans le sens inverse de l'aiguille d'une montre, faites y bien attention en ordonnant vos points.
-Pour des raisons de simplicité, <span class="important">il est fortement conseillé de gérer l'ordre directement dans le VBO</span>.
-</p>
-<img alt="Représentation d'un triangle" src="../images/opengl/triangles.png" style="max-height:300px;">
-<p>L'autre opération du "vertex shader" est <span class="important">l'adaptation de la position des points</span>.
-Ce contexte là peut changer pendant le programme (par exemple, si la caméra se déplace), et nécessite donc une modification à chaque rendu.
-Pour cela, <u>il faut utiliser des mathématiques, et, pour être plus précis, du calcul vectoriel et matriciel</u>.
-La première étape est de <span class="important">calculer précisément l'état de l'objet dans le programme : rotation, taille, position</span>...
-L'avatange du calcul matriciel est <u>que l'on peut faire tout ça via la multiplication d'une seule matrice 4*4 M avec un vecteur 4 P contenant la position de l'objet, possiblement obtenue via le VBO (et 1 en dernière valeur)</u>.
-Pour obtenir M, il faut y appliquer la position de l'objet, puis sa rotation, puis sa taille.
-La démonstration mathématique de tout ça étant assez complexe, elle ne sera pas abordée ici.
-Faites attention, les matrices ne sont pas commutatives, donc M * P n'est pas égal à P * M, et nous avons ici besoin de M * P.
-Dés que tout cela est fait, <span class="important">vous obtenez une matrice, auquelle il faut y appliquer les données de la caméra</span>.
-Le calcul étant très complexe, <u>il vaut mieux utiliser une fonction conçu à cette effet, dans la librairie OpenGL</u>.
-Dans le cas du C++, <u>la librairie GLM offre une fonction "look_at", qui vous retourne une matrice C permettant l'application directe des calculs nécessaires</u>.
-Vous aurez juste à lui fournir les coordonnées de la caméra et son vecteur "haut" et "avant".
-<u>Vous pourrez ensuite multiplier cette matrice par la matrice déjà calculée plus haut, pour obtenir la matrice nécessaire au monde 3D</u>.
-Pour finir, il faut réaliser un autre calcul : <span class="important">la projection de la matrice caméra sur un écran 2D, via une autre matrice J</span>.
-Comme pour la caméra, <u>il vaut mieux utiliser une fonction pré-conçu, comme "perspective" de GLM</u>.
-Elle demande le FOV de la caméra en radians, le ratio de la fenêtre OpenGL, et deux distances représentant les limites de rendu "trop proche" et "trop loin".
-Au final, <span class="important">le calcul dans le "vertex shader" doit être J * C * M * P, donnant une matrice qui sera utilisée par OpenGL</span>.
-</p>
-<p><span class="important">Les deux prochains shaders sont le "geometry shader" et le "shape shader"</span>.
-<u>Le "geometry shader" s'occupe de présenter à OpenGL la façon dont les triangle doivent géométriquement se présenter</u>.
-Ce shader peut être modifié par l'utilisateur, mais ce n'est pas obligé (et généralement peu utilisé pour un débutant).
-Dés que tout ceci est fait, <u>d'autres calculs géométriques plus spécifiques seront réalisés dans le "shape shader"</u>.
-Ce shader ne peut pas être modifié par l'utilisateur.
-Grâce à ces deux shaders, <span class="important">nous pouvons passer les résultats au shader qui va s'occuper de préparer le traçage de la forme : le "rasterization shader"</span>.
-Pour être précis, <u>ce shader va générer les pixels nécessaires au traçage, pour les passer au prochain shader</u>.
-</p>
-<p><span class="important">Le prochain shader, le "fragment shader", va avoir la tâche d'attribuer une couleur à chaque pixels renvoyé par le "rasterization shader"</span>.
-Pour cela, <u>il a besoin d'être écrit par l'utilisateur</u>.
-Pour utiliser proprement ce shader, <u>l'utilisateur peut avoir accés à certaines données d'OpenGL (comme la position sur l'écran), mais aussi des valeurs passées par le "vertex shader"</u>.
-C'est dans ce shader que peut se passer pleins de choses, comme l'application des textures, le rendu de la lumière, application de masques...
-Dés que ceci est fait, <span class="important">le résultat est passé au prochain shader, le "blending shader", qui va coller ce résultat sur l'image final</span>.
-Après tout ça, le rendu du VBO est terminé.
-</p>
-<p>Il nous reste un petit détail à explorer.
-En effet, <u>certains shaders peuvent être passés par l'utilisateur, cependant comment doit-il faire</u> ?
-En fait, <span class="important">les shaders sont des programmes écrits dans un langage, le <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)" target="_blank">GLSL</a>, et passés directement à la carte graphique</span>.
-Le passage vers la carte graphique est, en général, possible via votre librairie OpenGL.
-Le GLSL est un langage proche du C.
-Voici un exemple de GLSL pour un "vertex shader" :</p>
-<div class="code_sample">
-// Version d'OpenGL</br>
-#version 330 core</br></br>
-// Données du VBO (vec3 représente un point 3D)</br>
-layout(location = 0) in vec3 pos; // Position du point P</br></br>
-// Données changeantes entre chaque rendus (noté "uniform", avec mat4 représentant une matrice 4*4)</br>
-uniform mat4 model; // Matrice M</br>
-uniform mat4 projection; // Matrice J</br>
-uniform mat4 view; // Matrice C</br></br>
-// Fonction de base du shader</br>
-void main() {</br>
-&nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
-&nbsp;&nbsp;&nbsp;&nbsp;gl_Position = projection * view * model * vec4(pos.xyz, 1.0);</br>
-}
-</div>
-<p>Voici un exemple de GLSL pour un "fragment shader" :</p>
-<div class="code_sample">
-// Version d'OpenGL</br>
-#version 330 core</br></br>
-// Fonction de base du shader</br>
-void main() {</br>
-&nbsp;&nbsp;&nbsp&nbsp;// Calcul de la courleur nécessaire, avec ici le rouge, ou RGBA(255, 0, 0, 255)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;FragColor = vec4(1, 0, 0, 1);</br>
-}
-</div>
-<p>Plus de détail dans le maniement des shaders seront donnés dans la prochaine partie de cette page.
-Si vous voulez vous entrainer à pratiquer des shaders, vous pouvez vous rendre sur le site <a href="https://www.shadertoy.com/" target="_blank">ShaderToy</a>, un bas à sable assez amusant pour pratiquer le GLSL.</p>
-<h3>Les VAOs</h3>
-<p>Pour en finir avec les bases, <u>parlons des VAOs</u>.
-Pour tracer une forme, <span class="important">il vous faut lier un VBO avec un ensemble de shaders, via ce que l'on appelle un VAO</span>.
-Disons le, les VAOs ne sont vraiment utiles que dans le code, pour ne pas qu'OpenGL se perdent.
-Or, si vous voulez faire des traçage plus complexes que des formes (comme des bordures de formes ou des géométries avancées), <u>il vous faudra utiliser les bonnes catégories de VAOs, prévues à cet effet</u>.
-Donc, ne les oubliez surtout pas dans votre code, pour ne pas créer de comportements imprévus.
-En général, <span class="important">l'appel aux shaders pour effectuer un rendu se fait dans le code via ces VAOs</span>.
-</p>
+                                <p>
+                                    Après l'arrivée des premiers jeux 3D grâce au Raycast, les limites de cette technologie ont rapidement était atteintes.
+                                    Pour y remédier, en 1992, <span class="important">l'entreprise <a href="https://fr.wikipedia.org/wiki/Silicon_Graphics" target="_blank">Silicon Graphics</a> a lancé un ensembles de méthodes de rendus 3D, réunies sous le nom <a href="https://www.opengl.org/" target="_blank">d'OpenGL</a></span>.
+                                    Pour des raisons de simplicité, <u>cette libraire est toujours restée très ouverte</u>, que ce soit dans l'apprentissage (avec des sites comme <a href="https://learnopengl.com/" target="_blank">LearnOpenGL</a>) ou dans les ressources.
+                                    Les droits d'OpenGL sont détenus par le consortium <a href="https://www.khronos.org/" target="_blank">Khronos</a>.
+                                    Aujourd'hui, il existe pleins de versions d'OpenGL, de là 1.5 à la 4.6.
+                                    Une version mobile existe aussi : <a href="https://www.khronos.org/opengles/" target="_blank">OpenGL ES</a>.
+                                    Depuis 2016, <u>les nouvelles versions d'OpenGL portent le nom de Vulkan</u>.
+                                    Sur cette page, <span class="important">nous allons étudier la version d'OpenGL la plus répendue : OpenGL 3.3</span>.
+                                </p>
+                                <p>
+                                    Pour programmer en OpenGL, <u>il existe beaucoup de moyens différents selon le language</u>.
+                                    En C++, <span class="important">au moins deux librairies sont nécessaires : GLFW et GLAD</span>.
+                                    En Python, <u>la librairie <a href="https://pypi.org/project/PyOpenGL/" target="_blank">PyOpenGL</a> peut suffire</u>.
+                                    En Java, vous pouvez utiliser la même librairie que celle utilisée dans Minecraft : <a href="https://www.lwjgl.org/guide" target="_blank">LWJGL</a>.
+                                    Il est aussi assez conseillé de coupler ces librairies avec des librairies permettant de gérer les mathématiques nécessaires au rendu 3D, comme <a href="https://www.opengl.org/sdk/libs/GLM/" target="_blank">GLM</a>.
+                                    Beaucoup de possibilités s'offrent à vous.
+                                </p>
+                                <p>
+                                    Cependant, <u>les étapes précises à suivre pour utiliser OpenGL dépendent du language utilisé (bien que les concepts restent les mêmes)</u>.
+                                    Quelque soit le language, <span class="important">vous devez définir une passerelle vers OpenGL dans votre programme, nommé un contexte OpenGL</span>.
+                                    Vous pouvez aussi lui passer différents paramètres, pour moduler votre programme OpenGL (taille de la fenêtre, titre de la fenêtre...).
+                                    Dés que ce contexte est crée, pour l'utiliser, <span class="important">vous aurez besoin d'une boucle qui tournera jusqu'à ce que le programme ferme</span>.
+                                    Dans cette boucle, <u>vous devrez spécifier à OpenGL que le rendu doit être effectué (via différentes fonctions, dépendantes du language)</u>.
+                                    La gestion de cette boucle dépent de l'utilisation que vous devez en faire.
+                                </p>
+                                <img alt="Action à mener pour OpenGL" src="../images/opengl/steps.png" style="max-height:300px;">
+                                <h3>
+                                    Les VBOs
+                                </h3>
+                                <p>
+                                    Quelque soit l'objet que vous voulez afficher, <u>OpenGL à besoin de connaître toutes les données nécessaires à propos de lui (forme, couleur...)</u>.
+                                    Parmi ces données, certaines ne changeront jamais (ou très rarement), mais on besoin d'être rapidement accessible (comme la forme de l'objet).
+                                    Pour cela, <span class="important">vous devez spécifier dans la mémoire d'OpenGL leur forme, via ce que l'on appelle des VBOs</span>.
+                                    Les VBO, pour "Vertex Buffer Object", <u>sont des objets stockés en mémoire et utiliser directement pour le rendu</u>.
+                                    Comme tous objets mémoires bas-niveau, ils ne sont composés que de nombres (1-octet, 2-octets, 8-octets...).
+                                    Cependant, <span class="important">vous pouvez gérer le traitement de ces objets, grâce un programme nommé un shader</span>.
+                                </p>
+                                <h3>
+                                    Les shaders
+                                </h3>
+                                    <p><span class="important">Les programmes exécutés par OpenGL pour effectuer les rendus se nomment les shaders</span>.
+                                    Ces programmes utilisent de très complexes architectures matérielles dans la carte graphique pour s'exécuter rapidement.
+                                    <u>Ils sont au nombre de 6</u>.
+                                    Chaque shader prend des données du shader précedent, et en envoie au prochain shader.
+                                    Dans le cas du premier shader, les données viennent d'un VBO spécifique (spécifié dans le code du programme).
+                                    Dans le cas du dernier shader, la donnée renvoyée est l'image finale.
+                                    </p>
+                                    <img alt="Shaders OpenGL" src="../images/opengl/shaders.png" style="max-height:300px;">
+                                    <p><u>Le premier shader est nommé le "vertex shader"</u>.
+                                    Il doit entièrement être fait par le développeur.
+                                    Ce shader a directement accés aux données du VBOs, selon une méthode de découpe de ces données précisée dans le shader.
+                                    En fait, <span class="important">ce shader a pour tâche de passer précisément à OpenGL les points à afficher dans le bon ordre (et d'autres informations utiles si nécessaire) et avec la bonne position sur l'écran</span>.
+                                    En général, <u>il formate juste les données présentes dans le VBO utilisé</u>.
+                                    Dans le cas de l'ordre des points de la forme, l'ordre nécessaire des points est la traingulation de la forme à afficher.
+                                    En effet, <u>les formes complexes doivent être coupées en triangles pour être représentées</u>.
+                                    De plus, <u>il est grandement conseillé de proprement définir quel partie de la face est la partie avant est quelle partie de la face est la partie arrière</u>.
+                                    Effectivement, selon la façon dont vous regarder la forme, vous pouvez voir les points : soit dans le sens des aiguilles d'une montre, soit dans l'autre sens.
+                                    Pour OpenGL, la face est vue de par l'avant quand les points sont vus dans le sens inverse de l'aiguille d'une montre, faites y bien attention en ordonnant vos points.
+                                    Pour des raisons de simplicité, <span class="important">il est fortement conseillé de gérer l'ordre directement dans le VBO</span>.
+                                    </p>
+                                    <img alt="Représentation d'un triangle" src="../images/opengl/triangles.png" style="max-height:300px;">
+                                    <p>L'autre opération du "vertex shader" est <span class="important">l'adaptation de la position des points</span>.
+                                    Ce contexte là peut changer pendant le programme (par exemple, si la caméra se déplace), et nécessite donc une modification à chaque rendu.
+                                    Pour cela, <u>il faut utiliser des mathématiques, et, pour être plus précis, du calcul vectoriel et matriciel</u>.
+                                    La première étape est de <span class="important">calculer précisément l'état de l'objet dans le programme : rotation, taille, position</span>...
+                                    L'avatange du calcul matriciel est <u>que l'on peut faire tout ça via la multiplication d'une seule matrice 4*4 M avec un vecteur 4 P contenant la position de l'objet, possiblement obtenue via le VBO (et 1 en dernière valeur)</u>.
+                                    Pour obtenir M, il faut y appliquer la position de l'objet, puis sa rotation, puis sa taille.
+                                    La démonstration mathématique de tout ça étant assez complexe, elle ne sera pas abordée ici.
+                                    Faites attention, les matrices ne sont pas commutatives, donc M * P n'est pas égal à P * M, et nous avons ici besoin de M * P.
+                                    Dés que tout cela est fait, <span class="important">vous obtenez une matrice, auquelle il faut y appliquer les données de la caméra</span>.
+                                    Le calcul étant très complexe, <u>il vaut mieux utiliser une fonction conçu à cette effet, dans la librairie OpenGL</u>.
+                                    Dans le cas du C++, <u>la librairie GLM offre une fonction "look_at", qui vous retourne une matrice C permettant l'application directe des calculs nécessaires</u>.
+                                    Vous aurez juste à lui fournir les coordonnées de la caméra et son vecteur "haut" et "avant".
+                                    <u>Vous pourrez ensuite multiplier cette matrice par la matrice déjà calculée plus haut, pour obtenir la matrice nécessaire au monde 3D</u>.
+                                    Pour finir, il faut réaliser un autre calcul : <span class="important">la projection de la matrice caméra sur un écran 2D, via une autre matrice J</span>.
+                                    Comme pour la caméra, <u>il vaut mieux utiliser une fonction pré-conçu, comme "perspective" de GLM</u>.
+                                    Elle demande le FOV de la caméra en radians, le ratio de la fenêtre OpenGL, et deux distances représentant les limites de rendu "trop proche" et "trop loin".
+                                    Au final, <span class="important">le calcul dans le "vertex shader" doit être J * C * M * P, donnant une matrice qui sera utilisée par OpenGL</span>.
+                                    </p>
+                                    <p><span class="important">Les deux prochains shaders sont le "geometry shader" et le "shape shader"</span>.
+                                    <u>Le "geometry shader" s'occupe de présenter à OpenGL la façon dont les triangle doivent géométriquement se présenter</u>.
+                                    Ce shader peut être modifié par l'utilisateur, mais ce n'est pas obligé (et généralement peu utilisé pour un débutant).
+                                    Dés que tout ceci est fait, <u>d'autres calculs géométriques plus spécifiques seront réalisés dans le "shape shader"</u>.
+                                    Ce shader ne peut pas être modifié par l'utilisateur.
+                                    Grâce à ces deux shaders, <span class="important">nous pouvons passer les résultats au shader qui va s'occuper de préparer le traçage de la forme : le "rasterization shader"</span>.
+                                    Pour être précis, <u>ce shader va générer les pixels nécessaires au traçage, pour les passer au prochain shader</u>.
+                                    </p>
+                                    <p><span class="important">Le prochain shader, le "fragment shader", va avoir la tâche d'attribuer une couleur à chaque pixels renvoyé par le "rasterization shader"</span>.
+                                    Pour cela, <u>il a besoin d'être écrit par l'utilisateur</u>.
+                                    Pour utiliser proprement ce shader, <u>l'utilisateur peut avoir accés à certaines données d'OpenGL (comme la position sur l'écran), mais aussi des valeurs passées par le "vertex shader"</u>.
+                                    C'est dans ce shader que peut se passer pleins de choses, comme l'application des textures, le rendu de la lumière, application de masques...
+                                    Dés que ceci est fait, <span class="important">le résultat est passé au prochain shader, le "blending shader", qui va coller ce résultat sur l'image final</span>.
+                                    Après tout ça, le rendu du VBO est terminé.
+                                    </p>
+                                    <p>Il nous reste un petit détail à explorer.
+                                    En effet, <u>certains shaders peuvent être passés par l'utilisateur, cependant comment doit-il faire</u> ?
+                                    En fait, <span class="important">les shaders sont des programmes écrits dans un langage, le <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)" target="_blank">GLSL</a>, et passés directement à la carte graphique</span>.
+                                    Le passage vers la carte graphique est, en général, possible via votre librairie OpenGL.
+                                    Le GLSL est un langage proche du C.
+                                    Voici un exemple de GLSL pour un "vertex shader" :</p>
+                                    <div class="code_sample">
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Données du VBO (vec3 représente un point 3D)</br>
+                                    layout(location = 0) in vec3 pos; // Position du point P</br></br>
+                                    // Données changeantes entre chaque rendus (noté "uniform", avec mat4 représentant une matrice 4*4)</br>
+                                    uniform mat4 model; // Matrice M</br>
+                                    uniform mat4 projection; // Matrice J</br>
+                                    uniform mat4 view; // Matrice C</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = projection * view * model * vec4(pos.xyz, 1.0);</br>
+                                    }
+                                    </div>
+                                    <p>Voici un exemple de GLSL pour un "fragment shader" :</p>
+                                    <div class="code_sample">
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Couleur sortie du shader</br>
+                                    out vec4 FragColor;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp&nbsp;// Calcul de la couleur nécessaire, avec ici le rouge, ou RGBA(255, 0, 0, 255)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;FragColor = vec4(1, 0, 0, 1);</br>
+                                    }
+                                    </div>
+                                    <p>Plus de détail dans le maniement des shaders seront donnés dans la prochaine partie de cette page.
+                                    Si vous voulez vous entrainer à pratiquer des shaders, vous pouvez vous rendre sur le site <a href="https://www.shadertoy.com/" target="_blank">ShaderToy</a>, un bas à sable assez amusant pour pratiquer le GLSL.</p>
+                                    <h3>Les VAOs</h3>
+                                    <p>Pour en finir avec les bases, <u>parlons des VAOs</u>.
+                                    Pour tracer une forme, <span class="important">il vous faut lier un VBO avec un ensemble de shaders, via ce que l'on appelle un VAO</span>.
+                                    Disons le, les VAOs ne sont vraiment utiles que dans le code, pour ne pas qu'OpenGL se perdent.
+                                    Or, si vous voulez faire des traçage plus complexes que des formes (comme des bordures de formes ou des géométries avancées), <u>il vous faudra utiliser les bonnes catégories de VAOs, prévues à cet effet</u>.
+                                    Donc, ne les oubliez surtout pas dans votre code, pour ne pas créer de comportements imprévus.
+                                    En général, <span class="important">l'appel aux shaders pour effectuer un rendu se fait dans le code via ces VAOs</span>.
+                                    </p>
                             </div>
                         </div>
                     
