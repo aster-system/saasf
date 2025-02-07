@@ -75,15 +75,15 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                 <h3>
                                     Les shaders
                                 </h3>
-                                    <p><span class="important">Les programmes exécutés par OpenGL pour effectuer les rendus se nomment les shaders</span>.
+                                <p><span class="important">Les programmes exécutés par OpenGL pour effectuer les rendus se nomment les shaders</span>.
                                     Ces programmes utilisent de très complexes architectures matérielles dans la carte graphique pour s'exécuter rapidement.
                                     <u>Ils sont au nombre de 6</u>.
                                     Chaque shader prend des données du shader précedent, et en envoie au prochain shader.
                                     Dans le cas du premier shader, les données viennent d'un VBO spécifique (spécifié dans le code du programme).
                                     Dans le cas du dernier shader, la donnée renvoyée est l'image finale.
-                                    </p>
-                                    <img alt="Shaders OpenGL" src="../images/opengl/shaders.png" style="max-height:300px;">
-                                    <p><u>Le premier shader est nommé le "vertex shader"</u>.
+                                </p>
+                                <img alt="Shaders OpenGL" src="../images/opengl/shaders.png" style="max-height:300px;">
+                                <p><u>Le premier shader est nommé le "vertex shader"</u>.
                                     Il doit entièrement être fait par le développeur.
                                     Ce shader a directement accés aux données du VBOs, selon une méthode de découpe de ces données précisée dans le shader.
                                     En fait, <span class="important">ce shader a pour tâche de passer précisément à OpenGL les points à afficher dans le bon ordre (et d'autres informations utiles si nécessaire) et avec la bonne position sur l'écran</span>.
@@ -94,9 +94,9 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                     Effectivement, selon la façon dont vous regarder la forme, vous pouvez voir les points : soit dans le sens des aiguilles d'une montre, soit dans l'autre sens.
                                     Pour OpenGL, la face est vue de par l'avant quand les points sont vus dans le sens inverse de l'aiguille d'une montre, faites y bien attention en ordonnant vos points.
                                     Pour des raisons de simplicité, <span class="important">il est fortement conseillé de gérer l'ordre directement dans le VBO</span>.
-                                    </p>
-                                    <img alt="Représentation d'un triangle" src="../images/opengl/triangles.png" style="max-height:300px;">
-                                    <p>L'autre opération du "vertex shader" est <span class="important">l'adaptation de la position des points</span>.
+                                </p>
+                                <img alt="Représentation d'un triangle" src="../images/opengl/triangles.png" style="max-height:300px;">
+                                <p>L'autre opération du "vertex shader" est <span class="important">l'adaptation de la position des points</span>.
                                     Ce contexte là peut changer pendant le programme (par exemple, si la caméra se déplace), et nécessite donc une modification à chaque rendu.
                                     Pour cela, <u>il faut utiliser des mathématiques, et, pour être plus précis, du calcul vectoriel et matriciel</u>.
                                     La première étape est de <span class="important">calculer précisément l'état de l'objet dans le programme : rotation, taille, position</span>...
@@ -113,8 +113,9 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                     Comme pour la caméra, <u>il vaut mieux utiliser une fonction pré-conçu, comme "perspective" de GLM</u>.
                                     Elle demande le FOV de la caméra en radians, le ratio de la fenêtre OpenGL, et deux distances représentant les limites de rendu "trop proche" et "trop loin".
                                     Au final, <span class="important">le calcul dans le "vertex shader" doit être J * C * M * P, donnant une matrice qui sera utilisée par OpenGL</span>.
-                                    </p>
-                                    <p><span class="important">Les deux prochains shaders sont le "geometry shader" et le "shape shader"</span>.
+                                </p>
+                                <p>
+                                    <span class="important">Les deux prochains shaders sont le "geometry shader" et le "shape shader"</span>.
                                     <u>Le "geometry shader" s'occupe de présenter à OpenGL la façon dont les triangle doivent géométriquement se présenter</u>.
                                     Ce shader peut être modifié par l'utilisateur, mais ce n'est pas obligé (et généralement peu utilisé pour un débutant).
                                     Dés que tout ceci est fait, <u>d'autres calculs géométriques plus spécifiques seront réalisés dans le "shape shader"</u>.
@@ -134,8 +135,9 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                     En fait, <span class="important">les shaders sont des programmes écrits dans un langage, le <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)" target="_blank">GLSL</a>, et passés directement à la carte graphique</span>.
                                     Le passage vers la carte graphique est, en général, possible via votre librairie OpenGL.
                                     Le GLSL est un langage proche du C.
-                                    Voici un exemple de GLSL pour un "vertex shader" :</p>
-                                    <div class="code_sample">
+                                    Voici un exemple de GLSL pour un "vertex shader" :
+                                </p>
+                                <div class="code_sample">
                                     // Version d'OpenGL</br>
                                     #version 330 core</br></br>
                                     // Données du VBO (vec3 représente un point 3D)</br>
@@ -149,9 +151,9 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = projection * view * model * vec4(pos.xyz, 1.0);</br>
                                     }
-                                    </div>
-                                    <p>Voici un exemple de GLSL pour un "fragment shader" :</p>
-                                    <div class="code_sample">
+                                </div>
+                                <p>Voici un exemple de GLSL pour un "fragment shader" :</p>
+                                <div class="code_sample">
                                     // Version d'OpenGL</br>
                                     #version 330 core</br></br>
                                     // Couleur sortie du shader</br>
@@ -161,17 +163,20 @@ Il est aussi possible de l'utiliser avec Python, Java...
                                     &nbsp;&nbsp;&nbsp&nbsp;// Calcul de la couleur nécessaire, avec ici le rouge, ou RGBA(255, 0, 0, 255)</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;FragColor = vec4(1, 0, 0, 1);</br>
                                     }
-                                    </div>
-                                    <p>Plus de détail dans le maniement des shaders seront donnés dans la prochaine partie de cette page.
-                                    Si vous voulez vous entrainer à pratiquer des shaders, vous pouvez vous rendre sur le site <a href="https://www.shadertoy.com/" target="_blank">ShaderToy</a>, un bas à sable assez amusant pour pratiquer le GLSL.</p>
-                                    <h3>Les VAOs</h3>
-                                    <p>Pour en finir avec les bases, <u>parlons des VAOs</u>.
+                                </div>
+                                <p>
+                                    Plus de détail dans le maniement des shaders seront donnés dans la prochaine partie de cette page.
+                                    Si vous voulez vous entrainer à pratiquer des shaders, vous pouvez vous rendre sur le site <a href="https://www.shadertoy.com/" target="_blank">ShaderToy</a>, un bas à sable assez amusant pour pratiquer le GLSL.
+                                </p>
+                                <h3>Les VAOs</h3>
+                                <p>
+                                    Pour en finir avec les bases, <u>parlons des VAOs</u>.
                                     Pour tracer une forme, <span class="important">il vous faut lier un VBO avec un ensemble de shaders, via ce que l'on appelle un VAO</span>.
                                     Disons le, les VAOs ne sont vraiment utiles que dans le code, pour ne pas qu'OpenGL se perdent.
                                     Or, si vous voulez faire des traçage plus complexes que des formes (comme des bordures de formes ou des géométries avancées), <u>il vous faudra utiliser les bonnes catégories de VAOs, prévues à cet effet</u>.
                                     Donc, ne les oubliez surtout pas dans votre code, pour ne pas créer de comportements imprévus.
                                     En général, <span class="important">l'appel aux shaders pour effectuer un rendu se fait dans le code via ces VAOs</span>.
-                                    </p>
+                                </p>
                             </div>
                         </div>
                     

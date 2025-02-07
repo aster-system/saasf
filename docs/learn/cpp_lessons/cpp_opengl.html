@@ -265,6 +265,16 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;FragColor = vec4(1, 0, 0, 1);</br>
                                     }
                                 </div>
+                                <span class="important">Ce code utilise un langage très proche du C : <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)" target="_blank">GLSL</a></span>.
+                                Comme en C, la fonction principale du programme est "maine()", qui ne retourne rien.
+                                <u>Le type vec3 correspond à un vecteur de 3 flottants et vec4 correspond à un vecteur de 4 flottants</u>.
+                                Ici, le "#version 330 core" permet de spécifier la version d'OpenGL utilisé ici.
+                                <u>Les variables définis avec "out" signifient que le shader retourne ces variables pour le prochain shader</u>.
+                                "FragColor" représente la couleur pour le pixel traité par le shader.
+                                Cependant, certaines variables sont directement incluses à OpenGL, comme "gl_Position", qui représente la position précise d'un point du VBO (que nous pouvons modifier pour bouger l'objet).
+                                À l'inverse, <u>les variables définis avec "in" signifient que le shader reçoit ces variables depuis le dernier shader (ou depuis le VBO dans le cas du vertex shader)</u>.
+                                Dans le vertex shader, "layout(location = x)" permet de dire à shader d'aller chercher une certains variable dans le VBO, acomme étant la "x ième" variable traitée pour un point du VBO.
+                                Nous verrons comment utiliser ça précisement un peu après.
                                 Plaçons ces codes dans des "std::string", que nous appellerons respectivement "vertex_shader" et "fragment_shader".
                                 Ces codes vont être directement compilés par OpenGL.
                                 <div class="code_sample">
@@ -447,6 +457,138 @@
                                 Théoriquement, <span class="important">votre triangle devrait être bien tracé sur votre fenêtre OpenGL</span>.
                             </p>
                             <img alt="Fenêtre OpenGL avec un triangle" src="../../images/cpp_opengl/triangle.png" style="max-height:300px;">
+                        </div>
+                        <h3>
+                            d. Communiquer avec les objets OpenGL
+                        </h3>
+                        <div>
+                            <p>
+                                Imaginez que vous vouliez bouger votre objet.
+                                Comment faire ?
+                                <u>On peut penser qu'il faut agir sur le VBO, mais modifier le VBO à chaque boucle prendrait beaucoup de temps</u>.
+                                <span class="important">À la place, nous allons utiliser un système permettant de communiquer de manière rapide et simple avec les shaders : les variables "uniform"</span>.
+                                En effet, les variables notées "in" dans le shader ne peuvent pas être modifiée sans modifier le VBO.
+                                <span class="important">Les variables "uniform" peuvent être modifiée quand vous le souhaitez depuis le programme principal</span>.
+                                Pour bouger le shader, c'est ici que les mathématiques et GLM entrent en jeu.
+                                En effet, notre vertex shader prend des points 3D, nous devons donc utiliser un moyen mathématique de bouger ces points 3D facilement.
+                                Ici, <u>on va utiliser le système de calcul matriciel</u>.
+                                Nous ne rentrerons pas dans les détails (GLM le fera pour nous), cependant les transformations que nous allons faire sont parfaitement applicables avec des matrices.
+                                Nous allons appliquer des <a href="https://fr.wikipedia.org/wiki/Translation" target="_blank">translations</a>, des <a href="https://fr.wikipedia.org/wiki/Homoth%C3%A9tie" target="_blank">homothéties (remise à l'échelle, aggrandissement / rétrecissement)</a> et des <a href="https://fr.wikipedia.org/wiki/Rotation_affine" target="_blank">rotations</a>.
+                                Pour cela, nous aurons besoin de matrices de dimension 4X4.
+                                Ajoutons la au shader.
+                                <div class="code_sample">
+                                    // Vertex</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Données du VBO (vec3 représente un point 3D)</br>
+                                    layout(location = 0) in vec3 pos; // Position du point P</br></br>
+                                    // Données du programme principal</br>
+                                    uniform mat4 transformation;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = transformation * vec4(pos.xyz, 1.0);</br>
+                                    }
+                                </div>
+                                En GLSL, une matrice utilise le type "mat4".
+                                Pour appliquer les transformations dans le shader, nous avons juste à multiplier la matrice aux coordonnées du points.
+                                Finalement, ajoutons du code au programme principal, pour appliquer des transformations.
+                                Nous devons commencer par inclure les librairies GLm que nous utiliserons ici.
+                                <div class="code_sample">
+                                    #include &lt;glm/glm.hpp&gt;</br>
+                                    #include &lt;glm/gtc/matrix_transform.hpp&gt;</br>
+                                    #include &lt;glm/gtc/type_ptr.hpp&gt;
+                                </div>
+                                Nous pouvons maintenant commencer les choses sérieuses.
+                                <div class="code_sample">
+                                    // Calcul de la transformation</br>
+                                    glm::mat4 transformation = glm::mat4(1);</br>
+                                    // Translation de la matrice</br>
+                                    transformation = glm::translate(transformation, glm::vec3(-0.5, 0, 0.2));</br>
+                                    // Rotation de la matrice</br>
+                                    transformation = glm::rotate(transformation, 0.5f, glm::vec3(0, 0, 1));</br>
+                                    // Remise à l'échelle de la matrice</br>
+                                    transformation = glm::scale(transformation, glm::vec3(0.8, 1.0, 0.4));</br></br>
+                                    // Shader actuellement utilisé</br>
+                                    glUseProgram(shader);</br>
+                                    // Passage de la variable uniforme</br>
+                                    int variable_uniform = glGetUniformLocation(shader, "transformation");</br>
+                                    glUniformMatrix4fv(variable_uniform, 1, GL_FALSE, glm::value_ptr(transformation));</br></br>
+                                    // Tracer les points via le VAO</br>
+                                    glBindVertexArray(vao);</br>
+                                    glDrawArrays(GL_TRIANGLES, 0, vbo->points.size() / 3.0);
+                                </div>
+                                Commençons par créer la transformation, avec une matrice 4X4, de type "glm::mat4".
+                                Pour être précis, nous créeons ici une matrice diagonale (avec des 1).
+                                En suite, <u>nous obtenons une matrice transformé par translation de "transformation", qui sera la nouvelle valeur de "transformation"</u>.
+                                Pour cela, on utilise la fonction "translate()" de GLM, qui prend une matrice à transformer, ainsi que la translation à appliquer, et renvoie le résultat.
+                                Nous faisons la même avec la rotation, grâce à la fonction "rotate()" de GLM.
+                                Elle est un peu plus complexe : elle prend une matrice à transformer, ainsi qu'un angle en radians (OBLIGATOIREMENT UN "FLOAT", pas de "double" autorisé), et finalement l'axe sur lequel appliquer la rotation (ici l'axe Z).
+                                En effet, en 3D, les rotations se font autour d'un axe.
+                                Finalement, on utilise la fonction "scale()" de GLM, qui prend une matrice à transformer, ainsi que la remise à l'échelle à appliquer, et renvoie le résultat.
+                                Dés que cela est fait, <span class="important">nous passons cette matrice au shader</span>.
+                                Cette étape doit impérativement avoir lieu après "glUseProgram(shader)".
+                                Pour cela, nous commençons par obtenir un "int" pour accéder à la variable uniform "transformation" du shader "shader", grâce à <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml" target="_blank">glGetUniformLocation()</a>.
+                                Finalement, nous passons la variable au shader, avec <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml" target="_blank">glUniformMatrix4fv</a>.
+                                Son premier paramètre représente "l'int" d'accés à la variable.
+                                Le deuxième renvoie le nombre de données qui vont être passées, et la troisième si la matrice doit être transposer (une opération matricielle, ici inutile) ou non.
+                                Le dernier paramètre fourni à OpenGL un pointeur vers les données de la matrices, se trouvant à l'adresse renvoyée par "glm::value_ptr(transformation)".
+                                <span class="important">Si tout est bien fait, votre triangle devrait subir ses première transformations</span>.
+                                En modifiant les valeurs comme vous voulez, vous pouvez faire faire ce que vous voulez à votre triangle.
+                            </p>
+                            <img alt="Fenêtre OpenGL avec un triangle transformé" src="../../images/cpp_opengl/triangle_transformation.png" style="max-height:300px;">
+                            <p>
+                                Pour utiliser pleinement ce système, il y a quelques petits détails à rajouter.
+                                Premièrement, <span class="important">vous pouvez dessiner avec un même VAO et un même shader autant que vous voulez en une fois, en modifiant seulement les variables "uniform" si vous le souhaitez</span>.
+                                Par exemple, <u>vous pouvez très bien créer un "std::vector" (une liste dynamique) de différentes transformations, et toutes les dessiner à chaque fois</u>.
+                                Comme ça, vous pouvez faire des choses plus complètes.
+                                De plus, <span class="important">il est tout à fait possible de faire bouger (ou tourner, ou grossir / rétrécir) dans le temps des objets</span>.
+                                Dans ce cas, à chaque frame, l'objet occupera une position différente.
+                                Bien que vous ayez beaucoup de façon de faire, je vais vous en montrer une assez générale.
+                                Première, vous aurez besoin d'un indicateur de temps, ici une fonction que nous appellerons "time_ns()", et qui renvoie le nombre de nano-secondes depuis 1970.
+                                <div class="code_sample">
+                                    // Retourne le nombre de nano-secondes depuis 1970</br>
+                                    long long time_ns() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;timespec ts;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;clock_gettime(CLOCK_REALTIME, &ts);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return static_cast&lt;long long&gt;(ts.tv_nsec) + static_cast&lt;long long&gt;(ts.tv_sec) * 1000000000;</br>
+                                    };
+                                </div>
+                                À chaque début de frame, stocker le temps actuel dans une variable (de type "long long"), et comparez le avec l'ancienne valeur stockée (sauf si aucune valeur n'est déjà stockée).
+                                Vous aurez la durée en nano-secondes de la dernière frame (divisez là par 1 milliard pour obtenir le temps en secondes).
+                                <div class="code_sample">
+                                    // Obtenir la durée en seconde de la dernière frame</br>
+                                    long long temps_actuel = time_ns();</br>
+                                    long long duree_frame_en_seconde = static_cast&lt;double&gt;(temps_actuel - dernier_temp) / 1000000000.0;</br>
+                                    dernier_temp = temps_actuel;
+                                </div>
+                                Comme ça, vous saurez de quel distance l'objet à bouger PENDANT la dernière frame, ce qui vous permettra de bouger correctement l'objet.
+                                En suite, vous pouvez définir une variable de type "glm::vec3" / "double" / tout ce que vous voulez, qui correspond à la position (ou rotation...) de l'objet, que vous changez à chaque frame.
+                                Pour rendre vos animations plus complètes, il y a une dernière chose que vous pouvez faire.
+                                <span class="important">Pour savoir quand et comment un utilisateur a intéragi avec le système d'exploitation, il existe plusieurs fonctions différentes : <a href="https://www.glfw.org/docs/3.3/group__input.html#gadd341da06bc8d418b4dc3a3518af9ad2" target="_blank">glfwGetKey()</a> pour les touches du clavier, ou même <a href="https://www.glfw.org/docs/3.3/input_guide.html#input_mouse_button" target="_blank">glfwGetMouseButton()</a> pour les touches de la souris</span>.
+                                Comme ça, vous pouvez faire à ce que la réaction de l'objet dépende des entrées de l'utilisateur.
+                                <div class="code_sample">
+                                    // Obtenir l'état de la touche "A" du clavier</br>
+                                    int touche_a = glfwGetKey(window, GLFW_KEY_A);</br>
+                                    if (touche_a == GLFW_PRESS) {std::cout &lt;&lt; "La touche A est pressée." &lt;&lt; std::endl; }</br></br>
+                                    // Obtenir l'état de la touche gauche de la souris</br>
+                                    int etat_souris_gauche = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);</br>
+                                    if (etat_souris_gauche == GLFW_PRESS) {std::cout &lt;&lt; "La touche gauche de la souris est pressée." &lt;&lt; std::endl; }
+                                </div>
+                                Petit bonus : voici le VBO nécessaire pour réaliser un carré.
+                                <div class="code_sample">
+                                    // Création du VBO nécessaire</br>
+                                    VBO triangle;</br></br>
+                                    // Création d'un triangle</br>
+                                    vbo->points.push_back(-0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(-0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(-0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
+                                    vbo->points.push_back(0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);
+                                </div>
+
+                            </p>
                         </div>
                     </div>
                 </div>
