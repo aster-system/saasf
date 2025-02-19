@@ -36,9 +36,7 @@
                         A. Créez votre fenêtre OpenGL
                     </h2>
                     <div class="left_arrow_right_text left_arrow_right_text_text">
-                        <h3>
-                            a. Mettre en place votre environnement
-                        </h3>
+                        <h3>a. Mettre en place votre environnement</h3>
                         <div>
                             <p>
                                 Disons le, <u>OpenGL est une librairie assez complexe à utiliser</u>.
@@ -78,9 +76,7 @@
                                 Dés que tout cela est installé, vous pouvez créer votre projet pour commencer à travailler avec OpenGL.
                             </p>
                         </div>
-                        <h3>
-                            b. Créer votre première fenêtre
-                        </h3>
+                        <h3>b. Créer votre première fenêtre</h3>
                         <div>
                             <p>
                                 Pour créer notre première fenêtre avec OpenGL, <span class="important">il va falloir commencer à écrire le code permettant de configurer OpenGL</span>.
@@ -174,9 +170,7 @@
                             </p>
                             <img alt="Fenêtre OpenGL" src="../../images/cpp_opengl/window.png" style="max-height:300px;">
                         </div>
-                        <h3>
-                            c. Créer des objets OpenGL
-                        </h3>
+                        <h3>c. Créer des objets OpenGL</h3>
                         <div>
                             <p>
                                 Pour pouvour utiliser pleinement OpenGL, <span class="important">nous allons créer des objets dans OpenGL</span>.
@@ -266,7 +260,7 @@
                                     }
                                 </div>
                                 <span class="important">Ce code utilise un langage très proche du C : <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)" target="_blank">GLSL</a></span>.
-                                Comme en C, la fonction principale du programme est "maine()", qui ne retourne rien.
+                                Comme en C, la fonction principale du programme est "main()", qui ne retourne rien.
                                 <u>Le type vec3 correspond à un vecteur de 3 flottants et vec4 correspond à un vecteur de 4 flottants</u>.
                                 Ici, le "#version 330 core" permet de spécifier la version d'OpenGL utilisé ici.
                                 <u>Les variables définis avec "out" signifient que le shader retourne ces variables pour le prochain shader</u>.
@@ -449,7 +443,7 @@
                                     glUseProgram(shader);</br></br>
                                     // Tracer les points via le VAO</br>
                                     glBindVertexArray(vao);</br>
-                                    glDrawArrays(GL_TRIANGLES, 0, vbo->points.size() / 3.0);
+                                    glDrawArrays(GL_TRIANGLES, 0, carre.points.size() / 3.0);
                                 </div>
                                 Nous devons réutiliser la fonction "glUseProgram()", pour dire à OpenGL qu'on utilise ce shader.
                                 En suite, nous définissons "vao" comme la VAO utilisé actuellement par OpenGL, grâce à "glBindVertexArray()".
@@ -459,9 +453,7 @@
                             </p>
                             <img alt="Fenêtre OpenGL avec un triangle" src="../../images/cpp_opengl/triangle.png" style="max-height:300px;">
                         </div>
-                        <h3>
-                            d. Communiquer avec les objets OpenGL
-                        </h3>
+                        <h3>d. Communiquer avec les objets OpenGL</h3>
                         <div>
                             <p>
                                 Imaginez que vous vouliez bouger votre objet.
@@ -517,7 +509,7 @@
                                     glUniformMatrix4fv(variable_uniform, 1, GL_FALSE, glm::value_ptr(transformation));</br></br>
                                     // Tracer les points via le VAO</br>
                                     glBindVertexArray(vao);</br>
-                                    glDrawArrays(GL_TRIANGLES, 0, vbo->points.size() / 3.0);
+                                    glDrawArrays(GL_TRIANGLES, 0, carre.points.size() / 3.0);
                                 </div>
                                 Commençons par créer la transformation, avec une matrice 4X4, de type "glm::mat4".
                                 Pour être précis, nous créeons ici une matrice diagonale (avec des 1).
@@ -580,17 +572,251 @@
                                 Petit bonus : voici le VBO nécessaire pour réaliser un carré.
                                 <div class="code_sample">
                                     // Création du VBO nécessaire</br>
-                                    VBO triangle;</br></br>
-                                    // Création d'un triangle</br>
-                                    vbo->points.push_back(-0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
-                                    vbo->points.push_back(-0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
-                                    vbo->points.push_back(0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);</br>
-                                    vbo->points.push_back(0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
-                                    vbo->points.push_back(-0.5);vbo->points.push_back(0.5);vbo->points.push_back(0);</br>
-                                    vbo->points.push_back(0.5);vbo->points.push_back(-0.5);vbo->points.push_back(0);
+                                    VBO carre;</br></br>
+                                    // Création d'un carré</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(-0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(-0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(-0.5);carre.points.push_back(0);
                                 </div>
-
                             </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left_arrow_right_text_child">
+                    <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+                    <h2 class="left_arrow_right_text_title" id="part_A">
+                        B. Utilisez des concepts récents
+                    </h2>
+                    <div class="left_arrow_right_text left_arrow_right_text_text">
+                        <h3>a. Ajouter des textures</h3>
+                        <div>
+                            <p>
+                                Pour l'instant, nos objets ne peuvent avoir qu'une seule couleur (ou, du moins, autant que le shader en permet).
+                                Maintenant, <span class="important">ajoutons des textures pour nos objets</span>.
+                                La première étape est probablement la plus complexe : <u>charger la texture</u>.
+                                Pour charger la texture, plusieurs formats sont disponibles, même si nous allons utiliser le plus simple (pour l'instant) : le RGBA 8 bits.
+                                En effet, quand vous chargerez votre texture, <span class="important">vous aurez besoin de charger la texture dans un bloc de données, de telle manière que chaque pixel soit composé de 4 composants (rouge, vert, bleu et alpha), que chacun de ces composants occupent 8 bits (ou 1 octet / 1 "char"), placés 1 par 1 l'un après l'autre</span>.
+                                En toute logique, <u>il y aura autant de composants dans l'image que de données dans le bloc de données, donc 4 * largeur * hauteur</u>.
+                                Cependant, une grande partie des formats d'images modernes ne sont pas des pixels brutes.
+                                En effet, <u>il s'agit souvent d'un bloc de données représentant des pixels bruts mélangés et comprimés pour gagner de la mémoire</u>.
+                                Dans le cas du PNG, il s'agit de plusieurs blocs, compressés avec le système de compression <a href="https://fr.wikipedia.org/wiki/Deflate">deflate</a>.
+                                À partir de là, deux choix s'offrent à vous : créer votre propre système de chargement d'image ou utiliser un système déjà existant.
+                                Pour la suite de ce cours, <span class="important">nous allons utiliser notre propre librairie d'image : <a href="https://aster-system.github.io/scls/scls_image.html" target="_blank">SCLS Image "Michelangelo"</a></span>.
+                                N'oubliez pas de l'inclure et d'appeler SCLS_INIT.
+                                Grâce à elle, le chargement sera assez simple :
+                                <div class="code_sample">
+                                    // Charger l'image</br>
+                                    scls::Image texture_1 = scls::Image("textures/labyrinthe.png");
+                                </div>
+                                Pour l'instant, la librairie ne supporte ques des formats PNG.
+                                Comme pour les VBOs, nous allons mettre tout ça dans une structure, pour l'utiliser plus facilement.
+                                <div class="code_sample">
+                                    // Structure pour une texture</br>
+                                    struct Texture {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Texture(std::string path):image(path){};</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;scls::Image image;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// ID d'accés à la texture</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;unsigned int id;
+                                    };</br></br>
+                                    Texture texture_1 = Texture("textures/labyrinthe.png");
+                                </div>
+                                Maintenant, nous pouvons nous concentrer sur OpenGL.
+                            </p>
+                            <p>
+                                Avec OpenGL, <span class="important">le système de texture est directement implémenté dans la librairie</span>.
+                                Donc, ce ne sera pas si compliqué que ça à faire.
+                                Pour commencer, <u>nous allons spécifier à OpenGL comment la texture doit s'afficher sur l'objet, via le VBO</u>.
+                                En fait, on va indiquer à OpenGL la position sur l'image de chaque point de l'objet, pour lui assigner un pixel de l'image.
+                                Pour cela, <u>nous allons rajouter une variable d'entrée au shader, qui représentera la position de l'image pour ce point, soit un vecteur 2D, après la position 3D du point</u>.
+                                Dans le cas de notre carré (car il est plus facile de réaliser cette opération sur un carré), chaque point représente un coin de l'image (en haut à droite / à gauche ou en bas à droite / à gauche).
+                                Voici le nouveau VBO nécessaire :
+                                <div class="code_sample">
+                                    // Création du VBO nécessaire</br>
+                                    VBO carre;</br></br>
+                                    // Création d'un carré</br>
+                                    // Point 1</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.0);carre.points.push_back(1.0);</br>
+                                    // Point 2</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(-0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.0);carre.points.push_back(0.0);</br>
+                                    // Point 3</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(-0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(1.0);carre.points.push_back(0.0);</br>
+                                    // Point 4</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(1.0);carre.points.push_back(1.0);</br>
+                                    // Point 1</br>
+                                    carre.points.push_back(-0.5);carre.points.push_back(0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(0.0);carre.points.push_back(1.0);</br>
+                                    // Point 3</br>
+                                    carre.points.push_back(0.5);carre.points.push_back(-0.5);carre.points.push_back(0);</br>
+                                    carre.points.push_back(1.0);carre.points.push_back(0.0);
+                                </div>
+                                Pour que OpenGL le comprenne, il faut aussi le spécifier à la création du shader.
+                                Pour cela, on va remplacer les lignes de codes pour le paramètres par de nouvelles :
+                                <div class="code_sample">
+                                    // Paramètre nécessaire pour la position</br>
+                                    int taille_actuelle = 0;</br>
+                                    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)taille_actuelle);</br>
+                                    glEnableVertexAttribArray(0);</br>
+                                    // Paramètre nécessaire pour la position de la texture</br>
+                                    taille_actuelle = 3 * sizeof(float);</br>
+                                    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)taille_actuelle);</br>
+                                    glEnableVertexAttribArray(1);
+                                </div>
+                                Pour en finir avec le passage de la variable, nous allons devoir la rajouter au vertex shader.
+                                La modification est assez simple : on n'a juste qu'à rajouter la variable en variable "in" et en variable "out" pour le fragment shader.
+                                <div class="code_sample">
+                                    // Vertex</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Données du VBO (vec3 représente un point 3D)</br>
+                                    layout(location = 0) in vec3 pos; // Position du point P</br>
+                                    layout(location = 1) in vec2 pos_texture; // Position sur la texture du point P</br></br>
+                                    out vec2 position_texture; // Position sur la texture du point P</br></br>
+                                    // Données du programme principal</br>
+                                    uniform mat4 transformation;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Passage des variables "out"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;position_texture = pos_texture;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = transformation * vec4(pos.xyz, 1.0);</br>
+                                    }
+                                </div>
+                                Une petite chose à noter : OpenGL s'occupera d'attribuer à chaque pixel précis le "position_texture" nécessaire lors de la rasterization.
+                                Donc, pouvons maintenant afficher l'image comme bon nous semble.
+                            </p>
+                            <p>
+                                Finalement, <span class="important">passons à la manipulation de la texture en elle même</span>.
+                                Pour commencer, <u>occupons nous du fragment shader</u>.
+                                Nous avons deux choses à rajouter : la variable d'entrée "position_texture" et un moyen d'accéder à la texture, que nous ferons via une variable "uniform".
+                                <div class="code_sample">
+                                    // Fragment</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Position du pixel dans la texture</br>
+                                    in vec2 position_texture;</br></br>
+                                    // Couleur sortie du shader</br>
+                                    out vec4 FragColor;</br></br>
+                                    // Texture nécessaire</br>
+                                    uniform sampler2D texture_0;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp&nbsp;// Calcul de la couleur nécessaire, avec ici le rouge, ou RGBA(255, 0, 0, 255)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;FragColor = texture(texture_0, position_texture);</br>
+                                    }
+                                </div>
+                                Ici, <u>la texture est de l'objet "sampler2D", représentant un tableau d'objets 2D (ici, un tableau de pixels)</u>.
+                                Le nom "texture_0" est nécessaire ici (il y a plusieurs nom réservés de texture, dont "texture_0").
+                                Pour avoir la bonne valeur du pixel de l'image selon "position_texture", nous utilisons la fonction OpenGL <a href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL)#Basic_texture_access" target="_blank">texture()</a>.
+                                Elle nous facilitera le travail.
+                                Maintenant, les modifications devront être apportées au code principal.
+                                Pour en finir, <span class="important">passons et utilisons cette texture dans le code principal</span>.
+                                Commençons par créer la texture.
+                                <div class="code_sample">
+                                    // Charger la texture</br>
+                                    Texture texture_1 = Texture("textures/labyrinthe.png");</br>
+                                    glGenTextures(1, &texture_1.id);
+                                </div>
+                                Pour cela, on utilise (encore) le système avec un "unsigned int", et la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenTextures.xhtml" target="_blank">glGenTextures()</a> d'OpenGL, qui fonctionne exactement comme les fonctions de génération d'OpenGL.
+                                En suite, chargeons la texture dans la mémoire d'OpenGL.
+                                <div class="code_sample">
+                                    // Passer la texture</br>
+                                    glBindTexture(GL_TEXTURE_2D, texture_1.id);</br>
+                                    GLint color_format = GL_RGBA; if(texture_1.image.color_type() != 6){color_format = GL_RGB;}</br>
+                                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_1.image.width(), texture_1.image.height(), 0, color_format, GL_UNSIGNED_BYTE, texture_1.image.datas()->datas());</br>
+                                    glGenerateMipmap(GL_TEXTURE_2D);
+                                </div>
+                                Premièrement, nous indiquons à OpenGL que la texture 2D actuellement utilisée est "texture_1.id" avec la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindTexture.xhtml" target="_blank">glBindTexture()</a>.
+                                Elle fonctionne de la même façon que "glBindBuffer()" ou "glBindVertexArray()".
+                                De plus, <span class="important">le shader va utiliser l'image actuellement "bind" lors de l'affichage</span>, il faut donc y penser si vous utilisez plusieurs textures.
+                                En suite, nous cherchons si notre image est sous le forma "RGB" ou "RGBA" avec les outils de notre libraririe d'image.
+                                Nous stockong le résultat dans la variable "color_format", de type <a href="https://www.khronos.org/opengl/wiki/OpenGL_Type" target="_blank">GLint</a> (un "int" dans OpenGL).
+                                Si le type de couleur n'est pas 6, alors l'image est sous le format "RGB", et si le type est de 6, alors elle est sous le format "RGBA".
+                                Après, <span class="important">nous passons la texture à OpenGL avec la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml" target="_blank">glTexImage2D()</a></span>.
+                                Son premier paramètre représente l'endroit où l'image sera stockée (donc, ici, l'image 2D actuellement utilisée, soit "texture_1.id").
+                                Le deuxième paramètre représente le niveau de détail de l'image (contre toute attente, plus il est haut, moins l'image est détaillée).
+                                Le troisème paramètre représente interne de l'image représente le type de l'image stocké dans dans la mémoire OpenGL (RGB, RGBA...).
+                                Le quatrième paramètre représente la largeur  de l'image, le cinquième sa hauteur, le sixième une valeur toujours à 0 (allez savoir pourquoi) et le septième représente le type de l'image que l'on va passer à OpenGL (RGB ou RGBA, selon "color_format").
+                                Finalement, <u>le dernier paramètre représente un pointeur vers un "char*" contenant l'image</u>.
+                                Dés que cela est fait, nous appelons la fonction <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenerateMipmap.xhtml" target="_blank">glGenerateMipmap()</a>.
+                                Cette fonction va générer des mipmaps pour une certaine texture, ici la texture 2D actuellement utilisée.
+                                En fait, <span class="important">les mipmaps représentent des versions moins détaillées de l'image (et donc moins demandantes en ressources), qu'on peut utiliser à la place de l'image de base dans un contexte où l'objet l'utilisant est éloigné de la caméra (et donc, que la texture apparaît plus petite que prévue)</span>.
+                                Nous l'ajoutons pour des raisons de performances.
+                                Théoriquement, si tout est bien fait, <span class="important">tout devrait marcher comme prévu</span>.
+                            </p>
+                            <p>
+                                Cependant, <span class="important">paramétrons un peut le système de texture</span>.
+                                Pour commencer, <span class="important">définissons le comportement de l'image lorsque l'on agrandit ou qu'on rétrécit l'image</span>.
+                                Pour cela, nous aurons besoin d'une seule fonction : <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameter.xhtml" target="_blank">glTexParameter()</a>.
+                                <div class="code_sample">
+                                    // Paramétrer la texture</br>
+                                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); // Agrandissement de la texture</br>
+                                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST); // Rétrécissement of the texture
+                                </div>
+                                En réalité, <u>il existe plusieurs formes de cette fonction, toutes différenciées par une (ou des) lettre à la fin, représentant le type du paramètre pris (int, float...)</u>.
+                                Le premier paramètre représente l'image à paramétrer (ici, l'image 2D actuellement "bind").
+                                <u>Le deuxième paramètre représente le paramètre à modifier</u>.
+                                Dans le premier cas, il s'agit du comportement de l'image lors d'un agrandissement.
+                                Dans le deuxième cas, il s'agit du comportement de l'image lors d'un rétrécissement.
+                                Le troisième paramètre représente le paramètre actuel de cette texture.
+                                Dans les deux cas, nous utilisons la méthode "GL_NEAREST_MIPMAP_NEAREST" : retournant le pixel le plus proche de la position précise de chaque point du VBO, sur le mipmap le plus proche correspondant au zoom actuel.
+                                D'autres valeurs existent, comme "GL_LINEAR", qui retourne un mélange des pixels les plus proches de la position précise de chaque point du VBO.
+                                Beaucoup de paramètres sont disponibles, documentés <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameter.xhtml" target="_blank">sur cette page</a>.
+                            </p>
+                            <p>
+                                Avant d'en finir, <u>il reste un dernier truc à représenter avec ce système de texture</u>.
+                                Bien que, pour l'instant, nous n'utilisons que des textures externes, <span class="important">nous pouvons aussi utiliser les shaders (et leur puissance) pour générer des textures bien précises dans ces derniers</span>.
+                                Cependant, pour faire cela, <u>il nous faut de bon modèle mathématiques, capables de générer de tels images</u>.
+                                Le meilleur exemple est l'ensemble de Mandelbrot, et le fractale qu'il forme.
+                                Il s'agit d'un ensemble de suites mathématiques de nombres complexes à deux paramètres (un complexe et un entier pour la suite), caractérisées par leur limite en + l'infini.
+                                En cherchant si une suite d'un certain nombre complexe tend vers + l'infini en + l'infini, et en lui attribuant une couleur sur le plan complexe selon le résultat, nous pouvons créer une forme... totalement imprévue.
+                                Pour plus d'informations, <a href="https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot" target="_blank">rendez-vous ici</a>.
+                                Si vous voulez voir quelqu'un en développer un de manière plus précise, <a href="https://youtu.be/wUlVFYJIUNA?si=oJqXkEl7onabDSxO" target="_blank">je vous conseille cette vidéo de dimension code</a>.
+                                Voici un petit exemple de shader modifié pour accueillir un fractale de Mandelbrot.
+                                <div class="code_sample">
+                                    // Fragment "Mandelbrot"</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Position du pixel dans la texture</br>
+                                    in vec2 position_texture;</br></br>
+                                    // Couleur sortie du shader</br>
+                                    out vec4 FragColor;</br></br>
+                                    // Texture nécessaire</br>
+                                    uniform sampler2D texture_0;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// On cherche la valeur complexe du pixel actuel (dans un plan complexe entre x = -5 et x = 5, et y y -5 et y = 5)
+                                    &nbsp;&nbsp;&nbsp;&nbsp;float x = (position_texture.x - 0.5) * 5.0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;float y = (position_texture.y - 0.5) * 5.0;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// On définit le nombre d'itération de la suite actuel, ainsi que la limite à partir de laquelle la suite sera considérée comme "tendant vers + l'infini"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;float current_x=0;float current_y=0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;float iter=0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;float limit=100.0;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Boucle d'exécution pour la suite</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;for(;iter&lt;100;iter++){</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// On calcul les valeurs actuelles complexes de la suite</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float temp=current_x;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current_x=current_x*current_x-current_y*current_y;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current_y*=2.0*temp;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current_x+=x;current_y+=y;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Si la suite est trop grande, on sort de la boucle</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(sqrt(current_x*current_x+current_y*current_y)>limit){break;}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Si la suite ne tend pas, on affiche du noir</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;if(iter==100){FragColor = vec4(0, 0, 0, 1.0);}</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Sinon, on affiche une couleur représentant la vitesse à laquelle la suite tend</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;else{FragColor = vec4(iter / 100.0, iter / 100.0, 1.0, 1.0);}</br>
+                                    }
+                                </div>
+                                Pensez bien à ce genre de propriétés pour les shaders, elles pourraient nous être très utiles dans les temps à venir.
+                            </p>
+                            <img alt="Fractale de Mandelbrot" src="../../images/cpp_opengl/mandelbrot.png" style="max-height:300px;">
                         </div>
                     </div>
                 </div>
