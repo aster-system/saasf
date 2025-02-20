@@ -818,6 +818,115 @@
                             </p>
                             <img alt="Fractale de Mandelbrot" src="../../images/cpp_opengl/mandelbrot.png" style="max-height:300px;">
                         </div>
+                        <h3>b. Utiliser de la 3D</h3>
+                        <div>
+                            <p>
+                                Aussi effrayant qu'elle puisse être, <u>l'ajout de la 3D ne sera pas si complexe que ça</u>.
+                                Pour commencer, <span class="important">nousa allons définir un objet très utilisé dans les jeux vidéos : une caméra</span>.
+                                Pour notre caméra, nous aurons besoin de quelques données assez évidentes.
+                                <div class="code_sample">
+                                    // Structure pour une caméra</br>
+                                    struct Camera {</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Position de la caméra</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double x = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double y = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double z = 0;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Vecteur directeur de la vue de la caméra</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double angle = 1.570796;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double vue_x = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double vue_y = 0;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double vue_z = 1;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// FOV de la caméra (en degrés d'angle)</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double fov = 45;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Distance de rendu de la caméra</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double rendu_loin = 1000;</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;double rendu_proche = 0.001;</br>
+                                    };
+                                </div>
+                                Heuresement, <u>le combo GLM et calcul matriciel va nous permettre de rendre tout ça très facile</u>.
+                                <span class="important">Commençons par implémenter les choses nécessaires dans le shader</span>.
+                                En réalité, nous n'allons que rajouter 2 variables "uniform" dans le vertex shader : 2 matrices pour utiliser de la 3D.
+                                <div class="code_sample">
+                                    // Vertex</br></br>
+                                    // Version d'OpenGL</br>
+                                    #version 330 core</br></br>
+                                    // Données du VBO (vec3 représente un point 3D)</br>
+                                    layout(location = 0) in vec3 pos; // Position du point P</br>
+                                    layout(location = 1) in vec2 pos_texture; // Position sur la texture du point P</br></br>
+                                    out vec2 position_texture; // Position sur la texture du point P</br></br>
+                                    // Données du programme principal</br>
+                                    uniform mat4 transformation;</br></br>
+                                    // Données permettant d'afficher de la 3D</br>
+                                    uniform mat4 projection;</br>
+                                    uniform mat4 view;</br></br>
+                                    // Fonction de base du shader</br>
+                                    void main() {</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Passage des variables "out"</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;position_texture = pos_texture;</br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = vec4(pos.xyz, 1.0);</br>
+                                    }
+                                </div>
+                                Ici, "view" représente la matrice nécessaire pour utiliser la caméra et "projection" représente la matrice permettant d'utiliser un rendu 3D réaliste.
+                                Maintenant, <span class="important">importons ces valeurs depuis le programme principal</span>.
+                                <div class="code_sample">
+                                    // On définit la taille de la fenêtre au début du programme (dans des variables)</br>
+                                    int hauteur_fenetre = 1000;</br>
+                                    int largeur_fenetre = 1000;</br></br>
+                                    ...</br></br>
+                                    // Gestion de la caméra</br>
+                                    glm::mat4 projection = glm::perspective(glm::radians(cam.fov), static_cast&lt;double&gt;(largeur_fenetre) / static_cast&lt;double&gt;(hauteur_fenetre), cam.rendu_proche, cam.rendu_loin);</br>
+                                    glm::mat4 view = glm::lookAt(glm::vec3(cam.x, cam.y, cam.z), glm::vec3(cam.x + cam.vue_x, cam.y + cam.vue_y, cam.z + cam.vue_z), glm::vec3(0, 1, 0));</br></br>
+                                    ...</br></br>
+                                    // Passage des variables uniformes nécessaires</br>
+                                    glUseProgram(shader);</br>
+                                    int variable_uniform = glGetUniformLocation(shader, "projection");</br>
+                                    glUniformMatrix4fv(variable_uniform, 1, GL_FALSE, glm::value_ptr(projection));</br>
+                                    variable_uniform = glGetUniformLocation(shader, "transformation");</br>
+                                    glUniformMatrix4fv(variable_uniform, 1, GL_FALSE, glm::value_ptr(transformation));</br>
+                                    variable_uniform = glGetUniformLocation(shader, "view");</br>
+                                    glUniformMatrix4fv(variable_uniform, 1, GL_FALSE, glm::value_ptr(view));
+                                </div>
+                                Comme vous l'avez remarquer, nous allons devoir profondément changer notre code.
+                                Au début du programme, définissons des valeurs spécifiques pour la taille de la fenêtre, qui nous seront utiles plus tard.
+                                En suite, dans la boucle d'exécution, nous créeons les matrices nécessaires à la projection et à la vue caméra.
+                                Pour cela, <u>nous utiliserons deux fonctions de GLM</u>.
+                                La première est "perspective()", permettant d'avoir la matrice de projection.
+                                Cette fonction prend pas mal de paramètres pour les calculs.
+                                Le premier paramètre représente le FOV en gradians de la caméra.
+                                Le deuxième paramètre représente le ratio largeur/hauteur de l'écran (c'est pour cela que nous avons créer des variables avant).
+                                Le troisième et le quatrième représentetn les valeurs "proche" et "loin" de la caméra.
+                                Après cela, <span class="important">occupons nous de la vue caméra, avec la fonction "lookAt()"</span>.
+                                Son première paramètre représente la position de la caméra.
+                                Le deuxième représente le point regardé de la caméra, ici juste devant elle.
+                                Le troisième paramètre représente un vecteur directeur du sens, que la caméra considère comme le sens "en haut", donc ici un vecteur pointant vers le haut.
+                                Finalement, <u>envoyez toutes ces données à OpenGL, via les variables uniformes</u>.
+                                Un petit dernier truc possible : placer correctement l'objet observé dans le plan (dans l'idéal, à la coordonnée (0, 0, 1), pour directement le voir).
+                                Dés que cela est fait, votre objet apparaître sous la forme d'un plan carré dans un univers 3D.
+                                Si vous voulez vous en rendre compte, essayez d'implémenter un moyen de déplacement de la caméra, et regardez ce que cela donne.
+                                Voici un petit exemple de code permettant de naviguer dans votre programme, avec les touches "ZQSD" et rotation via les flèches.
+                                <div class="code_sample">
+                                    // Tourner la caméra</br>
+                                    int touche_ra = glfwGetKey(window, GLFW_KEY_RIGHT);</br>
+                                    if (touche_ra == GLFW_PRESS) { cam.angle += 3.1415 * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); }</br>
+                                    int touche_la = glfwGetKey(window, GLFW_KEY_LEFT);</br>
+                                    if (touche_la == GLFW_PRESS) { cam.angle -= 3.1415 * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); }</br></br>
+                                    // Appliquer la rotation</br>
+                                    cam.vue_x = std::cos(cam.angle);cam.vue_z = std::sin(cam.angle);</br></br>
+                                    // Bouger la caméra</br>
+                                    int touche_d = glfwGetKey(window, GLFW_KEY_D);</br>
+                                    if (touche_d == GLFW_PRESS) {cam.x -= cam.vue_z * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); cam.z += cam.vue_x * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9));}</br>
+                                    int touche_q = glfwGetKey(window, GLFW_KEY_A);</br>
+                                    if (touche_q == GLFW_PRESS) {cam.x += cam.vue_z * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9));cam.z -= cam.vue_x * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); }</br>
+                                    int touche_z = glfwGetKey(window, GLFW_KEY_W);</br>
+                                    if (touche_z == GLFW_PRESS) {cam.x += cam.vue_x * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); cam.z += cam.vue_z * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9));}</br>
+                                    int touche_s = glfwGetKey(window, GLFW_KEY_S);</br>
+                                    if (touche_s == GLFW_PRESS) {cam.x -= cam.vue_x * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9)); cam.z -= cam.vue_z * static_cast&lt;float&gt;(static_cast&lt;double&gt;(current - last_frame) / std::pow(10, 9));}</br>
+                                </div>
+                                Pour faire un tel code, de simples connaissances en géométrie (et, plus précisément, en trigonométrie) sont nécessaires.
+                            </p>
+                            <img alt="Fractale en 3D" src="../../images/cpp_opengl/mandelbrot_3d.png" style="max-height:300px;">
+                        </div>
                     </div>
                 </div>
             </div>
