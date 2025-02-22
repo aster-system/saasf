@@ -878,7 +878,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Passage des variables "out"</br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;position_texture = pos_texture;</br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;// Calcul du point retourné par le shader</br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = vec4(pos.xyz, 1.0);</br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;gl_Position = projection * view * transformation * vec4(pos.xyz, 1.0);</br>
                                     }
                                 </div>
                                 Ici, "view" représente la matrice nécessaire pour utiliser la caméra et "projection" représente la matrice permettant d'utiliser un rendu 3D réaliste.
