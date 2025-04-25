@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="../../styles/style.css" rel="stylesheet">
+<title>SAASF - Arithmétique</title>
+
+</head>
+
+<body class="open-sans-bold">
+<header class="hammersmith-one-regular">
+<a href="../../index.html">
+    <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
+</a>
+</header>
+<div id="main_div">
+<h1>L'arithmétique</h1>
+
+<div class="left_arrow_right_text">
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+L'arithmétique
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Qu'est ce qu'est l'arithmétique ?</h3><h4>La définition algébrique</h4><p><span class=important >L'arithmétique représente l'étude des nombres en mathématiques<span class=important >. En arithmétique, les nombres sont retranchés dans plusieurs ensembles différents, sous forme hiérarchique. </span></span></p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les ensembles de nombres
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Les nombres réels</h3><h4>Les nombres naturels</h4><p>L'ensemble de nombre le plus intuitif est l'ensemble des nombres naturels. <span class=important >L'ensemble des nombres naturels représente tous les nombres qui peuvent représenter dans la réalité une quantité entière</span>. Par exemple, si nous voulons compter le nombre d'un certain objet dans un système, les nombres naturels sont largement suffisants. </p><p>Bien évidemment, <span class=important >l'écriture d'un nombre entier naturel se fait par l'assemblage de chiffres</span>. En général, les chiffres sont : 0, 1, 2, 3, 4, 5, 6, 7, 8 et 9. Quand on arrive au nombre après 9, alors on rajoute un "1" avant, et un "0" après : le nombre suivant "9" est "10". Ce même 0 deviendra un 9, qui demandera en suite d'ajouter 1 au nombre d'avant, pour devenir un "2" suivi d'un "0" : le nombre suivant "19" est "20". </p><p>Pour définir les entiers naturels, <span class=important >il existe une axiomatisation particulièrement simple : les axiomes de Peano</span>. Le premier axiome admet l'existence du premier élément des entiers naturels : 0. Le deuxième axiome admet que tout nombre naturel possède un successeur (dans le cas de 0, le successeur est 1). Le troisième axiome dit que 0 ne peut pas être un successeur d'un autre nombre. Le quatrième définit deux entiers naturels ayant le même successeur comme égaux. Finalement, le dernier axiome décrit l'ensemble (de manière ensembliste) des entiers naturels comme un ensemble ayant 0, et le successeurs de 0 et les successeurs de tous les autres successeurs. Avec cette axiome, <span class=important >nous pouvons créer une algèbre des nombres entiers naturels, comme un groupe contenant une opération de composition interne d'addition</span>. L'axiome 3 garanti que 0 est l'élément neutre du groupe des entiers naturels. Grâce à l'axiome 2 et 4, <span class=important >nous pouvons définir l'addition dans le groupe des entiers naturels :  a + b représente la valeur obtenue après être passé de successeur en successeur b fois, en partant de a</span>. C'est une reformulation de la définition intuitive de l'addition. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La division
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>La division de nombres entiers</h3><h4>Multiples et division euclidienne</h4><p>En arithmétique de nombres naturels, la division est une opération assez peut utiliser, puisque le résultat qu'elle retourne n'est pas toujours un nombre naturel. Par exemple, 4 divisé par 3 est 1.333..., qui n'est pas un nombre naturel. Il est préférable d'inverser les rôles, en parlant de multiples. En effet, <span class=important >un nombre a est multiple d'un autre nombre b si a représente b multiplié par un nombre entier quelconque c, donc a = b * c</span>. Dans ce cas, la division de a par b est entière, est b est un diviseur de a. Cependant, dans certains cas, a n'est pas un multiple de b. Donc, a représente la multiplication de b d'un nombre entier quelconque, auquelle on additione un autre nombre entier d. Dans ce cas, <span class=important >nous obtenons a = b * c + r : cette opération représente la division euclidienne de a par b, avec c nommé le quotient de la division et r nommé le reste de la division</span>. Pour que cette opération soit simple, nous prenons le c le plus grand possible, et le r le plus petit possible. De plus, r doit être inférieur à b, car un r égal ou supérieur à b implique qu'il est possible d'additionner 1 à c, qui n'est donc pas le plus grand possible. </p><h4>Modulos et congruences</h4><p>Pour deux nombres entiers quelconques b et a, leur division euclidienne donne un certain reste r. Cependant, pour d'autres entiers quelconques c et a, leur division euclidienne peut donner le même reste r. <span class=important >Si deux nombres b et c (différents) ont le même reste pour une division par a (supérieure à 0), alors b et c sont dit congrus modulo a</span>. Cela implique une autre propriétés similaires : leur différence est divise par a. En effet : </p><math><mi>b = d * a + r</mi></math><br><math><mi>c = e * a + r</mi></math><br><math><mi>c - b = e * a + r - (d * a + r)</mi><mo>=</mo><mi>a(d - e)</mi></math><p>Les restes de nombres crées par une congruence modulo n sont liés par une relation d'équivalence. Venons en au fait : <span class=important >la somme de deux nombres a et b entiers congrus à c et d modulo n est congru à la somme de c et d</span>. De plus, <span class=important >le produit de deux nombres a et b entiers congrus à c et d modulo n est congru au produit de c et d</span>. En toute logique, l'exposant possède la même propriété. La démonstration est assez simple. </p><math><mi>a = c * n + e</mi></math><br><math><mi>b = d * n + f</mi></math><br><math><mi>a + b = c * n + e + d * n + f</mi><mo>=</mo><mi>n(c + d) + (e + f)</mi>&#x2261;<mi>(e + f) [n]</mi></math><br><math><mi>a * b = (c * n + e) * (d * n + f)</mi><mo>=</mo><msup><mi>n</mi><mi>2</mi></msup><mi>(c + d) + n(c * f + d * e) + (e * f)</mi>&#x2261;<mi>(e * f) [n]</mi></math><h4>Plus grand commun diviseur</h4><p>En arithmétique, deux nombres entiers naturels ont au moins 2 diviseurs, dont 1 pour les deux : 1 est un diviseur commun de tous les nombres entiers naturels. Cependant, <span class=important >deux nombres peuvent avoir d'autres diviseurs en commun : le plus grand de ces diviseurs communs est nommé le plus grand commun diviseur, ou PGCD</span>. Pour trouver ce diviseur, il existe un algorithme assez pratique : l'algorithme d'Euclide. L'idée est de trouver le reste de la division euclidienne ces deux nombres, et de continuer la recherche en remplaçant le plus grand des deux nombres par le reste. On s'arrête quand le reste est égal à 0 : le dernier reste est le plus grand commun diviseur des deux nombres. En toute logique, pour chaque étape de l'algorithme, on peut écrire le reste comme une combinaison linéaire des deux nombres. Donc, à la prochaine étape, on peut écrire le prochain reste comme une combinaison linéaire du petit nombre et du reste (et donc une combinaison linéaire plus complexe), mais parfaitement fonctionnel. Cela sera aussi le cas pour le dernier reste : le PGCD. Donc, <span class=important >le PGCD de deux nombres a et b peut s'écrire avec une combinaison linéaire des nombres de départ : cela s'appelle l'identité de Bézout</span>. </p><math><mi>a</mi><mo>*</mo><mi>u</mi><mo>+</mo><mi>b</mi><mo>*</mo><mi>v</mi><mo>=</mo><mi>PGCD(a, b)</mi></math><p>Ce théorème peut être très pratique dans certains cas spéciaux. Mais, avant, il faut savoir que certains nombres n'ont que 1 comme diviseur commun. <span class=important >Deux nombres entiers naturels n'ayant que 1 comme diviseur commun sont dits premiers entre eux</span>. Donc, leur PGCD est de 1. Donc, <span class=important >pour a et b deux nombres entiers naturels premiers entre eux, leur identité de Bézout vaut 1 : leur existence est justifiée par le théorème de Bézout</span>. </p><math><mi>a</mi><mo>*</mo><mi>u</mi><mo>+</mo><mi>b</mi><mo>*</mo><mi>v</mi><mo>=</mo><mi>PGCD(a, b)</mi><mo>=</mo><mi>1</mi></math><p>Cette définition permet quelque chose de très pratique : <span class=important >multiplié des 2 côtés par un nombre entier x permet de trouver une combinaison linéaire de a et b valant x</span>. Ce théorème permet d'en démontrer un autre assez utile : le lemme de Gauss. En effet, <span class=important >le lemme de Gauss dit que si deux nombres entiers a et b sont premiers entre eux et que a divise b * c, alors a divise c</span>. La démonstration est assez simple : PGCD(a, b) = 1 et a = b * c, donc a divise ac (logique) et bc, mais aussi PGCD(ac, bc) selon le théorème de Bézout (propriété des combinaisons linéaires), qui est c : a divise c. Grâce à ce lemme, on peut en déduire un autre beaucoup plus ancien : le lemme d'Euclide (proposition 32 du livre 7 des éléments d'Euclide). Le lemme d'Euclide stipule qui si un nombre entier a divise le produit de deux nombres entiers b et c, alors a divise b ou c (version moins générale du lemme de Gauss). Ces deux théorèmes provoquent une conséquence très importante : <span class=important >les nombres premiers ne peuvent jamais être un produit, et donc a n'existe pas : ils sont irréductibles</span>. Les autres ne le sont pas, et ont peut leur appliquer le lemme de Gauss pour obtenir des b et c soit premiers (et donc irréductibles), soit non-premiers, auquel on peut réitérer l'expérience. À la fin, on aura toujours des produits de nombres premiers, et donc irréductibles. Donc, <span class=important >un nombre peut toujours s'écrire comme le produit de nombres premiers : c'est le théorème fondamental de l'arithmétique</span>. </p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    <h1>Plus d'informations</h1>
+ <div class="open-sans-regular">
+SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
+  Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
+  <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+  <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
+  <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+  </span>
+  </div>
+</footer>
+</body>
+</html>

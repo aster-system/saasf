@@ -1,211 +1,116 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8" />
-        <title>SAASF - Hardware</title>
-        <link href="../..//styles/style.css" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Hammersmith+Onedisplay=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800display=swap" rel="stylesheet">
+<head>
+<link href="../../styles/style.css" rel="stylesheet">
+<title>SAASF - Hardware</title>
 
-    </head>
+</head>
 
-    <body class="open-sans-bold">
-        <header class="hammersmith-one-regular">
-<a href="../..//index.html">
-    <img alt="Logo de SAASF" src="../..//images/aster_system_logo.png" style="max-height:150px;">
+<body class="open-sans-bold">
+<header class="hammersmith-one-regular">
+<a href="../../index.html">
+    <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
 </a>
 </header>
-        <div id="main_div">
-            <h1>L'hardware</h1>
-                Bien qu'on puisse le croire, un ordinateur n'est pas magique.
-Toutes ces fonctionnalités, il le tire d'une architecrure bien réelle et physique (mais très complexe) : l'hardware.
-Même si il n'est pas utile de le comprendre intégralement, comprendre son fonctionnement superficiel est une étape assez importante dans la compréhension de l'informatique.
-                <div class="left_arrow_right_text">
-                    
-                        <div class="left_arrow_right_text_child">
-                            <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../..//images/arrow.png">
-                            <h2 class="left_arrow_right_text_title">
-                                Qu'est ce qu'est l'hardware ?
-                            </h2>
-                            <div class="left_arrow_right_text_text">
-                                <p><span class="important"><a href="https://fr.wikipedia.org/wiki/Mat%C3%A9riel_informatique" target="_blank">L'hardware</a> est, par définition, tout ce qui touche à la partie physique d'un ordinateur (processeur, mémoire...).</span>
-Par son architecture précise, <u>il doit permettre de fournir tous les outils</u> (ici, les instructions qu'il permet de réaliser) <span class="important">pour faire fonctionner dessus des logiciels, appelés "software"</span>. 
-<span class="important">Les logiciels utilisant directement l'hardware sont appelés <a href="https://fr.wikipedia.org/wiki/Firmware" target="_blank">"des firmwares"</a></span>. 
-Par exemple, le BIOS ou le noyau du système d'exploitation de votre ordinateur sont des firmwares.
-Les softwares, eux, utilisent les firmwares pour fonctionner.</p>
-<p><span class="important">Chaque composant de l'hardware est synchronisé par un système nommé l'horloge du système </span>.
-En fait, <u>chaque composant va remplir une instruction de sa tâche courante pendant une courtes période (quelques nano-secondes), où chaque composant de l'ordinateur est électriquement alimenté en même temps</u>.
-Le terme utilisé pour nommé le nombre d'alimentation pour l'ordinateur est le terme de fréquence.
-La source primaire de ce système provient <span class="important">du processeur de l'ordinateur, qui va actualiser le système à une certaine fréquence : sa fréquence d'horloge</span>.
-Bien évidemment, pour que cela fonctionne, <u>il faut que les composants soient structurés de telle manière à être utilisable selon ce système : ne pas s'exécuter au mauvais moment, rendre les données accessible pour les prochaines exécutions</u>...
-Certain composants ont des fréquences différents (comme la mémoire), <u>et doivent donc être structurés pour que la différence de fréquence ne pose pas de problème au système</u> (par exemple, en évitant certaines alimentations du processeur). 
-En synchronisant bien tout cela, vous pouvez utiliser correctement l'ordinateur.</p>
-<h3>L'hardware à distance</h3>
-<p>Imagineons que vous utiliser un logiciel quelconque, <span class="important">mais que l'hardware le faisant tourner n'est pas le votre, mais un hardware distant</span>. 
-<span class="important">Cette pratique est appelée <a href="https://fr.wikipedia.org/wiki/Cloud_computing" target="_blank">le cloud</a></span>.
-La tâche réalisée par le logiciel peut être de plein de natures différentes, comme le stockage de données (OneDrive), le jeu vidéo (Aternos ou Hostinger), le rendu de jeu vidéo (Stadia)... 
-<u>L'hardware de l'ordinateur distant est en général adapté à la tâche à réaliser (ou, au moins, plus adapté qu'un ordinateur classique)</u>, comme une abondance de stockage dans les clouds de stockage.
-<u>Ils sont aussi accessibles partout via Internet et, en général, tout le temps</u>. 
-Plusieurs services existent pour utiliser des ordinateurs en cloud, comme le géant français <a href="https://www.ovhcloud.com/fr/" target="_blank">OVHcloud</a>.</p>
-<h3>Les circuits imprimés</h3>
-<p>Comme nous l'avons déjà dit, <u>c'est l'architecture d'un hardware qui permet de lui faire faire une tâche quelconque</u>.
-Pour cela, <span class="important">il utilise tout un système mécanique extrêmement petit, qui permet de réaliser mécaniquement les tâches</span>.
-Si cette mécanique nous est invisible, <u>c'est car les pièces mécaniques utilisées sont vraiment minuscules, et utilisent l'électricité</u>.
-Plusieurs pièces de ce genre existe, <span class="important">mais la plus connue est <a href="https://fr.wikipedia.org/wiki/Transistor" target="_blank">le transistor</a> (une pièce ne dépassant pas 10nm)</span>.
-</p>
-<p>Pour réaliser des pièces aussi petites, <u>il faut utiliser une technologie extraordinaire : l'impression d'un circuit</u>.
-<span class="important">Le <a href="https://fr.wikipedia.org/wiki/Circuit_imprim%C3%A9" target="_blank">circuit imprimé</a> (ou PCB en anglais) dispose de tous les composants électroniques nécessaires pour fonctionner comme un ordinateur</span>.
-Il est aussi possible d'y ajouter des ports pour moduler son fonctionnement.
-Leur fabrication est assez simple : <u>il s'agit d'une succession de couches (isolantes ou non) qui, assemblées, forment un circuit</u>.
-Dans chaque couches, <u>il peut aussi y avoir des composants électroniques, comme des transistors ou des diodes par exemple</u>.
-Pleins de techniques différentes existent pour créer ces circuits : collage, gravure, soudure...
-Avec un circuit efficace et une réalisation ingénieuse, vous pouvez obtenir des puces permettant de faire tourner nos ordinateurs classiques.</p>
-<h3>L'hardware embarqué</h3>
-<p>Dans le cas où vous devez utiliser un système électronique dans une quelconque machine, <u>il est rare que vous ayez besoin de la puissance de tout un ordinateur pour faire fonctionner la machine</u>.
-Pour cela, <span class="important">l'hardware présent dans une machine est regroupé dans ce que l'on appelle <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_embarqu%C3%A9" target="_blank">un système embarqué</a>.</span>.
-Il s'agit, comme dans un ordinateur, d'une carte mère, avec les composants dessus. 
-Cependant, <u>ces composants sont en général ultra adapté à la tâche qui leur est attribué, et optimiser pour ne servir que cette tâche (et être donc moins imposants, moins cher, moins demandant en énergie mais aucunement modulable)</u>.
-Le système embarqué dépend entièrement de son fabricant pour le partage de ses caractéristiques internes, de son maniement, sa modulabilité...</p>
-<p><span class="important">N'importe qui en capacité de moduler un circuit imprimé peut réaliser un système embarqué</span>.
-Les contraintes du systèmes (taille, consommation électrique...) dépendent des besoins de la machine l'utilisant.
-Plusieurs bases existent pour réaliser des systèmes embarqués, comme <a href="https://www.arduino.cc/" target="_blank">Arduino</a> ou <a href="https://www.raspberrypi.com/" target="_blank">Raspberry</a>.
-</p>
-                            </div>
-                        </div>
-                    
-                        <div class="left_arrow_right_text_child">
-                            <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../..//images/arrow.png">
-                            <h2 class="left_arrow_right_text_title">
-                                Qu'est ce qui compose l'hardware ?
-                            </h2>
-                            <div class="left_arrow_right_text_text">
-                                <p>Tous les composants de l'hardware sont les composants de l'ordinateur.
-Donc, <span class="important">l'hardware est composé d'une carte mère, d'un processeur, d'un processeur graphique, de mémoire, de stockage, d'une alimentation et d'un boîtier</span>.
-Il est aussi composé de ce qu'on appelle <span class="important">des "pérhiphériques homme-machine" qui représente les entrées comme la souris ou le clavier ou les sorties comme l'écran</span>.
-Cependant, il existe aussi <span class="important">des périphériques "machine-machine", comme les cartes réseaux</span>.</p>
-<h3>La carte mère</h3>
-<p>La <a href="https://fr.wikipedia.org/wiki/Carte_m%C3%A8re" target="_blank">carte mère</a> est certainement le composant le plus important d'un ordinateur.
-<span class="important">Elle permet de connecter toutes les pièces de l'ordinateur entre elles</span>.
-Pour que les composants puissent correctement communiquer entre eux, <u>la carte mère utilise un ensemble de puces électroniques</u> <span class="important">nommé le <a href="https://fr.wikipedia.org/wiki/Chipset">chipset</a></span>.
-<u>Il est relié à chaque composant par des circuits nommés des bus</u>.
-Chaque bus peut faire passer une certaine quantité de données, certains très rapidement (processeur, PCI...) ou plus lentement (USB, SATA...).
-<u>Certains bus relient le chipset avec des connecteurs externes à la carte mère</u>.
-Par exemple, <span class="important">le bus processeur relie la carte mère avec le connecteur du processeur, nommé le socket</span>.
-Plein d'autres connecteur existe, <u>comme le connecteur PCI, SATA, ATX...</u></p>
-<p>Pour fonctionner de manière plus modulable, <span class="important">le chipset incorpore une puce spéciale contenant un programme permettant la modulabilité du chipset : le BIOS (ou UEFI pour les BIOS récents)</span>.
-<u>Ce sont des exemples de Firmwares, vus plus haut</u>.
-<u>BIOS est la contraction de "Basic Input Output System", et UEFI de "Unified Extensible Firmware Interface"</u>.
-<span class="important">Ils permettent tous les deux d'utiliser correctement les composants de l'ordinateur via le système d'exploitation</span>.</p>
-<h3>Le processeur</h3>
-<p>Le <a href="https://fr.wikipedia.org/wiki/Processeur" target="_blank">processeur</a>, parfois appelé CPU, est le cerveau de l'ordinateur.
-<span class="important">Il exécute les actions ce que l'utilisateur lui demande de faire, appelées des instructions</span>.
-L'exécution se déroule grâce à <u>une série de courants électriques</u>.
-Ces courants électriques sont en suite <u>utilisés dans le processeur pour réaliser les actions (grâce au circuit imprimé du processeur)</u>, <span class="important">sous forme de bits 0 et 1</span>, grâce à <span class="important">des petits composants nommés les transistors</span>.
-<span class="important">La façon dont les transistors sont disposés est nommées architecture du processeur</span>.</p>
-<p>Les bits peuvent aussi être <span class="important">stockés dans des petites puces de mémoires directement dans le processeur, nommées les registres de processeur</span>.
-Ils sont beaucoup plus rapides que la mémoire RAM, et améliorent les performances du processeur.
-Il y a <u>plusieurs registres possibles, pouvant stocker instructions, valeurs...
-</u>Les registres <u>peuvent aussi être superposés entre eux, bien que les registres supérieurs soient plus lents que les autres.
-</u> Ces différentes couches sont nommées <span class="important">"mémoire cache L1/2/3", où "L" représente la superposition de la couche</span>.</p>
-<p><span class="important">Les transistors sont physiquement repartis dans le processeur dans ce que l'on appelle des coeurs de processeur</span>.
-Plus il y a de coeurs, <u>plus le processeur peut réaliser d'instructions en même temps</u>, plus il est performant.
-Grâce à une ingénieuse disposition des transistors, <u>certains coeurs peuvent être doublés sans rajouter de transistors</u>, <span class="important">en ce que l'on appelle des threads</span>.
-<u>Les coeurs peuvent réaliser des opérations plusieurs milliards de fois par seconde</u>.
-<span class="important">Le nombre de fois qu'il sont utilisés est nommé la fréquence d'horloge, et s'exprime en hertz (ou plutot, en giga hertz, en millairds de hertz)</span>.</p>
-<h3>La mémoire vive</h3>
-<p>La <a href="https://fr.wikipedia.org/wiki/M%C3%A9moire_vive_dynamique" target="_blank">mémoire vive</a>, aussi appelé RAM, permet à l'ordinateur d'utiliser des données dans le temps.
-En effet, à un instant T, <u>le processeur ne peut conserver qu'une quantité limité de données dans ces registres</u>, en général, se mesurant en MO, souvent insuffisant pour permettre à des logiciels de fonctionner.
-<span class="important">La mémoire vive permet d'agrandir le nombre de données stockables dans un ordinateur, en général, en GO</span>.
-<u>Elle offre aussi une vitesse satisfaisante</u>, bien que plus lente que les registres de processeur.</p>
-<p>Quelque soit le type de mémoire vive, <span class="important">les données qu'elles stockent le sont de manière physique (bien réelle)</span>.
-Elle doit aussi permettre de <span class="important">les transmettre physiquement aux autres pièces de l'ordinateur</span>, via des bus.
-<u>La façon de faire tout ça physiquement dépend du type de mémoire vive (DDR4, VRAM...)</u>.
-<span class="important">La vitesse de transmission des données se mesure en Hertz, ou 1 Hertz représente 1 octet par seconde</span>.</p>
-<h3>Le processeur graphique</h3>
-<p>Le <a href="https://fr.wikipedia.org/wiki/Processeur_graphique" target="_blank">processeur graphique</a>, aussi appelé GPU, permet à l'ordinateur de générer une image pouvant être affiché sur un écran.
-<u>Il peut se présenter en général sous plusieurs formes différentes</u> : sous forme de carte graphique (extension du système), soit sous forme d'un ajout au processeur, soit sous forme d'une puce intégrée à la carte mère (IGP)...
-Il s'agit probablement d'un des composants les plus complexes d'un ordinateur.En effet, <span class="important">pour générer une image satisfaisante, il doit réaliser plein de tâches, toutes aussi complexes les unes que les autres : géométrie 2D / 3D, rendu d'image, rendu vidéo...</span>
-En général, <u>ces tâches sont accélérées via la configuration matériel du processeur graphique, le rendant extrêmement performant dans le domaine</u>.
-De plus, <u>on peut même moduler le processeur graphique pour lui faire faire tout ce que l'on veut</u> (grâce à, notamment, la librairie "CUDA" sur les processeurs graphiques NVidia).</p>
-<h3>L'alimentation électrique</h3>
-<p>Bien que souvent sous-côté, l'<a href="https://fr.wikipedia.org/wiki/Bloc_d%27alimentation" target="_blank">alimentation électrique</a>, aussi appelée PSU, est l'origine de l'énergie de l'ordinateur.
-<span class="important">Son rôle est d'apporter l'électricité nécessaire au fonctionnement des différentes pièces de l'ordinateur</span>.
-Pour cela, <u>elle découpe le courant qui lui parvient (en général, avec une intensité de 230-240 V) en différents courants</u>, selon les besoins du système.
-<u>Le courant est apporté au système via un réseau de câbles électriques</u>, comme les câbles ATX pour la carte mère, ou bien les câbles SATA pour de potentiels périphèriques externes.
-Pour éviter de trop chauffer, <u>elle est aussi en général accompagnée d'un ventilateur</u>, dessus ou sur le côté.</p>
-<p><span class="important">La puissance électrique totale qu'elle peut apporter au système est utilisée comme unité de comparaison entre les différentes alimentations</span> (500W, 750W...).
-<u>La qualité des matériaux utilisés peut aussi être un argument de vente</u>, notée selon un label nommé <a href="https://fr.wikipedia.org/wiki/80_PLUS">80 PLUS</a>.
-Le label le plus haut étant titane, et le plus bas étant bronze.
-<u>Plus elle est élevée, plus le rendement de l'alimentation est haut, moins elle consomme d'énergie de la prise pour une puissance d'ordinateur donnée</u>.</p>
-<p><span class="important">Chaque câble utilise ses propres normes pour apporter le courant électrique</span>.
-En général, <u>ces câbles sont eux même composés de fils de différentes couleurs</u>.
-Les fils jaunes apportent 12V, les fils rouges 5V, les fils oranges 3.3V, les fils noirs représentent la masse (0V)...</p>
-                            </div>
-                        </div>
-                    
-                        <div class="left_arrow_right_text_child">
-                            <img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../..//images/arrow.png">
-                            <h2 class="left_arrow_right_text_title">
-                                Les entrées - sorties
-                            </h2>
-                            <div class="left_arrow_right_text_text">
-                                <h3>Les périphériques entrées / sorties</h3>
+<div id="main_div">
+<h1>L'hardware</h1>
 
-<p>
-Nous, pauvres humains, ne pouvons pas (encore) connecter nos cerveaux aux ordinateurs pour communiquer avec lui.
-Donc, <span class="important">pour communiquer avec lui, nous devons utiliser des outils bien physiques, nommés des<a href="https://fr.wikipedia.org/wiki/P%C3%A9riph%C3%A9rique_informatique" target="_blank">périphériques entrées / sorties</a></span>.
-Pour connecter ces mêmes périphériques, <u>on peut, soit faire sans fils (Bluetooth, WiFi...) soit via un fil, brancher dans un trou de l'ordinateur nommé un port matériel</u>.
-Les formes de ports les plus connus sont USB, HDMI, Ethernet...
-Une autre catégorie de port existe pour les composants internes (et non pour l'entrée / sortie), contenant les sockets de processeurs, les ports SATA...
-Ils sont en général beaucoup moins connus que les autres.
-</p>
+<div class="left_arrow_right_text">
 
-<p>
-Même si cela peut paraître bizarre, <u>les données transmises via les ports ne dépendent en général pas du port en question</u>.
-Par exemple, un port USB peut en même temps transférer des données de souris, comme de clavier, de clé USB...
-La branche de l'ingénieurie étudiant ces communications est nommées <span class="https://fr.wikipedia.org/wiki/Connectique" target="_blank">la connectique</span>.
-Pour chaque ports, <span class="important">les informations importantes sont l'arrangement physique des câbles (la forme du port), le courant électrique supporté par le port et les protocoles de transport des signaux électriques physiques</span>.
-Par exemple, le port USB A 3.0 est constitué de 4 fils internes (2 d'alimentations électrique et 2 de transfert de données), communiquant avec des signaux alternant entre 0 et 5 V pour le transfert et jusqu'à 20 pour l'alimentation.
-Cependant, à l'échelle logicielle, <u>les données peuvent être transférées selon n'importe quelle norme, et décodées via un programme nommé un pilote</u> (déjà abordé dans la page des <a href="../../astersystemelearn/it/os.html">systèmes d'exploitation</a>).
-Par exemple, pour les périphériques utilisant de la vidéo (comme une caméra), les données sont (en général) codées avec la norme H.264, qui requiet des pilotes de décodage spécifique.
-</p>
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les bases de l'hardware
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Les différents types d'hardware</h3><h4>Les circuits imprimés</h4><p>Comme nous l'avons déjà dit, c'est l'architecture d'un hardware qui permet de lui faire faire une tâche quelconque. Pour cela, <span class=important >il utilise tout un système mécanique extrêmement petit, qui permet de réaliser mécaniquement les tâches</span>. Si cette mécanique nous est invisible, c'est car les pièces mécaniques utilisées sont vraiment minuscules, et utilisent l'électricité. Plusieurs pièces de ce genre existe, <span class=important >mais la plus connue est <a href=https://fr.wikipedia.org/wiki/Transistor target=_blank >le transistor</a>(une pièce ne dépassant pas 10nm)</span>. </p><p>Pour réaliser des pièces aussi petites, il faut utiliser une technologie extraordinaire : l'impression d'un circuit. <span class=important >Le <a href=https://fr.wikipedia.org/wiki/Circuit_imprim%C3%A9 target=_blank >circuit imprimé</a>(ou PCB en anglais) dispose de tous les composants électroniques nécessaires pour fonctionner comme un ordinateur</span>. Il est aussi possible d'y ajouter des ports pour moduler son fonctionnement. Leur fabrication est assez simple : il s'agit d'une succession de couches (isolantes ou non) qui, assemblées, forment un circuit. Dans chaque couches, il peut aussi y avoir des composants électroniques, comme des transistors ou des diodes par exemple. Pleins de techniques différentes existent pour créer ces circuits : collage, gravure, soudure... Avec un circuit efficace et une réalisation ingénieuse, vous pouvez obtenir des puces permettant de faire tourner nos ordinateurs classiques. </p><h4>L'hardware embarqué</h4><p>Dans le cas où vous devez utiliser un système électronique dans une quelconque machine, il est rare que vous ayez besoin de la puissance de tout un ordinateur pour faire fonctionner la machine. Pour cela, <span class=important >l'hardware présent dans une machine est regroupé dans ce que l'on appelle <a href=https://fr.wikipedia.org/wiki/Syst%C3%A8me_embarqu%C3%A9 target=_blank >un système embarqué</a>.</span>. Il s'agit, comme dans un ordinateur, d'une carte mère, avec les composants dessus.  Cependant, ces composants sont en général ultra adapté à la tâche qui leur est attribué, et optimiser pour ne servir que cette tâche (et être donc moins imposants, moins cher, moins demandant en énergie mais aucunement modulable). Le système embarqué dépend entièrement de son fabricant pour le partage de ses caractéristiques internes, de son maniement, sa modulabilité... </p><p><span class=important >N'importe qui en capacité de moduler un circuit imprimé peut réaliser un système embarqué</span>. Les contraintes du systèmes (taille, consommation électrique...) dépendent des besoins de la machine l'utilisant. Plusieurs bases existent pour réaliser des systèmes embarqués, comme <a href=https://www.arduino.cc/ target=_blank >Arduino</a>ou <a href=https://www.raspberrypi.com/ target=_blank >Raspberry</a>. </p><h4>L'hardware à distance</h4><p>Imagineons que vous utiliser un logiciel quelconque, <span class=important >mais que l'hardware le faisant tourner n'est pas le votre, mais un hardware distant</span>.  <span class=important >Cette pratique est appelée <a href=https://fr.wikipedia.org/wiki/Cloud_computing target=_blank >le cloud</a></span>. La tâche réalisée par le logiciel peut être de plein de natures différentes, comme le stockage de données (OneDrive), le jeu vidéo (Aternos ou Hostinger), le rendu de jeu vidéo (Stadia)...  L'hardware de l'ordinateur distant est en général adapté à la tâche à réaliser (ou, au moins, plus adapté qu'un ordinateur classique), comme une abondance de stockage dans les clouds de stockage. Ils sont aussi accessibles partout via Internet et, en général, tout le temps.  Plusieurs services existent pour utiliser des ordinateurs en cloud, comme le géant français <a href=https://www.ovhcloud.com/fr/ target=_blank >OVHcloud</a>. </p>
+</div>
+</div>
 
-<h3>Les écrans</h3>
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Le processeur
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Le cerveau de l'ordinateur</h3><h4>Une pièce qui "procède"</h4><p>Le <a href=https://fr.wikipedia.org/wiki/Processeur target=_blank >processeur</a>, parfois appelé CPU, est le cerveau de l'ordinateur. <span class=important >Il exécute les actions ce que l'utilisateur lui demande de faire, appelées des instructions</span>. L'exécution se déroule grâce à une série de courants électriques. Ces courants électriques sont en suite utilisés dans le processeur pour réaliser les actions (grâce au circuit imprimé du processeur), <span class=important >sous forme de bits 0 et 1</span>, grâce à <span class=important >des petits composants nommés les transistors</span>. <span class=important >La façon dont les transistors sont disposés est nommées architecture du processeur</span>. </p><p>Les bits peuvent aussi être <span class=important >stockés dans des petites puces de mémoires directement dans le processeur, nommées les registres de processeur</span>. Ils sont beaucoup plus rapides que la mémoire RAM, et améliorent les performances du processeur. Il y a plusieurs registres possibles, pouvant stocker instructions, valeurs... Les registres peuvent aussi être superposés entre eux, bien que les registres supérieurs soient plus lents que les autres. Ces différentes couches sont nommées <span class=important >"mémoire cache L1/2/3", où "L" représente la superposition de la couche</span>. </p><p><span class=important >Les transistors sont physiquement repartis dans le processeur dans ce que l'on appelle des coeurs de processeur</span>. Plus il y a de coeurs, plus le processeur peut réaliser d'instructions en même temps, plus il est performant. Grâce à une ingénieuse disposition des transistors, certains coeurs peuvent être doublés sans rajouter de transistors, <span class=important >en ce que l'on appelle des threads</span>. Les coeurs peuvent réaliser des opérations plusieurs milliards de fois par seconde. <span class=important >Le nombre de fois qu'il sont utilisés est nommé la fréquence d'horloge, et s'exprime en hertz (ou plutot, en giga hertz, en milliards de hertz)</span>. </p>
+</div>
+</div>
 
-<p>
-Sans affichage graphique, un ordinateur ne peut pas faire grand chose.
-En général, <u>le périphérique graphique le plus utilisé sur un ordinateur est un écran</u>.
-<span class="important">Un écran est un périphérique permettant d'afficher une (ou plutôt "des") images provenant de l'ordinateur</span>.
-Pour cela, <u>on peut connecter les deux via différents types de ports (et de protocoles associés) différents : HDMI, Display Port, USB-C</u>...
-Le nombre maximal d'images que l'écran peut afficher par seconde est une fréquence (exprimé donc en hertz) nommé le taux de rafraichissement.
-Pour afficher chaque parties de l'image, <span class="important">l'écran est composé de pixels</span>.
-Un circuit embarqué dans l'écran s'occupe de décoder l'image et de l'afficher pixels par pixels sur l'écran.
-L'écran peut se démarquer par sa taille réelle (souvent exprimé en pouces, avec 1 pouce = 2,54 cm) et le nombre de pixels sur l'écran, nommé la définition de l'écran.
-Le nombre de pixels pour une certaine unité de taille réelle (comme le pouce, en général) est nommée la résolution de l'écran.
-Le nombre de pixels de large de l'écran divisé par le nombre de pixels de haut de l'écran est nommée le ratio de l'écran (16/9, 4/3...).
-</p>
-<p>
-Parmi les différents écrans, <span class="important">la seule différence autre que les unités "basiques" de l'écran (définition, taille...) est la technologie utilisée dans l'affichage des pixels</span>.
-Actuellement, la technologie la plus utilisée est la technologie <a href="https://fr.wikipedia.org/wiki/%C3%89cran_%C3%A0_cristaux_liquides" target="_blank">LCD (plus communément appelée écrans à cristaux liquides)</a>.
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La carte mère
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Le système nerveux de l'ordinateur</h3><h4>Lier les pièces</h4><p>La <a href=https://fr.wikipedia.org/wiki/Carte_m%C3%A8re target=_blank >carte mère</a>est certainement le composant le plus important d'un ordinateur. <span class=important >Elle permet de connecter toutes les pièces de l'ordinateur entre elles</span>. Pour que les composants puissent correctement communiquer entre eux, la carte mère utilise un ensemble de puces électroniques <span class=important >nommé le <a href=https://fr.wikipedia.org/wiki/Chipset >chipset</a></span>. Il est relié à chaque composant par des circuits nommés des bus. Chaque bus peut faire passer une certaine quantité de données, certains très rapidement (processeur, PCI...) ou plus lentement (USB, SATA...). Certains bus relient le chipset avec des connecteurs externes à la carte mère. Par exemple, <span class=important >le bus processeur relie la carte mère avec le connecteur du processeur, nommé le socket</span>. Plein d'autres connecteur existe, comme le connecteur PCI, SATA, ATX... </p><h4>Le programme de la carte mère</h4><p>Pour fonctionner de manière plus modulable, <span class=important >le chipset incorpore une puce spéciale contenant un programme permettant la modulabilité du chipset : le BIOS (ou UEFI pour les BIOS récents)</span>. Ce sont des exemples de Firmwares, vus en introduction. BIOS est la contraction de "Basic Input Output System", et UEFI de "Unified Extensible Firmware Interface". <span class=important >Ils permettent tous les deux d'utiliser correctement les composants de l'ordinateur via le système d'exploitation</span>. </p>
+</div>
+</div>
 
-</p>
-                            </div>
-                        </div>
-                    
-                </div>
-        </div>
-        <footer>
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La mémoire et le stockage
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Retenir des informations</h3><h4>La mémoire vive</h4><p>La <a href=https://fr.wikipedia.org/wiki/M%C3%A9moire_vive_dynamique target=_blank >mémoire vive</a>, aussi appelé RAM, permet à l'ordinateur d'utiliser des données dans le temps. En effet, à un instant T, le processeur ne peut conserver qu'une quantité limité de données dans ces registres, en général, se mesurant en MO, souvent insuffisant pour permettre à des logiciels de fonctionner. <span class=important >La mémoire vive permet d'agrandir le nombre de données stockables dans un ordinateur, en général, en GO</span>. Elle offre aussi une vitesse satisfaisante, bien que plus lente que les registres de processeur. </p><p>Quelque soit le type de mémoire vive, <span class=important >les données qu'elles stockent le sont de manière physique (bien réelle)</span>. Elle doit aussi permettre de <span class=important >les transmettre physiquement aux autres pièces de l'ordinateur</span>, via des bus. La façon de faire tout ça physiquement dépend du type de mémoire vive (DDR4, VRAM...). <span class=important >La vitesse de transmission des données se mesure en Hertz, ou 1 Hertz représente 1 octet par seconde</span>. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La carte graphique
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Une calculatrice surpuissante</h3><h4>Gérer l'affichage graphique</h4><p>Le <a href=https://fr.wikipedia.org/wiki/Processeur_graphique target=_blank >processeur graphique</a>, aussi appelé GPU, permet à l'ordinateur de générer une image pouvant être affiché sur un écran. Il peut se présenter en général sous plusieurs formes différentes : sous forme de carte graphique (extension du système), soit sous forme d'un ajout au processeur, soit sous forme d'une puce intégrée à la carte mère (IGP)... Il s'agit probablement d'un des composants les plus complexes d'un ordinateur.En effet, <span class=important >pour générer une image satisfaisante, il doit réaliser plein de tâches, toutes aussi complexes les unes que les autres : géométrie 2D / 3D, rendu d'image, rendu vidéo...</span>En général, ces tâches sont accélérées via la configuration matériel du processeur graphique, le rendant extrêmement performant dans le domaine. De plus, on peut même moduler le processeur graphique pour lui faire faire tout ce que l'on veut (grâce à, notamment, la librairie "CUDA" sur les processeurs graphiques NVidia). </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les périphériques
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Les capteurs de l'ordinateur</h3><h4>Communiquer avec l'ordinateur</h4><p>Nous, pauvres humains, ne pouvons pas (encore) connecter nos cerveaux aux ordinateurs pour communiquer avec lui. Donc, <span class=important >pour communiquer avec lui, nous devons utiliser des outils bien physiques, nommés des<a href=https://fr.wikipedia.org/wiki/P%C3%A9riph%C3%A9rique_informatique target=_blank >périphériques entrées / sorties</a></span>. Pour connecter ces mêmes périphériques, on peut, soit faire sans fils (Bluetooth, WiFi...) soit via un fil, brancher dans un trou de l'ordinateur nommé un port matériel. Les formes de ports les plus connus sont USB, HDMI, Ethernet... Une autre catégorie de port existe pour les composants internes (et non pour l'entrée / sortie), contenant les sockets de processeurs, les ports SATA... Ils sont en général beaucoup moins connus que les autres. </p><h4>Le concept de port</h4><p>Même si cela peut paraître bizarre, les données transmises via les ports ne dépendent en général pas du port en question. Par exemple, un port USB peut en même temps transférer des données de souris, comme de clavier, de clé USB... La branche de l'ingénieurie étudiant ces communications est nommées <span class=https://fr.wikipedia.org/wiki/Connectique target=_blank >la connectique</span>. Pour chaque ports, <span class=important >les informations importantes sont l'arrangement physique des câbles (la forme du port), le courant électrique supporté par le port et les protocoles de transport des signaux électriques physiques</span>. Par exemple, le port USB A 3.0 est constitué de 4 fils internes (2 d'alimentations électrique et 2 de transfert de données), communiquant avec des signaux alternant entre 0 et 5 V pour le transfert et jusqu'à 20 pour l'alimentation. Cependant, à l'échelle logicielle, les données peuvent être transférées selon n'importe quelle norme, et décodées via un programme nommé un pilote (déjà abordé dans la page des <a href=../../astersystemelearn/it/os.html >systèmes d'exploitation</a>). Par exemple, pour les périphériques utilisant de la vidéo (comme une caméra), les données sont (en général) codées avec la norme H.264, qui requiet des pilotes de décodage spécifique. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les écrans
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Un périphérique de sortie</h3><h4>Un périphérique graphique</h4><p>Sans affichage graphique, un ordinateur ne peut pas faire grand chose. En général, le périphérique graphique le plus utilisé sur un ordinateur est un écran. <span class=important >Un écran est un périphérique permettant d'afficher une (ou plutôt "des") images provenant de l'ordinateur</span>. Pour cela, on peut connecter les deux via différents types de ports (et de protocoles associés) différents : HDMI, Display Port, USB-C... Le nombre maximal d'images que l'écran peut afficher par seconde est une fréquence (exprimé donc en hertz) nommé le taux de rafraichissement. Pour afficher chaque parties de l'image, <span class=important >l'écran est composé de pixels</span>. Un circuit embarqué dans l'écran s'occupe de décoder l'image et de l'afficher pixels par pixels sur l'écran. L'écran peut se démarquer par sa taille réelle (souvent exprimé en pouces, avec 1 pouce = 2,54 cm) et le nombre de pixels sur l'écran, nommé la définition de l'écran. Le nombre de pixels pour une certaine unité de taille réelle (comme le pouce, en général) est nommée la résolution de l'écran. Le nombre de pixels de large de l'écran divisé par le nombre de pixels de haut de l'écran est nommée le ratio de l'écran (16/9, 4/3...). </p><h3>Fonctionner grâce à la physique</h3><h4>Les écrans à cristaux liquides</h4><p>Parmi les différents écrans, <span class=important >la seule différence autre que les unités "basiques" de l'écran (définition, taille...) est la technologie utilisée dans l'affichage des pixels</span>. Actuellement, la technologie la plus utilisée est la technologie <a href=https://fr.wikipedia.org/wiki/%C3%89cran_%C3%A0_cristaux_liquides target=_blank >LCD (plus communément appelée écrans à cristaux liquides)</a>. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les autres pièces
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>L'alimentation électrique</h3><h4>Apporter l'énergie à l'ordinateur</h4><p>Bien que souvent sous-côté, l'<a href=https://fr.wikipedia.org/wiki/Bloc_d%27alimentation target=_blank >alimentation électrique</a>, aussi appelée PSU, est l'origine de l'énergie de l'ordinateur. <span class=important >Son rôle est d'apporter l'électricité nécessaire au fonctionnement des différentes pièces de l'ordinateur</span>. Pour cela, elle découpe le courant qui lui parvient (en général, avec une intensité de 230-240 V) en différents courants, selon les besoins du système. Le courant est apporté au système via un réseau de câbles électriques, comme les câbles ATX pour la carte mère, ou bien les câbles SATA pour de potentiels périphèriques externes. Pour éviter de trop chauffer, elle est aussi en général accompagnée d'un ventilateur, dessus ou sur le côté.</p><h4>Des normes très précises</h4><p><span class=important >La puissance électrique totale qu'elle peut apporter au système est utilisée comme unité de comparaison entre les différentes alimentations</span>(500W, 750W...). La qualité des matériaux utilisés peut aussi être un argument de vente, notée selon un label nommé <a href=https://fr.wikipedia.org/wiki/80_PLUS >80 PLUS</a>. Le label le plus haut étant titane, et le plus bas étant bronze. Plus elle est élevée, plus le rendement de l'alimentation est haut, moins elle consomme d'énergie de la prise pour une puissance d'ordinateur donnée. </p><p><span class=important >Chaque câble utilise ses propres normes pour apporter le courant électrique</span>. En général, ces câbles sont eux même composés de fils de différentes couleurs. Les fils jaunes apportent 12V, les fils rouges 5V, les fils oranges 3.3V, les fils noirs représentent la masse (0V)... </p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
     <h1>Plus d'informations</h1>
-    <div class="open-sans-regular">
-        SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
-        Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
-        <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-        <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
-        <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
-        </span>
-     </div>
+ <div class="open-sans-regular">
+SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
+  Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
+  <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+  <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
+  <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+  </span>
+  </div>
 </footer>
-    </body>
+</body>
 </html>

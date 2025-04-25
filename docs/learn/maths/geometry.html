@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="../../styles/style.css" rel="stylesheet">
+<title>SAASF - Géométrie</title>
+
+</head>
+
+<body class="open-sans-bold">
+<header class="hammersmith-one-regular">
+<a href="../../index.html">
+    <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
+</a>
+</header>
+<div id="main_div">
+<h1>La géométrie</h1>
+
+<div class="left_arrow_right_text">
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Définitions de la géométrie
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Qu'est ce qu'est la géométrie ?</h3><h4>La géométrie euclidienne</h4><p>Pour pouvoir faire de la géométrie complexe, il faut, au moins, comprendre comment l'humain a vu la géométrie pendant presque 2000 ans. En effet, <span class=important >la géométrie euclidienne est l'étude mathématique des plans / espaces, et des figures qui leur appartiennent</span>. En général, on parle de figures en 2 dimensions (par exemple, sur papier) ou en 3 dimensions (comme la vraie vie). Cette géométrie est la plus utilisée, et de loin, puisque, à notre échelle, elle est omniprésente. </p><p>Heuresement pour nous, <span class=important >la géométrie euclidienne est <a href=logic_definitions >précisément axiomatisée</a>avec 5 axiomes clés</span>. </p><p>En géométrie euclidienne, nous pouvons définir plusieurs objets "basiques", racines de tous les objets existants. <span class=important >Le premier est le point (applicable dans toutes les dimensions possibles)</span>. Un point représente une (et une seule) position / partie d'un espace géométrique. Il n'a donc n'y taille, ni surface, ni volume... <span class=important >Le deuxième est la droite (applicable au minimum en deux dimensions)</span>. Une droite représente un ensemble (généralement infini) de points alignés. Selon le 1er axiome d'Euclide, si vous prenez deux points quelconques, alors ils seront alignés entre eux. Selon le 2ème axiome d'Euclide, trois points sont alignés si la droite passant par deux de ces points passe aussi par l'autre point. D'un point de vue géométrique, un simple tracé suffit. D'un point de vue algébrique, il faut utiliser la notion de vecteur pour vérifier cela, étudiée plus loin. Seulement deux points de cette droite suffisent à la décrire. D'ailleurs, il est possible de n'étudier qu'une partie de cette droite, située entre deux points : c'est ce que l'on appelle un segment. <span class=important >Le troisième est le plan (applicable au minimum en deux dimensions)</span>. En deux dimensions, le plan représente (en général) l'espace total étudié. En trois dimensions, un plan représente une surface de l'espace (et donc, un sous-espace de l'espace). <span class=important >Une surface représente un ensemble de points où tous les points peuvent être représenté avec une simple paire de coordonnée</span>. Il est défini par au moins deux droites non parallèles, et permet de réaliser de la géométrie 2D en 3D. Il permet aussi de représenter des nombres complexes, des projections...<br>Chacunes de ces notions seront approfondies plus tard. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les vecteurs en géométrie
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Qu'est ce qu'est un vecteur ?</h3><h4>La définition pure</h4><p>L'élément le plus important en géométrie est le vecteur. Bien qu'il peut s'agir de plusieurs notions, <span class=important >la définition brute d'un vecteur est un ensemble de nombres, en général réels</span>(autant que de dimensions dans l'espace du vecteur). Les vecteurs peuvent aussi être assimilés à des matrices. Pour écrire un vecteur, il faut mettre une petite flèche au dessus de lui, et faire suivre ses coordonnées (si nécessaire) juste après, entre parenthèses, comme ça : </p><math><mover><mi>V</mi><mo stretchy=false >&#x2192;</mo></mover><mi>(x, y, z)</mi></math><p>Pour représenter un vecteur en géométrie, il est conseillé (pas obligatoire mais conseillé) de le faire partir de sa base jusqu'à la coordonnée qu'il représente, comme ça : </p><img src=../../images/img16.png ><p><span class=important >La caractéristique principale d'un vecteur est de représenter un point de l'espace</span>. En effet, il peut représenter une seule position de l'espace, et donc un point. Donc, <span class=important >deux vecteurs suffisent à définir une droite ou un segment</span>. Cette approche permet de donner une existence algébrique aux droites. En effet, il est possible de définir un système d'équation, qui permet de vérifier si une certaine coordonnée fait partie de la droite ou pas. </p><math><mi>x</mi><mo>=</mo><mi>A</mi><sub>x</sub><mo>+</mo><mi>kB</mi><sub>x</sub></math><br><math><mi>y</mi><mo>=</mo><mi>A</mi><sub>y</sub><mo>+</mo><mi>kB</mi><sub>y</sub></math><br>...<br><math><mi>z</mi><mo>=</mo><mi>A</mi><sub>z</sub><mo>+</mo><mi>kB</mi><sub>z</sub></math><h4>Les propriétés des vecteurs</h4><p><span class=important >La longueur totale d'un vecteur est nommée la norme de ce vecteur</span>. Si vous projetez visuellement le vecteur dans son espace, et que vous calculez sa longueur, vous obtenez la norme. La particularité de cette ensemble de nombres est que ces valeurs peuvent ne dépendre de rien d'autres que de leur espace. En d'autres termes, il est possible d'utiliser des vecteurs comme une base (arbitraire) pour d'autres vecteurs. Pour des raisons de simplicités, les vecteurs constituant une base doivent avoir une norme de 1, et être représentés comme partant du même point, nommé l'origine. Le combo origine et bases de vecteurs formes un repère de l'espace. </p><p>Les vecteurs peuvent représenter plusieurs objets. Pour en citer quelques-uns : points, mouvements, repères... </p><h3>L'utilisation des vecteurs</h3><h4>Les figures géométriques</h4><p>En géométrie, <span class=important >une figure représente un ensemble de points (un nombre fini de points) de l'espace géométrique</span>. En général, ce terme est confondu avec le terme de "forme géométrique". De plus, une figure géométrique peut être accompagner d'informations pour rendre son ensemble de point cohérent (liens / segments entre les points, angles formés...). </p><img src=../../images/img17.png ><p><span class=important >Le type de figures les plus utilisées représentent les figures "polytopes"</span>. Bien que le terme "polytope" soit peu connu, il s'agit juste de la généralisation du terme 2D "polygône" et 3D "polyhèdres" en X dimensions. <span class=important >En 2D, un polygône représente un ensemble de points liés (par des segments) et fermés</span>. En 3D, un ensemble de points liés (par des morceaux de plans) et fermés se nomme un polyhèdre. En X dimension, un ensemble de points liés (par des morceaux de sous-espaces de dimensions inférieures) et fermés se nomme un polytope. Il représentent aussi la délimitation d'un sous-espace de l'espace global. Pour une dimension N, <span class=important >l'objet le plus simple représentable dans cette dimension se nomme un simplexe</span>. En 2D, il s'agit du triangle, et en 3D, il s'agit du tétrahèdre. En 4D, cette forme est nommé un pentatope. Il est constitué de n+1 délimitations de dimensions inférieures (le triangle est composé de 3 segments, le tétrahèdre de 4 triangles...). Une propriété très importante des polytopes de dimension n est que <span class=important >un polytope de dimension n peut se décomposer en un nombre (fini) de simplexes de dimensions n</span>. Cela va aussi pour les polygônes se décomposant en triangles, ou les polyhèdres se décomposant en tetréhèdres. Grâce à ces concepts, <span class=important >on peut généraliser certains concepts communs de 2D et 3D en des dimensions quelconques</span>. </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La trigonométrie
+</h2>
+<div class="left_arrow_right_text_text">
+<h4>Les propriétés des équations trigonométriques</h4><p>Certaines équations font intervenir des fonctions trigonométriques : <span class=important >ces équations sont dites trigonométriques</span>. D'un point de vue pûrement géométrique, le plus simple pour résoudre ce genre d'équations est d'utiliser les propriétés du cercle trigonométrique (chercher un point ou un intervalle, grâce aux valeurs remarquables).  </p>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Les nombres complexes en géométrie
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Le plan complexe</h3><h4>Utilisation basique</h4><p>Prenez un nombre complexe "Z = a + bi". <span class=important >Vous pouvez représenter ce nombre dans un plan 2D (avec un repère canonique orthonormée) via un vecteur V(a, b), nommé le plan complexe</span>. Le nombre complexe "Z" sera nommé l'affixe de "V", et "V" sera nommé l'image de "Z". Dans ce cas, la norme du vecteur est nommée le module M du nombre complexe, et l'angle formé par le vecteur par rapport au vecteur u(1, 0) est nommé l'argument A du nombre complexe.  Cependant, il est aussi possible de les définir grâce à des coordonnées polaires. En effet, grâce à cet écriture, on peut en déduire une forme très spécial pour un nombre complexe : la multiplication du module du nombre avec un autre nombre complexe (de module 1), dont la valeur est la représentation trigonométrique de son vecteur (selon les règles du cercle trigonométrique). Cette forme s'écrit : <br><math><mi>Z</mi><mo>=</mo><mi>M</mi><mo>*</mo><mi>(</mi><mi>cos(A)</mi><mo>+</mo><mi>i</mi><mo>*</mo><mi>sin(A)</mi><mi>)</mi></math><br>Nous pouvons démontrer facilement que la dérivée de "cos(x) + i * sin(x)" représente "i * (cos(x) + i * sin(x))" : elle même multipliée par "i". Dans ce cas, nous pouvons utiliser une écriture exponentielle, sous la forme : <br><math><mi>Z</mi><mo>=</mo><mi>M</mi><msup><mi>e</mi><mi>iA</mi></msup></math><br>Avec cette propriété, <span class=important >on peut effectuer des translations sur le vecteur grâce à une simple addition de son affixe, des rotations grâce à des multiplications de l'affixe par un complexe de module 1 et d'argument l'angle voulu et des remises à l'échelle avec des multiplications de l'affixe par un réel</span>. </p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    <h1>Plus d'informations</h1>
+ <div class="open-sans-regular">
+SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
+  Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
+  <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+  <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
+  <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+  </span>
+  </div>
+</footer>
+</body>
+</html>
