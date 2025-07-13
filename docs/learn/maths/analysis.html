@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="../../styles/style.css" rel="stylesheet">
+<title>SAASF - Analyse</title>
+
+</head>
+
+<body class="open-sans-bold">
+<header class="hammersmith-one-regular">
+<a href="../../index.html">
+    <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
+</a>
+</header>
+<div id="main_div">
+<h1>L'analyse</h1>
+
+<div class="left_arrow_right_text">
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+L'analyse
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Qu'est ce qu'est l'analyse ?</h3><h4>Le concept de fonction</h4><p>Les fonctions représentent un moyen de lier un objet mathématique (appelé ici antécédent, ou variables) avec une transformation de ce dernier, et d'étudier l'objet transformé (appelée image). Tous les objets transformables de la fonction sont définis dans un ensemble, nommé ensemble de définition. En général, cet ensemble est composé de nombres, mais il est aussi possible qu'une fonction puisse prendre n'importe quelle autre type de valeur. De plus, une fonction peut prendre 1 seul antécédent, ou plusieurs antécédents. De même manière, une fonction peut transformer ses antécédents en 1 ou plusieurs images. L'ensemble de toutes les valeurs obtensibles via une fonction est nommé l'ensemble d'arrivée de la fonction. </p><p>Comme tout objets mathématiques, elle a un nom, et tout un système de notation dédié pour les utiliser. Par exemple, définissons une fonction "f" prenant un antécédent "x" défini sur l'ensemble "E". Une image "i" de "f" pour un certain "x" s'écrit : </p><math><mi>f(x)</mi><mo>=</mo><mi>i</mi></math><p>Cependant, quand on connait la fonction, le plus utile est d'indiquer la transformation qu'effectue "f" pour "x", appelée l'expression de la fonction : </p><math><mi>f(x)</mi><mo>=</mo><mi>3</mi><mo>*</mo><mi>x</mi><mo>+</mo><mi>2</mi></math>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+L'intégration de fonctions
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Une opération de calcul infinitésimal</h3><h4>La défintion, via un graphique</h4><p>Pour une fonction continue prenant un inconnu, on peut tracer sa représentation sur un graphique. Dans ce même graphique, <span class=important >l'aire entre la droite des abscisses et la courbe tracé par la fonction "f" entre deux absisse "a" et "b" est nommée "intégrale de f entre a et b"</span>. Pour obtenir cette aire, on peut définir "n" rectangles entre la courbe et la droite des abscisses, et obtenir une approximation de l'aire avec la somme de l'aire de ces rectangles. </p><img src=../../images/img27.png ><background_color white><base width=5 height=5><function expression="x/3"><curve_area number=5 area_end=2></function><h4>Le théorème fondamental de l'analyse</h4><p>Le théorème fondamental de l'analyse, démontré par (entre autre) Isaac Newton, affirme que l'intégrale d'une fonction peut s'obtenir avec sa primitive. En réalité, <span class=important >l'intégrale de la fonction "f" entre "a" et "b" est une fonction primitive de "f" (idéalement, s'annulant en "a") à la valeur "b", auquelle on enlève une valeur constante (qui dépend de la primitive utilisée)</span>. Cette constante est dû au fait que une fonction a une infinité de primitives, avec une seule correspondant exactement à son intégrale (et les autres devant être corrigés par une valeur constante). Donc, <span class=important >cela équivaut à dire que l'intégrale de la fonction "f" entre "a" et "b" est la différence entre la primitive généralisée de "f" pour b et la primitive généralisée de "f" pour a</span>. </p><math><mi>F(x)</mi><mo>=</mo><mi>f(t)dt</mi></math><p>D'un point de vue "épistémologique", ce théorème est parfaitement logique. En effet, <span class=important >le nombre dérivé d'une valeur de fonction est la variation infinitésimal de la fonction à cette valeur</span>. Pour rappel, une variation infinitésimal de la fonction de départ fait... varier la fonction de départ. En toute logique, l'obstention d'une fonction par sa dérivée se fait en appliquant toutes les valeurs de la dérivée en tant que variation infinitésimale de la fonction. Donc, <span class=important >la primitive d'une fonction en "x" représente la somme infinitésimale de toutes les valeurs précédentes de "x" dans la fonction, interprétées comme variations de la primitive</span>. On peut représenter ces valeurs infinitésimals comme l'aire précise sous cette valeur de la fonction (de largeur infinitésimale). Donc, <span class=important >la primitive d'une fonction représente la somme de toutes ces aires, et donc l'intégrale (aire sous la courbe) de la fonction</span>. </p><p>Ce théorème permet de démontrer rigoureusement pleins de propriétés (en réalité, assez triviales). Par exemple, <span class=important >les intégrales peuvent se calculer avec la relation de Chasles</span>. </p><math>&#x222b;<msubsup><mi>x</mi><mi>y</mi></msubsup>f(t)dt<mo>+</mo>&#x222b;<msubsup><mi>y</mi><mi>z</mi></msubsup>f(t)dt<mo>=</mo>&#x222b;<msubsup><mi>x</mi><mi>z</mi></msubsup>f(t)dt </math><p>Il est aussi possible de découper des intégrales pour calculer ces parties dans des intégrales différentes (et plus simple). <span class=important >Ce concept s'appelle l'intégration par partie</span>. </p><math>&#x222b;<msubsup><mi>x</mi><mi>y</mi></msubsup>u(t)*v'(t)dt<mo>=</mo><mi>[u(t)*v(t)]</mi><msubsup><mi>x</mi><mi>y</mi></msubsup><mo>-</mo>&#x222b;<msubsup><mi>x</mi><mi>y</mi></msubsup>u'(t)*v(t)dt </math>
+</div>
+</div>
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+La fonction exponentielle
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Qu'est ce qu'est la fonction exponentielle ?</h3><h4>La définition brute</h4><p>En analyse fonctionelle réelle, <span class=important >la fonction exponentielle est une fonction n'ayant qu'une seule dérivée : elle même</span>. Cette fonction est assez facilement déductible avec des équations différentielles. En gros, en cherchant une valeur commune aux tengantes de cette fonction, on remarque que cette fonction, n'ayant qu'une seule dérivée (elle même), est un nombre élevé à la puissance x. Ce nombre est appelé nombre exponentiel, est appelé "e" (ou nombre d'Euler), et vaut approximativement 2,71828. Elle est continue et dérivable sur R. Donc, pour tout x appartenant à R : </p><math><mi>exp(x)</mi><mo>=</mo><msup><mi>e</mi><mi>x</mi></msup><mo>|</mo><mi>exp'(x)</mi><mo>=</mo><mi>exp(x)</mi><mo>=</mo><msup><mi>e</mi><mi>x</mi></msup></math><p>Cependant, le nom "fonction exponentielle" peut aussi désigner des fonctions similaires, mais pas exactement égales à la fonction que nous venons de voir. En effet, <span class=important >une fonction exponentielle peut être n'importe qu'elle fonction suivant cette forme</span>: </p><math><mi>exp(x)</mi><mo>=</mo><msup><mi>ae</mi><mi>bx</mi></msup></math><h4>Les logarithmes</h4><p><span class=important >La fonction réciproque de la fonction exponentielle est nommée la fonction logarithme</span>. Elle permet de faire le lien entre la valeur d'une puissance et la puissance utilisé. D'un point de vu mathématique : </p><math><mi>exp(log(x))</mi><mo>=</mo><msup><mi>e</mi><mi>log(x)</mi></msup><mo>=</mo><mi>x</mi></math><p>Grâce aux propriétés de l'exponentiel, on peut généraliser pour n'importe quelle valeur. </p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    <h1>Plus d'informations</h1>
+ <div class="open-sans-regular">
+SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
+  Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
+  <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+Le texte dans <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
+  <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+  </span>
+</br>Sauf indication contraire, les images sont placées dans le domaine public.</div>
+</footer>
+</body>
+</html>
