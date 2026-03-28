@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="../../styles/style.css" rel="stylesheet">
+<title>SAASF - Le chapitre 4</title>
+
+</head>
+
+<body class="open-sans-bold">
+<header class="hammersmith-one-regular">
+<a href="../../index.html">
+    <img alt="Logo de SAASF" src="../../images/aster_system_logo.png" style="max-height:150px;">
+</a>
+</header>
+<div id="main_div">
+<h1>Le chapitre 4</h1>
+
+<div class="left_arrow_right_text">
+
+<div class="left_arrow_right_text_child">
+<img alt="Contenu" class="arrow left_arrow_right_text_arrow" src="../../images/arrow.png">
+<h2 class="left_arrow_right_text_title">
+Chapitre 4 - démonstrations
+</h2>
+<div class="left_arrow_right_text_text">
+<h3>Les anneaux et les corps</h3><h4>Les anneaux</h4><h4>4.0.0.0</h4><p>Démontrons que, dans l'anneau "(Z, +, .)", tout sous-ensemble "nZ" (avec "n" un nombre entier naturel) de "Z" forme un sous-anneau de "(Z, +, .)". Déjà, nous avons démontré à plusieurs reprises que "nZ" est inclut dans "Z". </p><math><mo>&#x2200;</mo><mi>a</mi><mo>,</mo><mi></mi><mo>&#x2200;</mo><mi>n </mi><mo>&#x2208;</mo><mi>N</mi><mo>,</mo><mi>a </mi><mo>&#x2208;</mo><mi>nZ </mi><mo>&#x21d2;</mo><mi>a </mi><mo>&#x2208;</mo><mi>Z</mi></math><p>De plus, nous avons déjà démontré que le groupe "(nZ, +)" est un sous-groupe de "(Z, +)" : il est stable par l'addition. Finalement, la stabilité par la multiplication est aussi assez simple à prouver. </p><math><mo>&#x2200;</mo><mi>a</mi><mo>,</mo><mi>b </mi><mo>&#x2208;</mo><mi>nZ</mi><mo>,</mo><mi></mi><mo>&#x2203;</mo><mi>c</mi><mo>,</mo><mi>d </mi><mo>&#x2208;</mo><mi>Z</mi><mo>,</mo><mi>a </mi><mo>=</mo><mi>n * c</mi><mo>,</mo><mi>b </mi><mo>=</mo><mi>n * d</mi></math><br><math><mi>a * b </mi><mo>=</mo><mi>(n * c) * (n * d) </mi><mo>=</mo><mi>n * (c * n * d) </mi><mo>=</mo><mi>n * e</mi><mo>,</mo><mi>e </mi><mo>=</mo><mi>(c * n * d)</mi></math><p>Donc, l'anneau "(nZ, +, .)" est un sous-anneau de "(Z, +, .)" </p><h4>Les polynômes</h4><h4>4.0.1.0</h4><p>Démontrons que dire qu'un polynôme "P(X)" admet une racine "r" équivaut à dire que ce polynôme est divisible par "X - r". Procédons par double implication. </p><p>Prouvons que dire qu'un polynôme "P(X)" est divisible par "X - r" implique que "P(X)" admet une racine "r". Si "P" est divisible par "X - r", il existe un "Q(X)" tel que le produit de "Q(X)" et "X - r" donne "P". </p><math><mo>&#x2203;</mo><mi>Q </mi><mo>&#x2208;</mo><mi>K[X]</mi><mo>,</mo><mi>(X - r) * Q(X) </mi><mo>=</mo><mi>P(X)</mi><math><p>De manière évidente, "r" permet d'annuler "(X - r)". Par transitivité de l'égalité, "r" annule aussi "P(X)". </p><math><mi>X </mi><mo>=</mo><mi>r </mi><mo>&#x21d2;</mo><mi>(X - r) </mi><mo>=</mo><mi>0 </mi><mo>&#x21d2;</mo><mi>(X - r) * Q(X) </mi><mo>=</mo><mi>P(X) </mi><mo>=</mo><mi>0</mi></math><p>Donc, dire qu'un polynôme "P(X)" est divisible par "X - r" implique que "P" admet une racine "r". </p><p>Prouvons qu'un polynôme "P(X)" admet une racine "r" implique que "P(X)" est divisible par "X - r". Pour cela, nous devons juste prouver l'existence d'un polynôme "Q" tel que "X - r" multiplié par "Q" donne "P". Cela implique que la division euclidienne de "P(X)" par "X - r" (qui existe bel et bien) donne un reste nul. </p><math><mi>P(X) </mi><mo>=</mo><mi>Q(X) * (X - r) </mi><mo>+</mo><mi>R(X)</mi></math><p>Nous savons qu'une division euclidienne de polynômes est unique. Donc, la division euclidienne de ce polynôme pour "X = r" est exactement la même que pour tous "X". Or, si "X = r", "P(X) = 0" et "Q(X) * (X - r) = 0" : il n'y a pas besoin de reste, qui est bel et bien nul. </p><math><mi>X </mi><mo>=</mo><mi>0 </mi><mo>&#x21d2;</mo><mi>(P(X) </mi><mo>=</mo><mi>Q(X) * (X - r) </mi><mo>+</mo><mi>R(X) </mi><mo>&#x2227;</mo><mi>R(X) </mi><mo>=</mo><mi>0 </mi><mo>&#x21d4;</mo><mi>P(X) </mi><mo>=</mo><mi>Q(X) * (X - r)) </mi><mo>&#x21d2;</mo><mi>R(X) </mi><mo>=</mo><mi>0</mi></math><p>Donc, un polynôme "P(X)" admet une racine "r" implique que "P(X)" est divisible par "X - r". </p><p>Les deux implications sont vérifiées : dire qu'un polynôme "P(X)" admet une racine "r" équivaut à dire que ce polynôme est divisible par "X - r". </p><h3>Les espaces vectoriels</h3><h4>Les applications linéaires</h4><h4>4.1.0.0</h4><p>Démontrons que, pour tout "w" et "z" appartenant à "R", l'application allant de "R²" vers "R²" transformant "(x, y)" en "(w * x, z * y)" est linéaire. Déjà, la première propriété est respectée, et l'on peut le vérifier de manière algébrique. </p><math><math><mo>&#x2200;</mo><mi>a</mi><mo>,</mo><mi>b </mi><mo>&#x2208;</mo><msup><mi>R</mi><mi>2</mi></msup><mo>,</mo><mi></mi><mo>&#x2203;</mo><mi>x</mi><mo>,</mo><mi>x'</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>y' </mi><mo>&#x2208;</mo><mi>R</mi><mo>,</mo><mi>a </mi><mo>=</mo><mi>(x</mi><mo>,</mo><mi>y)</mi><mo>,</mo><mi>b </mi><mo>=</mo><mi>(x'</mi><mo>,</mo><mi>y')</mi><mo>,</mo><mi>f(a </mi><mo>+</mo><mi>b) </mi><mo>=</mo><mi>f(x </mi><mo>+</mo><mi>x'</mi><mo>,</mo><mi>y </mi><mo>+</mo><mi>y') </mi><mo>=</mo><mi>(w * (x </mi><mo>+</mo><mi>x')</mi><mo>,</mo><mi>z * (y </mi><mo>+</mo><mi>y')) </mi><mo>=</mo><mi>(w * x </mi><mo>+</mo><mi>w * x'</mi><mo>,</mo><mi>z * y </mi><mo>+</mo><mi>z * y') </mi><mo>=</mo><mi>(w * x</mi><mo>,</mo><mi>z * y) </mi><mo>+</mo><mi>(w * x'</mi><mo>,</mo><mi>z * y') </mi><mo>=</mo><mi>f(a) </mi><mo>+</mo><mi>f(b)</mi></math><p>La deuxième propriété est aussi vraie, et ce n'est pas si difficile que ça à démontrer non plus. </p><math><math><mo>&#x2200;</mo><mi>a</mi><mo>,</mo><mi>b </mi><mo>&#x2208;</mo><msup><mi>R</mi><mi>2</mi></msup><mo>,</mo><mi></mi><mo>&#x2203;</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>c </mi><mo>&#x2208;</mo><mi>R</mi><mo>,</mo><mi>a </mi><mo>=</mo><mi>(x</mi><mo>,</mo><mi>y)</mi><mo>,</mo><mi>f(c * a) </mi><mo>=</mo><mi>f(c * x</mi><mo>,</mo><mi>c * y) </mi><mo>=</mo><mi>(w * c * x</mi><mo>,</mo><mi>z * c * y) </mi><mo>=</mo><mi>c * (w * x</mi><mo>,</mo><mi>z * y) </mi><mo>=</mo><mi>c * f(a)</mi></math><p>Finalement, "f(0, 0) = (0, 0)", donc cette application est belle est bien linéaire. Donc, pour tout "w" et "z" appartenant à "R", l'application allant de "R²" vers "R²" transformant "(x, y)" en "(w * x, z * y)" est linéaire. </p></math></math></math></math>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    <h1>Plus d'informations</h1>
+ <div class="open-sans-regular">
+SAASF est proposé par l'organisation <a href="https://aster-system.github.io/aster-system/" target="_blank">Aster Système</a>.<br>
+  Le site web est disponible sur Github, <a href="https://github.com/aster-system/saasf" target="_blank">dans ce repositorie</a>.<br>
+  <span xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+Le texte dans <a property="dct:title" rel="cc:attributionURL" href="https://aster-system.github.io/saasf/">SAASF</a> par
+  <span property="cc:attributionName">Aster Système</span> est proposé sous license <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+  </span>
+</br>Sauf indication contraire, les images sont placées dans le domaine public.</div>
+</footer>
+</body>
+</html>
